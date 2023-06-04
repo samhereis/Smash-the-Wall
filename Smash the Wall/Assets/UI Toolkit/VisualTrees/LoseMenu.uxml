@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/Concrete/StarControl.uss?fileID=7433441132597879392&amp;guid=80a6c6b352b7b164f9c611d09f1134ea&amp;type=3#StarControl" />
+    <Style src="project://database/Assets/UI%20Toolkit/USS/Themes/UIButtons_Lose.uss?fileID=7433441132597879392&amp;guid=45ab0fc8c5cd48d459fa478221ac4b93&amp;type=3#UIButtons_Lose" />
+    <ui:VisualElement name="Canvas" style="flex-grow: 1; width: 100%; height: 100%; justify-content: space-between; align-self: stretch;">
+        <ui:VisualElement name="InfoHolder" style="background-color: rgba(255, 0, 0, 0.2); height: 40%; align-self: center; justify-content: flex-start; border-top-left-radius: 25px; border-bottom-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; width: 75%; translate: 0 10%; border-left-color: rgb(255, 0, 0); border-right-color: rgb(255, 0, 0); border-top-color: rgb(255, 0, 0); border-bottom-color: rgb(255, 0, 0); border-right-width: 5px; border-left-width: 5px; padding-top: 10%;">
+            <ui:Label tabindex="-1" text="try again" display-tooltip-when-elided="true" name="YouLostLabel" class="UIButtonText" style="font-size: 125%; justify-content: space-around; align-self: stretch; align-items: stretch;" />
+            <ui:Label tabindex="-1" text="destroy the border&#10;not the picture" display-tooltip-when-elided="true" name="YouLost_Message" class="UIButtonText" style="font-size: 50%; justify-content: space-around; align-self: stretch; align-items: stretch; margin-top: 5%;" />
+            <ui:VisualElement name="Emoji" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;Sprites/1f972&apos;); -unity-background-scale-mode: scale-to-fit; width: 25%; height: 50%; align-self: center; justify-content: space-around;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ButtonsHolder" style="background-color: rgba(255, 0, 0, 0.2); align-self: center; justify-content: center; border-bottom-width: 5px; border-top-width: 5px; border-left-color: rgb(255, 0, 0); border-right-color: rgb(255, 0, 0); border-top-color: rgb(255, 0, 0); border-bottom-color: rgb(255, 0, 0); border-top-left-radius: 25px; border-bottom-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; width: 75%; height: 40%; translate: 0 -25%; padding-right: 5%; padding-left: 5%; padding-top: 5%; padding-bottom: 5%;">
+            <ui:Button text="play again" name="RestartButton" class="UIButton UIButtonText" />
+            <ui:Button text="go to main menu" name="GoToMainMenuButton" class="UIButton UIButtonText" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

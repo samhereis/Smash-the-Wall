@@ -1,0 +1,64 @@
+.Setting {
+    background-color: rgba(0, 81, 137, 0.1);
+    border-bottom-color: rgb(0, 232, 255);
+    border-bottom-width: 10px;
+    border-top-left-radius: 25%;
+    border-bottom-left-radius: 25%;
+    border-top-right-radius: 25%;
+    border-bottom-right-radius: 25%;
+    border-top-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    margin-top: 2.5%;
+    opacity: 1;
+    height: 15%;
+    transition-duration: 1s;
+    transition-delay: 1s;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-bottom: 2.5%;
+    flex-grow: 1;
+}
+
+.SettingText {
+    -unity-text-align: middle-left;
+    color: rgb(0, 232, 255);
+    -unity-font-style: bold;
+    font-size: 350%;
+    flex-grow: 1;
+}
+
+.Setting:hover {
+    transition-property: scale;
+    transition-delay: 0s;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-out-back;
+    scale: 1.05 1.05;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+}
+
+.Setting:disabled {
+    transition-property: scale;
+    transition-delay: 0s;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-out-back;
+    scale: 0 0;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.Setting:enabled {
+    transition-property: scale;
+    transition-delay: 0.25s;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-out-back;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}

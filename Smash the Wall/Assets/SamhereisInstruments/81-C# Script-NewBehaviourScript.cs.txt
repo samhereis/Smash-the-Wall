@@ -1,0 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Threading.Tasks;
+using System;
+using UnityEngine.Events;
+using Helpers;
+
+namespace Sripts
+{
+    [CreateAssetMenu(fileName = "fileName ", menuName = "Scriptables/menuName")]
+    public sealed class #SCRIPTNAME# : MonoBehaviour
+    {
+        [Header("Componenets")]
+        [SerializeField] private GameObject _gameObject;
+
+        [Header("Settings")]
+        [SerializeField] private float _setting;
+
+        [Header("Debug")]
+        [SerializeField] private float _debug;
+
+        private void OnValidate()
+        {
+            #NOTRIM#
+        }
+
+        private void Awake()
+        {
+            #NOTRIM#
+        }
+
+        private void OnEnable()
+        {
+            #NOTRIM#
+        }
+
+        private void OnDisable()
+        {
+            #NOTRIM#
+        }
+
+	  private void OnDestroy()
+        {
+            #NOTRIM#
+        }
+
+        [ContextMenu(nameof(Setup)] public void Setup()
+        {
+
+
+
+#if UNITY_EDITOR
+		this.TrySetDirty();
+#endif
+        }
+    }
+}

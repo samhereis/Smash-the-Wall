@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/General.uss?fileID=7433441132597879392&amp;guid=6f5b630c067b09a47af3b7c665b7cccf&amp;type=3#General" />
+    <Style src="project://database/Assets/UI%20Toolkit/USS/UIButtons.uss?fileID=7433441132597879392&amp;guid=7d1dc259ee728fe4d9adee58fe6dc27a&amp;type=3#UIButtons" />
+    <ui:VisualElement name="Canvas" style="flex-grow: 1; width: 100%; height: 100%; justify-content: space-around; align-self: stretch;">
+        <ui:VisualElement name="PauseMenuLabelHolder" style="flex-grow: 0; align-self: center; justify-content: space-around; width: 75%; height: 30%;">
+            <ui:VisualElement name="Border" class="UIText" style="background-color: rgba(0, 81, 137, 0.1); border-top-left-radius: 50px; border-bottom-left-radius: 50px; border-top-right-radius: 50px; border-bottom-right-radius: 50px; height: 50%; width: 100%; align-self: center; justify-content: space-around;">
+                <ui:Label tabindex="-1" text="pause menu" display-tooltip-when-elided="true" name="PauseMenuLabel" style="font-size: 75%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="PauseButtonsHolder" style="flex-grow: 0; align-self: center; justify-content: space-around; height: 70%; width: 75%;">
+            <ui:VisualElement name="Border" style="background-color: rgba(0, 81, 137, 0.1); border-top-left-radius: 50px; border-bottom-left-radius: 50px; border-top-right-radius: 50px; border-bottom-right-radius: 50px; width: 100%; height: 50%; align-self: stretch; justify-content: center; padding-left: 5%; padding-right: 5%; padding-top: 5%; padding-bottom: 5%;">
+                <ui:Button text="resume" display-tooltip-when-elided="true" name="ResumeButton" class="UIButton UIButtonText" />
+                <ui:Button text="settings" display-tooltip-when-elided="true" name="SettingsButton" class="UIButton UIButtonText" />
+                <ui:Button text="main menu" display-tooltip-when-elided="true" name="MainMenuButton" class="UIButton UIButtonText" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

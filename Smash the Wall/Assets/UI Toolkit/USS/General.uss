@@ -1,0 +1,8 @@
+.UIText {
+    font-size: 75%;
+    color: rgb(0, 232, 255);
+    text-overflow: ellipsis;
+    -unity-font-style: bold;
+    -unity-font: initial;
+    -unity-text-align: middle-center;
+}

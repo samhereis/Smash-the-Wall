@@ -53,9 +53,9 @@ namespace UI
             _noAdsManager.AddNoAdsButton(_noAdsButton);
         }
 
-        protected override void UnSubscribeFromEvents()
+        protected override void UnSubscribeFromUIEvents()
         {
-            base.UnSubscribeFromEvents();
+            base.UnSubscribeFromUIEvents();
 
             _playButton.UnregisterCallback<ClickEvent>(StartGame);
             _settingsButton.UnregisterCallback<ClickEvent>(OpenSettings);

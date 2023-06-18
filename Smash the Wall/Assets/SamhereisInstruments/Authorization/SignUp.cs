@@ -34,7 +34,7 @@ namespace Authorization.UI
         private void OnEnable()
         {
             if (ApplicationHelper.HasInternetConnection() == false) MessageToUser.instance.Log("You are offline");
-            SubscribeFromEvents();
+            SubscribeToEvents();
         }
 
         private void OnDisable()
@@ -42,7 +42,7 @@ namespace Authorization.UI
             UnSubscribeFromEvents();
         }
 
-        private void SubscribeFromEvents()
+        private void SubscribeToEvents()
         {
             UnSubscribeFromEvents();
 

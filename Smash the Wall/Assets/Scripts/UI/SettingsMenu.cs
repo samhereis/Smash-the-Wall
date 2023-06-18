@@ -53,9 +53,9 @@ namespace UI
             _gameSettingsManager?.SubscribeToUIEvents();
         }
 
-        override protected void UnSubscribeFromEvents()
+        override protected void UnSubscribeFromUIEvents()
         {
-            base.UnSubscribeFromEvents();
+            base.UnSubscribeFromUIEvents();
             _resumeButton.UnregisterCallback<ClickEvent>(OpenMainMenu);
 
             _gameSettingsManager?.UnSubscribeFromEvents();

@@ -54,10 +54,10 @@ namespace UI.Canvases
 
         protected virtual void SubscribeToUIEvents()
         {
-            UnSubscribeFromEvents();
+            UnSubscribeFromUIEvents();
         }
 
-        protected virtual void UnSubscribeFromEvents()
+        protected virtual void UnSubscribeFromUIEvents()
         {
 
         }
@@ -108,7 +108,7 @@ namespace UI.Canvases
             });
 
             PlayHideAnimation();
-            UnSubscribeFromEvents();
+            UnSubscribeFromUIEvents();
         }
 
         [ContextMenu(nameof(PlayShowAnimation))]

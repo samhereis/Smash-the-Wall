@@ -93,9 +93,9 @@ namespace UI
             _pauseButton.RegisterCallback<ClickEvent>(OpenPauseMenu);
         }
 
-        protected override void UnSubscribeFromEvents()
+        protected override void UnSubscribeFromUIEvents()
         {
-            base.UnSubscribeFromEvents();
+            base.UnSubscribeFromUIEvents();
         }
 
         private void OpenPauseMenu(ClickEvent evt)

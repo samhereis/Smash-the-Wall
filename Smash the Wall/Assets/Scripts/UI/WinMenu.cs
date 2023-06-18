@@ -100,9 +100,9 @@ namespace UI
             _goToMainMenuButton.RegisterCallback<ClickEvent>(GotoMainMenu);
         }
 
-        protected override void UnSubscribeFromEvents()
+        protected override void UnSubscribeFromUIEvents()
         {
-            base.UnSubscribeFromEvents();
+            base.UnSubscribeFromUIEvents();
 
             _restartButton.UnregisterCallback<ClickEvent>(RestartGame);
             _nextLevelButton.UnregisterCallback<ClickEvent>(NextLevel);

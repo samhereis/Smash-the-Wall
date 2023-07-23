@@ -1,4 +1,5 @@
-﻿using Configs;
+﻿using InGameStrings;
+using Configs;
 using Events;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,6 @@ namespace DI
         [SerializeField] private List<MonoBehaviourToDI> _objects = new List<MonoBehaviourToDI>();
         [SerializeField] private List<ConfigToDI> _configs = new List<ConfigToDI>();
         [SerializeField] private List<SOToDI> _scriptableObjects = new List<SOToDI>();
-        [SerializeField] private List<EventToDI> _eventsWithNoParameters = new List<EventToDI>();
 
         private void Awake()
         {
@@ -26,7 +26,10 @@ namespace DI
 
             DIBox.Clear();
 
-            foreach (var obj in _objects) DIBox.Add(obj.Instance, obj.id);
+            foreach (var obj in _objects)
+            {
+                DIBox.Add(obj.Instance, obj.id);
+            }
 
             foreach (var obj in _configs)
             {
@@ -34,16 +37,40 @@ namespace DI
                 DIBox.Add(obj.Instance, obj.id);
             }
 
-            foreach (var obj in _scriptableObjects) DIBox.Add(obj.Instance, obj.id);
-
-            foreach (var obj in _eventsWithNoParameters)
+            foreach (var obj in _scriptableObjects)
             {
-                obj.Init();
                 DIBox.Add(obj.Instance, obj.id);
             }
 
+            InjectEventWithNoEvents();
+            InjectEventsWithParameters();
+            InjecValueEvents();
+
             isInjected = true;
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            isInjected = false;
+        }
+
+        private void InjectEventWithNoEvents()
+        {
+            DIBox.Add<EventWithNoParameters>(new EventWithNoParameters(DIStrings.onWinEvent), DIStrings.onWinEvent);
+            DIBox.Add<EventWithNoParameters>(new EventWithNoParameters(DIStrings.onLoseEvent), DIStrings.onLoseEvent);
+            DIBox.Add<EventWithNoParameters>(new EventWithNoParameters(DIStrings.onNoAdsBought), DIStrings.onNoAdsBought);
+            DIBox.Add<EventWithNoParameters>(new EventWithNoParameters(DIStrings.onGameSceneLoad), DIStrings.onGameSceneLoad);
+        }
+
+        private void InjectEventsWithParameters()
+        {
+
+        }
+
+        private void InjecValueEvents()
+        {
+
         }
 
         [System.Serializable]
@@ -65,18 +92,6 @@ namespace DI
         {
             public string id = "";
             public ScriptableObject Instance;
-        }
-
-        [System.Serializable]
-        public class EventToDI
-        {
-            public string id = "";
-            public EventWithNoParameters Instance;
-
-            public void Init()
-            {
-                Instance = new EventWithNoParameters(id);
-            }
         }
     }
 }

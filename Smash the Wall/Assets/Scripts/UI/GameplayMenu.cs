@@ -1,7 +1,8 @@
-using Backend;
 using DI;
 using ECS.Systems.GameState;
+using Events;
 using Helpers;
+using InGameStrings;
 using Managers;
 using PlayerInputHolder;
 using UI.Canvases;
@@ -15,8 +16,8 @@ namespace UI
         [SerializeField] private int _sceneIndex;
 
         [Header("DI")]
-        [DI(InGameStrings.DIStrings.noAdsManager)] private NoAdsManager _noAdsManager;
-        [DI(InGameStrings.DIStrings.inputHolder)][SerializeField] private Input_SO inputs;
+        [DI(DIStrings.noAdsManager)] private NoAdsManager _noAdsManager;
+        [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _inputs;
 
         [Header("UI Components")]
         [SerializeField] private PauseMenu _pauseMenu;
@@ -47,7 +48,7 @@ namespace UI
 
         private void Update()
         {
-            if(_whatNeedsToBeDestroyedProgressbar != null && _whatNeedsToStayProgressbar != null)
+            if (_whatNeedsToBeDestroyedProgressbar != null && _whatNeedsToStayProgressbar != null)
             {
                 _whatNeedsToBeDestroyedProgressbar.value = WinLoseChecker_System.releasedWhatNeedsToBeDestroysPercentage;
                 _whatNeedsToStayProgressbar.value = WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
@@ -58,14 +59,15 @@ namespace UI
         {
             base.Enable(duration);
 
-            inputs.Enable();
+            _inputs.Enable();
+            AdsShowManager.instance.ShowBanner();
         }
 
         public override void Disable(float? duration = null)
         {
             base.Disable(duration);
 
-            inputs.Disable();
+            _inputs.Disable();
         }
 
         protected override void FindAllUIElements()

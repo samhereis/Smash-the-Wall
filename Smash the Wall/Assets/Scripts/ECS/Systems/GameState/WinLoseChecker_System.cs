@@ -1,4 +1,4 @@
-using Backend;
+using InGameStrings;
 using Configs;
 using DI;
 using ECS.ComponentData.Picture.Piece;
@@ -45,9 +45,9 @@ namespace ECS.Systems.GameState
 
         private void InjectDs()
         {
-            onWin = DIBox.Get<EventWithNoParameters>(InGameStrings.DIStrings.onWinEvent);
-            onLose = DIBox.Get<EventWithNoParameters>(InGameStrings.DIStrings.onLoseEvent);
-            gameConfigs = DIBox.Get<GameConfigs>(InGameStrings.DIStrings.gameConfigs);
+            onWin = DIBox.Get<EventWithNoParameters>(DIStrings.onWinEvent);
+            onLose = DIBox.Get<EventWithNoParameters>(DIStrings.onLoseEvent);
+            gameConfigs = DIBox.Get<GameConfigs>(DIStrings.gameConfigs);
         }
 
         public void OnUpdate(ref SystemState systemState)

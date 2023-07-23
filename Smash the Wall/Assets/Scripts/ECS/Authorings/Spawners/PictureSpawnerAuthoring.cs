@@ -1,4 +1,4 @@
-using Backend;
+using InGameStrings;
 using DI;
 using ECS.ComponentData;
 using Identifiers;
@@ -61,7 +61,7 @@ namespace ECS.Authoring
             }
         }
 
-        [DI(InGameStrings.DIStrings.listOfAllPictures)][field: SerializeField] public ListOfAllPictures pictures { get; private set; }
+        [DI(DIStrings.listOfAllPictures)][field: SerializeField] public ListOfAllPictures pictures { get; private set; }
         [SerializeField] private PicturePlacesIdentifier _picturePlaces;
 
         public List<PictureSpawnData_GameObject> GetPictures()

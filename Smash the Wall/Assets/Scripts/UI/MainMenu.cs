@@ -1,4 +1,4 @@
-using Backend;
+using InGameStrings;
 using DI;
 using Helpers;
 using Managers;
@@ -13,8 +13,8 @@ namespace UI
     public class MainMenu : CanvasWindowBase, IDIDependent
     {
         [Header("DI")]
-        [DI(InGameStrings.DIStrings.noAdsManager)][SerializeField] private NoAdsManager _noAdsManager;
-        [DI(InGameStrings.DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [DI(DIStrings.noAdsManager)][SerializeField] private NoAdsManager _noAdsManager;
+        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
 
         [Header("Components")]
         [SerializeField] private SettingsMenu _settingsMenu;

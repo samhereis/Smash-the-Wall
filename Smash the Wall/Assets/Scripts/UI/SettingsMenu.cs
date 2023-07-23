@@ -1,4 +1,4 @@
-using Backend;
+using InGameStrings;
 using Configs;
 using DI;
 using Helpers;
@@ -110,7 +110,7 @@ namespace UI
 
         private class GameSettingsManager : IDisposable, IDIDependent
         {
-            [DI(InGameStrings.DIStrings.gameConfigs)] private GameConfigs _gameConfigs;
+            [DI(DIStrings.gameConfigs)] private GameConfigs _gameConfigs;
 
             private VisualElement _root;
 

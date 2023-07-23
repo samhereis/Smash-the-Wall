@@ -1,9 +1,10 @@
-using Backend;
 using Configs;
 using DI;
 using ECS.Systems.GameState;
 using Events;
 using Helpers;
+using InGameStrings;
+using Managers;
 using SO.Lists;
 using UI.Canvases;
 using UI.CustomControls;
@@ -19,10 +20,11 @@ namespace UI
         [SerializeField] private int _mainMenuSceneIndex;
 
         [Header("DI")]
-        [DI(InGameStrings.DIStrings.onWinEvent)][SerializeField] private EventWithNoParameters _onWin;
-        [DI(InGameStrings.DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
-        [DI(InGameStrings.DIStrings.listOfAllPictures)][SerializeField] private ListOfAllPictures _listOfAllPictures;
-        [DI(InGameStrings.DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [DI(DIStrings.onWinEvent)][SerializeField] private EventWithNoParameters _onWin;
+        [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
+        [DI(DIStrings.listOfAllPictures)][SerializeField] private ListOfAllPictures _listOfAllPictures;
+        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [DI(DIStrings.onGameSceneLoad)][SerializeField] private EventWithNoParameters _onGameSceneLoad;
 
         private Button _restartButton;
         private Button _nextLevelButton;
@@ -48,7 +50,7 @@ namespace UI
             _onWin.RemoveListener(Open);
         }
 
-        public override void Enable(float? duration = null)
+        public override async void Enable(float? duration = null)
         {
             base.Enable(duration);
 
@@ -72,6 +74,8 @@ namespace UI
             }
 
             _gameConfigs.isRestart = false;
+
+            await AdsManager.instance.Request(AdsStrings.interstitialAd, 5f);
         }
 
         protected override void FindAllUIElements()
@@ -134,9 +138,11 @@ namespace UI
             LoadLevel(_mainMenuSceneIndex);
         }
 
-        private void LoadLevel(int sceneIndex)
+        private async void LoadLevel(int sceneIndex)
         {
-            SceneManager.LoadSceneAsync(sceneIndex);
+            await SceneLoader.LoadScene(sceneIndex);
+
+            AdsShowManager.instance.TryShowInterstitial();
         }
     }
 }

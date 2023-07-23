@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Managers.Providers
 {
     public abstract class AdProvider : MonoBehaviour
     {
-        public bool IsTest { get; set; }
-        public bool Consent { get; set; }
-        public string ApiKey { get; private set; }
-        public bool IsInitialized { get; set; }
-        public string AppOpenAdUnitId { get; private set; }
-        public string BannerAdUnitId { get; private set; }
-        public string InterstitialAdUnitId { get; private set; }
-        public string RewardedAdUnitId { get; private set; }
-        public string RewardedInterstitialAdUnitId { get; private set; }
-        public string MRecAdUnitId { get; private set; }
+        [field: SerializeField] public bool IsTest { get; set; }
+        [field: SerializeField] public bool Consent { get; set; }
+        [field: SerializeField] public string ApiKey { get; private set; }
+        [field: SerializeField] public bool IsInitialized { get; set; }
+        [field: SerializeField] public string AppOpenAdUnitId { get; private set; }
+        [field: SerializeField] public string BannerAdUnitId { get; private set; }
+        [field: SerializeField] public string InterstitialAdUnitId { get; private set; }
+        [field: SerializeField] public string RewardedAdUnitId { get; private set; }
+        [field: SerializeField] public string RewardedInterstitialAdUnitId { get; private set; }
+        [field: SerializeField] public string MRecAdUnitId { get; private set; }
 
         public Action OnInitialize;
         public Action<AdType, string, string> OnError;
@@ -33,7 +30,7 @@ namespace Managers.Providers
         public List<AdType> InitializedAdTypes { get; private set; }
         public List<AdType> RequestingAdTypes { get; private set; }
 
-        public virtual void Initialize(bool isTest, bool consent, string apiKey, string appOpen, string banner, string interstitial, string rewarded, string rewardedInterstitial, string mrec) 
+        public virtual void Initialize(bool isTest, bool consent, string apiKey, string appOpen, string banner, string interstitial, string rewarded, string rewardedInterstitial, string mrec)
         {
             IsTest = isTest;
             Consent = consent;
@@ -72,20 +69,20 @@ namespace Managers.Providers
                 InitializedAdTypes.Add(AdType.MRec);
         }
 
-        private void SetAdLoading(AdType type, bool isLoading) 
+        private void SetAdLoading(AdType type, bool isLoading)
         {
             if (isLoading)
             {
                 if (!RequestingAdTypes.Contains(type))
                     RequestingAdTypes.Add(type);
             }
-            else 
+            else
             {
                 RequestingAdTypes.Remove(type);
             }
         }
 
-        public virtual bool IsLoading(AdType type) 
+        public virtual bool IsLoading(AdType type)
         {
             return RequestingAdTypes.Contains(type);
         }
@@ -100,7 +97,7 @@ namespace Managers.Providers
             SetAdLoading(type, true);
         }
 
-        public virtual void Show(AdType type) 
+        public virtual void Show(AdType type)
         {
 
         }

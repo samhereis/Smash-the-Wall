@@ -1,8 +1,8 @@
-using Backend;
 using Configs;
 using DI;
 using Events;
 using Helpers;
+using InGameStrings;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,8 +16,9 @@ namespace UI
         [SerializeField] private int _mainMenuSceneIndex;
 
         [Header("DI")]
-        [DI(InGameStrings.DIStrings.onLoseEvent)][SerializeField] private EventWithNoParameters _onLose;
-        [DI(InGameStrings.DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
+        [DI(DIStrings.onLoseEvent)][SerializeField] private EventWithNoParameters _onLose;
+        [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
+        [DI(DIStrings.onGameSceneLoad)][SerializeField] private EventWithNoParameters _onGameSceneLoad;
 
         private Button _restartButton;
         private Button _goToMainMenuButton;
@@ -77,6 +78,7 @@ namespace UI
         {
             _gameConfigs.isRestart = true;
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            _onGameSceneLoad.Invoke();
         }
 
         private void GotoMainMenu(ClickEvent evt)

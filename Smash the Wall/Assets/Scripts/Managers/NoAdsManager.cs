@@ -1,4 +1,4 @@
-using Backend;
+using InGameStrings;
 using DI;
 using Helpers;
 using System.Collections.Generic;
@@ -10,9 +10,7 @@ namespace Managers
 {
     public class NoAdsManager : MonoBehaviour, IDIDependent
     {
-        [Header("DI")]
-        [DI(InGameStrings.inGameStringsString)][SerializeField] private InGameStrings _inGameStrings;
-        [DI(InGameStrings.DIStrings.inAppPurchacesManager)][SerializeField] private InAppPurchacesManager _inAppPurchacesManager;
+        [DI(DIStrings.inAppPurchacesManager)][SerializeField] private InAppPurchacesManager _inAppPurchacesManager;
 
         private List<Button> _noAdsButtons = new List<Button>();
 
@@ -20,7 +18,7 @@ namespace Managers
         {
             get
             {
-                return true;
+                return false;
 
                 /*if(_inAppPurchacesManager == null)
                 {
@@ -28,6 +26,8 @@ namespace Managers
                 }
 
                 return _inAppPurchacesManager.IsPurchased(InGameStrings.PurchaseStrings.noAdsPurchaseString);*/
+
+
             }
         }
 
@@ -84,7 +84,7 @@ namespace Managers
 
         private void OnAPurchaseCompleted(Item item)
         {
-            if (item.id == InGameStrings.PurchaseStrings.noAdsPurchaseString)
+            if (item.id == PurchaseStrings.noAdsPurchaseString)
             {
                 DisableAllButtons();
             }
@@ -92,7 +92,7 @@ namespace Managers
 
         private void OnAPurchaseFailed(Item item)
         {
-            if (item.id == InGameStrings.PurchaseStrings.noAdsPurchaseString)
+            if (item.id == PurchaseStrings.noAdsPurchaseString)
             {
                 EnableAllButtons();
             }
@@ -101,7 +101,7 @@ namespace Managers
         public void TryBuyNoAds(ClickEvent evt)
         {
             DisableAllButtons();
-            _inAppPurchacesManager.Purchase(InGameStrings.PurchaseStrings.noAdsPurchaseString);
+            _inAppPurchacesManager.Purchase(PurchaseStrings.noAdsPurchaseString);
         }
 
         private void EnableAllButtons()

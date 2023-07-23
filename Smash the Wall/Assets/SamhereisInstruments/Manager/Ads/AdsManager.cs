@@ -127,7 +127,7 @@ namespace Managers
 
         private CancellationTokenSource _getRewardCancellationTokenSource = new CancellationTokenSource();
 
-        private void Start()
+        private void Awake()
         {
             if (_dontDestroyOnLoad)
             {
@@ -151,11 +151,6 @@ namespace Managers
             {
                 Initialize();
             }
-        }
-
-        private void OnApplicationPause(bool paused)
-        {
-            if (adProvider != null) adProvider.OnPause(paused);
         }
 
         private void Update()
@@ -413,7 +408,6 @@ namespace Managers
             settings = admob_ios;
 #endif
 
-            adProvider = new AdMobProvider();
 #endif
 
 #if APPLOVINMAX

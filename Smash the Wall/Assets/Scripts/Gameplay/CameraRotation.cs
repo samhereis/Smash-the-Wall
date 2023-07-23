@@ -1,4 +1,4 @@
-using Backend;
+using InGameStrings;
 using DI;
 using PlayerInputHolder;
 using UnityEngine;
@@ -12,7 +12,7 @@ namespace Gameplay
         [SerializeField][Range(0, 1)] private float _mouseSensitivity = 0.2f;
 
         [Header("DI")]
-        [DI(InGameStrings.DIStrings.inputHolder)][SerializeField] private Input_SO inputs;
+        [DI(DIStrings.inputHolder)][SerializeField] private Input_SO inputs;
 
         private float _mouseX;
         private float _mouseY;

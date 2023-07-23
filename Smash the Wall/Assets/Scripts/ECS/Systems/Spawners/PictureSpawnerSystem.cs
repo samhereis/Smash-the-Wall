@@ -1,4 +1,4 @@
-using Backend;
+using InGameStrings;
 using Configs;
 using DI;
 using ECS.ComponentData;
@@ -27,8 +27,8 @@ namespace ECS.Systems.Spawners
         {
             _isActive = true;
 
-            _listOfAllPictures = DIBox.Get<ListOfAllPictures>(InGameStrings.DIStrings.listOfAllPictures);
-            _gameConfigs = DIBox.Get<GameConfigs>(InGameStrings.DIStrings.gameConfigs);
+            _listOfAllPictures = DIBox.Get<ListOfAllPictures>(DIStrings.listOfAllPictures);
+            _gameConfigs = DIBox.Get<GameConfigs>(DIStrings.gameConfigs);
         }
 
         public void Disable()

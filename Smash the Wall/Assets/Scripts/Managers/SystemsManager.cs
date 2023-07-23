@@ -27,14 +27,20 @@ namespace Managers
             _currentSystems.Add(CheckPicturePieceKinematic_System.instance);
             _currentSystems.Add(DestroyDestroyables_System.instance);
             _currentSystems.Add(WinLoseChecker_System.instance);
+        }
 
+        private void OnEnable()
+        {
             TryEnableSystems();
+        }
+
+        private void OnDisable()
+        {
+            TryDisableSystems();
         }
 
         private void OnDestroy()
         {
-            TryDisableSystems();
-
             onDestroyCancellationTokenSource.Cancel();
         }
 
@@ -73,7 +79,7 @@ namespace Managers
             {
                 if (onDestroyCancellationTokenSource.IsCancellationRequested) return;
 
-                if (system.isActive == true) system.Disable();
+                if (system.isActive == true) system?.Disable();
             }
         }
     }

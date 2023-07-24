@@ -60,7 +60,7 @@ namespace UI
             base.Enable(duration);
 
             _inputs.Enable();
-            AdsShowManager.instance.ShowBanner();
+            AdsShowManager.instance?.ShowBanner();
         }
 
         public override void Disable(float? duration = null)

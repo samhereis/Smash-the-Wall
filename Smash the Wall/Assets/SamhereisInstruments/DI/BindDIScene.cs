@@ -1,6 +1,6 @@
-﻿using InGameStrings;
-using Configs;
+﻿using Configs;
 using Events;
+using InGameStrings;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,12 +14,16 @@ namespace DI
         [SerializeField] private List<ConfigToDI> _configs = new List<ConfigToDI>();
         [SerializeField] private List<SOToDI> _scriptableObjects = new List<SOToDI>();
 
+        private bool _wasInjected = false;
+
         private void Awake()
         {
             Application.targetFrameRate = 60;
 
             if (isInjected == true)
             {
+                _wasInjected = true;
+
                 Destroy(gameObject);
                 return;
             }
@@ -52,7 +56,7 @@ namespace DI
 
         private void OnDestroy()
         {
-            isInjected = false;
+            if (_wasInjected == true) isInjected = false;
         }
 
         private void InjectEventWithNoEvents()

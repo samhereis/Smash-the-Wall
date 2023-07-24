@@ -1,3 +1,5 @@
+using GoogleMobileAds.Api;
+using GoogleMobileAds.Common;
 using InGameStrings;
 using UnityEngine;
 
@@ -7,31 +9,40 @@ namespace Managers
     {
         public static AdsShowManager instance { get; private set; }
 
+        [Header("Settings")]
+        [SerializeField] private int _openAppCountToShowAppOpenAdd = 1;
+
+        [Header("Debug")]
+        [SerializeField] private int _appOpenCount = 0;
+
         private void Awake()
         {
             instance = this;
+            AppStateEventNotifier.AppStateChanged += OnAppStateChanged;
         }
 
         private void OnDestroy()
         {
+            AppStateEventNotifier.AppStateChanged -= OnAppStateChanged;
             instance = null;
         }
 
-        private async void OnApplicationPause(bool paused)
+        private async void OnAppStateChanged(AppState state)
         {
-            if (paused == false)
-            {
-                await AdsManager.instance.TryShowPlacement(AdsStrings.appOpenAd);
-                RequestAppOpen();
-            }
-        }
+            Debug.Log("App State changed to : " + state);
 
-        private async void OnApplicationFocus(bool focus)
-        {
-            if (focus == true)
+            bool isForeground = state == AppState.Foreground;
+            bool isAppOpenCountReached = _appOpenCount >= _openAppCountToShowAppOpenAdd;
+
+            if (isForeground)
             {
-                await AdsManager.instance.TryShowPlacement(AdsStrings.appOpenAd);
-                RequestAppOpen();
+                _appOpenCount++;
+
+                if (isAppOpenCountReached)
+                {
+                    await AdsManager.instance.TryShowPlacement(AdsStrings.appOpenAd);
+                    RequestAppOpen();
+                }
             }
         }
 

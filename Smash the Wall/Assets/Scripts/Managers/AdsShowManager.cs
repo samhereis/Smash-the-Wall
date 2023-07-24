@@ -1,6 +1,5 @@
-using GoogleMobileAds.Api;
-using GoogleMobileAds.Common;
 using InGameStrings;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Managers
@@ -18,30 +17,24 @@ namespace Managers
         private void Awake()
         {
             instance = this;
-            AppStateEventNotifier.AppStateChanged += OnAppStateChanged;
         }
 
         private void OnDestroy()
         {
-            AppStateEventNotifier.AppStateChanged -= OnAppStateChanged;
             instance = null;
         }
 
-        private async void OnAppStateChanged(AppState state)
+        private void OnApplicationFocus(bool focus)
         {
-            Debug.Log("App State changed to : " + state);
-
-            bool isForeground = state == AppState.Foreground;
-            bool isAppOpenCountReached = _appOpenCount >= _openAppCountToShowAppOpenAdd;
-
-            if (isForeground)
+            if (focus == true)
             {
+                bool isAppOpenCountReached = _appOpenCount >= _openAppCountToShowAppOpenAdd;
+
                 _appOpenCount++;
 
                 if (isAppOpenCountReached)
                 {
-                    await AdsManager.instance.TryShowPlacement(AdsStrings.appOpenAd);
-                    RequestAppOpen();
+                    TryShowAppOpen();
                 }
             }
         }
@@ -50,41 +43,40 @@ namespace Managers
         {
             if (await AdsManager.instance.TryShowPlacement(AdsStrings.interstitialAd) == false)
             {
-                Debug.LogWarning("Interstitial ads not ready");
+                await RequestInterstitial();
             }
-            else
+        }
+
+        private async void TryShowAppOpen()
+        {
+            if (await AdsManager.instance.TryShowPlacement(AdsStrings.appOpenAd) == true)
             {
-                Debug.Log("Interstitial ads shown");
+                _appOpenCount = 0;
             }
 
-            RequestInterstitial();
+            await RequestAppOpen();
         }
 
         public async void ShowBanner()
         {
             if (await AdsManager.instance.TryShowPlacement(AdsStrings.bannerAd) == false)
             {
-                Debug.LogWarning("Banner ads not ready");
+                await RequestBanner();
+                await AdsManager.instance.TryShowPlacement(AdsStrings.bannerAd);
             }
-            else
-            {
-                Debug.Log("Banner ads shown");
-            }
-
-            RequestBanner();
         }
 
-        private async void RequestInterstitial()
+        private async Task RequestInterstitial()
         {
             await AdsManager.instance.Request(AdsStrings.interstitialAd, 5f);
         }
 
-        private async void RequestBanner()
+        private async Task RequestBanner()
         {
             await AdsManager.instance.Request(AdsStrings.bannerAd, 5f);
         }
 
-        private async void RequestAppOpen()
+        private async Task RequestAppOpen()
         {
             await AdsManager.instance.Request(AdsStrings.appOpenAd, 5f);
         }

@@ -1,13 +1,32 @@
 {
-    "m_SelectedDeviceId": "",
+    "m_SelectedDeviceId": "eee578ab",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "eee578ab",
+        "name": "com.erten_games.smash_the_wall",
+        "processId": 30580,
         "exited": false
     },
     "m_SelectedPriority": 0,
-    "m_KnownPackagesForSerialization": [],
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "eee578ab",
+            "name": "com.google.android.apps.nexuslauncher",
+            "processId": 2846,
+            "exited": false
+        },
+        {
+            "deviceId": "eee578ab",
+            "name": "com.erten_games.smash_the_wall",
+            "processId": 21933,
+            "exited": true
+        },
+        {
+            "deviceId": "eee578ab",
+            "name": "com.erten_games.smash_the_wall",
+            "processId": 30580,
+            "exited": false
+        }
+    ],
     "m_Tags": {
         "m_Entries": [
             {
@@ -41,9 +60,20 @@
         ]
     },
     "m_MemoryViewerState": {
-        "MemoryWindowHeight": 0.0,
-        "MemoryWindowWidth": 0.0,
-        "MemoryTypeEnabled": [],
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
         "MemoryGroup": 2,
         "Behavior": 0
     },

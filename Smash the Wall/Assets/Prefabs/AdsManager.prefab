@@ -135,3 +135,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a91fde9939d7c8c43bd6c59b8df59dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _openAppCountToShowAppOpenAdd: 1
+  _appOpenCount: 0

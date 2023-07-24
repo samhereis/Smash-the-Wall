@@ -1,12 +1,7 @@
 #if ADMOB
-using System;
-using System.Collections;
+using GoogleMobileAds.Api;
 using System.Collections.Generic;
 using UnityEngine;
-
-using GoogleMobileAds.Common;
-using GoogleMobileAds.Api;
-using GoogleMobileAds.Api.Mediation;
 
 #if ADMOB_ADCOLONY
 using GoogleMobileAds.Api.Mediation.AdColony;
@@ -148,12 +143,12 @@ namespace Managers.Providers
             });
         }
 
-        public override bool IsReady(AdType type) 
+        public override bool IsReady(AdType type)
         {
             if (!InitializedAdTypes.Contains(type))
                 return false;
 
-            switch (type) 
+            switch (type)
             {
                 case AdType.AppOpen:
                     return appOpenAd != null;
@@ -169,9 +164,9 @@ namespace Managers.Providers
             }
         }
 
-        public override void Hide(AdType type) 
+        public override void Hide(AdType type)
         {
-            switch (type) 
+            switch (type)
             {
                 case AdType.Banner:
                     if (banner == null)
@@ -201,7 +196,7 @@ namespace Managers.Providers
             }
         }
 
-        public override void Request(AdType type) 
+        public override void Request(AdType type)
         {
             if (!InitializedAdTypes.Contains(type))
                 return;
@@ -223,15 +218,15 @@ namespace Managers.Providers
             //    request = new AdRequest.Builder().AddMediationExtras(instance.vungleRewaredVideoExtras).Build();
             //}
 
-            AdRequest request = new AdRequest.Builder().Build();
+            AdRequest request = new AdRequest();
 
-            switch (type) 
+            switch (type)
             {
                 case AdType.AppOpen:
 
                     id = IsTest ? "ca-app-pub-3940256099942544/3419835294" : AppOpenAdUnitId;
 
-                    AppOpenAd.Load(id, ScreenOrientation.Portrait, request, ((ad, error) =>
+                    AppOpenAd.Load(id, request, ((ad, error) =>
                     {
                         if (error != null)
                         {
@@ -240,6 +235,8 @@ namespace Managers.Providers
                         }
 
                         appOpenAd = ad;
+
+                        OnLoad?.Invoke(type, id);
 
                         appOpenAd.OnAdFullScreenContentClosed += () => { OnClose?.Invoke(type, id); appOpenAd = null; Request(AdType.AppOpen); };
                         appOpenAd.OnAdFullScreenContentFailed += (error) => OnError?.Invoke(type, id, error.GetMessage());
@@ -323,7 +320,7 @@ namespace Managers.Providers
             }
         }
 
-        public override void Show(AdType type) 
+        public override void Show(AdType type)
         {
             switch (type)
             {
@@ -345,7 +342,7 @@ namespace Managers.Providers
             }
         }
 
-        private Revenue GetRevenue(string adUnit, AdValue adValue) 
+        private Revenue GetRevenue(string adUnit, AdValue adValue)
         {
             var revenue = new Revenue();
 

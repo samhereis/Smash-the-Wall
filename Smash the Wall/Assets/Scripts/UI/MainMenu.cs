@@ -1,8 +1,9 @@
-using InGameStrings;
 using DI;
 using Helpers;
+using InGameStrings;
 using Managers;
 using SO.Lists;
+using Tools;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,7 @@ namespace UI
         [Header("DI")]
         [DI(DIStrings.noAdsManager)][SerializeField] private NoAdsManager _noAdsManager;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
 
         [Header("Components")]
         [SerializeField] private SettingsMenu _settingsMenu;
@@ -69,13 +71,18 @@ namespace UI
             _settingsButton.RegisterCallback<ClickEvent>(OpenSettings);
         }
 
-        private void StartGame(ClickEvent evt)
+        private async void StartGame(ClickEvent evt)
         {
-            int sceneIndex = 1;
+            if (_listOfAllScenes != null)
+            {
+                await _sceneLoader.LoadSceneAsync(_listOfAllScenes.GetNextScene());
+            }
+            else
+            {
+                int sceneIndex = 1;
+                SceneManager.LoadScene(sceneIndex);
+            }
 
-            if (_listOfAllScenes != null) { sceneIndex = _listOfAllScenes.GetNext().target; }
-
-            SceneManager.LoadSceneAsync(sceneIndex);
         }
 
         private void OpenSettings(ClickEvent evt)

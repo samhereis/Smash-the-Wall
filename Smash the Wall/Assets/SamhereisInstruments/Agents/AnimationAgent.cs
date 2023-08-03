@@ -32,5 +32,41 @@ namespace Agents
         {
             animator.CrossFade(animationName, duration);
         }
+
+        [ContextMenu(nameof(TryEnableProjectionToRagdoll))]
+        public void TryEnableProjectionToRagdoll()
+        {
+            foreach (var joint in GetComponentsInChildren<CharacterJoint>()) joint.enableProjection = true;
+        }
+
+        [ContextMenu(nameof(TryDisableProjectionToRagdoll))]
+        public void TryDisableProjectionToRagdoll()
+        {
+            foreach (var joint in GetComponentsInChildren<CharacterJoint>()) joint.enableProjection = false;
+        }
+
+        [ContextMenu(nameof(TryEnableContinuousCollisionDetectionInChildRigidBodies))]
+        public void TryEnableContinuousCollisionDetectionInChildRigidBodies()
+        {
+            foreach (var rigidbody in GetComponentsInChildren<Rigidbody>()) rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        }
+
+        [ContextMenu(nameof(TryDisableContinuousCollisionDetectionInChildRigidBodies))]
+        public void TryDisableContinuousCollisionDetectionInChildRigidBodies()
+        {
+            foreach (var rigidbody in GetComponentsInChildren<Rigidbody>()) rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        }
+
+        [ContextMenu(nameof(TryEnableUpdateOffCameraOnAllSkinnedMeshRenderers))]
+        public void TryEnableUpdateOffCameraOnAllSkinnedMeshRenderers()
+        {
+            foreach (var skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>()) skinnedMeshRenderer.updateWhenOffscreen = true;
+        }
+
+        [ContextMenu(nameof(TryDisableUpdateOffCameraOnAllSkinnedMeshRenderers))]
+        public void TryDisableUpdateOffCameraOnAllSkinnedMeshRenderers()
+        {
+            foreach (var skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>()) skinnedMeshRenderer.updateWhenOffscreen = false;
+        }
     }
 }

@@ -1,5 +1,4 @@
 using DI;
-using Events;
 using Helpers;
 using System;
 using UI.Canvases;
@@ -31,10 +30,10 @@ namespace UI.Window.Tutorial
 
         public virtual void OnComplete()
         {
-            if(AreDependenciesCompleted() == true)
+            if (AreDependenciesCompleted() == true)
             {
                 PlayerPrefs.SetInt(tutorialBaseSettings.tutorialName, 1);
-                Close();
+                Disable();
             }
         }
 

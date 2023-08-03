@@ -1,5 +1,4 @@
 using Helpers;
-using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +23,7 @@ namespace UI.Canvases
                 return;
             }
 
-            Disable();
+            Disable(0);
             base.Awake();
         }
 

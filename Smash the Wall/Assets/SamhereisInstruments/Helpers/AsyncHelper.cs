@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Helpers
 {
@@ -12,12 +13,16 @@ namespace Helpers
 
         public static async Task Delay(float delay)
         {
-            await Task.Delay((int)delay * 1000);
+            int duration = (int)Mathf.Max(delay * 1000, 0);
+
+            await Task.Delay(duration);
         }
 
         public static async Task Delay(float delay, CancellationToken cancellationToken)
         {
-            await Task.Delay((int)delay * 1000, cancellationToken);
+            int duration = (int)Mathf.Max(delay * 1000, 0);
+
+            await Task.Delay(duration, cancellationToken);
         }
 
         public static async Task Delay(int delay)

@@ -32,8 +32,18 @@ namespace UI.Helpers
         {
             if (_parent == null) return;
 
-            float horrizontal = NumberHelper.GetNumberFromPercentage100(_parent.rect.size.x, _horrizontalOffset);
-            float vertical = NumberHelper.GetNumberFromPercentage100(_parent.rect.size.y, _verticalOffset);
+            float horrizontal = NumberHelper.GetNumberFromPercentage(_parent.rect.size.x, _horrizontalOffset);
+            float vertical = NumberHelper.GetNumberFromPercentage(_parent.rect.size.y, _verticalOffset);
+
+            if (horrizontal == 0)
+            {
+                horrizontal = _gridLayout.cellSize.x;
+            }
+
+            if (vertical == 0)
+            {
+                vertical = _gridLayout.cellSize.y;
+            }
 
             _gridLayout.cellSize = new Vector2(horrizontal, vertical);
         }

@@ -4,24 +4,19 @@ namespace Helpers
 {
     public static class NumberHelper
     {
-        public static float GetPercentageOf100(float number, float maxNumber)
-        {
-            return (number / maxNumber) * 100;
-        }
-
-        public static float GetNumberFromPercentage100(float theNumber, float percentage)
-        {
-            return (percentage / 100) * theNumber;
-        }
-
         public static float GetPercentageOf1(float number, float maxNumber)
         {
             return (number / maxNumber);
         }
 
-        public static float GetNumberFromPercentage1(float theNumber, float percentage)
+        public static float GetPercentageOf100(float number, float maxNumber)
         {
-            return (percentage) * theNumber;
+            return (number / maxNumber) * 100;
+        }
+
+        public static float GetNumberFromPercentage(float theNumber, float percentage)
+        {
+            return (percentage / 100) * theNumber;
         }
 
         public static bool IsMoreAbs(float one, float theOther)

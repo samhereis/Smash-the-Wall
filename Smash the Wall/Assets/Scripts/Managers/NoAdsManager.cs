@@ -1,6 +1,6 @@
-using InGameStrings;
 using DI;
 using Helpers;
+using InGameStrings;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -37,18 +37,18 @@ namespace Managers
 
             if (_inAppPurchacesManager == null) return;
 
-            _inAppPurchacesManager.onPurchaseCompleted += OnAPurchaseCompleted;
+            _inAppPurchacesManager.onPurchase += OnAPurchaseCompleted;
             _inAppPurchacesManager.onPurchaseFailed += OnAPurchaseFailed;
-            _inAppPurchacesManager.OnInitialize += OnInAppPurchacesManagerInitialized;
+            _inAppPurchacesManager.onInitialize += OnInAppPurchacesManagerInitialized;
         }
 
         private void OnDestroy()
         {
             if (_inAppPurchacesManager == null) return;
 
-            _inAppPurchacesManager.onPurchaseCompleted -= OnAPurchaseCompleted;
+            _inAppPurchacesManager.onPurchase -= OnAPurchaseCompleted;
             _inAppPurchacesManager.onPurchaseFailed -= OnAPurchaseFailed;
-            _inAppPurchacesManager.OnInitialize -= OnInAppPurchacesManagerInitialized;
+            _inAppPurchacesManager.onInitialize -= OnInAppPurchacesManagerInitialized;
         }
 
         public void AddNoAdsButton(Button noAdsButton)
@@ -101,7 +101,7 @@ namespace Managers
         public void TryBuyNoAds(ClickEvent evt)
         {
             DisableAllButtons();
-            _inAppPurchacesManager.Purchase(PurchaseStrings.noAdsPurchaseString);
+            _inAppPurchacesManager.Purchase(_inAppPurchacesManager.GetItem(PurchaseStrings.noAdsPurchaseString));
         }
 
         private void EnableAllButtons()

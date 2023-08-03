@@ -159,8 +159,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3015186795994323344}
   - component: {fileID: 1579252058325969953}
-  - component: {fileID: 5953961469101655988}
-  - component: {fileID: 7209009531317403837}
   m_Layer: 5
   m_Name: NeedForIAPToWork
   m_TagString: Untagged
@@ -211,46 +209,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &5953961469101655988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4676120889230354868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!114 &7209009531317403837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4676120889230354868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &4879703166379905983
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,10 +251,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4879703166379905983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 653d56bb19dcea6448e5210a3b6f3ab6, type: 3}
+  m_Script: {fileID: 11500000, guid: e030379fdd973da498cb6d7c23443d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsInitialized>k__BackingField: 0
   _autoInitialize: 1
   _subscriptionsInEditor: 0
   <items>k__BackingField:
@@ -314,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93df64d0be0bdf94e8f44dfe88db4ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inAppPurchacesManager: {fileID: 0}
+  _inAppPurchacesManager: {fileID: 8077346987065398365}
 --- !u!1 &8120009865874695716
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,3 +333,26 @@ MonoBehaviour:
   _scriptableObjects:
   - id: inputHolder
     Instance: {fileID: 11400000, guid: 16b519bd198fffe42923cdab02cec02d, type: 2}
+  - id: sceneLoader
+    Instance: {fileID: 11400000, guid: f921b8ce239d8e64ba5ecd99f54c054b, type: 2}
+  _eventsWithNoParameters:
+  - id: onWinEvent
+    Instance:
+      <eventName>k__BackingField: 
+      <currentSubscribedObjectsCount>k__BackingField: 0
+      <timesInvoked>k__BackingField: 0
+  - id: onLoseEvent
+    Instance:
+      <eventName>k__BackingField: 
+      <currentSubscribedObjectsCount>k__BackingField: 0
+      <timesInvoked>k__BackingField: 0
+  - id: onNoAdsBought
+    Instance:
+      <eventName>k__BackingField: 
+      <currentSubscribedObjectsCount>k__BackingField: 0
+      <timesInvoked>k__BackingField: 0
+  - id: onGameSceneLoad
+    Instance:
+      <eventName>k__BackingField: 
+      <currentSubscribedObjectsCount>k__BackingField: 0
+      <timesInvoked>k__BackingField: 0

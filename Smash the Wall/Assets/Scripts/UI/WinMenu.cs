@@ -1,4 +1,5 @@
 using Configs;
+using DataClasses;
 using DI;
 using ECS.Systems.GameState;
 using Events;
@@ -6,10 +7,10 @@ using Helpers;
 using InGameStrings;
 using Managers;
 using SO.Lists;
+using Tools;
 using UI.Canvases;
 using UI.CustomControls;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace UI
@@ -25,6 +26,7 @@ namespace UI
         [DI(DIStrings.listOfAllPictures)][SerializeField] private ListOfAllPictures _listOfAllPictures;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.onGameSceneLoad)][SerializeField] private EventWithNoParameters _onGameSceneLoad;
+        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
 
         private Button _restartButton;
         private Button _nextLevelButton;
@@ -116,7 +118,7 @@ namespace UI
         private void RestartGame(ClickEvent ev)
         {
             _gameConfigs.isRestart = true;
-            LoadLevel(SceneManager.GetActiveScene().buildIndex);
+            LoadLevel(_listOfAllScenes.GetCurrentScene());
         }
 
         private async void NextLevel(ClickEvent evt)
@@ -125,22 +127,22 @@ namespace UI
 
             if (GameConfigs.GameSettings.isRamdonEnviromentEnabled)
             {
-                LoadLevel(_listOfAllScenes.GetRandom().target);
+                LoadLevel(_listOfAllScenes.GetRandomScene());
             }
             else
             {
-                LoadLevel(_listOfAllScenes.GetNext().target);
+                LoadLevel(_listOfAllScenes.GetCurrentScene());
             }
         }
 
-        private void GotoMainMenu(ClickEvent evt)
+        private async void GotoMainMenu(ClickEvent evt)
         {
-            LoadLevel(_mainMenuSceneIndex);
+            await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
         }
 
-        private async void LoadLevel(int sceneIndex)
+        private async void LoadLevel(AScene scene)
         {
-            await SceneLoader.LoadScene(sceneIndex);
+            await _sceneLoader.LoadSceneAsync(scene);
 
             AdsShowManager.instance.TryShowInterstitial();
         }

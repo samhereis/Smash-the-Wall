@@ -66,10 +66,16 @@ namespace Helpers
 
         #region
 
-        public static void FadeDownQuick(this CanvasGroup obj)
+        public static void FadeDownQuick(this CanvasGroup obj, bool setUninteractable = true, bool setActiveToFalse = false)
         {
-            obj.interactable = false;
-            obj.blocksRaycasts = false;
+            if (setUninteractable)
+            {
+                obj.interactable = false;
+                obj.blocksRaycasts = false;
+            }
+
+            if (setActiveToFalse) obj.gameObject.SetActive(false);
+
             obj.alpha = 0;
         }
 
@@ -80,7 +86,7 @@ namespace Helpers
             obj.alpha = 1;
         }
 
-        public static Tweener FadeDown(this CanvasGroup obj, float duration = 0.5f, bool setUninteractable = true, Ease ease = Ease.OutBack, Action completeCallback = null)
+        public static Tweener FadeDown(this CanvasGroup obj, float duration = 0.5f, bool setUninteractable = true, Ease ease = Ease.OutBack, bool setActiveToFalse = false, Action completeCallback = null)
         {
             if (obj == null) return null;
 
@@ -89,6 +95,8 @@ namespace Helpers
                 obj.interactable = false;
                 obj.blocksRaycasts = false;
             }
+
+            if (setActiveToFalse) obj.gameObject.SetActive(false);
 
             return obj.FadeeTo(0, duration, ease).OnComplete(() =>
             {
@@ -107,7 +115,7 @@ namespace Helpers
             return obj.DOFade(value, duration).SetEase(ease).SetUpdate(true);
         }
 
-        public static Tweener FadeUp(this CanvasGroup obj, float duration = 0.5f, bool setInteractable = true, Ease ease = Ease.OutBack, Action completeCallback = null)
+        public static Tweener FadeUp(this CanvasGroup obj, float duration = 0.5f, bool setInteractable = true, Ease ease = Ease.OutBack, bool setActiveToTrue = true, Action completeCallback = null)
         {
             if (obj == null) return null;
 
@@ -116,6 +124,8 @@ namespace Helpers
                 obj.interactable = true;
                 obj.blocksRaycasts = true;
             }
+
+            if(setActiveToTrue) obj.gameObject.SetActive(true);
 
             return obj.FadeeTo(1, duration, ease).OnComplete(() =>
             {

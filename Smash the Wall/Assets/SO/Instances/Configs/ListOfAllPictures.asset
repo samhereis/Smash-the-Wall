@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c75c335c17275e4c91be6082af3db08, type: 3}
+  m_Name: ListOfAllPictures
+  m_EditorClassIdentifier: 
+  <pictures>k__BackingField:
+  - <targetName>k__BackingField: Bomb
+    <target>k__BackingField: {fileID: 6175686415919909157, guid: ceed9214720fa6c42b37690528345150,
+      type: 3}
+  - <targetName>k__BackingField: Bomb Green
+    <target>k__BackingField: {fileID: -6676753617988504395, guid: 53d418da7fdc5a9458366ffd2d748208,
+      type: 3}
+  - <targetName>k__BackingField: Bomb
+    <target>k__BackingField: {fileID: 6175686415919909157, guid: bfe06850adaeb374d98f2ae97be2ab8a,
+      type: 3}
+  - <targetName>k__BackingField: Phone
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 702a755c6bb64b54f8e2fa07110a36e5,
+      type: 3}

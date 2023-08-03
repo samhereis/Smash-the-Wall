@@ -22,7 +22,7 @@ namespace Sound
         [SerializeField] private bool _isGlobal;
 
         [Header("DI")]
-        [DI("GameConfigs")][SerializeField] private GameConfigs _gameConfigs;
+        [DI(InGameStrings.DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
 
         public bool canPlayAudio => GameConfigs.GameSettings.areSoundsEnabled;
 
@@ -50,11 +50,6 @@ namespace Sound
         private void OnDestroy()
         {
             if (instance == this && _isGlobal == true) instance = null;
-        }
-
-        private void OnValidate()
-        {
-            Setup();
         }
 
         public void TryPlay(SoundBase sound)

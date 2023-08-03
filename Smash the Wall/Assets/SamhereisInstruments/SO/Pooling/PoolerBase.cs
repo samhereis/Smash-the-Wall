@@ -1,27 +1,36 @@
 using Helpers;
+using Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Pooling
 {
-    public abstract class PoolerBase<T> : ScriptableObject where T : Component
+    public abstract class PoolerBase<T> : ScriptableObject, IInitializable<Transform>, IInitializable where T : Component
     {
-        [field: SerializeField] public T poolable { get; private set; }
+        [field: SerializeField] public T poolable { get; protected set; }
         [SerializeField] protected Queue<T> _poolablesQueue = new Queue<T>();
         [SerializeField] protected List<T> _poolablesDequeued = new List<T>();
-
-#if UNITY_EDITOR
         [SerializeField] protected List<T> _poolablesQueued = new List<T>();
-#endif
 
         [Header("Settings")]
         [SerializeField] protected bool _setParent = true;
         [SerializeField] private int _defaultSpawnQuantity = 2;
 
-        protected virtual void Init()
+        [Header("Debug")]
+        [SerializeField] private int _spawnCount = 0;
+        [SerializeField] private Transform _parent;
+
+        public virtual void Initialize(Transform parent)
+        {
+            _parent = parent;
+        }
+
+        public virtual async void Initialize()
         {
             Clear();
+            await SpawnAsync(_defaultSpawnQuantity, _parent);
         }
 
         public virtual async Task SpawnAsync(int quantity = 5, Transform parent = null)
@@ -29,7 +38,13 @@ namespace Pooling
             for (int i = 0; i < quantity; i++)
             {
                 await AsyncHelper.Delay();
-                PutIn(Instantiate(poolable, parent));
+
+                var poolableInstance = Instantiate(poolable, parent);
+                poolableInstance.gameObject.name += _spawnCount;
+
+                PutIn(poolableInstance);
+
+                _spawnCount++;
             }
         }
 
@@ -37,12 +52,17 @@ namespace Pooling
         {
             for (int i = 0; i < quantity; i++)
             {
-                PutIn(Instantiate(poolable, parent));
+                var poolableInstance = Instantiate(poolable, parent);
+                poolableInstance.gameObject.name += _spawnCount;
+
+                PutIn(poolableInstance);
+
+                _spawnCount++;
             }
         }
 
         [ContextMenu(nameof(Clear))]
-        public virtual void Clear()
+        public void Clear()
         {
             _poolablesQueue?.Clear();
             _poolablesQueue = new Queue<T>();
@@ -50,10 +70,46 @@ namespace Pooling
             _poolablesDequeued?.Clear();
             _poolablesDequeued = new List<T>();
 
-#if UNITY_EDITOR
             _poolablesQueued?.Clear();
             _poolablesQueued = new List<T>();
-#endif
+
+            _spawnCount = 0;
+        }
+
+        public virtual T PutOff(Transform position, Quaternion rotation, Transform parent = null)
+        {
+            return PutOff(position.position, rotation, parent);
+        }
+
+        public virtual T PutOff(Transform position, Transform parent = null)
+        {
+            return PutOff(position.position, Quaternion.identity, parent);
+        }
+
+        public virtual T PutOff(Vector3 position, Transform parent = null)
+        {
+            return PutOff(position, Quaternion.identity, parent);
+        }
+
+        public virtual T PutOff(Vector3 position, Quaternion rotation, Transform parent = null)
+        {
+            T poolable;
+
+            if (_poolablesQueue.Count < 1) Spawn(_defaultSpawnQuantity, _parent);
+
+            poolable = _poolablesQueue.Dequeue();
+
+            _poolablesDequeued.SafeAdd(poolable);
+            _poolablesQueued.SafeRemove(poolable);
+
+            if (parent != null) poolable.transform.parent = parent;
+
+            poolable.gameObject.SetActive(true);
+
+            poolable.transform.position = position;
+            poolable.transform.rotation = rotation;
+
+            return poolable;
         }
 
         public virtual Task<T> PutOffAsync(Transform position, Quaternion rotation, Transform parent = null)
@@ -75,21 +131,19 @@ namespace Pooling
         {
             T poolable;
 
-            if (_poolablesQueue.Count < 1) await SpawnAsync(_defaultSpawnQuantity, parent);
+            if (_poolablesQueue.Count < 1) await SpawnAsync(_defaultSpawnQuantity, _parent);
 
             poolable = _poolablesQueue.Dequeue();
 
             _poolablesDequeued.SafeAdd(poolable);
-
-#if UNITY_EDITOR
             _poolablesQueued.SafeRemove(poolable);
-#endif
+
             if (parent != null) poolable.transform.parent = parent;
+
+            poolable.gameObject.SetActive(true);
 
             poolable.transform.position = position;
             poolable.transform.rotation = rotation;
-
-            poolable.gameObject.SetActive(true);
 
             return poolable;
         }
@@ -102,14 +156,11 @@ namespace Pooling
                 {
                     _poolablesQueue?.Enqueue(poolable);
                     _poolablesDequeued?.SafeRemove(poolable);
-
-#if UNITY_EDITOR
                     _poolablesQueued?.SafeAdd(poolable);
-#endif
 
                     poolable.gameObject.SetActive(false);
 
-                    if (_setParent) poolable.transform.parent = null;
+                    if (_setParent) poolable.transform.parent = _parent;
                 }
                 finally
                 {

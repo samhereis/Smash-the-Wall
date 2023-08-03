@@ -35,5 +35,10 @@ namespace ECS.Authoring
                 childTransformAuthoring.Init();
             }
         }
+
+        public override string ToString()
+        {
+            return gameObject.name;
+        }
     }
 }

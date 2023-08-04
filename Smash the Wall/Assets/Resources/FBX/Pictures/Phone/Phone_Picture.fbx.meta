@@ -3,7 +3,37 @@ guid: 33bd7298d8c2c9244881538356076079
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LeftPart
+    second: {fileID: 2100000, guid: a9526b75d7f230c4cb8eb78dcd8fc891, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RightPart_leftPanel
+    second: {fileID: 2100000, guid: 0220737ead0b06d48b2c787dc48e0bd9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RightPart_rightPanel
+    second: {fileID: 2100000, guid: 2a14974df82328146b7032002a1ed289, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: buttons
+    second: {fileID: 2100000, guid: 95a0863043f50404bb7a851e93bcb509, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: display
+    second: {fileID: 2100000, guid: dcd556f4c91347c4f87497a13d3838dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phone
+    second: {fileID: 2100000, guid: a5e5c2602339ab941b79e2ae865d8746, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

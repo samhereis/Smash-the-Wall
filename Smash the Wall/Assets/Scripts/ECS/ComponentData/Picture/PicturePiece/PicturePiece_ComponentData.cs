@@ -1,6 +1,5 @@
 using System;
 using Unity.Entities;
-using UnityEngine;
 
 namespace ECS.ComponentData.Picture.Piece
 {

@@ -13,16 +13,15 @@ namespace Managers
     {
         [SerializeField] private List<IEnableableSystem> _currentSystems = new List<IEnableableSystem>();
 
-        private CancellationTokenSource onDestroyCancellationTokenSource = new CancellationTokenSource();
+        private CancellationTokenSource _onDestroyCancellationTokenSource = new CancellationTokenSource();
 
         private async void Awake()
         {
             await AsyncHelper.Delay(2000);
-            if (onDestroyCancellationTokenSource.IsCancellationRequested) return;
+            if (_onDestroyCancellationTokenSource.IsCancellationRequested) return;
 
             _currentSystems.Add(PictureSpawner_System.instance);
             _currentSystems.Add(DestroyableCollisionUpdator_System.instance);
-            _currentSystems.Add(MiniGunBulletSpawner_System.instance);
             _currentSystems.Add(ChangeKinematicOnCollided_Updator.instance);
             _currentSystems.Add(CheckPicturePieceKinematic_System.instance);
             _currentSystems.Add(DestroyDestroyables_System.instance);
@@ -34,12 +33,7 @@ namespace Managers
         private void OnDestroy()
         {
             TryDisableSystems();
-            onDestroyCancellationTokenSource.Cancel();
-        }
-
-        private void Update()
-        {
-
+            _onDestroyCancellationTokenSource.Cancel();
         }
 
         public void AddSystem(IEnableableSystem system, bool autoEnable)
@@ -60,7 +54,7 @@ namespace Managers
         {
             foreach (var system in _currentSystems)
             {
-                if (onDestroyCancellationTokenSource.IsCancellationRequested) return;
+                if (_onDestroyCancellationTokenSource.IsCancellationRequested) return;
 
                 if (system.isActive == false) system.Enable();
             }
@@ -70,7 +64,7 @@ namespace Managers
         {
             foreach (var system in _currentSystems)
             {
-                if (onDestroyCancellationTokenSource.IsCancellationRequested) return;
+                if (_onDestroyCancellationTokenSource.IsCancellationRequested) return;
 
                 if (system.isActive == true) system?.Disable();
             }

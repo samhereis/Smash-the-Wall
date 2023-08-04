@@ -121,9 +121,9 @@ namespace UI
             LoadLevel(_listOfAllScenes.GetCurrentScene());
         }
 
-        private async void NextLevel(ClickEvent evt)
+        private void NextLevel(ClickEvent evt)
         {
-            await _listOfAllPictures.SetNextLevelAsync();
+            _listOfAllPictures.SetNextLevel();
 
             if (GameConfigs.GameSettings.isRamdonEnviromentEnabled)
             {

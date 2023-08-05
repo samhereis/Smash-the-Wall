@@ -2,10 +2,10 @@ namespace InGameStrings
 {
     public class DIStrings
     {
-        public const string onWinEvent = "onWinEvent";
-        public const string onLoseEvent = "onLoseEvent";
-        public const string onNoAdsBought = "onNoAdsBoughtEvent";
-        public const string onGameSceneLoad = "onGameSceneLoadEvent";
+        public const string onWinEvent = "onWin";
+        public const string onLoseEvent = "onLose";
+        public const string onNoAdsBought = "onNoAdsBought";
+        public const string onGameSceneLoad = "onGameSceneLoad";
 
         public const string noAdsManager = "noAdsManager";
         public const string inAppPurchacesManager = "inAppPurchacesManager";
@@ -14,6 +14,7 @@ namespace InGameStrings
 
         public const string listOfAllPictures = "listOfAllPictures";
         public const string listOfAllScenes = "listOfAllScenes";
+        public const string listOfAllWeapons = "listOfAllWeapons";
 
         public const string inputHolder = "inputHolder";
         public const string lazyUpdator = "lazyUpdator";

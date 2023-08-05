@@ -1,4 +1,5 @@
 using ECS.ComponentData;
+using Interfaces;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -9,20 +10,35 @@ using Weapons;
 namespace ECS.Systems.Spawners
 {
     [BurstCompile]
-    public partial struct MiniGunBulletSpawner_System : ISystem, IEnableableSystem
+    public partial struct ProjectileiGunBulletSpawner_System : ISystem, IEnableableSystem, IInitializable<ProjectileWeaponBase>, IClearable
     {
-        public static MiniGunBulletSpawner_System instance { get; private set; }
-        public static bool _isActive { get; private set; }
-        public bool isActive => _isActive;
+        public static ProjectileiGunBulletSpawner_System instance { get; private set; }
+        public static bool isCurrentlyActive { get; private set; }
+        public bool isActive => isCurrentlyActive;
+
+        private static ProjectileWeaponBase _projectileWeapon;
+
+        public void Initialize(ProjectileWeaponBase projectileWeapon)
+        {
+            _projectileWeapon = projectileWeapon;
+        }
+
+        public void Clear()
+        {
+            _projectileWeapon = null;
+        }
 
         public void Enable()
         {
-            _isActive = true;
+            if (_projectileWeapon != null)
+            {
+                isCurrentlyActive = true;
+            }
         }
 
         public void Disable()
         {
-            _isActive = false;
+            isCurrentlyActive = false;
         }
 
         public void OnCreate(ref SystemState state)
@@ -42,8 +58,9 @@ namespace ECS.Systems.Spawners
         public void OnUpdate(ref SystemState state)
         {
             if (isActive == false) return;
+            if (_projectileWeapon == null) return;
 
-            if (MiniGun.canShoot)
+            if (_projectileWeapon.canShoot)
             {
                 var spawnPhysics = SystemAPI.GetSingleton<ProjectileToShoot_ComponentData>();
                 var ecbSingleton = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
@@ -51,10 +68,12 @@ namespace ECS.Systems.Spawners
 
                 var bulletEntity = ecb.Instantiate(spawnPhysics.bulletPrefab);
 
+                var shootPosition = _projectileWeapon.shootPosition;
+
                 var localTransformComponent = new LocalTransform
                 {
-                    Position = new float3(MiniGun.shootPosition.position.x, MiniGun.shootPosition.position.y, MiniGun.shootPosition.position.z),
-                    Rotation = new quaternion(MiniGun.shootPosition.rotation.x, MiniGun.shootPosition.rotation.y, MiniGun.shootPosition.rotation.z, MiniGun.shootPosition.rotation.w),
+                    Position = new float3(shootPosition.position.x, shootPosition.position.y, shootPosition.position.z),
+                    Rotation = new quaternion(shootPosition.rotation.x, shootPosition.rotation.y, shootPosition.rotation.z, shootPosition.rotation.w),
                     Scale = 1
                 };
 
@@ -64,6 +83,8 @@ namespace ECS.Systems.Spawners
                 {
                     Linear = localTransformComponent.Forward() * spawnPhysics.force
                 });
+
+                _projectileWeapon?.OnFired();
             }
         }
     }

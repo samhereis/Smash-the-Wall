@@ -14,9 +14,10 @@ namespace IdentityCards
             this.targetName = targetName;
         }
 
-        public void SetTarget(T target)
+        public void SetTarget(T target, bool autoSetTargetName = true)
         {
             this.target = target;
+            if (autoSetTargetName == true) AutoSetTargetName();
         }
 
         public void AutoSetTargetName()

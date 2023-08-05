@@ -4,19 +4,18 @@ using UnityEngine;
 
 namespace ECS.Authoring
 {
-    public class MiniGunBulletSpawner_Authoring : MonoBehaviour
+    public class ProjectileBulletSpawner_Authoring : MonoBehaviour
     {
-        public GameObject bulletPrefab;
-        public float force;
+        public BulletAuthoring bulletPrefab;
 
-        public class ShootBulletBaker : Baker<MiniGunBulletSpawner_Authoring>
+        public class ShootBulletBaker : Baker<ProjectileBulletSpawner_Authoring>
         {
-            public override void Bake(MiniGunBulletSpawner_Authoring authoring)
+            public override void Bake(ProjectileBulletSpawner_Authoring authoring)
             {
                 AddComponent(GetEntity(TransformUsageFlags.Dynamic), new ProjectileToShoot_ComponentData
                 {
                     bulletPrefab = GetEntity(authoring.bulletPrefab, TransformUsageFlags.Dynamic),
-                    force = authoring.force
+                    force = authoring.bulletPrefab.force
                 });
             }
         }

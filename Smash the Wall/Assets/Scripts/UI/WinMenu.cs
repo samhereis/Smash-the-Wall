@@ -77,7 +77,7 @@ namespace UI
 
             _gameConfigs.isRestart = false;
 
-            await AdsManager.instance.Request(AdsStrings.interstitialAd, 5f);
+            await AdsManager.instance?.Request(AdsStrings.interstitialAd, 5f);
         }
 
         protected override void FindAllUIElements()
@@ -144,7 +144,7 @@ namespace UI
         {
             await _sceneLoader.LoadSceneAsync(scene);
 
-            AdsShowManager.instance.TryShowInterstitial();
+            AdsShowManager.instance?.TryShowInterstitial();
         }
     }
 }

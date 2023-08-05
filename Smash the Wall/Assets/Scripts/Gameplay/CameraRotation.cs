@@ -1,5 +1,5 @@
-using InGameStrings;
 using DI;
+using InGameStrings;
 using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,11 +8,12 @@ namespace Gameplay
 {
     public class CameraRotation : MonoBehaviour, IDIDependent
     {
-        [SerializeField] private Transform PlayerBody;
+        [SerializeField] private Transform _xRotatedObject;
+        [SerializeField] private Transform _yRotatedObject;
         [SerializeField][Range(0, 1)] private float _mouseSensitivity = 0.2f;
 
         [Header("DI")]
-        [DI(DIStrings.inputHolder)][SerializeField] private Input_SO inputs;
+        [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _inputsHolder;
 
         private float _mouseX;
         private float _mouseY;
@@ -26,14 +27,14 @@ namespace Gameplay
 
         private void OnEnable()
         {
-            inputs.input.Player.Look.performed += Look;
-            inputs.input.Player.Look.canceled += Look;
+            _inputsHolder.input.Player.Look.performed += Look;
+            _inputsHolder.input.Player.Look.canceled += Look;
         }
 
         private void OnDisable()
         {
-            inputs.input.Player.Look.performed -= Look;
-            inputs.input.Player.Look.canceled -= Look;
+            _inputsHolder.input.Player.Look.performed -= Look;
+            _inputsHolder.input.Player.Look.canceled -= Look;
         }
 
         private void Look(InputAction.CallbackContext context)
@@ -54,8 +55,8 @@ namespace Gameplay
             _yRotation += _mouseX;
             _yRotation = Mathf.Clamp(_yRotation, -30f, 30f);
 
-            transform.localRotation = Quaternion.Euler(-_xRotation, 0f, 0f);
-            PlayerBody.localRotation = Quaternion.Euler(0f, _yRotation, 0f);
+            _xRotatedObject.localRotation = Quaternion.Euler(-_xRotation, 0f, 0f);
+            _yRotatedObject.localRotation = Quaternion.Euler(0f, _yRotation, 0f);
         }
     }
 }

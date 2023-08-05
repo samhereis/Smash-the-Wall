@@ -7,6 +7,7 @@ namespace ECS.Authoring
 {
     public class BulletAuthoring : MonoBehaviour
     {
+        [field: SerializeField] public float force { get; private set; } = 100;
         [field: SerializeField] public Destroyable_ComponentData destroyable_ComponentData { get; private set; }
 
         public class BulletBaker : Baker<BulletAuthoring>

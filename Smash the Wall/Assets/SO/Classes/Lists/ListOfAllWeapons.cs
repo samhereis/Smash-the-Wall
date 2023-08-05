@@ -1,6 +1,7 @@
 using Configs;
 using IdentityCards;
 using Managers;
+using ProjectSripts;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,12 +17,57 @@ namespace SO.Lists
         {
             var weaponsSave = GameSaveManager.GetWeaponsSave();
 
-            defaultWeapon.SetIsUnlockedStatus(true);
+            InitWeapon(defaultWeapon);
 
             foreach (var weaponsIdentifier in weapons)
             {
-                weaponsIdentifier.Initialize(weaponsSave);
+                InitWeapon(weaponsIdentifier);
             }
+
+            void InitWeapon(WeaponIdentityiCard weaponIdentityiCard, bool isUnlockedValueIfNotFoundInSaveFile = false)
+            {
+                if (weaponsSave.allWeapons.Find(x => x.weaponName == weaponIdentityiCard.targetName) == null)
+                {
+                    weaponsSave.allWeapons.Add(new AWeapon_DTO
+                    {
+                        weaponName = weaponIdentityiCard.targetName,
+                        isUnlocked = isUnlockedValueIfNotFoundInSaveFile
+                    });
+                }
+
+                weaponIdentityiCard.Initialize(weaponsSave);
+            }
+
+            GameSaveManager.SaveWeapons(weaponsSave);
+        }
+
+        public void ChooseWeapon(WeaponIdentityiCard weaponIdentityiCard)
+        {
+            var weaponsSave = GameSaveManager.GetWeaponsSave();
+            weaponsSave.currentWeaponIndex = weapons.IndexOf(weaponIdentityiCard);
+
+            GameSaveManager.SaveWeapons(weaponsSave);
+        }
+        public int GetCurrentWeaponIndex()
+        {
+            var weaponsSave = GameSaveManager.GetWeaponsSave();
+
+            if (weaponsSave.currentWeaponIndex >= weapons.Count)
+            {
+                weaponsSave.currentWeaponIndex = 0;
+                GameSaveManager.SaveWeapons(weaponsSave);
+            }
+
+            var currentWeaponIndex = weaponsSave.currentWeaponIndex;
+
+            return currentWeaponIndex;
+        }
+
+        public WeaponIdentityiCard GetCurrentWeapon()
+        {
+            var currentWeapon = weapons[GetCurrentWeaponIndex()];
+
+            return currentWeapon;
         }
     }
 }

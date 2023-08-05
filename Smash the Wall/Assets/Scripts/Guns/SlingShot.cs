@@ -1,19 +1,30 @@
+using DG.Tweening;
 using DI;
 using ECS.Systems.Spawners;
-using System.Collections;
+using InGameStrings;
+using PlayerInputHolder;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Weapons;
 
-namespace Weapons
+namespace ProjectSripts
 {
-    public class MiniGun : ProjectileWeaponBase, IDIDependent
+    public sealed class SlingShot : ProjectileWeaponBase, IDIDependent
     {
-        [Header("Settings")]
-        [SerializeField] private float _rotationSpeed = 1;
-        [SerializeField] private float _waitBeforeFire = 2;
-        [SerializeField] private float _fireRate = 0.25f;
+        [Header("DI")]
+        [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _input;
 
-        private float _currentRotationSpeed;
+        [Header("Componenets")]
+        [SerializeField] private Transform _elasticPart;
+
+        [Header("Settings")]
+        [SerializeField] private float _normalElasticZScalse;
+        [SerializeField] private float _shootElasticZScalse;
+        [SerializeField] private float _scaleScaleDuration = 0.25f;
+        [SerializeField] private float _shootScaleDuration = 0.1f;
+
+        [Header("Debug")]
+        [SerializeField] private bool _debug;
 
         private void OnEnable()
         {
@@ -22,16 +33,13 @@ namespace Weapons
 
         private void OnDisable()
         {
-            canShoot = false;
             DisableInput();
+            canShoot = false;
         }
 
-        private void Update()
+        public override void Initialize()
         {
-            if (_gunPoint == null) { return; }
-            if (_currentRotationSpeed == 0) { return; }
-
-            _gunPoint.Rotate(0, 0, -_currentRotationSpeed, Space.Self);
+            (this as IDIDependent).LoadDependencies();
         }
 
         public override void EnableInput()
@@ -40,6 +48,7 @@ namespace Weapons
 
             _input.input.Player.Fire.performed += Fire;
             _input.input.Player.Fire.canceled += Fire;
+            canShoot = false;
 
             ProjectileiGunBulletSpawner_System.instance.Initialize(this);
             ProjectileiGunBulletSpawner_System.instance.Enable();
@@ -52,6 +61,8 @@ namespace Weapons
             _input.input.Player.Fire.performed -= Fire;
             _input.input.Player.Fire.canceled -= Fire;
 
+            canShoot = false;
+
             ProjectileiGunBulletSpawner_System.instance.Disable();
             ProjectileiGunBulletSpawner_System.instance.Clear();
         }
@@ -60,36 +71,22 @@ namespace Weapons
         {
             if (context.ReadValueAsButton() == true)
             {
-                StartCoroutine(FireCouroutine());
+                _elasticPart.DOScaleZ(_shootElasticZScalse, _shootScaleDuration);
             }
             else
             {
-                StopAllCoroutines();
-                _currentRotationSpeed = 0;
+                if (_elasticPart.localScale.z == _shootElasticZScalse)
+                {
+                    canShoot = true;
+                }
 
-                canShoot = false;
-            }
-
-            IEnumerator FireCouroutine()
-            {
-                _currentRotationSpeed = _rotationSpeed;
-                yield return new WaitForSecondsRealtime(_waitBeforeFire);
-                canShoot = true;
+                _elasticPart.DOScaleZ(_normalElasticZScalse, _shootScaleDuration);
             }
         }
 
         public override void OnFired()
         {
-            base.OnFired();
-
             canShoot = false;
-            StartCoroutine(ResetCanFireCoroutine());
-
-            IEnumerator ResetCanFireCoroutine()
-            {
-                yield return new WaitForSecondsRealtime(_fireRate);
-                canShoot = true;
-            }
         }
     }
 }

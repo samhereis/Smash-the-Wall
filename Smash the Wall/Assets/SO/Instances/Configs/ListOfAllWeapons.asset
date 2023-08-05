@@ -12,8 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3443f76d21be5d544a7cb07c42ceec54, type: 3}
   m_Name: ListOfAllWeapons
   m_EditorClassIdentifier: 
-  <weapons>k__BackingField: []
+  <weapons>k__BackingField:
+  - <targetName>k__BackingField: 
+    <target>k__BackingField: {fileID: 1754635865819145469, guid: d817b8c2bbedf5e43845b317ab5cf7bd,
+      type: 3}
+    <isUnlocked>k__BackingField: 0
+  - <targetName>k__BackingField: 
+    <target>k__BackingField: {fileID: 1754635865819145469, guid: f216dbcff9d9727478184e636cca290b,
+      type: 3}
+    <isUnlocked>k__BackingField: 0
+  - <targetName>k__BackingField: 
+    <target>k__BackingField: {fileID: 6738277081916857878, guid: 14f989eb764386941bacf72fa51c75bf,
+      type: 3}
+    <isUnlocked>k__BackingField: 0
   <defaultWeapon>k__BackingField:
     <targetName>k__BackingField: 
-    <target>k__BackingField: {fileID: 0}
+    <target>k__BackingField: {fileID: 6738277081916857878, guid: 14f989eb764386941bacf72fa51c75bf,
+      type: 3}
     <isUnlocked>k__BackingField: 0

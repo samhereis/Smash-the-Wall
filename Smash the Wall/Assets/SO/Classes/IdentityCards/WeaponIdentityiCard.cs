@@ -25,6 +25,11 @@ namespace IdentityCards
                 return;
             }
 
+            if (targetName == string.Empty)
+            {
+                AutoSetTargetName();
+            }
+
             SetIsUnlockedStatus(aWeapon.isUnlocked);
         }
 

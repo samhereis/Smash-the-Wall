@@ -320,39 +320,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objects:
   - id: noAdsManager
-    Instance: {fileID: 4100215913814625398}
+    instance: {fileID: 4100215913814625398}
   - id: inAppPurchacesManager
-    Instance: {fileID: 8077346987065398365}
+    instance: {fileID: 8077346987065398365}
   _configs:
   - id: gameConfigs
-    Instance: {fileID: 11400000, guid: 7516ebd22a60cd645ba168f241048310, type: 2}
+    instance: {fileID: 11400000, guid: 7516ebd22a60cd645ba168f241048310, type: 2}
   - id: listOfAllPictures
-    Instance: {fileID: 11400000, guid: 6d554313b5c1e374ca2547c0838e5707, type: 2}
+    instance: {fileID: 11400000, guid: 6d554313b5c1e374ca2547c0838e5707, type: 2}
   - id: listOfAllScenes
-    Instance: {fileID: 11400000, guid: 15c3dcbad9e71f84ab7db56e628e450b, type: 2}
+    instance: {fileID: 11400000, guid: 15c3dcbad9e71f84ab7db56e628e450b, type: 2}
+  - id: listOfAllWeapons
+    instance: {fileID: 11400000, guid: 6f5f45b9dfd803346a7c6f91ee58ded6, type: 2}
   _scriptableObjects:
   - id: inputHolder
-    Instance: {fileID: 11400000, guid: 16b519bd198fffe42923cdab02cec02d, type: 2}
+    instance: {fileID: 11400000, guid: 16b519bd198fffe42923cdab02cec02d, type: 2}
   - id: sceneLoader
-    Instance: {fileID: 11400000, guid: f921b8ce239d8e64ba5ecd99f54c054b, type: 2}
+    instance: {fileID: 11400000, guid: f921b8ce239d8e64ba5ecd99f54c054b, type: 2}
   _eventsWithNoParameters:
-  - id: onWinEvent
-    Instance:
+  - id: onWin
+    instance:
       <eventName>k__BackingField: 
       <currentSubscribedObjectsCount>k__BackingField: 0
       <timesInvoked>k__BackingField: 0
-  - id: onLoseEvent
-    Instance:
+  - id: onLose
+    instance:
       <eventName>k__BackingField: 
       <currentSubscribedObjectsCount>k__BackingField: 0
       <timesInvoked>k__BackingField: 0
   - id: onNoAdsBought
-    Instance:
+    instance:
       <eventName>k__BackingField: 
       <currentSubscribedObjectsCount>k__BackingField: 0
       <timesInvoked>k__BackingField: 0
   - id: onGameSceneLoad
-    Instance:
+    instance:
       <eventName>k__BackingField: 
       <currentSubscribedObjectsCount>k__BackingField: 0
       <timesInvoked>k__BackingField: 0
+  _isGlobal: 1

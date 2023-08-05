@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5335731203972732066}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1548563846387785068
 MonoBehaviour:
@@ -61,6 +61,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 496b4bbbca58d45488b9a89045619aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8385245990687871900, guid: 085f4d940a7d98342b67e9408e6f6133,
+  bulletPrefab: {fileID: -8191071171814461866, guid: 085f4d940a7d98342b67e9408e6f6133,
     type: 3}
-  force: 100

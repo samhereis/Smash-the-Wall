@@ -22,12 +22,9 @@ namespace ECS.Systems.GameState
 
         public bool isActive => _isActive;
 
-        public async void Enable()
+        public void Enable()
         {
             _isActive = true;
-
-            while (BindDIScene.isInjected == false) { await AsyncHelper.Delay(); }
-            DIBox.InjectDataTo(instance);
 
             InjectDs();
         }

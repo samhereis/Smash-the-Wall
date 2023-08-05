@@ -12,10 +12,10 @@ namespace Samhereis.DI
         {
             EditorGUI.indentLevel = 2;
 
-            var rects = position.Row(new[] {2, 3f });
+            var rects = position.Row(new[] { 2, 3f });
 
             EditorGUI.PropertyField(rects[0], property.FindPropertyRelative("id"), new GUIContent());
-            EditorGUI.PropertyField(rects[1], property.FindPropertyRelative("Instance"), new GUIContent());
+            EditorGUI.PropertyField(rects[1], property.FindPropertyRelative("instance"), new GUIContent());
         }
     }
 }

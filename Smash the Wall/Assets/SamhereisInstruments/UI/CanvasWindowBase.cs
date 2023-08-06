@@ -1,176 +1,132 @@
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
+using DG.Tweening;
 using Helpers;
+using Interfaces;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 namespace UI.Canvases
 {
-    public abstract class CanvasWindowBase : MonoBehaviour
+    [RequireComponent(typeof(Canvas))]
+    [RequireComponent(typeof(CanvasScaler))]
+    [RequireComponent(typeof(GraphicRaycaster))]
+    [RequireComponent(typeof(CanvasGroup))]
+    public abstract class CanvasWindowBase : MonoBehaviour, IUIWindow
     {
-        protected static Action<CanvasWindowBase> onAWindowOpen;
-        [SerializeField] protected BaseSettings baseSettings = new BaseSettings();
+        public static Action<CanvasWindowBase> onAWindowOpen { get; private set; }
 
-        private TweenerCore<float, float, FloatOptions> _currentTween;
+        [SerializeField] protected BaseSettings _baseSettings = new BaseSettings();
 
         protected virtual void Awake()
         {
-            baseSettings.SetCanvas(this);
+            Setup();
             onAWindowOpen += OnAWindowOpen;
-        }
-
-        protected virtual void Start()
-        {
-            FindAllUIElements();
         }
 
         protected virtual void OnDestroy()
         {
+            UnsubscribeFromEvents();
             onAWindowOpen -= OnAWindowOpen;
         }
 
-        private void Update()
-        {
-            baseSettings.animatedVisualElementsDebug.Clear();
-            baseSettings.animatedVisualElements.RemoveNulls();
 
-            foreach (var item in baseSettings.animatedVisualElements)
+        public virtual void OnAWindowOpen(IUIWindow uIWIndow)
+        {
+            if (uIWIndow != this as IUIWindow)
             {
-                baseSettings.animatedVisualElementsDebug.Add(item.name);
+                Disable();
             }
         }
 
-        public virtual void OnAWindowOpen(CanvasWindowBase uIWIndow)
-        {
-            if (uIWIndow != this) Disable();
-        }
-
-        protected virtual void FindAllUIElements()
-        {
-
-        }
-
-        protected virtual void SubscribeToUIEvents()
-        {
-            UnSubscribeFromUIEvents();
-        }
-
-        protected virtual void UnSubscribeFromUIEvents()
-        {
-
-        }
-
-        [ContextMenu(nameof(Open))]
-        public void Open()
-        {
-            Enable();
-        }
-
-        [ContextMenu(nameof(Close))]
-        public void Close()
+        public virtual void Exit()
         {
             Disable();
+            _baseSettings.openOnExit?.Enable();
         }
 
-        public virtual async void Enable(float? duration = null)
+        public virtual void Enable(float? duration = null)
         {
-            if (baseSettings.notifyOthers == true) onAWindowOpen?.Invoke(this);
-            if (duration == null) duration = baseSettings.animationDuration;
+            if (_baseSettings.isOpen == true) return;
+            _baseSettings.isOpen = true;
 
-            baseSettings.SetVisibility(true);
+            if (_baseSettings.notifyOthers == true) onAWindowOpen?.Invoke(this);
 
-            await AsyncHelper.Delay(baseSettings.enableAnimationDelay);
+            _baseSettings.canvasGroup.DOKill();
 
-            _currentTween = baseSettings.root.style.opacity.value.TweenFloat(1, duration.Value, onUpdateCallback: (currentValue) =>
-            {
-                baseSettings.ChangeOpasity(currentValue);
-            });
+            if (duration == null) duration = _baseSettings.animationDuration_Enable;
 
-            PlayShowAnimation();
-            SubscribeToUIEvents();
+            if (_baseSettings.enableDisable) gameObject.SetActive(true);
+            _baseSettings.canvasGroup.FadeUp(duration.Value);
         }
 
-        public virtual async void Disable(float? duration = null)
+        public virtual void Disable(float? duration = null)
         {
-            if (duration == null) duration = baseSettings.animationDuration;
+            if (_baseSettings.isOpen == false) return;
+            _baseSettings.isOpen = false;
 
-            await AsyncHelper.Delay(baseSettings.disableAnimationDelay);
+            _baseSettings.canvasGroup.DOKill();
 
-            _currentTween = baseSettings.root.style.opacity.value.TweenFloat(0, duration.Value, onUpdateCallback: (currentValue) =>
+            if (duration == null) duration = _baseSettings.animationDuration_Disable;
+
+            if (duration.Value == 0)
             {
-                baseSettings.ChangeOpasity(currentValue);
-            },
-            completedCallback: (value) =>
+                _baseSettings.canvasGroup.FadeDownQuick();
+                OnClosed();
+            }
+            else
             {
-                if (baseSettings.enableDisable) baseSettings.SetVisibility(false);
-            });
+                _baseSettings.canvasGroup.FadeDown(duration.Value)?.OnComplete(() =>
+                {
+                    OnClosed();
+                });
+            }
 
-            PlayHideAnimation();
-            UnSubscribeFromUIEvents();
-        }
-
-        [ContextMenu(nameof(PlayShowAnimation))]
-        protected void PlayShowAnimation()
-        {
-            baseSettings.animatedVisualElements.RemoveNulls();
-
-            foreach (var element in baseSettings.animatedVisualElements)
+            void OnClosed()
             {
-                element.SetEnabled(true);
+                if (_baseSettings.enableDisable) { gameObject.SetActive(false); }
+                if (_baseSettings.openOnExit != null && duration.Value != 0) { _baseSettings.openOnExit.Enable(); }
             }
         }
 
-        [ContextMenu(nameof(PlayHideAnimation))]
-        protected void PlayHideAnimation()
+        protected virtual void SubscribeToEvents()
         {
-            baseSettings.animatedVisualElements.RemoveNulls();
+            UnsubscribeFromEvents();
+        }
 
-            foreach (var element in baseSettings.animatedVisualElements)
+        protected virtual void UnsubscribeFromEvents()
+        {
+
+        }
+
+        public virtual void Setup()
+        {
+            try
             {
-                element.SetEnabled(false);
+                if (_baseSettings.canvasGroup == null) _baseSettings.canvasGroup = GetComponent<CanvasGroup>();
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning(e);
             }
         }
 
-        [System.Serializable]
+        [Serializable]
         protected class BaseSettings
         {
             [Header("Settings")]
             public bool enableDisable = true;
             public bool notifyOthers = true;
-            public float animationDuration = 0.5f;
-            public int enableAnimationDelay = 0;
-            public int disableAnimationDelay = 0;
+            public float animationDuration_Enable = 1;
+            public float animationDuration_Disable = 0.25f;
 
             [Header("Components")]
-            public UIDocument uIDocument;
+            public bool isOpen = true;
 
-            public List<VisualElement> animatedVisualElements = new List<VisualElement>();
-            public List<string> animatedVisualElementsDebug = new List<string>();
+            [Header("Components")]
+            public CanvasGroup canvasGroup;
 
-            private CanvasWindowBase _canvas;
-
-            public VisualElement root => uIDocument != null ? uIDocument.rootVisualElement : (uIDocument = _canvas.GetComponent<UIDocument>()).rootVisualElement;
-
-            public void SetCanvas(CanvasWindowBase canvas)
-            {
-                _canvas = canvas;
-                uIDocument = _canvas.GetComponent<UIDocument>();
-            }
-
-            public void ChangeOpasity(float opacity)
-            {
-                if (root != null) root.style.opacity = new StyleFloat(opacity);
-            }
-
-            public void SetVisibility(bool enabled)
-            {
-                if (root != null)
-                {
-                    root.visible = enabled;
-                }
-            }
+            [Header("Optional")]
+            public CanvasWindowBase openOnExit;
         }
     }
 }

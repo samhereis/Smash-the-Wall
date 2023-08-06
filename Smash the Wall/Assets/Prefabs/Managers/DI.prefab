@@ -337,6 +337,8 @@ MonoBehaviour:
     instance: {fileID: 11400000, guid: 16b519bd198fffe42923cdab02cec02d, type: 2}
   - id: sceneLoader
     instance: {fileID: 11400000, guid: f921b8ce239d8e64ba5ecd99f54c054b, type: 2}
+  - id: lazyUpdator
+    instance: {fileID: 11400000, guid: 5b7e6931e446568468aabd7b1edef3ee, type: 2}
   _eventsWithNoParameters:
   - id: onWin
     instance:
@@ -349,11 +351,6 @@ MonoBehaviour:
       <currentSubscribedObjectsCount>k__BackingField: 0
       <timesInvoked>k__BackingField: 0
   - id: onNoAdsBought
-    instance:
-      <eventName>k__BackingField: 
-      <currentSubscribedObjectsCount>k__BackingField: 0
-      <timesInvoked>k__BackingField: 0
-  - id: onGameSceneLoad
     instance:
       <eventName>k__BackingField: 
       <currentSubscribedObjectsCount>k__BackingField: 0

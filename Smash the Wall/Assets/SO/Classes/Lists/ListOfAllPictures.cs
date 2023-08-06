@@ -4,7 +4,6 @@ using Helpers;
 using IdentityCards;
 using Managers;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace SO.Lists

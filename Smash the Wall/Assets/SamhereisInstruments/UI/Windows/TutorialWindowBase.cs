@@ -13,7 +13,7 @@ namespace UI.Window.Tutorial
         [SerializeField] private int _openDelayInMillisecods = 1000;
         private void OnValidate()
         {
-            baseSettings.notifyOthers = false;
+            _baseSettings.notifyOthers = false;
             tutorialBaseSettings.tutorialName = gameObject.name;
             this.TrySetDirty();
         }

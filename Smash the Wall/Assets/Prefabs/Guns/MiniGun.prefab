@@ -83,7 +83,7 @@ MonoBehaviour:
   _gunPoint: {fileID: 9371668981475657}
   _rotationSpeed: 6
   _waitBeforeFire: 2
-  _fireRate: 0.1
+  _fireRate: 0
 --- !u!1001 &6730412907322019300
 PrefabInstance:
   m_ObjectHideFlags: 0

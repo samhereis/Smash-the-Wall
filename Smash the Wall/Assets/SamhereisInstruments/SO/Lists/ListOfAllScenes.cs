@@ -21,10 +21,14 @@ namespace SO.Lists
             }
         }
 
-        public AScene GetNextScene()
+        public void SetNextScene()
         {
             currentSceneIndex++;
-            return GetCurrentScene();
+
+            if (currentSceneIndex >= _scenes.Count)
+            {
+                currentSceneIndex = 0;
+            }
         }
 
         public AScene GetCurrentScene()

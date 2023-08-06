@@ -66,6 +66,11 @@ namespace Managers
             }
         }
 
+        public void DestroyBanner()
+        {
+            AdsManager.instance.Destroy(AdsStrings.bannerAd);
+        }
+
         private async Task RequestInterstitial()
         {
             await AdsManager.instance.Request(AdsStrings.interstitialAd, 5f);

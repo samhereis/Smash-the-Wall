@@ -601,11 +601,29 @@ namespace Managers
             adProvider.Request(placement.type);
         }
 
+        public void Hide(string placementString)
+        {
+            if (isInitialized == false) return;
+
+            var placement = GetPlacement(placementString);
+
+            adProvider.Hide(placement.type);
+        }
+
         public void Hide(Placement placement)
         {
             if (isInitialized == false) return;
 
             adProvider.Hide(placement.type);
+        }
+
+        public void Destroy(string placementString)
+        {
+            if (isInitialized == false) return;
+
+            var placement = GetPlacement(placementString);
+
+            adProvider.Destroy(placement.type);
         }
 
         public void Destroy(Placement placement)

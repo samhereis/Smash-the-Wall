@@ -1,5 +1,7 @@
 using DI;
+using ProjectSripts;
 using UI.Canvases;
+using UI.Elements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +11,9 @@ namespace UI
     {
         [Header("Components")]
         [SerializeField] private Button _backButton;
+
+        [Header("Shops")]
+        [SerializeField] private WeaponsShop _weaponsShop;
 
         protected void Start()
         {
@@ -27,6 +32,8 @@ namespace UI
             base.Enable(duration);
 
             SubscribeToEvents();
+
+            _weaponsShop.Initialize();
         }
 
         public override void Disable(float? duration = null)
@@ -34,6 +41,8 @@ namespace UI
             base.Disable(duration);
 
             UnsubscribeFromEvents();
+
+            _weaponsShop.Clear();
         }
 
         protected override void SubscribeToEvents()

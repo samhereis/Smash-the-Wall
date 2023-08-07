@@ -20,13 +20,10 @@ namespace Gameplay
         private float _xRotation;
         private float _yRotation;
 
-        private void Awake()
-        {
-            (this as IDIDependent).LoadDependencies();
-        }
-
         private void OnEnable()
         {
+            (this as IDIDependent).LoadDependencies();
+
             _inputsHolder.input.Player.Look.performed += Look;
             _inputsHolder.input.Player.Look.canceled += Look;
         }

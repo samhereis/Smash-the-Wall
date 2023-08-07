@@ -11,31 +11,39 @@ namespace SO.Lists
     public class ListOfAllWeapons : ConfigBase
     {
         [field: SerializeField] public List<WeaponIdentityiCard> weapons { get; private set; } = new List<WeaponIdentityiCard>();
-        [field: SerializeField] public WeaponIdentityiCard defaultWeapon { get; private set; }
 
         public override void Initialize()
         {
             var weaponsSave = GameSaveManager.GetWeaponsSave();
-
-            InitWeapon(defaultWeapon);
 
             foreach (var weaponsIdentifier in weapons)
             {
                 InitWeapon(weaponsIdentifier);
             }
 
-            void InitWeapon(WeaponIdentityiCard weaponIdentityiCard, bool isUnlockedValueIfNotFoundInSaveFile = false)
+            void InitWeapon(WeaponIdentityiCard weaponIdentityiCard)
             {
-                if (weaponsSave.allWeapons.Find(x => x.weaponName == weaponIdentityiCard.targetName) == null)
+                var aWeapon_DTO = weaponsSave.allWeapons.Find(x => x.weaponName == weaponIdentityiCard.targetName);
+
+                if (aWeapon_DTO == null)
                 {
-                    weaponsSave.allWeapons.Add(new AWeapon_DTO
+                    var newAWeapon_STO = new AWeapon_DTO
                     {
                         weaponName = weaponIdentityiCard.targetName,
-                        isUnlocked = isUnlockedValueIfNotFoundInSaveFile
-                    });
+                        isUnlocked = false
+                    };
+
+                    if (weaponIdentityiCard.isDefault == true)
+                    {
+                        newAWeapon_STO.isUnlocked = true;
+                    }
+
+                    weaponsSave.allWeapons.Add(newAWeapon_STO);
                 }
 
-                weaponIdentityiCard.Initialize(weaponsSave);
+                aWeapon_DTO = weaponsSave.allWeapons.Find(x => x.weaponName == weaponIdentityiCard.targetName);
+
+                weaponIdentityiCard.Initialize(aWeapon_DTO);
             }
 
             GameSaveManager.SaveWeapons(weaponsSave);
@@ -48,6 +56,7 @@ namespace SO.Lists
 
             GameSaveManager.SaveWeapons(weaponsSave);
         }
+
         public int GetCurrentWeaponIndex()
         {
             var weaponsSave = GameSaveManager.GetWeaponsSave();
@@ -68,6 +77,30 @@ namespace SO.Lists
             var currentWeapon = weapons[GetCurrentWeaponIndex()];
 
             return currentWeapon;
+        }
+
+        public void UnlockWeapon(WeaponIdentityiCard weaponIdentityiCard)
+        {
+            var weaponsSave = GameSaveManager.GetWeaponsSave();
+
+            var weaponSaveUnit = weaponsSave.allWeapons.Find(x => x.weaponName == weaponIdentityiCard.targetName);
+
+            if (weaponSaveUnit != null)
+            {
+                weaponSaveUnit.isUnlocked = true;
+            }
+            else
+            {
+                weaponsSave.allWeapons.Add(new AWeapon_DTO()
+                {
+                    weaponName = weaponIdentityiCard.targetName,
+                    isUnlocked = true
+                });
+            }
+
+            GameSaveManager.SaveWeapons(weaponsSave);
+
+            Initialize();
         }
     }
 }

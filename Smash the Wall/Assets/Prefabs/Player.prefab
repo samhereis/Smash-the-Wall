@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c15e68b566611848b0ade1bfe31f9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _xRotatedObject: {fileID: 4821988786035758897}
-  _yRotatedObject: {fileID: 8571361916071457871}
+  _xRotatedObject: {fileID: 8571361916071457871}
+  _yRotatedObject: {fileID: 4821988786035758897}
   _mouseSensitivity: 0.2
   _inputsHolder: {fileID: 0}
 --- !u!1 &7773065476089419291

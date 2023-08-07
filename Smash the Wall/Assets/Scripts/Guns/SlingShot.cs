@@ -11,9 +11,6 @@ namespace ProjectSripts
 {
     public sealed class SlingShot : ProjectileWeaponBase, IDIDependent
     {
-        [Header("DI")]
-        [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _input;
-
         [Header("Componenets")]
         [SerializeField] private Transform _elasticPart;
 

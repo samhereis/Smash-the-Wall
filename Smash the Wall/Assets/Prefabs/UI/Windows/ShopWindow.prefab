@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: -17}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &2880177190499288281
@@ -619,6 +619,7 @@ MonoBehaviour:
     canvasGroup: {fileID: 0}
     openOnExit: {fileID: 0}
   _backButton: {fileID: 6733884235619374942}
+  _weaponsShop: {fileID: 6395190221379763011}
 --- !u!1 &3445616385425865394
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,6 +958,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3514358472028528238}
   - component: {fileID: 603003056682313427}
+  - component: {fileID: 6395190221379763011}
   m_Layer: 5
   m_Name: WeaponsShop
   m_TagString: Untagged
@@ -1009,6 +1011,22 @@ MonoBehaviour:
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
   _lazyUpdator: {fileID: 0}
+--- !u!114 &6395190221379763011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6975519808604010898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fcd5ba70d342444ba064bf409223bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listOfAllWeapons: {fileID: 0}
+  _shopWeaponUnitsPrefab: {fileID: 4083532283969066130, guid: 2c5d2920a2dcb8f458af67ec0e57b4bc,
+    type: 3}
+  _shopWeaponUnitsParent: {fileID: 4465017753693327423}
 --- !u!1 &7489089253110313985
 GameObject:
   m_ObjectHideFlags: 0

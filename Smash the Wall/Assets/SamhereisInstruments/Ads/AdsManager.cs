@@ -127,7 +127,7 @@ namespace Managers
 
         private CancellationTokenSource _getRewardCancellationTokenSource = new CancellationTokenSource();
 
-        private void Start()
+        private void Awake()
         {
             if (_dontDestroyOnLoad)
             {
@@ -303,14 +303,25 @@ namespace Managers
             return IsReady(placementString);
         }
 
-        public async Task<bool> TryShowPlacement(string placementString)
+        public bool CanShow(Placement placement)
         {
             if (isInitialized == false) return false;
 
-            var placement = GetPlacement(placementString);
             if (placement == null) return false;
-            if (IsReady(placementString) == false) return false;
+            if (IsReady(placement) == false) return false;
             if (removedAds && placement.type != AdType.Rewarded) return false;
+
+            return true;
+        }
+
+        public async Task<bool> TryShowPlacement(string placementString)
+        {
+            var placement = GetPlacement(placementString);
+
+            if (CanShow(placement) == false)
+            {
+                return false;
+            }
 
             return await ShowPlacement(placement);
         }

@@ -6,6 +6,7 @@ namespace InGameStrings
         public const string onLoseEvent = "onLose";
         public const string onNoAdsBought = "onNoAdsBought";
         public const string onGameSceneLoad = "onGameSceneLoad";
+        public const string onChangedWeapon = "onChangedWeapon";
 
         public const string noAdsManager = "noAdsManager";
         public const string inAppPurchacesManager = "inAppPurchacesManager";

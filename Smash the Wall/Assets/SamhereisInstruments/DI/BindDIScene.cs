@@ -1,5 +1,7 @@
 ﻿using Configs;
 using Events;
+using IdentityCards;
+using InGameStrings;
 using Interfaces;
 using System;
 using System.Collections.Generic;
@@ -106,7 +108,7 @@ namespace DI
 
         private void InjectEventsWithParameters()
         {
-
+            DIBox.Add(new EventWithOneParameters<WeaponIdentityiCard>(DIStrings.onChangedWeapon), DIStrings.onChangedWeapon);
         }
 
         private void InjecValueEvents()

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using DI;
+using Events;
 using Helpers;
 using IdentityCards;
 using InGameStrings;
@@ -17,6 +18,7 @@ namespace Spawners
         [Header("Prefabs")]
         [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _input;
         [DI(DIStrings.listOfAllWeapons)][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
+        [DI(DIStrings.onChangedWeapon)][SerializeField] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
 
         [Header("Components")]
         [SerializeField] private Transform _parent;
@@ -39,25 +41,12 @@ namespace Spawners
 
         public void SubscribeToEvents()
         {
-            _input.input.Player.ChangeWeapon.performed += TryChangeWeapon;
+            _onChangedWeapon.AddListener(ChangeWeapon);
         }
 
         public void UnsubscribeFromEvents()
         {
-            _input.input.Player.ChangeWeapon.performed -= TryChangeWeapon;
-        }
-
-        private void TryChangeWeapon(InputAction.CallbackContext context)
-        {
-            var index = _listOfAllWeapons.GetCurrentWeaponIndex() + 1;
-
-            if (index >= _listOfAllWeapons.weapons.Count)
-            {
-                index = 0;
-            }
-
-            _listOfAllWeapons.ChooseWeapon(_listOfAllWeapons.weapons[index]);
-            ChangeWeapon(_listOfAllWeapons.GetCurrentWeapon());
+            _onChangedWeapon.AddListener(ChangeWeapon);
         }
 
         private async void ChangeWeapon(WeaponIdentityiCard weapon)

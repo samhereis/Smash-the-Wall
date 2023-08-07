@@ -219,7 +219,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6610175395279142763}
   - component: {fileID: 8077346987065398365}
-  - component: {fileID: 4100215913814625398}
   m_Layer: 0
   m_Name: InAppPurchaces
   m_TagString: Untagged
@@ -259,19 +258,6 @@ MonoBehaviour:
   <items>k__BackingField:
   - id: noAds
     type: 1
---- !u!114 &4100215913814625398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4879703166379905983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93df64d0be0bdf94e8f44dfe88db4ad7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inAppPurchacesManager: {fileID: 8077346987065398365}
 --- !u!1 &8120009865874695716
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,8 +306,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objects:
-  - id: noAdsManager
-    instance: {fileID: 4100215913814625398}
   - id: inAppPurchacesManager
     instance: {fileID: 8077346987065398365}
   _configs:

@@ -1,7 +1,12 @@
 using Configs;
+using DataClasses;
 using DI;
 using Events;
+using Helpers;
 using InGameStrings;
+using Managers;
+using SO.Lists;
+using Tools;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +22,8 @@ namespace UI
         [Header("DI")]
         [DI(DIStrings.onLoseEvent)][SerializeField] private EventWithNoParameters _onLose;
         [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
+        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
+        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
 
         [Header("Components")]
         [SerializeField] private Button _restartButton;
@@ -72,7 +79,9 @@ namespace UI
         private void RestartGame()
         {
             _gameConfigs.isRestart = true;
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+
+            var scene = _listOfAllScenes._scenes.Find(x => x.sceneName == SceneManager.GetActiveScene().name);
+            LoadLevel(scene);
         }
 
         private void OnLose()
@@ -82,7 +91,19 @@ namespace UI
 
         private void GotoMainMenu()
         {
-            SceneManager.LoadSceneAsync(_mainMenuSceneIndex);
+            LoadLevel(_listOfAllScenes.mainMenuScene, false);
+        }
+
+        private async void LoadLevel(AScene scene, bool showInterstitial = true)
+        {
+            await _sceneLoader.LoadSceneAsync(scene);
+
+            if (showInterstitial == true)
+            {
+                await AsyncHelper.Delay(2000);
+
+                AdsShowManager.instance?.TryShowInterstitial();
+            }
         }
     }
 }

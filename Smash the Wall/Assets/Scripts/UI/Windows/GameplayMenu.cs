@@ -7,6 +7,7 @@ using Identifiers;
 using InGameStrings;
 using Managers;
 using PlayerInputHolder;
+using TMPro;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,6 @@ namespace UI
     public class GameplayMenu : CanvasWindowBase, IDIDependent
     {
         [Header("DI")]
-        [DI(DIStrings.noAdsManager)] private NoAdsManager _noAdsManager;
         [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _inputs;
         [DI(DIStrings.gameConfigs)] private GameConfigs _gameConfigs;
 
@@ -27,7 +27,6 @@ namespace UI
         [Space(10)]
         [SerializeField] private Button _pauseButton;
         [SerializeField] private Button _shopsButton;
-        [SerializeField] private Button _noAdsButton;
 
         [Space(10)]
         [SerializeField] private Slider _whatNeedsToBeDestroyedProgressbar;
@@ -36,6 +35,9 @@ namespace UI
         [Space(10)]
         [SerializeField] private Slider _whatNeedsToStayProgressbar;
         [SerializeField] private Image _whatNeedsToStayProgressbarFillImage;
+
+        [Space(10)]
+        [SerializeField] private TextMeshProUGUI _currentLevelText;
 
         [Header("Settings")]
         [SerializeField] private Gradient _whatNeedsToBeDestroyedProgressbarGradient;
@@ -62,6 +64,14 @@ namespace UI
 
             _whatNeedsToBeDestroyedProgressbarGradient.SetKeys(_whatNeedsToBeDestroyedProgressbarGradientKeys, _whatNeedsToBeDestroyedProgressbarGradient.alphaKeys);
             _whatNeedsToStayProgressbarGradient.SetKeys(_whatNeedsToStayProgressbarGradientKeys, _whatNeedsToStayProgressbarGradient.alphaKeys);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            _whatNeedsToBeDestroyedProgressbarFillImage?.DOKill();
+            _whatNeedsToStayProgressbarFillImage?.DOKill();
         }
 
         private void Update()
@@ -122,6 +132,11 @@ namespace UI
             else
             {
                 AdsShowManager.instance?.ShowBanner();
+            }
+
+            if (_currentLevelText != null)
+            {
+                _currentLevelText.text = "current level: " + GameSaveManager.GetLevelIndex();
             }
         }
 

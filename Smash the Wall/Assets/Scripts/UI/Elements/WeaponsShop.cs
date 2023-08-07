@@ -17,6 +17,7 @@ namespace UI.Elements
 
         [Header("Componenets")]
         [SerializeField] private Transform _shopWeaponUnitsParent;
+
         private void Start()
         {
             (this as IDIDependent).LoadDependencies();
@@ -49,6 +50,8 @@ namespace UI.Elements
         {
             foreach (ShopWeaponUnit child in GetComponentsInChildren<ShopWeaponUnit>(true))
             {
+                child.transform.DOKill();
+
                 Destroy(child.gameObject);
             }
         }

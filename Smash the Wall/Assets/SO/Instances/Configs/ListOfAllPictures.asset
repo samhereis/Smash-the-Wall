@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: ListOfAllPictures
   m_EditorClassIdentifier: 
   <pictures>k__BackingField:
-  - <targetName>k__BackingField: Bomb
-    <target>k__BackingField: {fileID: 6175686415919909157, guid: ceed9214720fa6c42b37690528345150,
-      type: 3}
   - <targetName>k__BackingField: Bomb Green
     <target>k__BackingField: {fileID: -6676753617988504395, guid: 53d418da7fdc5a9458366ffd2d748208,
       type: 3}

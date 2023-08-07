@@ -14,7 +14,6 @@ namespace UI
     public class MainMenu : CanvasWindowBase, IDIDependent
     {
         [Header("DI")]
-        [DI(DIStrings.noAdsManager)][SerializeField] private NoAdsManager _noAdsManager;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
 
@@ -25,7 +24,6 @@ namespace UI
         [SerializeField] private Button _playButton;
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _quitButton;
-        [SerializeField] private Button _noAdsButton;
 
         private async void Start()
         {

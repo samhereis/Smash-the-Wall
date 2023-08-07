@@ -1,5 +1,6 @@
 using DataClasses;
 using Helpers;
+using Managers;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace Tools
 
         public async Task LoadSceneAsync(AScene aScene, Action<float> onUpdate = null)
         {
+            GameSaveManager.SaveAll();
+
             if (_loading == false)
             {
                 _loading = true;

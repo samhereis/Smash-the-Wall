@@ -18,7 +18,13 @@ namespace Helpers
 
             FileStream fileSteam = new FileStream(path + fileName + ".json", FileMode.Create);
 
-            using (StreamWriter writer = new StreamWriter(fileSteam)) writer.Write(JsonConvert.SerializeObject(objectToSave));
+            var json = JsonConvert.SerializeObject(objectToSave);
+
+            using (StreamWriter writer = new StreamWriter(fileSteam))
+            {
+                Debug.Log("Saving: " + json);
+                writer.Write(json);
+            }
         }
 
         public static T GetStoredDataClass<T>(string folder, string fileName) where T : ISavable

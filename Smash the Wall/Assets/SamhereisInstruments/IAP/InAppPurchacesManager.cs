@@ -11,7 +11,7 @@ namespace Managers
     public class InAppPurchacesManager : MonoBehaviour, IDetailedStoreListener
     {
         public static InAppPurchacesManager instance { get; private set; }
-        public bool isInitialized { get; private set; }
+        [field: SerializeField] public bool isInitialized { get; private set; }
 
         public Action onInitialize;
         public Action<Item> onPurchase; 

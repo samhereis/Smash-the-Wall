@@ -38,7 +38,7 @@ namespace DI
             {
                 _dictionarySingle[typeof(T)].Remove(id);
 
-                Debug.Log($"Removed from DI - Type: {typeof(T)} - Id: '{id}'");
+                //Debug.Log($"Removed from DI - Type: {typeof(T)} - Id: '{id}'");
             }
             if (_dictionarySingle.Count == 0)
             {
@@ -51,7 +51,7 @@ namespace DI
             if (_dictionarySingle.ContainsKey(type))
             {
                 _dictionarySingle[type].Remove(id);
-                Debug.Log($"Removed from DI - Type: {type} - Id: '{id}'");
+                //Debug.Log($"Removed from DI - Type: {type} - Id: '{id}'");
             }
             if (_dictionarySingle.Count == 0)
             {
@@ -150,7 +150,7 @@ namespace DI
                 if (_dictionarySingle[typeInstance].ContainsValue(id) == false)
                 {
                     _dictionarySingle[typeInstance].Add(id, instance);
-                    Debug.Log($"Added to DI - Type: {typeInstance}- Id: '{id}'");
+                    //Debug.Log($"Added to DI - Type: {typeInstance}- Id: '{id}'");
                 }
             }
             else

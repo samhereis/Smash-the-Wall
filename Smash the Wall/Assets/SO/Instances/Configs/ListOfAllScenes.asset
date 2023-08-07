@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ListOfAllScenes
   m_EditorClassIdentifier: 
   <_scenes>k__BackingField:
-  - <sceneName>k__BackingField: 
+  - <sceneName>k__BackingField: NatureCyperpunk
     _scene: {fileID: 102900000, guid: c6c9e2e5a14dfd74888f0100da5d9797, type: 3}
-  - <sceneName>k__BackingField: 
+  - <sceneName>k__BackingField: SpaceBeach
     _scene: {fileID: 102900000, guid: f81033ed90c72e747920a845273ea101, type: 3}
   <mainMenuScene>k__BackingField:
-    <sceneName>k__BackingField: 
+    <sceneName>k__BackingField: Main
     _scene: {fileID: 102900000, guid: 0670b16e77fb2e94aae0d15cf3db7fbb, type: 3}
   <currentSceneIndex>k__BackingField: 0

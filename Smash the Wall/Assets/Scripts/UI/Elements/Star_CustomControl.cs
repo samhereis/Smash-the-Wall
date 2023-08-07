@@ -18,6 +18,14 @@ namespace UI.Elements
         [SerializeField] private List<SingleStarIdentifier> _instantiatedStars = new List<SingleStarIdentifier>();
         [SerializeField] private int _starsCount = 0;
 
+        private void OnDisable()
+        {
+            foreach (var star in GetComponentsInChildren<SingleStarIdentifier>(true))
+            {
+                star.transform.DOKill();
+            }
+        }
+
         public void SetStarCount(int starCount)
         {
             _starsCount = starCount;

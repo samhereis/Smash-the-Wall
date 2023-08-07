@@ -17,7 +17,7 @@ namespace ProjectSripts
         [Header("Settings")]
         [SerializeField] private float _normalElasticZScalse;
         [SerializeField] private float _shootElasticZScalse;
-        [SerializeField] private float _scaleScaleDuration = 0.25f;
+        [SerializeField] private float _resetScaleDuration = 0.25f;
         [SerializeField] private float _shootScaleDuration = 0.1f;
 
         [Header("Debug")]
@@ -77,7 +77,7 @@ namespace ProjectSripts
                     canShoot = true;
                 }
 
-                _elasticPart.DOScaleZ(_normalElasticZScalse, _shootScaleDuration);
+                _elasticPart.DOScaleZ(_normalElasticZScalse, _resetScaleDuration);
             }
         }
 

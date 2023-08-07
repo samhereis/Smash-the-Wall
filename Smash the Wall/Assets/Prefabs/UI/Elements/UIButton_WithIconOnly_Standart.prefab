@@ -203,3 +203,5 @@ MonoBehaviour:
     disableOthers: 0
     volume: 1
     distance: 50
+  _onOverScale: 0.75
+  _animationDuration: 0.25

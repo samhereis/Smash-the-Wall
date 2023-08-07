@@ -85,12 +85,12 @@ namespace ECS.Systems.Spawners
                             }
                             else
                             {
-                                newPicture = ecb.Instantiate(picturePrefabBuffer[_listOfAllPictures.GeCurrentIndex()].value.prefab);
+                                newPicture = ecb.Instantiate(picturePrefabBuffer[_listOfAllPictures.GetCurrentIndex()].value.prefab);
                             }
                         }
                         else
                         {
-                            newPicture = ecb.Instantiate(picturePrefabBuffer[_listOfAllPictures.GeCurrentIndex()].value.prefab);
+                            newPicture = ecb.Instantiate(picturePrefabBuffer[_listOfAllPictures.GetCurrentIndex()].value.prefab);
                         }
 
                         Debug.Log($"Spawned {entityManager.GetName(entity)} at {picture.value.position}");

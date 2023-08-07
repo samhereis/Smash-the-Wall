@@ -1,7 +1,7 @@
 using Configs;
+using DTO;
 using IdentityCards;
 using Managers;
-using ProjectSripts;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,16 +45,12 @@ namespace SO.Lists
 
                 weaponIdentityiCard.Initialize(aWeapon_DTO);
             }
-
-            GameSaveManager.SaveWeapons(weaponsSave);
         }
 
         public void ChooseWeapon(WeaponIdentityiCard weaponIdentityiCard)
         {
             var weaponsSave = GameSaveManager.GetWeaponsSave();
             weaponsSave.currentWeaponIndex = weapons.IndexOf(weaponIdentityiCard);
-
-            GameSaveManager.SaveWeapons(weaponsSave);
         }
 
         public int GetCurrentWeaponIndex()
@@ -64,7 +60,6 @@ namespace SO.Lists
             if (weaponsSave.currentWeaponIndex >= weapons.Count)
             {
                 weaponsSave.currentWeaponIndex = 0;
-                GameSaveManager.SaveWeapons(weaponsSave);
             }
 
             var currentWeaponIndex = weaponsSave.currentWeaponIndex;
@@ -97,8 +92,6 @@ namespace SO.Lists
                     isUnlocked = true
                 });
             }
-
-            GameSaveManager.SaveWeapons(weaponsSave);
 
             Initialize();
         }

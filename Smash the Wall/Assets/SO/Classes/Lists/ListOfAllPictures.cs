@@ -1,5 +1,4 @@
 using Configs;
-using DTO.Save;
 using Helpers;
 using IdentityCards;
 using Managers;
@@ -31,19 +30,22 @@ namespace SO.Lists
             return pictures.IndexOf(GetRandom());
         }
 
-        public int GeCurrentIndex()
+        public int GetCurrentIndex()
         {
             var save = GameSaveManager.GetLevelSave();
             int pictureIndex = 0;
 
             if (save != null) { pictureIndex = save.pictureIndex; }
 
-            if (pictureIndex >= pictures.Count) { pictureIndex = 0; }
+            if (pictureIndex >= pictures.Count)
+            {
+                pictureIndex = 0;
+            }
 
             return pictureIndex;
         }
 
-        public void SetNextLevel()
+        public void SetNextPicture()
         {
             var save = GameSaveManager.GetLevelSave();
             int pictureIndex = 0;
@@ -54,9 +56,7 @@ namespace SO.Lists
 
             if (pictureIndex >= pictures.Count) { pictureIndex = 0; }
 
-            save = new LevelSave_DTO() { pictureIndex = pictureIndex };
-
-            GameSaveManager.SaveLevel(save);
+            save.pictureIndex = pictureIndex;
         }
 
         public PictureIdentityCard GetCurrent()

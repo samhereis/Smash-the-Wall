@@ -70620,7 +70620,7 @@ PrefabInstance:
     - target: {fileID: 1460447222813581391, guid: 0f59657d7cb188840b7693369dc5f28b,
         type: 3}
       propertyPath: m_Name
-      value: Bomb
+      value: Crab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

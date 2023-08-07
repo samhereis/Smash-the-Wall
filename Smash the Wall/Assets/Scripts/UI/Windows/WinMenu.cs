@@ -101,36 +101,41 @@ namespace UI
 
         private void OnWin()
         {
+            _listOfAllPictures.SetNextPicture();
+            _listOfAllScenes.SetNextScene();
+
+            GameSaveManager.IncreaseLevelIndex();
+
             Enable();
         }
 
         private void NextLevel()
         {
-            _listOfAllPictures.SetNextLevel();
-
             if (GameConfigs.GameSettings.isRamdonEnviromentEnabled)
             {
                 LoadLevel(_listOfAllScenes.GetRandomScene());
             }
             else
             {
-                _listOfAllScenes.SetNextScene();
                 LoadLevel(_listOfAllScenes.GetCurrentScene());
             }
         }
 
-        private async void GotoMainMenu()
+        private void GotoMainMenu()
         {
-            await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
+            LoadLevel(_listOfAllScenes.mainMenuScene, false);
         }
 
-        private async void LoadLevel(AScene scene)
+        private async void LoadLevel(AScene scene, bool showInterstitial = true)
         {
             await _sceneLoader.LoadSceneAsync(scene);
 
-            await AsyncHelper.Delay(1000);
+            if (showInterstitial == true)
+            {
+                await AsyncHelper.Delay(2000);
 
-            AdsShowManager.instance?.TryShowInterstitial();
+                AdsShowManager.instance?.TryShowInterstitial();
+            }
         }
     }
 }

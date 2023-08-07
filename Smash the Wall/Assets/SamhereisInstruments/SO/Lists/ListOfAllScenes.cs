@@ -1,6 +1,8 @@
 using Configs;
 using DataClasses;
+using Helpers;
 using Interfaces;
+using Managers;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +21,12 @@ namespace SO.Lists
             {
                 scene.Initialize();
             }
+
+            mainMenuScene.Initialize();
+
+            currentSceneIndex = GameSaveManager.GetLevelSave().sceneIndex;
+
+            this.TrySetDirty();
         }
 
         public void SetNextScene()
@@ -29,6 +37,8 @@ namespace SO.Lists
             {
                 currentSceneIndex = 0;
             }
+
+            SetScene(currentSceneIndex);
         }
 
         public AScene GetCurrentScene()
@@ -36,6 +46,7 @@ namespace SO.Lists
             if (currentSceneIndex >= _scenes.Count)
             {
                 currentSceneIndex = 0;
+                SetScene(currentSceneIndex);
             }
 
             return _scenes[currentSceneIndex];
@@ -44,6 +55,12 @@ namespace SO.Lists
         public AScene GetRandomScene()
         {
             return _scenes[Random.Range(0, _scenes.Count)];
+        }
+
+        private void SetScene(int index)
+        {
+            var levelSave = GameSaveManager.GetLevelSave();
+            levelSave.sceneIndex = index;
         }
     }
 }

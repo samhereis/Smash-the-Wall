@@ -1,19 +1,22 @@
 using DI;
+using InGameStrings;
+using SO.Lists;
+using Tools;
 using UI.Canvases;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI
 {
     public class PauseMenu : CanvasWindowBase, IDIDependent
     {
+        [Header("DI")]
+        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
+        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+
         [Header("Components")]
         [SerializeField] private CanvasWindowBase _settingsWindow;
         [SerializeField] private CanvasWindowBase _gameplayWindow;
-
-        [Header("Settings")]
-        [SerializeField] private int _mainSceneIndex = 0;
 
         [SerializeField] private Button _resumeButton;
         [SerializeField] private Button _settingsButton;
@@ -66,9 +69,9 @@ namespace UI
             _settingsWindow?.Enable();
         }
 
-        private void OpenMainMenu()
+        private async void OpenMainMenu()
         {
-            SceneManager.LoadSceneAsync(_mainSceneIndex);
+            await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
         }
     }
 }

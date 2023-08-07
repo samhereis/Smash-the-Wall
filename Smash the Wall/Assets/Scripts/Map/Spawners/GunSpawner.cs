@@ -8,7 +8,6 @@ using Interfaces;
 using PlayerInputHolder;
 using SO.Lists;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Weapons;
 
 namespace Spawners
@@ -46,21 +45,19 @@ namespace Spawners
 
         public void UnsubscribeFromEvents()
         {
-            _onChangedWeapon.AddListener(ChangeWeapon);
+            _onChangedWeapon.RemoveListener(ChangeWeapon);
         }
 
         private async void ChangeWeapon(WeaponIdentityiCard weapon)
         {
-            if (_currentWeapon != null)
-            {
-                _currentWeapon.DisableInput();
-                _currentWeapon.transform.DOScale(0, 0.25f).OnComplete(() =>
-                {
-                    Destroy(_currentWeapon.gameObject);
-                });
+            if (_currentWeapon != null) { DeleteWeapon(_currentWeapon); }
 
-                await AsyncHelper.Delay(0.25f);
+            foreach (var weaponBase in _parent.GetComponentsInChildren<WeaponBase>(true))
+            {
+                DeleteWeapon(weaponBase);
             }
+
+            await AsyncHelper.Delay(0.25f);
 
             _currentWeapon = Instantiate(weapon.target, _parent);
             _currentWeapon.Initialize();
@@ -70,6 +67,17 @@ namespace Spawners
             _currentWeapon.transform.DOScale(1, 0.25f).OnComplete(() =>
             {
                 _currentWeapon.EnableInput();
+            });
+
+
+        }
+
+        private void DeleteWeapon(WeaponBase weapon)
+        {
+            weapon.DisableInput();
+            weapon.transform.DOScale(0, 0.25f).OnComplete(() =>
+            {
+                Destroy(weapon.gameObject);
             });
         }
     }

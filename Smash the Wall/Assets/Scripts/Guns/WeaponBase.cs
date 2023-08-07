@@ -14,5 +14,10 @@ namespace Weapons
         public abstract void DisableInput();
         protected abstract void Fire(InputAction.CallbackContext context);
         public abstract void OnFired();
+
+        public override string ToString()
+        {
+            return gameObject.name;
+        }
     }
 }

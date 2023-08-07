@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace ProjectSripts
+namespace DTO
 {
     public sealed record AWeapon_DTO
     {

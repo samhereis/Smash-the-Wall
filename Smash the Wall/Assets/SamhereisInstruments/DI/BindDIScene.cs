@@ -23,13 +23,10 @@ namespace DI
         [Header("Settings")]
         [SerializeField] private bool _isGlobal = false;
 
-        private bool _wasGloballyInjected = false;
-
         private void Awake()
         {
             if (_isGlobal == true && isGLoballyInhected == true)
             {
-                _wasGloballyInjected = true;
                 Destroy(gameObject);
                 return;
             }
@@ -89,6 +86,7 @@ namespace DI
         {
 
 #if UNITY_EDITOR
+
             if (EditorApplication.isPlayingOrWillChangePlaymode == false && EditorApplication.isPlaying)
             {
                 Debug.Log("Exiting playmode.");
@@ -96,7 +94,7 @@ namespace DI
             }
 #endif
 
-            if (_isGlobal && isGLoballyInhected == true)
+            if (_isGlobal == true && isGLoballyInhected == true)
             {
                 return;
             }
@@ -104,14 +102,25 @@ namespace DI
             Clear();
         }
 
-
-
         private void InjectEventsWithParameters()
         {
-            DIBox.Add(new EventWithOneParameters<WeaponIdentityiCard>(DIStrings.onChangedWeapon), DIStrings.onChangedWeapon);
+            if (DIBox.Get<EventWithOneParameters<WeaponIdentityiCard>>(DIStrings.onChangedWeapon, false) == null)
+            {
+                DIBox.Add(new EventWithOneParameters<WeaponIdentityiCard>(DIStrings.onChangedWeapon), DIStrings.onChangedWeapon);
+            }
         }
 
         private void InjecValueEvents()
+        {
+
+        }
+
+        private void ClearEventsWithParameters()
+        {
+            DIBox.Remove<EventWithOneParameters<WeaponIdentityiCard>>(DIStrings.onChangedWeapon);
+        }
+
+        private void ClearValueEvents()
         {
 
         }
@@ -137,6 +146,9 @@ namespace DI
             {
                 DIBox.Remove(eventWithNoParameter.instance.GetType(), eventWithNoParameter.id);
             }
+
+            ClearEventsWithParameters();
+            ClearValueEvents();
 
             if (_isGlobal == true)
             {

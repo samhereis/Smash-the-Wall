@@ -27,6 +27,8 @@ namespace UI.Canvases
         {
             UnsubscribeFromEvents();
             onAWindowOpen -= OnAWindowOpen;
+
+            _baseSettings.canvasGroup.DOKill();
         }
 
 

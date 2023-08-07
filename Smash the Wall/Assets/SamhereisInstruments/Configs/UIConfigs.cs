@@ -11,12 +11,16 @@ namespace Configs
         public static float defaultUIFadeAnimationDuration { get; private set; } = 0.25f;
         public static Ease defaultUIFadeEase { get; private set; } = Ease.OutBack;
 
-        [field: SerializeField, Tooltip("Время скейлинга UI элементов")] public float uiScaleAnimationDuration { get; private set; } = 0.25f;
-        [field: SerializeField, Tooltip("Ease скейлинга UI элементов")] public Ease uiScaleEase { get; private set; } = Ease.InOutBack;
-        [field: SerializeField, Tooltip("Время скейлинга UI элементов")] public float uiFadeAnimationDuration { get; private set; } = 0.25f;
-        [field: SerializeField, Tooltip("Ease скейлинга UI элементов")] public Ease uiFadeEase { get; private set; } = Ease.InOutBack;
+        [field: SerializeField] public float uiScaleAnimationDuration { get; private set; } = 0.25f;
+        [field: SerializeField] public Ease uiScaleEase { get; private set; } = Ease.InOutBack;
+        [field: SerializeField] public float uiFadeAnimationDuration { get; private set; } = 0.25f;
+        [field: SerializeField] public Ease uiFadeEase { get; private set; } = Ease.InOutBack;
 
-        [field: SerializeField, Tooltip("Задний фон внегеймплейных UI окон")] public Color uiBackgroundColor { get; private set; } = Color.cyan;
+        [field: SerializeField] public Color uiBackgroundColor_Standart { get; private set; } = Color.cyan;
+        [field: SerializeField] public Color uiBackgroundColor_Win { get; private set; } = Color.red;
+        [field: SerializeField] public Color uiBackgroundColor_Lose { get; private set; } = Color.green;
+        [field: SerializeField] public Color uiBackgroundColor_Shop_MainPart { get; private set; } = Color.yellow;
+        [field: SerializeField] public Color uiBackgroundColor_Shop_UpperPart { get; private set; } = Color.cyan;
 
         public override void Initialize()
         {

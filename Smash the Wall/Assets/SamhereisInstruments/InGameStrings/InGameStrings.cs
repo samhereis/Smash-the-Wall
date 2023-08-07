@@ -12,6 +12,7 @@ namespace InGameStrings
         public const string inAppPurchacesManager = "inAppPurchacesManager";
 
         public const string gameConfigs = "gameConfigs";
+        public const string uiConfigs = "uiConfigs";
 
         public const string listOfAllPictures = "listOfAllPictures";
         public const string listOfAllScenes = "listOfAllScenes";

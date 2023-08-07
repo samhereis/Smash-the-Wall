@@ -119,6 +119,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NoAdsButton
       objectReference: {fileID: 0}
+    - target: {fileID: 8818240508952284196, guid: f2fc0843b0a854841be4b0f7db43a304,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

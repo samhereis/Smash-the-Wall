@@ -26,11 +26,17 @@ namespace UI
         [DI(DIStrings.listOfAllPictures)][SerializeField] private ListOfAllPictures _listOfAllPictures;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
+        [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
 
         [Header("Components")]
         [SerializeField] private Button _nextLevelButton;
         [SerializeField] private Button _goToMainMenuButton;
 
+        [Space(10)]
+        [SerializeField] private Image _winInfoBlock;
+        [SerializeField] private Image _buttonsInfoBlock;
+
+        [Space(10)]
         [SerializeField] private Star_CustomControl _starControl;
 
         protected void Start()
@@ -71,9 +77,12 @@ namespace UI
 
             _gameConfigs.isRestart = false;
 
-            await AdsManager.instance?.Request(AdsStrings.interstitialAd, 5f);
+            _winInfoBlock.color = _uIConfigs.uiBackgroundColor_Win;
+            _buttonsInfoBlock.color = _uIConfigs.uiBackgroundColor_Standart;
 
             SubscribeToEvents();
+
+            await AdsManager.instance?.Request(AdsStrings.interstitialAd, 5f);
         }
 
         public override void Disable(float? duration = null)

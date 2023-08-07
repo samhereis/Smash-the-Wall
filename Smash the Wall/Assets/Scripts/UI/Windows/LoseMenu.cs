@@ -24,10 +24,15 @@ namespace UI
         [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
 
         [Header("Components")]
         [SerializeField] private Button _restartButton;
         [SerializeField] private Button _goToMainMenuButton;
+
+        [Space(10)]
+        [SerializeField] private Image _loseInfoBlock;
+        [SerializeField] private Image _loseButtonsBlock;
 
         protected void Start()
         {
@@ -51,6 +56,9 @@ namespace UI
             _gameConfigs.isRestart = false;
 
             SubscribeToEvents();
+
+            _loseInfoBlock.color = _uIConfigs.uiBackgroundColor_Lose;
+            _loseButtonsBlock.color = _uIConfigs.uiBackgroundColor_Standart;
         }
 
         public override void Disable(float? duration = null)

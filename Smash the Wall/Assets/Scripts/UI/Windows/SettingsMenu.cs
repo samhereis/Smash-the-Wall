@@ -1,4 +1,6 @@
+using Configs;
 using DI;
+using InGameStrings;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,8 +9,14 @@ namespace UI
 {
     public class SettingsMenu : CanvasWindowBase, IDIDependent
     {
+        [Header("DI")]
+        [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
+
         [Header("Components")]
         [SerializeField] private Button _closeButton;
+
+        [Space(10)]
+        [SerializeField] private Image _buttonsInfoBlock;
 
         protected void Start()
         {
@@ -22,6 +30,8 @@ namespace UI
             base.Enable(duration);  
 
             SubscribeToEvents();
+
+            _buttonsInfoBlock.color = _uIConfigs.uiBackgroundColor_Standart;
         }
 
         public override void Disable(float? duration = null)

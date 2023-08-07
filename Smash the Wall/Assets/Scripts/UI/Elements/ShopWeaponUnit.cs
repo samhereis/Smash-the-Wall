@@ -79,8 +79,8 @@ namespace UI.Elements
 
                     _label.text = "tap to unlock";
 
-                    _tapToGetImage.DOFade(0.25f, 1).SetLoops(-1, LoopType.Yoyo);
-                    _tapToGetImage.transform.DOScale(0.5f, 1).SetLoops(-1, LoopType.Yoyo);
+                    _tapToGetImage.DOFade(0.25f, 1).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutBack);
+                    _tapToGetImage.transform.DOScale(0.5f, 1).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutBack);
                 }
                 else
                 {

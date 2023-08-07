@@ -1,3 +1,4 @@
+using Configs;
 using DI;
 using Helpers;
 using InGameStrings;
@@ -16,11 +17,15 @@ namespace UI
         [Header("DI")]
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
+        [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
 
         [Header("Components")]
         [SerializeField] private SettingsMenu _settingsMenu;
 
-        [Header("Components")]
+        [Space(10)]
+        [SerializeField] private Image _buttonsInfoBlock;
+
+        [Header("Buttons")]
         [SerializeField] private Button _playButton;
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _quitButton;
@@ -39,6 +44,8 @@ namespace UI
             base.Enable(duration);
 
             SubscribeToEvents();
+
+            _buttonsInfoBlock.color = _uIConfigs.uiBackgroundColor_Standart;
         }
 
         public override void Disable(float? duration = null)

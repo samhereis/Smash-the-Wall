@@ -3,24 +3,17 @@ using Managers;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
 
 namespace Samhereis.Helpers
 {
     public sealed class ProjectHelper : MonoBehaviour
     {
-
         [SerializeField] private int _targetFPS = 120;
 
         private void Awake()
         {
             Application.targetFrameRate = _targetFPS;
-        }
-
-        private void OnDestroy()
-        {
-            GameSaveManager.SaveAll();
         }
 
         private void OnApplicationQuit()

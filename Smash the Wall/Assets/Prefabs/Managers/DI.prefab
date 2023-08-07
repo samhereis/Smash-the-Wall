@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e030379fdd973da498cb6d7c23443d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <isInitialized>k__BackingField: 0
   _autoInitialize: 1
   _subscriptionsInEditor: 0
   <items>k__BackingField:
@@ -311,6 +312,8 @@ MonoBehaviour:
   _configs:
   - id: gameConfigs
     instance: {fileID: 11400000, guid: 7516ebd22a60cd645ba168f241048310, type: 2}
+  - id: uiConfigs
+    instance: {fileID: 11400000, guid: 70e2bdea80e951740811304eb8079677, type: 2}
   - id: listOfAllPictures
     instance: {fileID: 11400000, guid: 6d554313b5c1e374ca2547c0838e5707, type: 2}
   - id: listOfAllScenes

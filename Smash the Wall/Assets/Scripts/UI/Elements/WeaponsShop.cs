@@ -43,7 +43,7 @@ namespace UI.Elements
             var shopWeaponUnit = Instantiate(_shopWeaponUnitsPrefab, _shopWeaponUnitsParent);
             shopWeaponUnit.transform.localScale = Vector3.zero;
             shopWeaponUnit.Initialize(weaponIdentityiCard);
-            shopWeaponUnit.transform.DOScale(1, 0.5f);
+            shopWeaponUnit.transform.DOScale(1, 0.5f).SetEase(Ease.OutBack);
         }
 
         public void Clear()

@@ -420,6 +420,14 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  - m_AssetGUID: e0dac6a863fe95f48b684c07f7a611be
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: b9c94ede2c310bd47aee048839659897
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
   _enviroment: {fileID: 0}
 --- !u!1 &1629336984
 GameObject:

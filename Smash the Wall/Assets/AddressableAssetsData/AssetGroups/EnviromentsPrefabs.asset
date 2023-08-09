@@ -22,6 +22,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0dac6a863fe95f48b684c07f7a611be
+    m_Address: Assets/Prefabs/Enviroments/DinigRoom.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9c94ede2c310bd47aee048839659897
+    m_Address: Assets/Prefabs/Enviroments/ArabicVillage.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5ed90d24bdcc2eb4386211027ee118a9, type: 2}
   m_SchemaSet:

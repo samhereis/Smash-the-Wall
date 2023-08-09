@@ -19,6 +19,7 @@ namespace UI
         [Header("DI")]
         [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _inputs;
         [DI(DIStrings.gameConfigs)] private GameConfigs _gameConfigs;
+        [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
 
         [Header("UI Components")]
         [SerializeField] private PauseMenu _pauseMenu;
@@ -125,13 +126,13 @@ namespace UI
             {
                 if (shouldDestroyBanner == true)
                 {
-                    AdsShowManager.instance?.DestroyBanner();
-                    AdsShowManager.instance?.ShowBanner();
+                    _adsShowManager?.DestroyBanner();
+                    _adsShowManager?.ShowBanner();
                 }
             }
             else
             {
-                AdsShowManager.instance?.ShowBanner();
+                _adsShowManager?.ShowBanner();
             }
 
             if (_currentLevelText != null)

@@ -10,6 +10,7 @@ namespace Managers
     {
         [Header("DI")]
         [DI(DIStrings.inAppPurchacesManager)][SerializeField] private InAppPurchacesManager _inAppPurchacesManager;
+        [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
 
         public bool isNoAdsEnabled
         {
@@ -103,10 +104,7 @@ namespace Managers
 
         private void OnNoAdsEnabled()
         {
-            if (AdsManager.instance?.removedAds == false)
-            {
-                AdsManager.instance?.RemoveAds(true);
-            }
+            _adsShowManager.RemoveAds();
 
             transform.DOScale(0, 1);
         }

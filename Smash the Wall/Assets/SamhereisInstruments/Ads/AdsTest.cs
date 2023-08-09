@@ -1,60 +1,44 @@
+using DI;
+using InGameStrings;
 using UnityEngine;
 
 namespace Managers
 {
-    public class AdsTest : MonoBehaviour
+    public class AdsTest : MonoBehaviour, IDIDependent
     {
-        public string bannerString = "banner";
-        public string interstitialString = "interstitial";
-        public string rewardedString = "rewarded";
-        public string appOpenString = "appOpen";
+        [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
 
-        [ContextMenu(nameof(RequestBanner))]
-        public async void RequestBanner()
+        private void Start()
         {
-            Debug.Log($"{nameof(RequestBanner)} {await AdsManager.instance.Request(bannerString, 5)}");
+            (this as IDIDependent).LoadDependencies();
         }
 
         [ContextMenu(nameof(ShowBanner))]
-        public async void ShowBanner()
+        public void ShowBanner()
         {
-            Debug.Log($"{nameof(ShowBanner)} {await AdsManager.instance.TryShowPlacement(bannerString)}");
-        }
-
-        [ContextMenu(nameof(RequestInterstitial))]
-        public async void RequestInterstitial()
-        {
-            Debug.Log($"{nameof(RequestInterstitial)} {await AdsManager.instance.Request(interstitialString, 5)}");
+            Debug.Log(nameof(ShowBanner));
+            _adsShowManager.ShowBanner();
         }
 
         [ContextMenu(nameof(ShowInterstitial))]
-        public async void ShowInterstitial()
+        public void ShowInterstitial()
         {
-            Debug.Log($"{nameof(ShowInterstitial)} {await AdsManager.instance.TryShowPlacement(interstitialString)}");
-        }
-
-        [ContextMenu(nameof(RequestRewarded))]
-        public async void RequestRewarded()
-        {
-            Debug.Log($"{nameof(RequestRewarded)} {await AdsManager.instance.Request(rewardedString, 5)}");
+            Debug.Log(nameof(ShowBanner));
+            _adsShowManager.TryShowInterstitial();
         }
 
         [ContextMenu(nameof(ShowRewarded))]
-        public async void ShowRewarded()
+        public void ShowRewarded()
         {
-            Debug.Log($"{nameof(ShowRewarded)} {await AdsManager.instance.TryShowPlacement(rewardedString)}");
-        }
-
-        [ContextMenu(nameof(RequestAppOpen))]
-        public async void RequestAppOpen()
-        {
-            Debug.Log($"{nameof(RequestAppOpen)} {await AdsManager.instance.Request(appOpenString, 5)}");
+            Debug.Log(nameof(ShowRewarded));
+            _adsShowManager.TryShowRewarded();
         }
 
         [ContextMenu(nameof(ShowAppOpen))]
-        public async void ShowAppOpen()
+        public void ShowAppOpen()
         {
-            Debug.Log($"{nameof(ShowAppOpen)} {await AdsManager.instance.TryShowPlacement(appOpenString)}");
+            Debug.Log(nameof(ShowAppOpen));
+            _adsShowManager.TryShowAppOpen();
         }
     }
 }

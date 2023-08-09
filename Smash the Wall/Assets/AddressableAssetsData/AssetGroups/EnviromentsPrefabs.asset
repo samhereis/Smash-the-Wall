@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: EnviromentsPrefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: EnviromentsPrefabs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 246ba854e7e28fe4285cf44f266dd3ff
+  m_SerializeEntries:
+  - m_GUID: 86517e524a52e8942b642d4e44fb56d6
+    m_Address: Assets/Prefabs/Enviroments/JapaneseGarden.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5ed90d24bdcc2eb4386211027ee118a9, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 751f6459170fcea43b0a27c68758597f, type: 2}
+    - {fileID: 11400000, guid: 4bde26b918a778c40988011994974ec2, type: 2}

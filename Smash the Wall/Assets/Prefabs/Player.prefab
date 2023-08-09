@@ -90,7 +90,7 @@ Transform:
   m_GameObject: {fileID: 7773065475431232033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.3, y: -2.5, z: 27.9}
+  m_LocalPosition: {x: 0, y: 5, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -111,6 +111,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _input: {fileID: 0}
   _listOfAllWeapons: {fileID: 0}
+  _onChangedWeapon:
+    <eventName>k__BackingField: 
+    <currentSubscribedObjectsCount>k__BackingField: 0
+    <timesInvoked>k__BackingField: 0
   _parent: {fileID: 8571361916071457871}
   _currentWeapon: {fileID: 0}
 --- !u!114 &724284484201838638
@@ -195,8 +199,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 250
+  near clip plane: 0.01
+  far clip plane: 75
   field of view: 75
   orthographic: 0
   orthographic size: 5

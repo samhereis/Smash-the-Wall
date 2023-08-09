@@ -25,6 +25,7 @@ namespace UI
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
+        [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
 
         [Header("Components")]
         [SerializeField] private Button _restartButton;
@@ -110,7 +111,7 @@ namespace UI
             {
                 await AsyncHelper.Delay(2000);
 
-                AdsShowManager.instance?.TryShowInterstitial();
+                _adsShowManager?.TryShowInterstitial();
             }
         }
     }

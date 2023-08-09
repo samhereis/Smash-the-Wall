@@ -5,9 +5,11 @@ using UnityEngine;
 
 namespace Managers
 {
+    [RequireComponent(typeof(AdsManager))]
     public class AdsShowManager : MonoBehaviour
     {
-        public static AdsShowManager instance { get; private set; }
+        [Header("Comonents")]
+        [SerializeField] private AdsManager _adsManager;
 
         [Header("Settings")]
         [SerializeField] private int _openAppCountToShowAppOpenAdd = 1;
@@ -17,12 +19,10 @@ namespace Managers
 
         private void Awake()
         {
-            instance = this;
-        }
-
-        private void OnDestroy()
-        {
-            instance = null;
+            if (_adsManager == null)
+            {
+                _adsManager = GetComponent<AdsManager>();
+            }
         }
 
         private async void Start()
@@ -48,38 +48,46 @@ namespace Managers
             }
         }
 
+        public void RemoveAds()
+        {
+            if (_adsManager.removedAds == false)
+            {
+                _adsManager.RemoveAds(true);
+            }
+        }
+
         #region Rewarded
 
-        public async void TryShowRewarded(Action callback)
+        public async void TryShowRewarded(Action callback = null)
         {
-            AdsManager.instance.OnRewarded -= OnRewarded;
-            AdsManager.instance.OnClose -= OnAdClosed;
+            _adsManager.OnRewarded -= OnRewarded;
+            _adsManager.OnClose -= OnAdClosed;
 
-            AdsManager.instance.OnRewarded += OnRewarded;
-            AdsManager.instance.OnClose += OnAdClosed;
+            _adsManager.OnRewarded += OnRewarded;
+            _adsManager.OnClose += OnAdClosed;
 
-            if (await AdsManager.instance.TryShowPlacement(AdsStrings.rewardedAd) == false)
+            if (await _adsManager.TryShowPlacement(AdsStrings.rewardedAd) == false)
             {
                 await RequestRewarded();
 
-                await AdsManager.instance.TryShowPlacement(AdsStrings.rewardedAd);
+                await _adsManager.TryShowPlacement(AdsStrings.rewardedAd);
             }
 
             void OnRewarded(Placement placement)
             {
-                AdsManager.instance.OnRewarded -= OnRewarded;
+                _adsManager.OnRewarded -= OnRewarded;
                 callback?.Invoke();
             }
 
             void OnAdClosed(Placement placement)
             {
-                AdsManager.instance.OnClose -= OnAdClosed;
+                _adsManager.OnClose -= OnAdClosed;
             }
         }
 
         private async Task RequestRewarded()
         {
-            await AdsManager.instance.Request(AdsStrings.rewardedAd, 5f);
+            await _adsManager.Request(AdsStrings.rewardedAd, 5f);
         }
 
         #endregion
@@ -88,7 +96,7 @@ namespace Managers
 
         public async void TryShowInterstitial()
         {
-            if (await AdsManager.instance.TryShowPlacement(AdsStrings.interstitialAd) == false)
+            if (await _adsManager.TryShowPlacement(AdsStrings.interstitialAd) == false)
             {
                 await RequestInterstitial();
             }
@@ -96,7 +104,7 @@ namespace Managers
 
         private async Task RequestInterstitial()
         {
-            await AdsManager.instance.Request(AdsStrings.interstitialAd, 5f);
+            await _adsManager.Request(AdsStrings.interstitialAd, 5f);
         }
 
         #endregion
@@ -105,30 +113,30 @@ namespace Managers
 
         public async void ShowBanner()
         {
-            if (await AdsManager.instance.TryShowPlacement(AdsStrings.bannerAd) == false)
+            if (await _adsManager.TryShowPlacement(AdsStrings.bannerAd) == false)
             {
                 await RequestBanner();
-                await AdsManager.instance.TryShowPlacement(AdsStrings.bannerAd);
+                await _adsManager.TryShowPlacement(AdsStrings.bannerAd);
             }
         }
 
         public void DestroyBanner()
         {
-            AdsManager.instance.Destroy(AdsStrings.bannerAd);
+            _adsManager.Destroy(AdsStrings.bannerAd);
         }
 
         private async Task RequestBanner()
         {
-            await AdsManager.instance.Request(AdsStrings.bannerAd, 5f);
+            await _adsManager.Request(AdsStrings.bannerAd, 5f);
         }
 
         #endregion
 
         #region AppOpen
 
-        private async void TryShowAppOpen()
+        public async void TryShowAppOpen()
         {
-            if (await AdsManager.instance.TryShowPlacement(AdsStrings.appOpenAd) == true)
+            if (await _adsManager.TryShowPlacement(AdsStrings.appOpenAd) == true)
             {
                 _appOpenCount = 0;
             }
@@ -138,7 +146,7 @@ namespace Managers
 
         private async Task RequestAppOpen()
         {
-            await AdsManager.instance.Request(AdsStrings.appOpenAd, 5f);
+            await _adsManager.Request(AdsStrings.appOpenAd, 5f);
         }
 
         #endregion

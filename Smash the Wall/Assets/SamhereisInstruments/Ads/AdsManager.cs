@@ -37,7 +37,6 @@ namespace Managers
     /// </summary>
     public class AdsManager : MonoBehaviour
     {
-        public static AdsManager instance { get; private set; }
         public static readonly string version = "1.0.4";
 
         public Action OnGetAdvertissingId;
@@ -129,24 +128,6 @@ namespace Managers
 
         private void Awake()
         {
-            if (_dontDestroyOnLoad)
-            {
-                if (instance != null && instance != this)
-                {
-                    Destroy(this);
-                    return;
-                }
-                else
-                {
-                    instance = this;
-                    DontDestroyOnLoad(this);
-                }
-            }
-            else
-            {
-                instance = this;
-            }
-
             if (_initializeOnStart && isInitialized == false)
             {
                 Initialize();

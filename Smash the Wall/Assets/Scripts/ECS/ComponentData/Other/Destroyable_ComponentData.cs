@@ -7,5 +7,6 @@ namespace ECS.ComponentData.Other
     public struct Destroyable_ComponentData : IComponentData
     {
         public bool toDestroy;
+        public bool isDestroyed;
     }
 }

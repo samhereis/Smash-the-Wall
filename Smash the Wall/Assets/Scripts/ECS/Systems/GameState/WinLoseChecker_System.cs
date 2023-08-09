@@ -1,9 +1,9 @@
-using InGameStrings;
 using Configs;
 using DI;
 using ECS.ComponentData.Picture.Piece;
 using Events;
 using Helpers;
+using InGameStrings;
 using Unity.Entities;
 
 namespace ECS.Systems.GameState
@@ -81,7 +81,7 @@ namespace ECS.Systems.GameState
                 >().WithEntityAccess())
             {
                 numberOfAllWhatNeedsToBeDestroys++;
-                if (picturePiece.ValueRO.isKinematic == false)
+                if (picturePiece.ValueRO.isHit == true)
                 {
                     numberOfAllReleasedWhatNeedsToBeDestroys++;
                 }
@@ -118,7 +118,7 @@ namespace ECS.Systems.GameState
                 >().WithEntityAccess())
             {
                 numberOfAllWhatNeedsToStays++;
-                if (picturePiece.ValueRO.isKinematic == false)
+                if (picturePiece.ValueRO.isHit == true)
                 {
                     numberOfAllReleasedWhatNeedsToStays++;
                 }

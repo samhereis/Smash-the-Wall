@@ -17,17 +17,12 @@ namespace ECS.Authoring
             }
         }
 
-        private void OnValidate()
-        {
-            Validate();
-        }
-
         [ContextMenu(nameof(Validate))]
         public void Validate()
         {
-            foreach (var picturePieceAuthoring in GetComponentsInChildren<PicturePieceAuthoring>(true))
+            foreach (var childTransformAuthoring in GetComponentsInChildren<PicturePieceAuthoring>(true))
             {
-                picturePieceAuthoring.Init();
+                childTransformAuthoring.Initialize();
             }
 
             foreach (var childTransformAuthoring in GetComponentsInChildren<ChildTransformAuthoring>(true))

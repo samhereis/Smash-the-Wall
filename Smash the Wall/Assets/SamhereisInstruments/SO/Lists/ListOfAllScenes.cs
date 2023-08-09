@@ -17,6 +17,8 @@ namespace SO.Lists
 
         public override void Initialize()
         {
+            currentSceneIndex = 0;
+
             foreach (var scene in _scenes)
             {
                 scene.Initialize();

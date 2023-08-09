@@ -24,7 +24,6 @@ namespace ECS.CollisionEventJobs
             if (entityManager.HasComponent<T_ComponentToCheckFor>(collidedWith))
             {
                 var component = collisionEventDestroyData[entity];
-                component.isKinematic = false;
                 component.isHit = true;
                 collisionEventDestroyData[entity] = component;
             }

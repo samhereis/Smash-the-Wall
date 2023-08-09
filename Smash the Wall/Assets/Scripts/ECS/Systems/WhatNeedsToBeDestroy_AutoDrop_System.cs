@@ -32,7 +32,7 @@ namespace ECS.Systems
 
         public void OnUpdate(ref SystemState systemState)
         {
-            if (isActive == false) return;
+            /*if (isActive == false) return;
 
             foreach (var (whatNeedsToBeDestroyed, picturePiece, entity) in SystemAPI.Query
                 <
@@ -41,12 +41,12 @@ namespace ECS.Systems
                 >().WithEntityAccess())
             {
                 TryReleasePiece(ref systemState, whatNeedsToBeDestroyed, picturePiece, entity);
-            }
+            }*/
         }
 
         private void TryReleasePiece(ref SystemState systemState, RefRW<WhatNeedsToBeDestroyed_ComponentData> whatNeedsToBeDestroyed, RefRW<PicturePiece_ComponentData> picturePiece, Entity entity)
         {
-            if (picturePiece.ValueRO.isKinematic == true)
+            if (picturePiece.ValueRO.isHit == true)
             {
                 var localToWorld = SystemAPI.GetComponent<LocalTransform>(entity);
 
@@ -59,7 +59,7 @@ namespace ECS.Systems
 
                 if (hitEntity == Entity.Null)
                 {
-                    picturePiece.ValueRW.isKinematic = false;
+                    picturePiece.ValueRW.isHit = true;
                 }
             }
         }

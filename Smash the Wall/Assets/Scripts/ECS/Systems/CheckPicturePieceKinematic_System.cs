@@ -1,12 +1,11 @@
 using ECS.ComponentData.Picture.Piece;
-using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Physics;
+using Unity.Physics.Aspects;
 
 namespace ECS.Systems
 {
-    public partial class CheckPicturePieceKinematic_System : SystemBase, IEnableableSystem
+    public partial struct CheckPicturePieceKinematic_System : ISystem, IEnableableSystem
     {
         public static CheckPicturePieceKinematic_System instance { get; private set; }
         public static bool _isActive { get; private set; }
@@ -14,48 +13,48 @@ namespace ECS.Systems
 
         public void Enable()
         {
-            Enabled = true;
             _isActive = true;
         }
 
         public void Disable()
         {
-            Enabled = false;
             _isActive = false;
         }
 
-        protected override void OnCreate()
+        public void OnCreate(ref SystemState systemState)
         {
             instance = this;
             Disable();
         }
 
-        protected override void OnUpdate()
+        public void OnDestroy(ref SystemState state)
+        {
+
+        }
+
+        public void OnUpdate(ref SystemState systemState)
         {
             if (isActive == false) return;
 
-            using (var commandBuffer = new EntityCommandBuffer(Allocator.TempJob))
+            foreach (var (picturePiece, physicsMassOverride, ridigbody) in SystemAPI.Query
+                <
+                    RefRW<PicturePiece_ComponentData>,
+                    RefRW<PhysicsMassOverride>,
+                    RigidBodyAspect
+                >())
             {
-                foreach (var (picturePiece, physicsMassOverride, physicsVelocity, entity) in SystemAPI.Query
-                    <
-                        RefRW<PicturePiece_ComponentData>,
-                        RefRW<PhysicsMassOverride>,
-                        RefRW<PhysicsVelocity>
-                    >().WithEntityAccess())
+                if (picturePiece.ValueRW.isHit == true)
                 {
-                    if (picturePiece.ValueRW.isKinematic == true)
-                    {
-                        physicsMassOverride.ValueRW.IsKinematic = 1;
-                        physicsVelocity.ValueRW.Linear = float3.zero;
-                        physicsVelocity.ValueRW.Angular = float3.zero;
-                    }
-                    else
-                    {
-                        physicsMassOverride.ValueRW.IsKinematic = 0;
-                    }
+                    ridigbody.IsKinematic = false;
+                    physicsMassOverride.ValueRW.IsKinematic = 0;
+                    physicsMassOverride.ValueRW.SetVelocityToZero = 0;
                 }
-
-                commandBuffer.Playback(EntityManager);
+                else if (picturePiece.ValueRW.isHit == false)
+                {
+                    ridigbody.IsKinematic = true;
+                    physicsMassOverride.ValueRW.IsKinematic = 1;
+                    physicsMassOverride.ValueRW.SetVelocityToZero = 1;
+                }
             }
         }
     }

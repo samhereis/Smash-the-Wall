@@ -149,6 +149,7 @@ MonoBehaviour:
     <currentSubscribedObjectsCount>k__BackingField: 0
     <timesInvoked>k__BackingField: 0
   _listOfAllWeapons: {fileID: 0}
+  _adsShowManager: {fileID: 0}
   _weaponImage: {fileID: 4128999460932888147}
   _tapToGetImage: {fileID: 2492608957745481044}
   _lockImage: {fileID: 4989795088219695323}

@@ -119,6 +119,8 @@ namespace ECS.Systems.Spawners
                         if (numberOfSpawnedPictures == pictureSpawner.ValueRO.numberOfSpawnablePictures)
                         {
                             pictureSpawner.ValueRW.hasSpawnAll = true;
+
+                            Disable();
                         }
                     }
                 }
@@ -143,7 +145,7 @@ namespace ECS.Systems.Spawners
                 foreach (var child in buffer)
                 {
                     if (entityManager.HasComponent<PicturePiece_ComponentData>(child.Value) == false) continue;
-                    if (SystemAPI.GetComponent<PicturePiece_ComponentData>(child.Value).isKinematic == false) continue;
+                    //if (SystemAPI.GetComponent<PicturePiece_ComponentData>(child.Value).isKinematic == false) continue;
                     if (SystemAPI.HasComponent<ChildTransform_ComponentData>(child.Value) == false) continue;
 
                     var childTransform_ComponentData = SystemAPI.GetComponent<ChildTransform_ComponentData>(child.Value);

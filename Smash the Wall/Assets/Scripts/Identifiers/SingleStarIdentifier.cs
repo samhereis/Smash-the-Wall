@@ -12,6 +12,12 @@ namespace UI.Elements
         [Header("Settings")]
         [SerializeField] private Color _activeStarColor = Color.yellow;
 
+        private void OnDestroy()
+        {
+            _starImage.DOKill();
+            _starImage.transform.DOKill();
+        }
+
         public void Activate()
         {
             _starImage.DOColor(_activeStarColor, 0.5f);

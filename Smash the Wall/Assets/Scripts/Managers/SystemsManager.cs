@@ -56,7 +56,7 @@ namespace Managers
             {
                 if (_onDestroyCancellationTokenSource.IsCancellationRequested) return;
 
-                if (system.isActive == false) system.Enable();
+                system.Enable();
             }
         }
 
@@ -66,7 +66,7 @@ namespace Managers
             {
                 if (_onDestroyCancellationTokenSource.IsCancellationRequested) return;
 
-                if (system.isActive == true) system?.Disable();
+                system?.Disable();
             }
         }
     }

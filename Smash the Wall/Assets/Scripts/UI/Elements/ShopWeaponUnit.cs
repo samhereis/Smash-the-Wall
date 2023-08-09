@@ -18,6 +18,7 @@ namespace UI.Elements
         [Header("DI")]
         [DI(DIStrings.onChangedWeapon)][SerializeField] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
         [DI(DIStrings.listOfAllWeapons)][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
+        [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
 
         [Header("Components")]
         [SerializeField] private Image _weaponImage;
@@ -104,7 +105,7 @@ namespace UI.Elements
         {
             if (_weaponIdentityiCard.isUnlocked == false)
             {
-                AdsShowManager.instance.TryShowRewarded(OnOpen);
+                _adsShowManager?.TryShowRewarded(OnOpen);
             }
             else
             {

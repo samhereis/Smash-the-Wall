@@ -1,17 +1,18 @@
 using ECS.ComponentData.Picture.Piece;
 using Helpers;
+using Interfaces;
 using Unity.Entities;
 using Unity.Physics;
-using Unity.Physics.Authoring;
 using UnityEngine;
+using MeshCollider = UnityEngine.MeshCollider;
 
 namespace ECS.Authoring
 {
     [RequireComponent(typeof(ChildTransformAuthoring))]
-    [RequireComponent(typeof(PhysicsBodyAuthoring))]
-    [RequireComponent(typeof(PhysicsShapeAuthoring))]
+    [RequireComponent(typeof(MeshCollider))]
+    [RequireComponent(typeof(Rigidbody))]
     [DisallowMultipleComponent]
-    public class PicturePieceAuthoring : MonoBehaviour
+    public class PicturePieceAuthoring : MonoBehaviour, IInitializable
     {
         public enum PicturePieceType { WhatNeedsToBeDestroyed, WhatNeedsToStay }
 
@@ -24,10 +25,9 @@ namespace ECS.Authoring
                 AddComponent(GetEntity(TransformUsageFlags.Dynamic), new PicturePiece_ComponentData
                 {
                     isHit = authoring.isHit,
-                    isKinematic = authoring.isKinematic,
                 });
 
-                AddComponent(GetEntity(TransformUsageFlags.Dynamic), new PhysicsMassOverride { IsKinematic = 0 });
+                AddComponent(GetEntity(TransformUsageFlags.Dynamic), new PhysicsMassOverride { });
 
                 if (authoring.picturePieceType == PicturePieceType.WhatNeedsToBeDestroyed)
                 {
@@ -45,19 +45,12 @@ namespace ECS.Authoring
         [field: SerializeField] public bool isKinematic { get; private set; } = true;
         [field: SerializeField] public bool isHit { get; private set; }
 
-        [ContextMenu(nameof(Init))]
-        public void Init()
+        [ContextMenu(nameof(Initialize))]
+        public void Initialize()
         {
-# if UNITY_EDITOR
-            var physicsShape = GetComponent<PhysicsShapeAuthoring>();
-            physicsShape.SetConvexHull(new ConvexHullGenerationParameters());
-            physicsShape.CollisionResponse = CollisionResponsePolicy.CollideRaiseCollisionEvents;
-
-            physicsShape.InitializeConvexHullGenerationParameters();
-
+            GetComponent<MeshCollider>().convex = true;
+            MonobehaviorHelper.DeleteAllMissingScripts(gameObject);
             this.TrySetDirty();
-#endif
         }
-
     }
 }

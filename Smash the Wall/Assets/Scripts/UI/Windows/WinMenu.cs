@@ -27,6 +27,7 @@ namespace UI
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
         [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
+        [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
 
         [Header("Components")]
         [SerializeField] private Button _nextLevelButton;
@@ -55,7 +56,7 @@ namespace UI
             _onWin.RemoveListener(OnWin);
         }
 
-        public override async void Enable(float? duration = null)
+        public override void Enable(float? duration = null)
         {
             base.Enable(duration);
 
@@ -81,8 +82,6 @@ namespace UI
             _buttonsInfoBlock.color = _uIConfigs.uiBackgroundColor_Standart;
 
             SubscribeToEvents();
-
-            await AdsManager.instance?.Request(AdsStrings.interstitialAd, 5f);
         }
 
         public override void Disable(float? duration = null)
@@ -143,7 +142,7 @@ namespace UI
             {
                 await AsyncHelper.Delay(2000);
 
-                AdsShowManager.instance?.TryShowInterstitial();
+                _adsShowManager?.TryShowInterstitial();
             }
         }
     }

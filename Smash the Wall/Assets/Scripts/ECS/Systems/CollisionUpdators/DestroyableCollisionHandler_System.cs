@@ -1,7 +1,7 @@
 using ECS.ComponentData.Enviroment;
 using ECS.ComponentData.Other;
 using Unity.Entities;
-using Unity.Physics;
+using Unity.Transforms;
 
 namespace ECS.Systems.CollisionUpdators
 {
@@ -10,8 +10,6 @@ namespace ECS.Systems.CollisionUpdators
         public static DestroyableCollisionUpdator_System instance { get; private set; }
         public static bool _isActive { get; private set; }
         public bool isActive => _isActive;
-
-        public ComponentLookup<Destroyable_ComponentData> collisionEventDestroyData;
 
         public void Enable()
         {
@@ -27,9 +25,6 @@ namespace ECS.Systems.CollisionUpdators
         {
             instance = this;
 
-            systemState.RequireForUpdate(systemState.GetEntityQuery(ComponentType.ReadWrite<Destroyable_ComponentData>()));
-            collisionEventDestroyData = systemState.GetComponentLookup<Destroyable_ComponentData>(false);
-
             Disable();
         }
 
@@ -37,13 +32,18 @@ namespace ECS.Systems.CollisionUpdators
         {
             if (isActive == false) return;
 
-            collisionEventDestroyData.Update(ref systemState);
-            var job = new DestroyOnCollided<Ground_ComponentData>();
-            job.collisionEventDestroyData = collisionEventDestroyData;
+            foreach (var (groudComponent, groudTransform) in SystemAPI.Query<RefRW<Ground_ComponentData>, RefRW<LocalTransform>>())
+            {
+                foreach (var (destroyableComponent, destroyableTransform) in SystemAPI.Query<RefRW<Destroyable_ComponentData>, RefRW<LocalTransform>>())
+                {
+                    if (destroyableComponent.ValueRO.toDestroy == true) continue;
 
-            var jobHandler = job.Schedule(SystemAPI.GetSingleton<SimulationSingleton>(), systemState.Dependency);
-
-            systemState.Dependency = jobHandler;
+                    if (destroyableTransform.ValueRW.Position.y < 1.05)
+                    {
+                        destroyableComponent.ValueRW.toDestroy = true;
+                    }
+                }
+            }
         }
     }
 }

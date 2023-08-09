@@ -9,7 +9,6 @@ using Weapons;
 
 namespace ECS.Systems.Spawners
 {
-    [BurstCompile]
     public partial struct ProjectileiGunBulletSpawner_System : ISystem, IEnableableSystem, IInitializable<ProjectileWeaponBase>, IClearable
     {
         public static ProjectileiGunBulletSpawner_System instance { get; private set; }

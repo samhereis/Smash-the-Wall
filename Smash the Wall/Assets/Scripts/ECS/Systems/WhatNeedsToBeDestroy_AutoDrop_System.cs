@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace ECS.Systems
 {
-    [BurstCompile]
     public partial struct WhatNeedsToBeDestroy_AutoDrop_System : ISystem, IEnableableSystem
     {
         public static WhatNeedsToBeDestroy_AutoDrop_System instance { get; private set; }

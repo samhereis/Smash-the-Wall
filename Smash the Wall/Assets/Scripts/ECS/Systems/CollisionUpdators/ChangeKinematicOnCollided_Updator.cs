@@ -1,13 +1,11 @@
 using ECS.ComponentData.Picture.Piece;
 using ECS.ComponentData.Projectile;
-using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
 
 namespace ECS.Systems.CollisionUpdators
 {
-    [BurstCompile]
     public partial struct ChangeKinematicOnCollided_Updator : ISystem, IEnableableSystem
     {
         public static ChangeKinematicOnCollided_Updator instance { get; private set; }
@@ -24,7 +22,6 @@ namespace ECS.Systems.CollisionUpdators
             _isActive = false;
         }
 
-        [BurstCompile]
         public void OnCreate(ref SystemState systemState)
         {
             instance = this;
@@ -32,7 +29,6 @@ namespace ECS.Systems.CollisionUpdators
             Disable();
         }
 
-        [BurstCompile]
         public void OnUpdate(ref SystemState systemState)
         {
             if (isActive == false) return;

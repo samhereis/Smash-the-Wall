@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 246ba854e7e28fe4285cf44f266dd3ff
   m_SerializeEntries:
-  - m_GUID: 86517e524a52e8942b642d4e44fb56d6
-    m_Address: Assets/Prefabs/Enviroments/JapaneseGarden.prefab
+  - m_GUID: ff9f90ccc2af6044ea2438a2ba309a1b
+    m_Address: Assets/Prefabs/Enviroments/LivingBlock.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

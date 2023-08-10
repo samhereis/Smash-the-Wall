@@ -16,12 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 9658f2555f7c1114fbe229bb820b8916
-  m_SerializeEntries:
-  - m_GUID: bce7298192668f94ab1d1bfa0c54b80b
-    m_Address: Assets/AddressableResources/EnvirometAssets/diningRoom
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5ed90d24bdcc2eb4386211027ee118a9, type: 2}
   m_SchemaSet:

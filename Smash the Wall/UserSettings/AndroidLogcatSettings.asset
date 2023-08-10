@@ -3,17 +3,11 @@
     "m_SelectedPackage": {
         "deviceId": "eee578ab",
         "name": "com.erten_games.smash_the_wall.game",
-        "processId": 11817,
+        "processId": 23059,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
-        {
-            "deviceId": "eee578ab",
-            "name": "com.google.android.apps.nexuslauncher",
-            "processId": 2846,
-            "exited": true
-        },
         {
             "deviceId": "eee578ab",
             "name": "com.erten_games.smash_the_wall",
@@ -36,6 +30,12 @@
             "deviceId": "eee578ab",
             "name": "com.erten_games.smash_the_wall.game",
             "processId": 11817,
+            "exited": true
+        },
+        {
+            "deviceId": "eee578ab",
+            "name": "com.erten_games.smash_the_wall.game",
+            "processId": 23059,
             "exited": false
         }
     ],

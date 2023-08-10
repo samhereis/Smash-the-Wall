@@ -22,6 +22,22 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec8eeae258d5b424dbd1fcacbd71b3b1
+    m_Address: Assets/AddressableResources/EnvirometAssets/Poly City - Free Cartoon
+      Pack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bce7298192668f94ab1d1bfa0c54b80b
+    m_Address: Assets/AddressableResources/EnvirometAssets/diningRoom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79db90e8c3fc55949a5ef5d0d342e7ff
+    m_Address: Assets/AddressableResources/EnvirometAssets/A_piece_of_nature
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5ed90d24bdcc2eb4386211027ee118a9, type: 2}
   m_SchemaSet:

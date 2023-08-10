@@ -37,10 +37,10 @@ namespace InGameStrings
 
     public class AdsStrings
     {
-        public const string interstitialAd = "InterstitialAd";
-        public const string appOpenAd = "AppOpenAd";
-        public const string rewardedAd = "RewardedAd";
-        public const string bannerAd = "BannerAd";
+        public const string interstitialAd = "DefaultInterstitial";
+        public const string appOpenAd = "DefaultAppOpen";
+        public const string rewardedAd = "DefaultRewarded";
+        public const string bannerAd = "DefaultBanner";
     }
 
     public class MainMenuUIStrings

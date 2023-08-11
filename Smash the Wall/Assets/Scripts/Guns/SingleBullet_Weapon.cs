@@ -22,11 +22,6 @@ namespace ProjectSripts
         [Header("Debug")]
         [SerializeField] private bool _debug;
 
-        private void Awake()
-        {
-            _elasticPart = GetComponentsInChildren<Transform>().ToList().Find(x => x.gameObject.name == "elastic");
-        }
-
         private void OnEnable()
         {
             canShoot = false;
@@ -36,6 +31,13 @@ namespace ProjectSripts
         {
             DisableInput();
             canShoot = false;
+        }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            _elasticPart = GetComponentsInChildren<Transform>().ToList().Find(x => x.gameObject.name == "elastic");
         }
 
         public override void EnableInput()
@@ -67,6 +69,8 @@ namespace ProjectSripts
         {
             if (_elasticPart == null)
             {
+                _elasticPart = GetComponentsInChildren<Transform>().ToList().Find(x => x.gameObject.name == "elastic");
+
                 canShoot = true;
                 return;
             }

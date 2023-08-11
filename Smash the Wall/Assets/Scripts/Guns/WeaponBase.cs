@@ -45,6 +45,11 @@ namespace Weapons
             ChangeWeaponMesh();
         }
 
+        protected virtual void OnInitialized()
+        {
+
+        }
+
         public abstract void EnableInput();
         public abstract void DisableInput();
         protected abstract void Fire(InputAction.CallbackContext context);
@@ -63,6 +68,8 @@ namespace Weapons
                 _weaponMesh.transform.parent = transform;
                 _weaponMesh.transform.localPosition = Vector3.zero;
                 _weaponMesh.transform.localRotation = Quaternion.identity;
+
+                OnInitialized();
             }
         }
 

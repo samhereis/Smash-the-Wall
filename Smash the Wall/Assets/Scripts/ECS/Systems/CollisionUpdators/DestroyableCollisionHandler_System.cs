@@ -36,7 +36,7 @@ namespace ECS.Systems.CollisionUpdators
             {
                 if (destroyableComponent.ValueRO.toDestroy == true) continue;
 
-                if (destroyableTransform.ValueRW.Position.y <= 1.01)
+                if (destroyableTransform.ValueRW.Position.y <= 0.55)
                 {
                     destroyableComponent.ValueRW.toDestroy = true;
                 }

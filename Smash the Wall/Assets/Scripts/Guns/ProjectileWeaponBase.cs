@@ -8,6 +8,8 @@ namespace Weapons
         public override void Initialize()
         {
             (this as IDIDependent).LoadDependencies();
+
+            base.Initialize();
         }
 
         public override void EnableInput()

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using DI;
 using ECS.Systems.Spawners;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Weapons;
@@ -21,6 +22,11 @@ namespace ProjectSripts
         [Header("Debug")]
         [SerializeField] private bool _debug;
 
+        private void Awake()
+        {
+            _elasticPart = GetComponentsInChildren<Transform>().ToList().Find(x => x.gameObject.name == "elastic");
+        }
+
         private void OnEnable()
         {
             canShoot = false;
@@ -30,11 +36,6 @@ namespace ProjectSripts
         {
             DisableInput();
             canShoot = false;
-        }
-
-        public override void Initialize()
-        {
-            (this as IDIDependent).LoadDependencies();
         }
 
         public override void EnableInput()
@@ -64,6 +65,12 @@ namespace ProjectSripts
 
         protected override void Fire(InputAction.CallbackContext context)
         {
+            if (_elasticPart == null)
+            {
+                canShoot = true;
+                return;
+            }
+
             if (context.ReadValueAsButton() == true)
             {
                 _elasticPart.DOScaleZ(_shootElasticZScalse, _shootScaleDuration);

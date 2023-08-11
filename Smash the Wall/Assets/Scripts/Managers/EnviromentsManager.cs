@@ -27,6 +27,8 @@ namespace Managers
         {
             (this as IDIDependent).LoadDependencies();
 
+            _currentIndex = UnityEngine.Random.Range(0, _suitableEnviroments.Length);
+
             Initialize(_currentIndex);
 
             _input.input.Player.ChangeWeapon.performed += ChangeEnviroment;
@@ -41,8 +43,6 @@ namespace Managers
 
         private void ChangeEnviroment(InputAction.CallbackContext context)
         {
-            Clear();
-
             _currentIndex++;
 
             if (_currentIndex >= _suitableEnviroments.Length)
@@ -55,6 +55,8 @@ namespace Managers
 
         public async void Initialize(int index)
         {
+            Clear();
+
             AssetReferenceGameObject enviroment = _suitableEnviroments[index];
 
             _enviroment = await AddressablesHelper.InstantiateAsync<EnviromentIdentifier>(enviroment);

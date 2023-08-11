@@ -5,8 +5,10 @@ using ECS.Systems.GameState;
 using Helpers;
 using Identifiers;
 using InGameStrings;
+using LazyUpdators;
 using Managers;
 using PlayerInputHolder;
+using System.Threading.Tasks;
 using TMPro;
 using UI.Canvases;
 using UnityEngine;
@@ -20,6 +22,7 @@ namespace UI
         [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _inputs;
         [DI(DIStrings.gameConfigs)] private GameConfigs _gameConfigs;
         [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
+        [DI(DIStrings.lazyUpdator)][SerializeField] private LazyUpdator_SO _lazyUpdator;
 
         [Header("UI Components")]
         [SerializeField] private PauseMenu _pauseMenu;
@@ -73,31 +76,8 @@ namespace UI
 
             _whatNeedsToBeDestroyedProgressbarFillImage?.DOKill();
             _whatNeedsToStayProgressbarFillImage?.DOKill();
-        }
 
-        private void Update()
-        {
-            if (_whatNeedsToBeDestroyedProgressbar != null && _whatNeedsToStayProgressbar != null)
-            {
-                var releasedWhatNeedsToBeDestroysPercentage = WinLoseChecker_System.releasedWhatNeedsToBeDestroysPercentage;
-                var releasedWhatNeedsToStaysPercentage = WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
-
-                if (_whatNeedsToBeDestroyedProgressbar.value != releasedWhatNeedsToBeDestroysPercentage)
-                {
-                    _whatNeedsToBeDestroyedProgressbar?.DOValue(releasedWhatNeedsToBeDestroysPercentage, 0.1f);
-
-                    var color = _whatNeedsToBeDestroyedProgressbarGradient.Evaluate(releasedWhatNeedsToBeDestroysPercentage / _whatNeedsToBeDestroyedProgressbar.maxValue);
-                    _whatNeedsToBeDestroyedProgressbarFillImage?.DOColor(color, 0.1f);
-                }
-
-                if (_whatNeedsToStayProgressbar.value != releasedWhatNeedsToStaysPercentage)
-                {
-                    _whatNeedsToStayProgressbar?.DOValue(releasedWhatNeedsToStaysPercentage, 0.1f);
-
-                    var color = _whatNeedsToStayProgressbarGradient.Evaluate(releasedWhatNeedsToStaysPercentage / _whatNeedsToStayProgressbar.maxValue);
-                    _whatNeedsToStayProgressbarFillImage?.DOColor(color, 0.1f);
-                }
-            }
+            _lazyUpdator?.RemoveFromQueue(LazyUpdate);
         }
 
         public override void Enable(float? duration = null)
@@ -156,6 +136,8 @@ namespace UI
 
             _pauseButton.onClick.AddListener(OpenPauseMenu);
             _shopsButton.onClick.AddListener(OnShopsButtonClicked);
+
+            _lazyUpdator?.AddToQueue(LazyUpdate);
         }
 
         protected override void UnsubscribeFromEvents()
@@ -164,6 +146,35 @@ namespace UI
 
             _pauseButton.onClick.RemoveListener(OpenPauseMenu);
             _shopsButton.onClick.RemoveListener(OnShopsButtonClicked);
+
+            _lazyUpdator?.RemoveFromQueue(LazyUpdate);
+        }
+
+        private async Task LazyUpdate()
+        {
+            if (_whatNeedsToBeDestroyedProgressbar != null && _whatNeedsToStayProgressbar != null)
+            {
+                var releasedWhatNeedsToBeDestroysPercentage = WinLoseChecker_System.releasedWhatNeedsToBeDestroysPercentage;
+                var releasedWhatNeedsToStaysPercentage = WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
+
+                if (_whatNeedsToBeDestroyedProgressbar.value != releasedWhatNeedsToBeDestroysPercentage)
+                {
+                    _whatNeedsToBeDestroyedProgressbar?.DOValue(releasedWhatNeedsToBeDestroysPercentage, 0.1f);
+
+                    var color = _whatNeedsToBeDestroyedProgressbarGradient.Evaluate(releasedWhatNeedsToBeDestroysPercentage / _whatNeedsToBeDestroyedProgressbar.maxValue);
+                    _whatNeedsToBeDestroyedProgressbarFillImage?.DOColor(color, 0.1f);
+                }
+
+                if (_whatNeedsToStayProgressbar.value != releasedWhatNeedsToStaysPercentage)
+                {
+                    _whatNeedsToStayProgressbar?.DOValue(releasedWhatNeedsToStaysPercentage, 0.1f);
+
+                    var color = _whatNeedsToStayProgressbarGradient.Evaluate(releasedWhatNeedsToStaysPercentage / _whatNeedsToStayProgressbar.maxValue);
+                    _whatNeedsToStayProgressbarFillImage?.DOColor(color, 0.1f);
+                }
+            }
+
+            await AsyncHelper.Delay(100);
         }
 
         private void OpenPauseMenu()

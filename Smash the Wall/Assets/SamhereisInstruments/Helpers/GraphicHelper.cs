@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 namespace Helpers
@@ -35,6 +34,22 @@ namespace Helpers
             {
                 meshRenderer.receiveShadows = false;
                 meshRenderer.TrySetDirty();
+                await AsyncHelper.Delay();
+            }
+        }
+
+        [ContextMenu(nameof(DisableAllColliders))]
+        public async void DisableAllColliders()
+        {
+            foreach (Transform transformObject in GetComponentsInChildren<Transform>(true))
+            {
+                var collider = transformObject.GetComponent<Collider>();
+
+                if (collider == null) { continue; }
+
+                DestroyImmediate(collider);
+                transform.TrySetDirty();
+
                 await AsyncHelper.Delay();
             }
         }

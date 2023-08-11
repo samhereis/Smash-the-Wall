@@ -16,7 +16,7 @@ namespace Managers
         [Header("DI")]
         [DI(DIStrings.inputHolder)] private Input_SO _input;
 
-        [Header("Components")]
+        [Header("Addressables")]
         [SerializeField] private AssetReferenceGameObject[] _suitableEnviroments;
 
         [Header("Debug")]
@@ -61,6 +61,7 @@ namespace Managers
 
             if (_enviroment != null)
             {
+                _enviroment.Initialize();
                 DontDestroyOnLoad(_enviroment);
             }
         }
@@ -76,6 +77,8 @@ namespace Managers
 
             void Delete(EnviromentIdentifier enviroment)
             {
+                if (enviroment == null) { return; }
+
                 try
                 {
                     AddressablesHelper.DestroyObject(enviroment.gameObject);

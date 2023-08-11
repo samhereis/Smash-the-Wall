@@ -21,6 +21,8 @@ namespace InGameStrings
         public const string inputHolder = "inputHolder";
         public const string lazyUpdator = "lazyUpdator";
         public const string sceneLoader = "sceneLoader";
+
+        public const string trajectoryDisplayer = "trajectoryDisplayer";
     }
 
     public class PurchaseStrings

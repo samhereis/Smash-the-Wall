@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: SkyBoxes
+  m_EditorClassIdentifier: 
+  m_GroupName: SkyBoxes
+  m_Data:
+    m_SerializedData: []
+  m_GUID: bd7539802a9cbf94e82031de561a0d1d
+  m_SerializeEntries:
+  - m_GUID: ac96cfb5dfac7b441acdf6df38b9bef5
+    m_Address: Assets/AddressableResources/SkyBoxes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5ed90d24bdcc2eb4386211027ee118a9, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 5844e3418feeb774696bb909cc950e67, type: 2}
+    - {fileID: 11400000, guid: 67a8df9edf751eb48bd23973abff560e, type: 2}

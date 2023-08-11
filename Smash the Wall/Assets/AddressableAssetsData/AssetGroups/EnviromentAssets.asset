@@ -33,13 +33,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 79db90e8c3fc55949a5ef5d0d342e7ff
-    m_Address: Assets/AddressableResources/EnvirometAssets/A_piece_of_nature
+  - m_GUID: 87588e7ac2f8ec2468149634b71726e4
+    m_Address: Assets/AddressableResources/EnvirometAssets/Free Voxel Christmas Pack
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 87588e7ac2f8ec2468149634b71726e4
-    m_Address: Assets/AddressableResources/EnvirometAssets/Free Voxel Christmas Pack
+  - m_GUID: b16ddb466b8cff54cb1c006f4fad8667
+    m_Address: Assets/AddressableResources/EnvirometAssets/CubexCube - Free Medieval_Cemetery
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

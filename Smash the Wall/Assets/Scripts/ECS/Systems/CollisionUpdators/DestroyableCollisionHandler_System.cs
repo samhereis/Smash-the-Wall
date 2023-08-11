@@ -1,5 +1,5 @@
-using ECS.ComponentData.Enviroment;
 using ECS.ComponentData.Other;
+using ECS.ComponentData.Picture.Piece;
 using Unity.Entities;
 using Unity.Transforms;
 
@@ -32,16 +32,31 @@ namespace ECS.Systems.CollisionUpdators
         {
             if (isActive == false) return;
 
-            foreach (var (groudComponent, groudTransform) in SystemAPI.Query<RefRW<Ground_ComponentData>, RefRW<LocalTransform>>())
+            foreach (var (destroyableComponent, destroyableTransform) in SystemAPI.Query<RefRW<Destroyable_ComponentData>, RefRW<LocalTransform>>())
             {
-                foreach (var (destroyableComponent, destroyableTransform) in SystemAPI.Query<RefRW<Destroyable_ComponentData>, RefRW<LocalTransform>>())
-                {
-                    if (destroyableComponent.ValueRO.toDestroy == true) continue;
+                if (destroyableComponent.ValueRO.toDestroy == true) continue;
 
-                    if (destroyableTransform.ValueRW.Position.y < 1.05)
+                if (destroyableTransform.ValueRW.Position.y <= 1.01)
+                {
+                    destroyableComponent.ValueRW.toDestroy = true;
+                }
+            }
+
+            foreach (var (picturePieceComponent, picturePiecesTransform) in SystemAPI.Query<RefRW<PicturePiece_ComponentData>, RefRW<LocalTransform>>())
+            {
+                if (picturePieceComponent.ValueRO.isHit == true)
+                {
+                    if (picturePiecesTransform.ValueRW.Position.y >= 1.1)
                     {
-                        destroyableComponent.ValueRW.toDestroy = true;
+                        continue;
                     }
+
+                    if (picturePiecesTransform.ValueRW.Scale <= 0.015f)
+                    {
+                        continue;
+                    }
+
+                    picturePiecesTransform.ValueRW.Scale -= 0.01f;
                 }
             }
         }

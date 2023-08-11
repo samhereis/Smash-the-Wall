@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: GunMeshes
+  m_EditorClassIdentifier: 
+  m_GroupName: GunMeshes
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 42b0d46225de80d48953387207f1fcce
+  m_SerializeEntries:
+  - m_GUID: 983d3c32751ffbf40b05493c52f50da9
+    m_Address: Assets/AddressablePrefabs/GunMeshes/Red Rifle.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d3954090301230418284fcfa57f5332
+    m_Address: Assets/AddressableResources/GunAssets/Sci-Fi Gun/Prefab/LowPoly Scifi_Gun.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da7cd4b9f46bfb643b234204c07cc42e
+    m_Address: Assets/AddressablePrefabs/GunMeshes/SlingshotMesh.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5ed90d24bdcc2eb4386211027ee118a9, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1e374e1f848dc3d46920487bb2395b18, type: 2}
+    - {fileID: 11400000, guid: 4a3004f5e0fe32743a03c499ec2453ef, type: 2}

@@ -70,5 +70,9 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  - m_AssetGUID: 70bf94217c33315459c48071ceec9916
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   _enviroment: {fileID: 0}
   _currentIndex: 0

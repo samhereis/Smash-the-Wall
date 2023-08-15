@@ -76,9 +76,9 @@ MonoBehaviour:
   _defaultInterstitialDelay: 45
   _defaultRewardedDelay: 0
   _defaultInterstitialAfterRewardedDelay: 45
-  _isTest: 0
+  _isTest: 1
   _enabledAd: 02000000000000000100000003000000
-  _skipAd: 
+  _skipAd: 020000000100000000000000
   <placements>k__BackingField:
   - placement: DefaultInterstitial
     type: 2

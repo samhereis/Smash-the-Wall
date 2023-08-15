@@ -279,6 +279,16 @@ namespace Managers
                 await AsyncHelper.Delay();
 
                 if (timeout <= 0) break;
+
+#if UNITY_EDITOR
+
+                if (Application.isPlaying == false)
+                {
+                    Debug.LogWarning("Application is not playing. Requesting ads is not possible.");
+                    return false;
+                }
+
+#endif
             }
 
             return IsReady(placementString);

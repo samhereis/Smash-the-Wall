@@ -15,9 +15,8 @@ namespace Managers
 
         private CancellationTokenSource _onDestroyCancellationTokenSource = new CancellationTokenSource();
 
-        private async void Awake()
+        private void Awake()
         {
-            await AsyncHelper.Delay(2000);
             if (_onDestroyCancellationTokenSource.IsCancellationRequested) return;
 
             _currentSystems.Add(PictureSpawner_System.instance);

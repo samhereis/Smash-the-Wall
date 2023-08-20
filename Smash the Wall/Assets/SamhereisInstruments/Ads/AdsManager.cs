@@ -276,7 +276,6 @@ namespace Managers
             while (IsReady(placementString) == false)
             {
                 timeout -= Time.deltaTime;
-                await AsyncHelper.Delay();
 
                 if (timeout <= 0) break;
 
@@ -288,6 +287,7 @@ namespace Managers
                     return false;
                 }
 
+                await AsyncHelper.Delay();
 #endif
             }
 
@@ -519,7 +519,7 @@ namespace Managers
 
             bool skip = _skipAd.Any(x => x == placement.type);
 
-            if (skip) Debug.Log($"OnAdSkiped: {placement}, Skip ad types: {string.Join(',', _skipAd)}");
+            if (skip) Debug.Log($"OnAdSkiped: {placement.placement}, Skip ad types: {string.Join(',', _skipAd)}");
 
             return skip;
         }

@@ -1,9 +1,9 @@
-using InGameStrings;
 using Configs;
 using DI;
 using ECS.ComponentData;
 using ECS.ComponentData.Other;
 using ECS.ComponentData.Picture.Piece;
+using InGameStrings;
 using SO.Lists;
 using System;
 using Unity.Entities;
@@ -119,8 +119,6 @@ namespace ECS.Systems.Spawners
                         if (numberOfSpawnedPictures == pictureSpawner.ValueRO.numberOfSpawnablePictures)
                         {
                             pictureSpawner.ValueRW.hasSpawnAll = true;
-
-                            Disable();
                         }
                     }
                 }
@@ -145,23 +143,25 @@ namespace ECS.Systems.Spawners
                 foreach (var child in buffer)
                 {
                     if (entityManager.HasComponent<PicturePiece_ComponentData>(child.Value) == false) continue;
-                    //if (SystemAPI.GetComponent<PicturePiece_ComponentData>(child.Value).isKinematic == false) continue;
+                    if (SystemAPI.GetComponent<PicturePiece_ComponentData>(child.Value).isHit == true) continue;
                     if (SystemAPI.HasComponent<ChildTransform_ComponentData>(child.Value) == false) continue;
 
                     var childTransform_ComponentData = SystemAPI.GetComponent<ChildTransform_ComponentData>(child.Value);
 
                     var localTransform = SystemAPI.GetComponent<LocalTransform>(child.Value);
                     localTransform.Position = localToWorldTransforms.ValueRW.Position + childTransform_ComponentData.localPosition;
-                    localTransform.RotateX(childTransform_ComponentData.rotation.x);
-                    localTransform.RotateY(childTransform_ComponentData.rotation.y);
-                    localTransform.RotateZ(childTransform_ComponentData.rotation.z);
+                    localTransform.Rotation = childTransform_ComponentData.rotation;
 
                     SystemAPI.SetComponent<LocalTransform>(child.Value, localTransform);
 
                     numberOfHandledChildren++;
                 }
 
-                if (numberOfHandledChildren == bufferCount) parent.ValueRW.isPositionHandled = true;
+                if (numberOfHandledChildren == bufferCount)
+                {
+                    parent.ValueRW.isPositionHandled = true;
+                    Disable();
+                }
             }
         }
     }

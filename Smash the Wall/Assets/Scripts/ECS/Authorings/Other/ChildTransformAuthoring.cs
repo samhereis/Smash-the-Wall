@@ -21,13 +21,15 @@ namespace ECS.Authoring
         }
 
         [field: SerializeField] public Vector3 localPosition { get; private set; }
-        [field: SerializeField] public Vector3 rotation { get; private set; }
+        [field: SerializeField] public Quaternion rotation { get; private set; }
 
         [ContextMenu(nameof(Init))]
         public void Init()
         {
-            localPosition = transform.localPosition;
-            rotation = transform.localEulerAngles;
+            localPosition = transform.position;
+            rotation = transform.rotation;
+
+            Debug.Log(rotation);
         }
     }
 }

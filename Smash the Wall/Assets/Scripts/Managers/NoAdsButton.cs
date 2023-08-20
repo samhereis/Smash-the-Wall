@@ -32,7 +32,7 @@ namespace Managers
 
         private void Start()
         {
-            (this as IDIDependent).LoadDependencies();
+            /*(this as IDIDependent).LoadDependencies();
 
             if (_inAppPurchacesManager != null)
             {
@@ -41,8 +41,9 @@ namespace Managers
                 _inAppPurchacesManager.onInitialize += OnInAppPurchacesManagerInitialized;
             }
 
+            UpdateStatus();*/
+
             transform.localScale = Vector3.zero;
-            UpdateStatus();
         }
 
         private void OnDestroy()

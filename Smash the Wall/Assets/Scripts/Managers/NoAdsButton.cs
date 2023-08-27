@@ -44,6 +44,8 @@ namespace Managers
             UpdateStatus();*/
 
             transform.localScale = Vector3.zero;
+
+            gameObject.SetActive(false);
         }
 
         private void OnDestroy()

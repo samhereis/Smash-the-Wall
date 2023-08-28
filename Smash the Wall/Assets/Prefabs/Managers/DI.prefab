@@ -60,7 +60,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5802422689347854476}
   - component: {fileID: 3398682003654139528}
-  - component: {fileID: 2232290173966227800}
   m_Layer: 0
   m_Name: DI
   m_TagString: Untagged
@@ -105,6 +104,10 @@ MonoBehaviour:
     instance: {fileID: 5150046590546313053}
   - id: trajectoryDisplayer
     instance: {fileID: 1741770912057574665}
+  - id: adsManager
+    instance: {fileID: 9186027096760896376}
+  - id: eventsLogManager
+    instance: {fileID: 0}
   _configs:
   - id: gameConfigs
     instance: {fileID: 11400000, guid: 7516ebd22a60cd645ba168f241048310, type: 2}
@@ -140,19 +143,6 @@ MonoBehaviour:
       <currentSubscribedObjectsCount>k__BackingField: 0
       <timesInvoked>k__BackingField: 0
   _isGlobal: 1
---- !u!114 &2232290173966227800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8120009865874695716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 936439394b697f64684142c358b30688, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetFPS: 120
 --- !u!1001 &2370172527813360273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -239,6 +229,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a91fde9939d7c8c43bd6c59b8df59dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9186027096760896376 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6890465247782482409, guid: 4aa6c61fd195c5e479f68533d4fb8cd2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2370172527813360273}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514c04905a661c4468a7bda81b5066ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5452102742018361870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,6 +303,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484627287787440422, guid: a0c6a078e7d708249b55082db0054afa,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

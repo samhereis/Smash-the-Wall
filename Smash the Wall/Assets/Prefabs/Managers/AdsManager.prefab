@@ -71,7 +71,7 @@ MonoBehaviour:
     <adapterDebug>k__BackingField: 
   _dontDestroyOnLoad: 1
   _initializeOnStart: 1
-  _initializeOnSetConsent: 0
+  _initializeOnSetConsent: 1
   _defaultAppOpenAdDelay: 60
   _defaultInterstitialDelay: 45
   _defaultRewardedDelay: 0

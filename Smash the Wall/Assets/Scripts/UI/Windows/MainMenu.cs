@@ -1,6 +1,7 @@
 using Configs;
 using DI;
 using InGameStrings;
+using Managers;
 using SO.Lists;
 using Tools;
 using UI.Canvases;
@@ -74,6 +75,7 @@ namespace UI
                 SceneManager.LoadScene(sceneIndex);
             }
 
+            EventsLogManager.LogEvent("PlayButtonClicked");
         }
 
         private void OpenSettings()

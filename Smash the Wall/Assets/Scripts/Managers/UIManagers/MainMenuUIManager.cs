@@ -1,4 +1,4 @@
-using Helpers;
+using DI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,16 +19,18 @@ namespace Managers.UIManagers
 
         private void Awake()
         {
-            _menus = GetComponentsInChildren<CanvasWindowBase>().ToList();
+            _menus = GetComponentsInChildren<CanvasWindowBase>(true).ToList();
+        }
+
+        private IEnumerator Start()
+        {
+            yield return new WaitUntil(() => BindDIScene.isGLoballyInhected == true);
 
             foreach (CanvasWindowBase menu in _menus)
             {
                 menu?.Initialize();
             }
-        }
 
-        private IEnumerator Start()
-        {
             yield return new WaitForSecondsRealtime(_openOnStartDelay);
 
             _openOnStart?.Enable();

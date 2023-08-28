@@ -7,13 +7,32 @@ using UnityEngine;
 
 namespace Samhereis.Helpers
 {
+    [RequireComponent(typeof(RemoteConfigManager), typeof(EventsLogManager))]
     public sealed class ProjectHelper : MonoBehaviour
     {
         [SerializeField] private int _targetFPS = 120;
 
+        [SerializeField] private RemoteConfigManager _remoteConfigManager;
+        [SerializeField] private EventsLogManager _eventsLogManager;
+
         private void Awake()
         {
             Application.targetFrameRate = _targetFPS;
+
+            if (FindObjectOfType<ProjectHelper>(true) == null)
+            {
+                DontDestroyOnLoad(gameObject);
+
+                _remoteConfigManager = GetComponent<RemoteConfigManager>();
+                _eventsLogManager = GetComponent<EventsLogManager>();
+
+                _remoteConfigManager.Initialize();
+                _eventsLogManager.Initialize();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void OnApplicationQuit()

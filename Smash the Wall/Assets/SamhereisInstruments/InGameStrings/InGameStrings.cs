@@ -7,8 +7,11 @@ namespace InGameStrings
         public const string onNoAdsBought = "onNoAdsBought";
         public const string onGameSceneLoad = "onGameSceneLoad";
         public const string onChangedWeapon = "onChangedWeapon";
+        public const string isGameInitialized = "isGameInitialized";
 
         public const string adsShowManager = "adsShowManager";
+        public const string adsManager = "adsManager";
+        public const string eventsLogManager = "eventsLogManager";
         public const string inAppPurchacesManager = "inAppPurchacesManager";
 
         public const string gameConfigs = "gameConfigs";

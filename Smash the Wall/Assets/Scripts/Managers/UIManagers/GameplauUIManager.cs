@@ -63,12 +63,24 @@ namespace Managers.UIManagers
 
         private void OnWin()
         {
+            int starsCount = _winMenu.CalculateStars();
+            string levelName = _listOfAllPictures.GetCurrent().targetName;
+
             _listOfAllPictures.SetNextPicture();
             _listOfAllScenes.SetNextScene();
 
             GameSaveManager.IncreaseLevelIndex();
 
             _winMenu.Enable();
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+               { "LevelMode", "DestroyBorder"},
+               { "LevelName", levelName},
+               { "Stars", starsCount},
+            };
+
+            EventsLogManager.LogEvent("LevelCompleted", parameters);
         }
 
         private void OnLose()

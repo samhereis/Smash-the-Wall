@@ -2,7 +2,6 @@ using Configs;
 using DataClasses;
 using DI;
 using ECS.Systems.GameState;
-using Events;
 using Helpers;
 using InGameStrings;
 using Managers;
@@ -43,20 +42,7 @@ namespace UI
             base.Enable(duration);
 
             _starControl.SetStarCount(_gameConfigs.gameplaySettings.winLoseStarSettings.Count);
-
-            float currentPercentage = WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
-
-            if (currentPercentage <= 0) return;
-
-            for (int i = 0; i < _gameConfigs.gameplaySettings.winLoseStarSettings.Count; i++)
-            {
-                float percentage = _gameConfigs.gameplaySettings.winLoseStarSettings[i].percentage;
-
-                if (currentPercentage >= percentage)
-                {
-                    _starControl.SetActiveStars(i + 1);
-                }
-            }
+            _starControl.SetActiveStars(CalculateStars());
 
             _gameConfigs.isRestart = false;
 
@@ -87,6 +73,24 @@ namespace UI
 
             _nextLevelButton.onClick.RemoveListener(NextLevel);
             _goToMainMenuButton.onClick.RemoveListener(GotoMainMenu);
+        }
+
+        public int CalculateStars()
+        {
+            int stars = 0;
+            float currentPercentage = WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
+
+            for (int i = 0; i < _gameConfigs.gameplaySettings.winLoseStarSettings.Count; i++)
+            {
+                float percentage = _gameConfigs.gameplaySettings.winLoseStarSettings[i].percentage;
+
+                if (currentPercentage >= percentage)
+                {
+                    stars = i + 1;
+                }
+            }
+
+            return stars;
         }
 
         private void NextLevel()

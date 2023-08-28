@@ -1,4 +1,3 @@
-using Firebase.Analytics;
 using Interfaces;
 using System;
 using System.Collections.Generic;
@@ -79,8 +78,6 @@ namespace Managers
         {
             try
             {
-                FirebaseAnalytics.LogEvent(name);
-
                 AnalyticsService.Instance.CustomData(name);
                 AnalyticsService.Instance.Flush();
             }

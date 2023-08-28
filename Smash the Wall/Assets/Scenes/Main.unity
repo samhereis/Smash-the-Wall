@@ -568,6 +568,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetFPS: 120
+  _remoteConfigManager: {fileID: 0}
+  _eventsLogManager: {fileID: 0}
 --- !u!4 &2002856616
 Transform:
   m_ObjectHideFlags: 0
@@ -595,7 +597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4806e0f6f4ed3499c2ead00858998f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isInitialized: 0
 --- !u!114 &2002856618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,12 +625,12 @@ PrefabInstance:
     - target: {fileID: 236751446431362144, guid: cbe86a199ec514c459f4d3816682df52,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -962.24744
+      value: -962.2473
       objectReference: {fileID: 0}
     - target: {fileID: 236751446431362144, guid: cbe86a199ec514c459f4d3816682df52,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -384.89896
+      value: -384.89893
       objectReference: {fileID: 0}
     - target: {fileID: 393335262633093026, guid: cbe86a199ec514c459f4d3816682df52,
         type: 3}

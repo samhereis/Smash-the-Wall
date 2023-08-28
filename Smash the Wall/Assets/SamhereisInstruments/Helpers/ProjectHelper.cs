@@ -10,6 +10,8 @@ namespace Samhereis.Helpers
     [RequireComponent(typeof(RemoteConfigManager), typeof(EventsLogManager))]
     public sealed class ProjectHelper : MonoBehaviour
     {
+        private static ProjectHelper _instance;
+
         [SerializeField] private int _targetFPS = 120;
 
         [SerializeField] private RemoteConfigManager _remoteConfigManager;
@@ -19,7 +21,7 @@ namespace Samhereis.Helpers
         {
             Application.targetFrameRate = _targetFPS;
 
-            if (FindObjectOfType<ProjectHelper>(true) == null)
+            if (_instance == null)
             {
                 DontDestroyOnLoad(gameObject);
 
@@ -28,10 +30,20 @@ namespace Samhereis.Helpers
 
                 _remoteConfigManager.Initialize();
                 _eventsLogManager.Initialize();
+
+                _instance = this;
             }
             else
             {
                 Destroy(gameObject);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (_instance == this)
+            {
+                _instance = null;
             }
         }
 

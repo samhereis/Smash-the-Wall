@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b0c67c71b46c514ab025e0363e73be2, type: 3}
-  m_Name: InGameStrings
+  m_Script: {fileID: 11500000, guid: e2ecff9dffcb98641b00353604184d98, type: 3}
+  m_Name: GunRotationSpeed
   m_EditorClassIdentifier: 
+  _currentValue: 0.5
+  _KEY: GunRotationSpeed_Key
+  _defaultValue: 0.2

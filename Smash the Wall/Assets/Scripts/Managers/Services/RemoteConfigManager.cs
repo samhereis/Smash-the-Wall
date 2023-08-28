@@ -1,3 +1,6 @@
+using Configs;
+using DI;
+using InGameStrings;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -6,11 +9,13 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class RemoteConfigManager : MonoBehaviour
+    public class RemoteConfigManager : MonoBehaviour, IDIDependent
     {
         private const string _defaultMouseSensitivityString = "DefMouseSens";
         private const string _defaultWinPercentageString = "WinPerce";
         private const string _defaultLosePercentageString = "LosePerce";
+
+        [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
 
         public struct UserAttributes { }
         public struct AppAttributes { }
@@ -51,6 +56,8 @@ namespace Managers
 
         private void ApplyRemoteConfig(ConfigResponse configResponse)
         {
+            (this as IDIDependent).LoadDependencies();
+
             RemoteConfigService.Instance.FetchCompleted -= ApplyRemoteConfig;
 
             switch (configResponse.requestOrigin)
@@ -66,9 +73,8 @@ namespace Managers
                     break;
             }
 
-            Debug.Log(RemoteConfigService.Instance.appConfig.GetFloat(_defaultMouseSensitivityString));
-            Debug.Log(RemoteConfigService.Instance.appConfig.GetFloat(_defaultWinPercentageString));
-            Debug.Log(RemoteConfigService.Instance.appConfig.GetFloat(_defaultLosePercentageString));
+            _gameConfigs.gameplaySettings.SetWinPercentage(RemoteConfigService.Instance.appConfig.GetFloat(_defaultWinPercentageString));
+            _gameConfigs.gameplaySettings.SetLosePercentage(RemoteConfigService.Instance.appConfig.GetFloat(_defaultLosePercentageString));
         }
     }
 }

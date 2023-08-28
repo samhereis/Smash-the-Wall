@@ -60,7 +60,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 882.76575, y: 120}
+  m_CellSize: {x: 895.2561, y: 120}
   m_Spacing: {x: 0, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 1
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.92941177, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -542,7 +542,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -88.27657, y: -12}
+  m_SizeDelta: {x: -89.52561, y: -12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7368192433552669507
 CanvasRenderer:
@@ -806,27 +806,37 @@ PrefabInstance:
     - target: {fileID: 1886461356997279900, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -750.3509
+      value: -805.73047
       objectReference: {fileID: 0}
     - target: {fileID: 1886461356997279900, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375.17545
+      value: 402.86523
       objectReference: {fileID: 0}
     - target: {fileID: 2324043470608658516, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -150.07018
+      value: -152.19354
       objectReference: {fileID: 0}
     - target: {fileID: 2324043470608658516, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -75.03509
+      value: -76.09677
       objectReference: {fileID: 0}
     - target: {fileID: 3933259245199409565, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}
       propertyPath: _scaleSettings.<right>k__BackingField
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219058316582323634, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -134.28842
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219058316582323634, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -67.14421
       objectReference: {fileID: 0}
     - target: {fileID: 6180613007410038604, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}
@@ -992,27 +1002,37 @@ PrefabInstance:
     - target: {fileID: 1886461356997279900, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -750.3509
+      value: -805.73047
       objectReference: {fileID: 0}
     - target: {fileID: 1886461356997279900, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375.17545
+      value: 402.86523
       objectReference: {fileID: 0}
     - target: {fileID: 2324043470608658516, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -150.07018
+      value: -152.19354
       objectReference: {fileID: 0}
     - target: {fileID: 2324043470608658516, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -75.03509
+      value: -76.09677
       objectReference: {fileID: 0}
     - target: {fileID: 3933259245199409565, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}
       propertyPath: _scaleSettings.<right>k__BackingField
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219058316582323634, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -134.28842
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219058316582323634, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -67.14421
       objectReference: {fileID: 0}
     - target: {fileID: 6180613007410038604, guid: 2bdd7ea6a48b9594d899cb88b8c89d01,
         type: 3}

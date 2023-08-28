@@ -16,7 +16,7 @@ MonoBehaviour:
   <uiScaleEase>k__BackingField: 28
   <uiFadeAnimationDuration>k__BackingField: 0.25
   <uiFadeEase>k__BackingField: 28
-  <uiBackgroundColor_Standart>k__BackingField: {r: 0, g: 0.5882353, b: 1, a: 0.39215687}
+  <uiBackgroundColor_Standart>k__BackingField: {r: 0, g: 0.5882353, b: 1, a: 0.5882353}
   <uiBackgroundColor_Win>k__BackingField: {r: 0, g: 1, b: 0.6862745, a: 0.39215687}
   <uiBackgroundColor_Lose>k__BackingField: {r: 1, g: 0.39215687, b: 0, a: 0.39215687}
   <uiBackgroundColor_Shop_MainPart>k__BackingField: {r: 1, g: 0.5882353, b: 0, a: 0.09803922}

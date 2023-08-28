@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: e5f81fc0b9d89aa4aaf54e2999da1a3e
   m_SerializeEntries:
-  - m_GUID: 75488d736a9f1c34b8ac744d485faa26
-    m_Address: SpaceBeach_ECS
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a09f7ed7feaa8c64dbfbea9f04fe47c9
     m_Address: NatureCyberPunk_ECS
     m_ReadOnly: 0

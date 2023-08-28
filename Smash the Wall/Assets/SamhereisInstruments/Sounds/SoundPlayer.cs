@@ -24,7 +24,7 @@ namespace Sound
         [Header("DI")]
         [DI(InGameStrings.DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
 
-        public bool canPlayAudio => GameConfigs.GameSettings.areSoundsEnabled;
+        public bool canPlayAudio => _gameConfigs == null ? false : _gameConfigs.gameSettings.soundsSettings.currentValue;
 
         private void Awake()
         {

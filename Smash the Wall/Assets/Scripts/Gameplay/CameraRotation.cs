@@ -1,3 +1,4 @@
+using Configs;
 using DI;
 using InGameStrings;
 using PlayerInputHolder;
@@ -8,12 +9,14 @@ namespace Gameplay
 {
     public class CameraRotation : MonoBehaviour, IDIDependent
     {
+        public float _gunRotationSpeed => _gameConfigs == null ? 0.2f : _gameConfigs.gameplaySettings.gunRotationSpeed.currentValue;
+
         [SerializeField] private Transform _xRotatedObject;
         [SerializeField] private Transform _yRotatedObject;
-        [SerializeField][Range(0, 1)] private float _mouseSensitivity = 0.2f;
 
         [Header("DI")]
         [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _inputsHolder;
+        [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
 
         private float _mouseX;
         private float _mouseY;
@@ -36,7 +39,7 @@ namespace Gameplay
 
         private void Look(InputAction.CallbackContext context)
         {
-            var contextValue = context.ReadValue<Vector2>() * _mouseSensitivity;
+            var contextValue = context.ReadValue<Vector2>() * _gunRotationSpeed;
 
             _mouseX = contextValue.x;
             _mouseY = contextValue.y;

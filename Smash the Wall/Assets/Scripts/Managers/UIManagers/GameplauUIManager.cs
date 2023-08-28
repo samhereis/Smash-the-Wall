@@ -67,7 +67,6 @@ namespace Managers.UIManagers
             string levelName = _listOfAllPictures.GetCurrent().targetName;
 
             _listOfAllPictures.SetNextPicture();
-            _listOfAllScenes.SetNextScene();
 
             GameSaveManager.IncreaseLevelIndex();
 

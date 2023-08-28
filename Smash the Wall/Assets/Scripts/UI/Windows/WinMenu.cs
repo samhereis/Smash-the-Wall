@@ -95,14 +95,7 @@ namespace UI
 
         private void NextLevel()
         {
-            if (GameConfigs.GameSettings.isRamdonEnviromentEnabled)
-            {
-                LoadLevel(_listOfAllScenes.GetRandomScene());
-            }
-            else
-            {
-                LoadLevel(_listOfAllScenes.GetCurrentScene());
-            }
+            LoadLevel(_listOfAllScenes.gameScene);
         }
 
         private void GotoMainMenu()

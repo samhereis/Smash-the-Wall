@@ -67,7 +67,7 @@ namespace UI
         {
             if (_listOfAllScenes != null)
             {
-                await _sceneLoader.LoadSceneAsync(_listOfAllScenes.GetCurrentScene());
+                await _sceneLoader.LoadSceneAsync(_listOfAllScenes.gameScene);
             }
             else
             {

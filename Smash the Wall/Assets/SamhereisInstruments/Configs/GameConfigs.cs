@@ -1,5 +1,5 @@
-using Helpers;
 using Interfaces;
+using Settings;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,106 +25,40 @@ namespace Configs
         [Serializable]
         public class GameSettings : IInitializable
         {
-            private const string _isVibroEnabledString = "isVibroEnabled";
-            private const string _isMusicEnabledString = "isMusicEnabled";
-            private const string _areSoundsEnabledString = "areSoundsEnabled";
+            [field: SerializeField] public BoolSetting_SO vibroSettings { get; private set; }
+            [field: SerializeField] public BoolSetting_SO musicSettings { get; private set; }
+            [field: SerializeField] public BoolSetting_SO soundsSettings { get; private set; }
+            [field: SerializeField] public BoolSetting_SO randomEnviromentSettings { get; private set; }
+            [field: SerializeField] public BoolSetting_SO randomPictureSettings { get; private set; }
 
-            private const string _ramdonEnviromentString = "ramdonEnviroment";
-            private const string _ramdonPicturesString = "ramdonPictures";
-
-            public static bool isVibroEnabled => PlayerPrefs.GetInt(_isVibroEnabledString, 1) == 1;
-            public static bool isMusicEnabled => PlayerPrefs.GetInt(_isMusicEnabledString, 1) == 1;
-            public static bool areSoundsEnabled => PlayerPrefs.GetInt(_areSoundsEnabledString, 1) == 1;
-
-            public static bool isRamdonEnviromentEnabled => PlayerPrefs.GetInt(_ramdonEnviromentString, 0) == 1;
-            public static bool isRamdonPicturesEnabled => PlayerPrefs.GetInt(_ramdonPicturesString, 0) == 1;
-
-            public Action<bool> onVibroEnabledChanged;
-            public Action<bool> onMusicEnabledChanged;
-            public Action<bool> onSoundsEnabledChanged;
-
-            public Action<bool> onRamdonEnviromentEnabledChanged;
-            public Action<bool> onRamdonPicturesEnabledChanged;
-
-            public Action onSettingsChanged;
-
-#if UNITY_EDITOR
-
-            [Header("Debug")]
-            public bool isVibroEnabledDebug;
-            public bool isMusicEnabledDebug;
-            public bool areSoundsEnabledDebug;
-
-            public bool isRamdonEnviromentEnabledDebug;
-            public bool isRamdonPicturesEnabledDebug;
-
-#endif
             public void Initialize()
             {
-                UpdateDebug();
+
             }
 
             public void SetVibroEnabled(bool isVibroEnabledNewValue)
             {
-                PlayerPrefs.SetInt(_isVibroEnabledString, isVibroEnabledNewValue ? 1 : 0);
-
-                VibrationHelper.SetActive(isVibroEnabled);
-
-                OnSettingsChanged();
-                onVibroEnabledChanged?.Invoke(isVibroEnabled);
+                vibroSettings.SetData(isVibroEnabledNewValue);
             }
 
             public void SetMusicEnabled(bool isMusicEnabledNewValue)
             {
-                PlayerPrefs.SetInt(_isMusicEnabledString, isMusicEnabledNewValue ? 1 : 0);
-
-                OnSettingsChanged();
-                onMusicEnabledChanged?.Invoke(isMusicEnabled);
+                musicSettings.SetData(isMusicEnabledNewValue);
             }
 
             public void SetSoundsEnabled(bool areSoundsEnabledNewValue)
             {
-                PlayerPrefs.SetInt(_areSoundsEnabledString, areSoundsEnabledNewValue ? 1 : 0);
-
-                OnSettingsChanged();
-                onSoundsEnabledChanged?.Invoke(areSoundsEnabled);
+                soundsSettings.SetData(areSoundsEnabledNewValue);
             }
 
             public void SetRamdonEnviromentEnabled(bool ramdonEnviromentNewValue)
             {
-                PlayerPrefs.SetInt(_ramdonEnviromentString, ramdonEnviromentNewValue ? 1 : 0);
-
-                OnSettingsChanged();
-                onRamdonEnviromentEnabledChanged?.Invoke(isRamdonEnviromentEnabled);
+                randomEnviromentSettings.SetData(ramdonEnviromentNewValue);
             }
 
             public void SetRamdonPicturesEnabled(bool ramdonPicturesNewValue)
             {
-                PlayerPrefs.SetInt(_ramdonPicturesString, ramdonPicturesNewValue ? 1 : 0);
-
-                OnSettingsChanged();
-                onRamdonPicturesEnabledChanged?.Invoke(isRamdonPicturesEnabled);
-            }
-
-            private void OnSettingsChanged()
-            {
-                UpdateDebug();
-                onSettingsChanged?.Invoke();
-            }
-
-            private void UpdateDebug()
-            {
-
-#if UNITY_EDITOR
-
-                isVibroEnabledDebug = isVibroEnabled;
-                isMusicEnabledDebug = isMusicEnabled;
-                areSoundsEnabledDebug = areSoundsEnabled;
-
-                isRamdonEnviromentEnabledDebug = isRamdonEnviromentEnabled;
-                isRamdonPicturesEnabledDebug = isRamdonPicturesEnabled;
-
-#endif
+                randomPictureSettings.SetData(ramdonPicturesNewValue);
             }
         }
 
@@ -179,7 +113,7 @@ namespace Configs
         [Serializable]
         public class GameplayConfigs : IInitializable
         {
-            [field: SerializeField] public float gunRotationSpeed { get; private set; } = 0.2f;
+            [field: SerializeField] public FloatSetting_SO gunRotationSpeed { get; private set; }
 
             [field: SerializeField] public float percentageOfReleasedWhatNeedsToBeDestroysToWin { get; private set; } = 90;
             [field: SerializeField] public float percentageOfReleasedWhatNeedsToStaysToLose { get; private set; } = 50;
@@ -195,6 +129,21 @@ namespace Configs
             public void Initialize()
             {
 
+            }
+
+            public void SetGunRotationSpeed(float newGunRotationSpeed)
+            {
+                gunRotationSpeed.SetData(newGunRotationSpeed);
+            }
+
+            public void SetWinPercentage(float winPercantage)
+            {
+                percentageOfReleasedWhatNeedsToBeDestroysToWin = winPercantage;
+            }
+
+            public void SetLosePercentage(float losePercantage)
+            {
+                percentageOfReleasedWhatNeedsToStaysToLose = losePercantage;
             }
         }
     }

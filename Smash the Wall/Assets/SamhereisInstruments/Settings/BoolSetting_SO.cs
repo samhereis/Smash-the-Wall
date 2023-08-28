@@ -1,3 +1,4 @@
+using Helpers;
 using UnityEngine;
 
 namespace Settings
@@ -25,8 +26,15 @@ namespace Settings
             _currentValue = PlayerPrefs.GetString(KEY, _defaultValue) == _trueValue;
 
 #if UNITY_EDITOR
-            if (name.StartsWith("_Key") == false) _KEY = _keyStartsWith + name + _keyEndsWith;
+
+            if (name.StartsWith("_Key") == false)
+            {
+                _KEY = _keyStartsWith + name + _keyEndsWith;
+                this.TrySetDirty();
+            }
+
 #endif
+
         }
 
         private void OnEnable()

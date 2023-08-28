@@ -40,6 +40,9 @@ namespace ECS.Systems.Spawners
         {
             instance = this;
             Disable();
+
+            _listOfAllPictures = DIBox.Get<ListOfAllPictures>(DIStrings.listOfAllPictures);
+            _gameConfigs = DIBox.Get<GameConfigs>(DIStrings.gameConfigs);
         }
 
         public void OnDestroy(ref SystemState state)
@@ -79,7 +82,7 @@ namespace ECS.Systems.Spawners
 
                         if (_gameConfigs.isRestart == false)
                         {
-                            if (GameConfigs.GameSettings.isRamdonPicturesEnabled)
+                            if (_gameConfigs.gameSettings.randomPictureSettings.currentValue == true)
                             {
                                 newPicture = ecb.Instantiate(picturePrefabBuffer[_listOfAllPictures.GetRandomIndex()].value.prefab);
                             }

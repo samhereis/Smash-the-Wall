@@ -72,8 +72,7 @@ namespace UI
         {
             _gameConfigs.isRestart = true;
 
-            var scene = _listOfAllScenes._scenes.Find(x => x.sceneName == SceneManager.GetActiveScene().name);
-            LoadLevel(scene);
+            LoadLevel(_listOfAllScenes.gameScene);
         }
 
         private void GotoMainMenu()

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using DI;
 using Helpers;
 using Interfaces;
 using System;
@@ -11,7 +12,7 @@ namespace UI.Canvases
     [RequireComponent(typeof(CanvasScaler))]
     [RequireComponent(typeof(GraphicRaycaster))]
     [RequireComponent(typeof(CanvasGroup))]
-    public abstract class CanvasWindowBase : MonoBehaviour, IUIWindow
+    public abstract class CanvasWindowBase : MonoBehaviour, IDIDependent, IUIWindow, IInitializable
     {
         public static Action<CanvasWindowBase> onAWindowOpen { get; private set; }
 
@@ -19,8 +20,11 @@ namespace UI.Canvases
 
         protected virtual void Awake()
         {
-            Setup();
+            if (_baseSettings.canvasGroup == null) _baseSettings.canvasGroup = GetComponent<CanvasGroup>();
+
             onAWindowOpen += OnAWindowOpen;
+
+            TurnOff(0);
         }
 
         protected virtual void OnDestroy()
@@ -31,6 +35,10 @@ namespace UI.Canvases
             _baseSettings.canvasGroup.DOKill();
         }
 
+        public virtual void Initialize()
+        {
+            (this as IDIDependent).LoadDependencies();
+        }
 
         public virtual void OnAWindowOpen(IUIWindow uIWIndow)
         {
@@ -48,6 +56,16 @@ namespace UI.Canvases
 
         public virtual void Enable(float? duration = null)
         {
+            TurnOn(duration);
+        }
+
+        public virtual void Disable(float? duration = null)
+        {
+            TurnOff(duration);
+        }
+
+        protected void TurnOn(float? duration = null)
+        {
             if (_baseSettings.isOpen == true) return;
             _baseSettings.isOpen = true;
 
@@ -61,7 +79,7 @@ namespace UI.Canvases
             _baseSettings.canvasGroup.FadeUp(duration.Value);
         }
 
-        public virtual void Disable(float? duration = null)
+        protected void TurnOff(float? duration = null)
         {
             if (_baseSettings.isOpen == false) return;
             _baseSettings.isOpen = false;
@@ -98,18 +116,6 @@ namespace UI.Canvases
         protected virtual void UnsubscribeFromEvents()
         {
 
-        }
-
-        public virtual void Setup()
-        {
-            try
-            {
-                if (_baseSettings.canvasGroup == null) _baseSettings.canvasGroup = GetComponent<CanvasGroup>();
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning(e);
-            }
         }
 
         [Serializable]

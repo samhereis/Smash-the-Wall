@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class ShopWindow : CanvasWindowBase, IDIDependent
+    public class ShopWindow : CanvasWindowBase
     {
         [Header("DI")]
         [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
@@ -23,13 +23,6 @@ namespace UI
 
         [Header("Shops")]
         [SerializeField] private WeaponsShop _weaponsShop;
-
-        protected void Start()
-        {
-            (this as IDIDependent).LoadDependencies();
-
-            Disable(0);
-        }
 
         protected override void OnDestroy()
         {

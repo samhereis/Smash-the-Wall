@@ -366,15 +366,11 @@ MonoBehaviour:
     canvasGroup: {fileID: 0}
     openOnExit: {fileID: 0}
   _mainMenuSceneIndex: 0
-  _onWin:
-    <eventName>k__BackingField: 
-    <currentSubscribedObjectsCount>k__BackingField: 0
-    <timesInvoked>k__BackingField: 0
   _gameConfigs: {fileID: 0}
-  _listOfAllPictures: {fileID: 0}
   _listOfAllScenes: {fileID: 0}
   _sceneLoader: {fileID: 0}
   _uIConfigs: {fileID: 0}
+  _adsShowManager: {fileID: 0}
   _nextLevelButton: {fileID: 1521434032172089246}
   _goToMainMenuButton: {fileID: 8660523861662061310}
   _winInfoBlock: {fileID: 7614886493378642414}

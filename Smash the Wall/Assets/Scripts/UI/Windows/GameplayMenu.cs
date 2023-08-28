@@ -16,7 +16,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class GameplayMenu : CanvasWindowBase, IDIDependent
+    public class GameplayMenu : CanvasWindowBase
     {
         [Header("DI")]
         [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _inputs;
@@ -47,15 +47,9 @@ namespace UI
         [SerializeField] private Gradient _whatNeedsToBeDestroyedProgressbarGradient;
         [SerializeField] private Gradient _whatNeedsToStayProgressbarGradient;
 
-        private async void Start()
+        public override void Initialize()
         {
-            (this as IDIDependent).LoadDependencies();
-
-            Disable(0);
-
-            await AsyncHelper.Delay(1000);
-
-            Enable();
+            base.Initialize();
 
             _whatNeedsToBeDestroyedProgressbarFillImage = _whatNeedsToBeDestroyedProgressbar.fillRect.GetComponent<Image>();
             _whatNeedsToStayProgressbarFillImage = _whatNeedsToStayProgressbar.fillRect.GetComponent<Image>();

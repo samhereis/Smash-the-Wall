@@ -639,14 +639,11 @@ MonoBehaviour:
     canvasGroup: {fileID: 0}
     openOnExit: {fileID: 0}
   _mainMenuSceneIndex: 0
-  _onLose:
-    <eventName>k__BackingField: 
-    <currentSubscribedObjectsCount>k__BackingField: 0
-    <timesInvoked>k__BackingField: 0
   _gameConfigs: {fileID: 0}
   _sceneLoader: {fileID: 0}
   _listOfAllScenes: {fileID: 0}
   _uIConfigs: {fileID: 0}
+  _adsShowManager: {fileID: 0}
   _restartButton: {fileID: 3839746550107668225}
   _goToMainMenuButton: {fileID: 8861188305433955777}
   _loseInfoBlock: {fileID: 1616095592396660568}

@@ -15,15 +15,13 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class WinMenu : CanvasWindowBase, IDIDependent
+    public class WinMenu : CanvasWindowBase
     {
         [Header("Settings")]
         [SerializeField] private int _mainMenuSceneIndex;
 
         [Header("DI")]
-        [DI(DIStrings.onWinEvent)][SerializeField] private EventWithNoParameters _onWin;
         [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
-        [DI(DIStrings.listOfAllPictures)][SerializeField] private ListOfAllPictures _listOfAllPictures;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
         [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
@@ -39,22 +37,6 @@ namespace UI
 
         [Space(10)]
         [SerializeField] private Star_CustomControl _starControl;
-
-        protected void Start()
-        {
-            (this as IDIDependent).LoadDependencies();
-
-            _onWin.AddListener(OnWin);
-
-            Disable(0);
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            _onWin.RemoveListener(OnWin);
-        }
 
         public override void Enable(float? duration = null)
         {
@@ -105,16 +87,6 @@ namespace UI
 
             _nextLevelButton.onClick.RemoveListener(NextLevel);
             _goToMainMenuButton.onClick.RemoveListener(GotoMainMenu);
-        }
-
-        private void OnWin()
-        {
-            _listOfAllPictures.SetNextPicture();
-            _listOfAllScenes.SetNextScene();
-
-            GameSaveManager.IncreaseLevelIndex();
-
-            Enable();
         }
 
         private void NextLevel()

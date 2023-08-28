@@ -9,11 +9,11 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class PauseMenu : CanvasWindowBase, IDIDependent
+    public class PauseMenu : CanvasWindowBase
     {
         [Header("DI")]
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
-        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes; 
+        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
 
         [Header("Components")]
@@ -28,13 +28,6 @@ namespace UI
         [SerializeField] private Button _resumeButton;
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _mainMenuButton;
-
-        protected void Start()
-        {
-            Disable(0);
-
-            (this as IDIDependent).LoadDependencies();
-        }
 
         public override void Enable(float? duration = null)
         {

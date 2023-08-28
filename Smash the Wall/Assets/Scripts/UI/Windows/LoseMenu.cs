@@ -14,13 +14,12 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class LoseMenu : CanvasWindowBase, IDIDependent
+    public class LoseMenu : CanvasWindowBase
     {
         [Header("Settings")]
         [SerializeField] private int _mainMenuSceneIndex;
 
         [Header("DI")]
-        [DI(DIStrings.onLoseEvent)][SerializeField] private EventWithNoParameters _onLose;
         [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
@@ -34,22 +33,6 @@ namespace UI
         [Space(10)]
         [SerializeField] private Image _loseInfoBlock;
         [SerializeField] private Image _loseButtonsBlock;
-
-        protected void Start()
-        {
-            (this as IDIDependent).LoadDependencies();
-
-            _onLose.AddListener(OnLose);
-
-            Disable(0);
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            _onLose.RemoveListener(OnLose);
-        }
 
         public override void Enable(float? duration = null)
         {
@@ -91,11 +74,6 @@ namespace UI
 
             var scene = _listOfAllScenes._scenes.Find(x => x.sceneName == SceneManager.GetActiveScene().name);
             LoadLevel(scene);
-        }
-
-        private void OnLose()
-        {
-            Enable();
         }
 
         private void GotoMainMenu()

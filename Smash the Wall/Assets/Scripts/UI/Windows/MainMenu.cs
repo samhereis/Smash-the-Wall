@@ -1,8 +1,6 @@
 using Configs;
 using DI;
-using Helpers;
 using InGameStrings;
-using Managers;
 using SO.Lists;
 using Tools;
 using UI.Canvases;
@@ -12,7 +10,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class MainMenu : CanvasWindowBase, IDIDependent
+    public class MainMenu : CanvasWindowBase
     {
         [Header("DI")]
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
@@ -29,15 +27,6 @@ namespace UI
         [SerializeField] private Button _playButton;
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _quitButton;
-
-        private async void Start()
-        {
-            (this as IDIDependent).LoadDependencies();
-
-            Disable(0);
-            await AsyncHelper.Delay(1000);
-            Enable();
-        }
 
         public override void Enable(float? duration = null)
         {

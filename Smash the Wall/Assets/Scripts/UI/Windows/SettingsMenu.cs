@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class SettingsMenu : CanvasWindowBase, IDIDependent
+    public class SettingsMenu : CanvasWindowBase
     {
         [Header("DI")]
         [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
@@ -17,13 +17,6 @@ namespace UI
 
         [Space(10)]
         [SerializeField] private Image _buttonsInfoBlock;
-
-        protected void Start()
-        {
-            (this as IDIDependent).LoadDependencies();
-
-            Disable(0);
-        }
 
         public override void Enable(float? duration = null)
         {

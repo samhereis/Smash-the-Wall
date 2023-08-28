@@ -38,6 +38,8 @@ namespace Events
         {
             onInvoke?.Invoke();
             timesInvoked++;
+
+            Debug.Log("Invoked: " + eventName);
         }
 
         private void UpdateCurrentSubscribedObjectsCount()

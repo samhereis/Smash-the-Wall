@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4124185496936650589}
   - component: {fileID: 6890465247782482409}
-  - component: {fileID: 6134047267467409965}
   - component: {fileID: 7465894293229340108}
   m_Layer: 0
   m_Name: AdsManager
@@ -47,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <provider>k__BackingField: 1
-  <adProvider>k__BackingField: {fileID: 6134047267467409965}
+  <adProvider>k__BackingField: {fileID: 0}
   _ironSource: 0
   _adColony: 0
   _maxSdk: 0
@@ -58,10 +57,10 @@ MonoBehaviour:
   _dtExchange: 0
   _chartboost: 0
   _admob_Android:
-    <appOpenId>k__BackingField: ca-app-pub-9553652608203796/6337634139
-    <interstitialId>k__BackingField: ca-app-pub-9553652608203796/8963797474
-    <rewardedId>k__BackingField: ca-app-pub-9553652608203796/7660408373
-    <bannerId>k__BackingField: ca-app-pub-9553652608203796/3164675887
+    <appOpenId>k__BackingField: ca-app-pub-3540187149252214/1282048349
+    <interstitialId>k__BackingField: ca-app-pub-3540187149252214/8944399025
+    <rewardedId>k__BackingField: ca-app-pub-3540187149252214/9236823316
+    <bannerId>k__BackingField: ca-app-pub-3540187149252214/3517592776
     <adapterDebug>k__BackingField: 
   _admob_Ios:
     <appOpenId>k__BackingField: 
@@ -76,7 +75,7 @@ MonoBehaviour:
   _defaultInterstitialDelay: 45
   _defaultRewardedDelay: 0
   _defaultInterstitialAfterRewardedDelay: 45
-  _isTest: 0
+  _isTest: 1
   _enabledAd: 02000000000000000100000003000000
   _skipAd: 
   <placements>k__BackingField:
@@ -101,18 +100,6 @@ MonoBehaviour:
   _showAdResultChanged: 0
   _rewardedStatusChanged: 0
   _lastAdShownSuccessfully: 0
---- !u!114 &6134047267467409965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3209343878217277981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2599e7b6a736504ab71a174c6791f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7465894293229340108
 MonoBehaviour:
   m_ObjectHideFlags: 0

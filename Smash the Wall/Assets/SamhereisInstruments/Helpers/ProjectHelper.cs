@@ -23,8 +23,6 @@ namespace Samhereis.Helpers
 
             if (_instance == null)
             {
-                DontDestroyOnLoad(gameObject);
-
                 _remoteConfigManager = GetComponent<RemoteConfigManager>();
                 _eventsLogManager = GetComponent<EventsLogManager>();
 

@@ -3,6 +3,7 @@ using DI;
 using ECS.ComponentData;
 using ECS.ComponentData.Other;
 using ECS.ComponentData.Picture.Piece;
+using Helpers;
 using InGameStrings;
 using SO.Lists;
 using System;
@@ -36,13 +37,24 @@ namespace ECS.Systems.Spawners
             _isActive = false;
         }
 
+        private async void Inject()
+        {
+
+            while (BindDIScene.isGLoballyInhected == false)
+            {
+                await AsyncHelper.Delay();
+            }
+
+            _listOfAllPictures = DIBox.Get<ListOfAllPictures>(DIStrings.listOfAllPictures);
+            _gameConfigs = DIBox.Get<GameConfigs>(DIStrings.gameConfigs);
+        }
+
         public void OnCreate(ref SystemState state)
         {
             instance = this;
             Disable();
 
-            _listOfAllPictures = DIBox.Get<ListOfAllPictures>(DIStrings.listOfAllPictures);
-            _gameConfigs = DIBox.Get<GameConfigs>(DIStrings.gameConfigs);
+            Inject();
         }
 
         public void OnDestroy(ref SystemState state)

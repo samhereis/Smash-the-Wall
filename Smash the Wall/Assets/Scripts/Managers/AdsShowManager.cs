@@ -60,6 +60,8 @@ namespace Managers
 
         public async void TryShowRewarded(Action callback = null)
         {
+            Debug.Log("Try Show ad: Rewarded");
+
             _adsManager.OnRewarded -= OnRewarded;
             _adsManager.OnClose -= OnAdClosed;
 
@@ -96,6 +98,8 @@ namespace Managers
 
         public async void TryShowInterstitial()
         {
+            Debug.Log("Try Show ad: Interstitial");
+
             if (await _adsManager.TryShowPlacement(AdsStrings.interstitialAd) == false)
             {
                 await RequestInterstitial();
@@ -111,8 +115,10 @@ namespace Managers
 
         #region Banner
 
-        public async void ShowBanner()
+        public async void TryShowBanner()
         {
+            Debug.Log("Try Show ad: Banner");
+
             if (await _adsManager.TryShowPlacement(AdsStrings.bannerAd) == false)
             {
                 await RequestBanner();
@@ -136,6 +142,8 @@ namespace Managers
 
         public async void TryShowAppOpen()
         {
+            Debug.Log("Try Show ad: AppOpen");
+
             if (await _adsManager.TryShowPlacement(AdsStrings.appOpenAd) == true)
             {
                 _appOpenCount = 0;

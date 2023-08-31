@@ -17,7 +17,7 @@ namespace Managers
         public void ShowBanner()
         {
             Debug.Log(nameof(ShowBanner));
-            _adsShowManager.ShowBanner();
+            _adsShowManager.TryShowBanner();
         }
 
         [ContextMenu(nameof(ShowInterstitial))]

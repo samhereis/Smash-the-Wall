@@ -101,12 +101,12 @@ namespace UI
                 if (shouldDestroyBanner == true)
                 {
                     _adsShowManager?.DestroyBanner();
-                    _adsShowManager?.ShowBanner();
+                    _adsShowManager?.TryShowBanner();
                 }
             }
             else
             {
-                _adsShowManager?.ShowBanner();
+                _adsShowManager?.TryShowBanner();
             }
 
             if (_currentLevelText != null)

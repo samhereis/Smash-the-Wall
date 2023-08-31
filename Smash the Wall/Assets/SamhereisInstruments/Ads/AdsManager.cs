@@ -309,7 +309,11 @@ namespace Managers
         {
             var placement = GetPlacement(placementString);
 
-            if (CanShow(placement) == false)
+            bool canShow = CanShow(placement);
+
+            Debug.Log("Can show playsment: " + placementString + " - " + canShow);
+
+            if (canShow == false)
             {
                 return false;
             }

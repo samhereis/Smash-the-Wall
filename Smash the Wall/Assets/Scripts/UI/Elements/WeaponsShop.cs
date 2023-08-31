@@ -18,11 +18,6 @@ namespace UI.Elements
         [Header("Componenets")]
         [SerializeField] private Transform _shopWeaponUnitsParent;
 
-        private void Start()
-        {
-            (this as IDIDependent).LoadDependencies();
-        }
-
         private void OnDestroy()
         {
             Clear();
@@ -30,6 +25,8 @@ namespace UI.Elements
 
         public void Initialize()
         {
+            (this as IDIDependent).LoadDependencies();
+
             Clear();
 
             foreach (var weapon in _listOfAllWeapons.weapons)

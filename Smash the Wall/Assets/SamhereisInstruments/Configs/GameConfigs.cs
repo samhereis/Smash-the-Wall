@@ -25,11 +25,11 @@ namespace Configs
         [Serializable]
         public class GameSettings : IInitializable
         {
-            [field: SerializeField] public BoolSetting_SO vibroSettings { get; private set; }
-            [field: SerializeField] public BoolSetting_SO musicSettings { get; private set; }
-            [field: SerializeField] public BoolSetting_SO soundsSettings { get; private set; }
-            [field: SerializeField] public BoolSetting_SO randomEnviromentSettings { get; private set; }
-            [field: SerializeField] public BoolSetting_SO randomPictureSettings { get; private set; }
+            [field: SerializeField] public BoolSavable_SO vibroSettings { get; private set; }
+            [field: SerializeField] public BoolSavable_SO musicSettings { get; private set; }
+            [field: SerializeField] public BoolSavable_SO soundsSettings { get; private set; }
+            [field: SerializeField] public BoolSavable_SO randomEnviromentSettings { get; private set; }
+            [field: SerializeField] public BoolSavable_SO randomPictureSettings { get; private set; }
 
             public void Initialize()
             {
@@ -113,7 +113,7 @@ namespace Configs
         [Serializable]
         public class GameplayConfigs : IInitializable
         {
-            [field: SerializeField] public FloatSetting_SO gunRotationSpeed { get; private set; }
+            [field: SerializeField] public FloatSavable_SO gunRotationSpeed { get; private set; }
 
             [field: SerializeField] public float percentageOfReleasedWhatNeedsToBeDestroysToWin { get; private set; } = 90;
             [field: SerializeField] public float percentageOfReleasedWhatNeedsToStaysToLose { get; private set; } = 50;

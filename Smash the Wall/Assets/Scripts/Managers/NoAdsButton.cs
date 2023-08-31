@@ -62,13 +62,13 @@ namespace Managers
 
         private void OnInAppPurchacesManagerInitialized()
         {
-            if (isNoAdsEnabled == false)
+            if (isNoAdsEnabled == true)
             {
-                OnNoAdsDisabled();
+                OnNoAdsEnabled();
             }
             else
             {
-                OnNoAdsEnabled();
+                OnNoAdsDisabled();
             }
         }
 
@@ -107,7 +107,7 @@ namespace Managers
 
         private void OnNoAdsEnabled()
         {
-            _adsShowManager.RemoveAds();
+            //_adsShowManager.RemoveAds();
 
             transform.DOScale(0, 1);
         }

@@ -71,10 +71,8 @@ namespace Helpers
             return handle.Result.GetComponent<T>();
         }
 
-        public static async void DestroyObject(GameObject gameObject)
+        public static void DestroyObject(GameObject gameObject)
         {
-            await AsyncHelper.Delay();
-
             if (Addressables.ReleaseInstance(gameObject) == false)
             {
                 Object.Destroy(gameObject);

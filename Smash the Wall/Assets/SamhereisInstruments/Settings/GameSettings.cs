@@ -9,12 +9,12 @@ namespace Settings
         public static GameSettings instance;
 
         [Header("Sensitivity")]
-        [SerializeField] private FloatSetting_SO _sensitivity;
+        [SerializeField] private FloatSavable_SO _sensitivity;
         [SerializeField] private Slider _sensitivitySlider;
 
         [Header("Audio")]
         [SerializeField] private AudioMixer _mixer;
-        [SerializeField] private FloatSetting_SO _volume;
+        [SerializeField] private FloatSavable_SO _volume;
         [SerializeField] private Slider _volumeSlider;
 
         private void Awake()

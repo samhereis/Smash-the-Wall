@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ecff9dffcb98641b00353604184d98, type: 3}
   m_Name: GunRotationSpeed
   m_EditorClassIdentifier: 
-  _currentValue: 0.5
-  _KEY: GunRotationSpeed_Key
+  _currentValue: 0.2
+  _key: GunRotationSpeed_key
   _defaultValue: 0.2

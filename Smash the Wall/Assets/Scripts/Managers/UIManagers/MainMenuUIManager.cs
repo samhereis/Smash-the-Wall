@@ -24,7 +24,11 @@ namespace Managers.UIManagers
 
         private IEnumerator Start()
         {
+            Time.timeScale = 0;
+
             yield return new WaitUntil(() => BindDIScene.isGLoballyInhected == true);
+
+            Time.timeScale = 1;
 
             foreach (CanvasWindowBase menu in _menus)
             {

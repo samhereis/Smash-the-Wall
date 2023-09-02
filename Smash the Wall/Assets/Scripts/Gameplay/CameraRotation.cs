@@ -9,7 +9,7 @@ namespace Gameplay
 {
     public class CameraRotation : MonoBehaviour, IDIDependent
     {
-        public float _gunRotationSpeed => _gameConfigs == null ? 0.2f : _gameConfigs.gameplaySettings.gunRotationSpeed.currentValue;
+        public float _gunRotationSpeed => _gameConfigs == null ? 0.2f : _gameConfigs.gameSettings.gunRotationSpeed.currentValue;
 
         [SerializeField] private Transform _xRotatedObject;
         [SerializeField] private Transform _yRotatedObject;

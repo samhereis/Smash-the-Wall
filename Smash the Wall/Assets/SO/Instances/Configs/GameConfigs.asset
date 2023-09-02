@@ -14,28 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <isRestart>k__BackingField: 0
   gameSettings:
+    <gunRotationSpeed>k__BackingField: {fileID: 11400000, guid: 92fff25f19956674bb88805cfcac1d57,
+      type: 2}
+    <musicValue>k__BackingField: {fileID: 11400000, guid: 08fb4daeac157ac4091c9b52a2635d05,
+      type: 2}
+    <soundsVolume>k__BackingField: {fileID: 11400000, guid: 7d8e4eb1a6afb1c4fb142535aaf307eb,
+      type: 2}
     <vibroSettings>k__BackingField: {fileID: 11400000, guid: b709d97e314226747bd14f362ed0f100,
       type: 2}
-    <musicSettings>k__BackingField: {fileID: 11400000, guid: 9aec1e096f9af2544a86704f79e239ee,
-      type: 2}
-    <soundsSettings>k__BackingField: {fileID: 11400000, guid: ac99e49d38dc6b244a6d3dbdaea661d7,
-      type: 2}
-    <randomEnviromentSettings>k__BackingField: {fileID: 11400000, guid: f11f2a99eb408d249b2726a4a4961575,
-      type: 2}
     <randomPictureSettings>k__BackingField: {fileID: 11400000, guid: 18a6907e17174784697c4227efc236db,
+      type: 2}
+    <percentageOfReleasedWhatNeedsToBeDestroysToWin>k__BackingField: 75
+    <percentageOfReleasedWhatNeedsToStaysToLose>k__BackingField: 25
+    <winLoseStarSettings>k__BackingField: []
+    <audioMixer>k__BackingField: {fileID: 24100000, guid: f83bbb284e44b6940998af8f4dcb9c55,
       type: 2}
   rateUsSettings:
     storeLink: 
     <firstAppearOnLevel>k__BackingField: 2
     <showLevelIncreaseValue>k__BackingField: 5
-  gameplaySettings:
-    <gunRotationSpeed>k__BackingField: {fileID: 11400000, guid: 92fff25f19956674bb88805cfcac1d57,
-      type: 2}
-    <percentageOfReleasedWhatNeedsToBeDestroysToWin>k__BackingField: 75
-    <percentageOfReleasedWhatNeedsToStaysToLose>k__BackingField: 25
-    <winLoseStarSettings>k__BackingField:
-    - <percentage>k__BackingField: 20
-    - <percentage>k__BackingField: 30
-    - <percentage>k__BackingField: 50
-    - <percentage>k__BackingField: 70
-    - <percentage>k__BackingField: 80

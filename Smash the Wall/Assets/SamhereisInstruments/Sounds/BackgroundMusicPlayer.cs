@@ -1,54 +1,59 @@
 using DG.Tweening;
+using Helpers;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Sound
 {
     public sealed class BackgroundMusicPlayer : MonoBehaviour
     {
-        public static BackgroundMusicPlayer instance;
-
         [Header("Settings")]
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private float _transitionDuration = 1;
 
-        private void Awake()
-        {
-            instance = this;
-        }
+        [SerializeField] private List<AssetReferenceAudioClip> _audioClips = new List<AssetReferenceAudioClip>();
 
         private void OnDestroy()
         {
-            instance = null;
+            _audioSource.DOKill();
         }
 
-        public void PlayMusic(SoundBase sound)
+        [ContextMenu(nameof(PlayMusic))]
+        public async void PlayMusic()
         {
-            if(_audioSource.clip == sound.audioClip && _audioSource.isPlaying == true)
-            {
-                return;
-            }
+            var audioClip = await AddressablesHelper.GetAssetAsync<AudioClip>(_audioClips.GetRandom());
 
-            _audioSource.clip = sound.audioClip;
-            _audioSource.loop = sound.loop;
+            _audioSource.clip = audioClip;
+            _audioSource.loop = true;
 
             _audioSource.Play();
+
+            ChangeVolume(1);
         }
 
-        private void PlayMusic()
-        {
-            _audioSource.DOKill();
-            _audioSource.DOFade(1, _transitionDuration);
-        }
-
+        [ContextMenu(nameof(StopMusic))]
         public void StopMusic()
         {
-            _audioSource.DOKill();
-            _audioSource.DOFade(0, _transitionDuration);
+            ChangeVolume(0, () =>
+            {
+                _audioSource.Stop();
+
+                if (_audioSource.clip != null)
+                {
+                    AddressablesHelper.Release<AudioClip>(_audioSource.clip);
+                }
+
+                _audioSource.clip = null;
+            });
         }
 
-        public void ChangeVolume(float volume)
+        public void ChangeVolume(float volume, Action onComplete = null)
         {
-            _audioSource.DOFade(volume, _transitionDuration);
+            _audioSource.DOFade(volume, _transitionDuration).OnComplete(() =>
+            {
+                onComplete?.Invoke();
+            });
         }
     }
 }

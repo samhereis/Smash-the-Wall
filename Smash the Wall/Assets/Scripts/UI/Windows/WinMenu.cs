@@ -41,7 +41,7 @@ namespace UI
         {
             base.Enable(duration);
 
-            _starControl.SetStarCount(_gameConfigs.gameplaySettings.winLoseStarSettings.Count);
+            _starControl.SetStarCount(_gameConfigs.gameSettings.winLoseStarSettings.Count);
             _starControl.SetActiveStars(CalculateStars());
 
             _gameConfigs.isRestart = false;
@@ -80,9 +80,9 @@ namespace UI
             int stars = 0;
             float currentPercentage = WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
 
-            for (int i = 0; i < _gameConfigs.gameplaySettings.winLoseStarSettings.Count; i++)
+            for (int i = 0; i < _gameConfigs.gameSettings.winLoseStarSettings.Count; i++)
             {
-                float percentage = _gameConfigs.gameplaySettings.winLoseStarSettings[i].percentage;
+                float percentage = _gameConfigs.gameSettings.winLoseStarSettings[i].percentage;
 
                 if (currentPercentage >= percentage)
                 {

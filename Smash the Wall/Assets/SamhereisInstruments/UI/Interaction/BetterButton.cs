@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Helpers;
 using Sound;
 using System.Collections;
 using UnityEditor;
@@ -12,11 +13,11 @@ namespace UI.Interaction
     {
         [SerializeField] private SimpleSound _clickSoundResponce;
 
-        [Header("Scale")]
+        [Header("Settings")]
         [SerializeField] private float _onOverScale = 0.75f;
-
-        [Header("Timing")]
         [SerializeField] private float _animationDuration = 0.25f;
+        [SerializeField] private bool _playSound = true;
+        [SerializeField] private bool _vibrate = true;
 
         private bool _hasDownAnimationEnded = false;
 
@@ -43,11 +44,15 @@ namespace UI.Interaction
 
         public override void OnPointerClick(PointerEventData eventData)
         {
+            bool canClick = IsActive() && IsInteractable();
+
             base.OnPointerClick(eventData);
 
-            if (IsActive() && IsInteractable())
+            if (canClick)
             {
-                SoundPlayer.instance?.TryPlay(_clickSoundResponce);
+                if (_playSound) { SoundPlayer.instance.TryPlay(_clickSoundResponce); }
+
+                if (_vibrate) { VibrationHelper.LightVibration(); }
             }
         }
 
@@ -74,6 +79,8 @@ namespace UI.Interaction
         SerializedProperty _clickSoundResponce;
         SerializedProperty _onOverScale;
         SerializedProperty _animationDuration;
+        SerializedProperty _playSound;
+        SerializedProperty _vibrate;
 
         protected override void OnEnable()
         {
@@ -81,6 +88,8 @@ namespace UI.Interaction
             _clickSoundResponce = serializedObject.FindProperty("_clickSoundResponce");
             _onOverScale = serializedObject.FindProperty("_onOverScale");
             _animationDuration = serializedObject.FindProperty("_animationDuration");
+            _playSound = serializedObject.FindProperty("_playSound");
+            _vibrate = serializedObject.FindProperty("_vibrate");
         }
 
         public override void OnInspectorGUI()
@@ -92,6 +101,8 @@ namespace UI.Interaction
             EditorGUILayout.PropertyField(_clickSoundResponce);
             EditorGUILayout.PropertyField(_onOverScale);
             EditorGUILayout.PropertyField(_animationDuration);
+            EditorGUILayout.PropertyField(_playSound);
+            EditorGUILayout.PropertyField(_vibrate);
             serializedObject.ApplyModifiedProperties();
         }
     }

@@ -14,6 +14,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 3f6a91a80f097864399ef24ce253748e,
         type: 3}
+    - target: {fileID: 5314811371653031956, guid: f2fc0843b0a854841be4b0f7db43a304,
+        type: 3}
+      propertyPath: _clickSoundResponce._audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: de114b168a1cbc948925b52fc76cc035, type: 3}
     - target: {fileID: 6697565897775870723, guid: f2fc0843b0a854841be4b0f7db43a304,
         type: 3}
       propertyPath: m_Pivot.x

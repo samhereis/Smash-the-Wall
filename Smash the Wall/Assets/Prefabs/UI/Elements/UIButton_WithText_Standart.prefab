@@ -385,7 +385,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _clickSoundResponce:
-    _audioClips: []
+    _audioClips:
+    - {fileID: 8300000, guid: 9f87c789474605745ad6bf56f1831977, type: 3}
     isMain: 0
     loop: 0
     disableOthers: 0
@@ -393,6 +394,8 @@ MonoBehaviour:
     distance: 50
   _onOverScale: 0.75
   _animationDuration: 0.25
+  _playSound: 1
+  _vibrate: 1
 --- !u!114 &-8458693782932289028
 MonoBehaviour:
   m_ObjectHideFlags: 0

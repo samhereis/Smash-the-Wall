@@ -1,4 +1,6 @@
 using DI;
+using InGameStrings;
+using Sound;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +9,12 @@ using UnityEngine;
 
 namespace Managers.UIManagers
 {
-    public class MainMenuUIManager : MonoBehaviour
+    public class MainMenuUIManager : MonoBehaviour, IDIDependent
     {
+        [Header("DI")]
+        [DI(DIStrings.backgrounMusicPlayer)][SerializeField] private BackgroundMusicPlayer _backgroundMusicPlayer;
+
+        [Header("Components")]
         [SerializeField] private CanvasWindowBase _openOnStart;
 
         [Header("Settings")]
@@ -31,9 +37,18 @@ namespace Managers.UIManagers
                 menu?.Initialize();
             }
 
+            (this as IDIDependent).LoadDependencies();
+
             yield return new WaitForSecondsRealtime(_openOnStartDelay);
 
             _openOnStart?.Enable();
+
+            _backgroundMusicPlayer?.PlayMusic();
+        }
+
+        private void OnDisable()
+        {
+            _backgroundMusicPlayer?.StopMusic();
         }
     }
 }

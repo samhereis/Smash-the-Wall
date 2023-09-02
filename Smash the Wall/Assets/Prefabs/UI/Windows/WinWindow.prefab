@@ -364,7 +364,10 @@ MonoBehaviour:
     animationDuration_Disable: 0.25
     isOpen: 1
     canvasGroup: {fileID: 0}
+    uIConfigs: {fileID: 0}
     openOnExit: {fileID: 0}
+    uIAnimationElements: []
+  _buttons: []
   _mainMenuSceneIndex: 0
   _gameConfigs: {fileID: 0}
   _listOfAllScenes: {fileID: 0}

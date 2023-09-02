@@ -91,7 +91,7 @@ namespace ECS.Systems.GameState
             {
                 releasedWhatNeedsToBeDestroysPercentage = NumberHelper.GetPercentageOf100(numberOfAllReleasedWhatNeedsToBeDestroys, numberOfAllWhatNeedsToBeDestroys);
 
-                if (releasedWhatNeedsToBeDestroysPercentage >= gameConfigs.gameplaySettings.percentageOfReleasedWhatNeedsToBeDestroysToWin)
+                if (releasedWhatNeedsToBeDestroysPercentage >= gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToBeDestroysToWin)
                 {
                     return true;
                 }
@@ -128,7 +128,7 @@ namespace ECS.Systems.GameState
             {
                 releasedWhatNeedsToStaysPercentage = 100 - NumberHelper.GetPercentageOf100(numberOfAllReleasedWhatNeedsToStays, numberOfAllWhatNeedsToStays);
 
-                if (releasedWhatNeedsToStaysPercentage <= gameConfigs.gameplaySettings.percentageOfReleasedWhatNeedsToStaysToLose)
+                if (releasedWhatNeedsToStaysPercentage <= gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToStaysToLose)
                 {
                     return true;
                 }

@@ -5,7 +5,9 @@ using Helpers;
 using InGameStrings;
 using Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading;
+using UI.Interaction;
 using UI.UIAnimationElements;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +25,28 @@ namespace UI.Canvases
         [SerializeField] protected BaseSettings _baseSettings = new BaseSettings();
 
         private CancellationTokenSource _onDestroyCTS = new CancellationTokenSource();
+
+#if UNITY_EDITOR
+
+        [SerializeField] private List<Button> _buttons = new List<Button>();
+
+        private void OnValidate()
+        {
+            foreach (var button in GetComponentsInChildren<Button>(true))
+            {
+                if (button is not BetterButton)
+                {
+                    _buttons.SafeAdd(button);
+                }
+            }
+
+            if (_buttons.Count > 0)
+            {
+                Debug.Log(gameObject.name + " Has a standart button");
+            }
+        }
+
+#endif
 
         protected virtual void Awake()
         {

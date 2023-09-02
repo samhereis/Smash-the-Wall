@@ -74,8 +74,8 @@ namespace Managers
                     break;
             }
 
-            _gameConfigs.gameplaySettings.SetWinPercentage(RemoteConfigService.Instance.appConfig.GetFloat(_winPercentageString));
-            _gameConfigs.gameplaySettings.SetLosePercentage(RemoteConfigService.Instance.appConfig.GetFloat(_losePercentageString));
+            _gameConfigs.gameSettings.SetWinPercentage(RemoteConfigService.Instance.appConfig.GetFloat(_winPercentageString));
+            _gameConfigs.gameSettings.SetLosePercentage(RemoteConfigService.Instance.appConfig.GetFloat(_losePercentageString));
 
             _uIConfigs.SetUIAnimationElementForeachDelay(RemoteConfigService.Instance.appConfig.GetFloat(_uiAnimationElementForeachDelayString));
         }

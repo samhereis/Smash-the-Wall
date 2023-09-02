@@ -58,8 +58,8 @@ namespace UI
             var _whatNeedsToBeDestroyedProgressbarGradientKeys = _whatNeedsToBeDestroyedProgressbarGradient.colorKeys;
             var _whatNeedsToStayProgressbarGradientKeys = _whatNeedsToStayProgressbarGradient.colorKeys;
 
-            _whatNeedsToBeDestroyedProgressbarGradientKeys[1].time = _gameConfigs.gameplaySettings.percentageOfReleasedWhatNeedsToBeDestroysToWin / 100;
-            _whatNeedsToStayProgressbarGradientKeys[0].time = _gameConfigs.gameplaySettings.percentageOfReleasedWhatNeedsToStaysToLose / 100;
+            _whatNeedsToBeDestroyedProgressbarGradientKeys[1].time = _gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToBeDestroysToWin / 100;
+            _whatNeedsToStayProgressbarGradientKeys[0].time = _gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToStaysToLose / 100;
 
             _whatNeedsToBeDestroyedProgressbarGradient.SetKeys(_whatNeedsToBeDestroyedProgressbarGradientKeys, _whatNeedsToBeDestroyedProgressbarGradient.alphaKeys);
             _whatNeedsToStayProgressbarGradient.SetKeys(_whatNeedsToStayProgressbarGradientKeys, _whatNeedsToStayProgressbarGradient.alphaKeys);

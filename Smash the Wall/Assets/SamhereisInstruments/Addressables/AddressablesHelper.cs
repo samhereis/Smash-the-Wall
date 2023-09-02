@@ -71,6 +71,11 @@ namespace Helpers
             return handle.Result.GetComponent<T>();
         }
 
+        public static void Release<T>(T toRelease)
+        {
+            Addressables.Release<T>(toRelease);
+        }
+
         public static void DestroyObject(GameObject gameObject)
         {
             if (Addressables.ReleaseInstance(gameObject) == false)

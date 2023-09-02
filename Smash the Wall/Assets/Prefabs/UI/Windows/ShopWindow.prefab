@@ -619,7 +619,10 @@ MonoBehaviour:
     animationDuration_Disable: 0.25
     isOpen: 1
     canvasGroup: {fileID: 0}
+    uIConfigs: {fileID: 0}
     openOnExit: {fileID: 0}
+    uIAnimationElements: []
+  _buttons: []
   _uIConfigs: {fileID: 0}
   _backButton: {fileID: 6733884235619374942}
   _upperPartBackground: {fileID: 1836443880316660095}

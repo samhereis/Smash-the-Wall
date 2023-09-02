@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Samhereis.Helpers
 {
     [RequireComponent(typeof(RemoteConfigManager), typeof(EventsLogManager))]
-    public sealed class ProjectHelper : MonoBehaviour
+    public sealed class ProjectHelper : MonoBehaviour, IDIDependent
     {
         private static ProjectHelper _instance;
 
@@ -21,12 +21,19 @@ namespace Samhereis.Helpers
 
         [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
 
-        private void Awake()
+        private async void Awake()
         {
             Application.targetFrameRate = _targetFPS;
 
             if (_instance == null)
             {
+                while (BindDIScene.isGLoballyInhected == false)
+                {
+                    await AsyncHelper.Delay();
+                }
+
+                (this as IDIDependent).LoadDependencies();
+
                 _remoteConfigManager = GetComponent<RemoteConfigManager>();
                 _eventsLogManager = GetComponent<EventsLogManager>();
 

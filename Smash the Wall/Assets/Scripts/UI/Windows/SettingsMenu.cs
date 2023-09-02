@@ -14,14 +14,14 @@ namespace UI
         [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
 
         [Header("Components")]
-        [SerializeField] private Button _closeButton;
+        [SerializeField] private Button[] _closeButtons;
 
         [Space(10)]
-        [SerializeField] private Toggle _soundsToggle;
-        [SerializeField] private Toggle _musicToggle;
-        [SerializeField] private Toggle _randomEnviromentToggle;
-        [SerializeField] private Toggle _randomPictureToggle;
         [SerializeField] private Slider _gunRotationSpeed;
+        [SerializeField] private Slider _musicVolume;
+        [SerializeField] private Slider _soundsVolume;
+        [SerializeField] private Toggle _vibrationToggle;
+        [SerializeField] private Toggle _randomPictureToggle;
 
         [Space(10)]
         [SerializeField] private Image _buttonsInfoBlock;
@@ -30,28 +30,37 @@ namespace UI
         {
             base.Enable(duration);
 
-            SubscribeToEvents();
-
             _buttonsInfoBlock.color = _uIConfigs.uiBackgroundColor_Standart;
 
+            _gunRotationSpeed.value = _gameConfigs.gameSettings.gunRotationSpeed.currentValue;
+            _musicVolume.value = _gameConfigs.gameSettings.musicValue.currentValue;
+            _soundsVolume.value = _gameConfigs.gameSettings.musicValue.currentValue;
+            _vibrationToggle.isOn = _gameConfigs.gameSettings.vibroSettings.currentValue;
             _randomPictureToggle.isOn = _gameConfigs.gameSettings.randomPictureSettings.currentValue;
-            _gunRotationSpeed.value = _gameConfigs.gameplaySettings.gunRotationSpeed.currentValue;
+
+            SubscribeToEvents();
         }
 
         public override void Disable(float? duration = null)
         {
-            base.Disable(duration);
-
             UnsubscribeFromEvents();
+
+            base.Disable(duration);
         }
 
         protected override void SubscribeToEvents()
         {
             base.SubscribeToEvents();
 
-            _closeButton.onClick.AddListener(Close);
+            foreach (var button in _closeButtons)
+            {
+                button.onClick.AddListener(Close);
+            }
 
             _gunRotationSpeed.onValueChanged.AddListener(SetGunRotationSpeed);
+            _musicVolume.onValueChanged.AddListener(SetMusicVolume);
+            _soundsVolume.onValueChanged.AddListener(SetSoundsVolume);
+            _vibrationToggle.onValueChanged.AddListener(SetVibrationEnabled);
             _randomPictureToggle.onValueChanged.AddListener(SetRandomPicturesEnabled);
         }
 
@@ -59,20 +68,41 @@ namespace UI
         {
             base.UnsubscribeFromEvents();
 
-            _closeButton.onClick.RemoveListener(Close);
+            foreach (var button in _closeButtons)
+            {
+                button.onClick.RemoveListener(Close);
+            }
 
             _gunRotationSpeed.onValueChanged.RemoveListener(SetGunRotationSpeed);
+            _musicVolume.onValueChanged.RemoveListener(SetMusicVolume);
+            _soundsVolume.onValueChanged.RemoveListener(SetSoundsVolume);
+            _vibrationToggle.onValueChanged.RemoveListener(SetVibrationEnabled);
             _randomPictureToggle.onValueChanged.RemoveListener(SetRandomPicturesEnabled);
         }
 
         private void SetGunRotationSpeed(float newGunRotationSpeed)
         {
-            _gameConfigs.gameplaySettings.SetGunRotationSpeed(newGunRotationSpeed);
+            _gameConfigs.gameSettings.SetGunRotationSpeed(newGunRotationSpeed);
+        }
+
+        private void SetMusicVolume(float musicVolume)
+        {
+            _gameConfigs.gameSettings.SetMusicVolume(musicVolume);
+        }
+
+        private void SetSoundsVolume(float soundsVolume)
+        {
+            _gameConfigs.gameSettings.SetSoundsVolume(soundsVolume);
         }
 
         private void SetRandomPicturesEnabled(bool randomPictureEnabled)
         {
             _gameConfigs.gameSettings.SetRamdonPicturesEnabled(randomPictureEnabled);
+        }
+
+        private void SetVibrationEnabled(bool isVibrationEnable)
+        {
+            _gameConfigs.gameSettings.SetVibroEnabled(isVibrationEnable);
         }
 
         private void Close()

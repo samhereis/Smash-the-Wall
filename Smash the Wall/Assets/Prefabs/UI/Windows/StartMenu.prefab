@@ -285,6 +285,8 @@ MonoBehaviour:
     distance: 50
   _onOverScale: 0.75
   _animationDuration: 0.25
+  _playSound: 1
+  _vibrate: 1
 --- !u!1 &2646920305298924939
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +500,7 @@ MonoBehaviour:
     uIConfigs: {fileID: 0}
     openOnExit: {fileID: 0}
     uIAnimationElements: []
+  _buttons: []
   _adsManager: {fileID: 0}
   _eventsLogManager: {fileID: 0}
   _sceneLoader: {fileID: 0}

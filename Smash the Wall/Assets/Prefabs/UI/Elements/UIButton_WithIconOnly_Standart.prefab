@@ -198,7 +198,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _clickSoundResponce:
-    _audioClips: []
+    _audioClips:
+    - {fileID: 8300000, guid: 9f87c789474605745ad6bf56f1831977, type: 3}
     isMain: 0
     loop: 0
     disableOthers: 0

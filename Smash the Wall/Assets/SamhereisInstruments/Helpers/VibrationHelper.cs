@@ -1,6 +1,7 @@
 using Configs;
 using DI;
 using InGameStrings;
+using Lofelt.NiceVibrations;
 using UnityEngine;
 
 namespace Helpers
@@ -11,17 +12,17 @@ namespace Helpers
 
         public static void SetActive(bool active)
         {
-            //HapticController.hapticsEnabled = active;
+            HapticController.hapticsEnabled = active;
         }
 
-        public static void LightImpact()
+        public static void LightVibration()
         {
             if (Validate() == false) return;
 
             if (_gameConfigs.gameSettings.vibroSettings.currentValue == false) return;
 
             Debug.Log("MediumImpact");
-            //try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.MediumImpact); } catch { }
+            try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact); } catch { }
         }
 
         public static void MeduimVibration()
@@ -31,7 +32,17 @@ namespace Helpers
             if (_gameConfigs.gameSettings.vibroSettings.currentValue == false) return;
 
             Debug.Log("HeavyImpact");
-            //try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact); } catch { }
+            try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact); } catch { }
+        }
+
+        public static void HardVibration()
+        {
+            if (Validate() == false) return;
+
+            if (_gameConfigs.gameSettings.vibroSettings.currentValue == false) return;
+
+            Debug.Log("HeavyImpact");
+            try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact); } catch { }
         }
 
         private static bool Validate()

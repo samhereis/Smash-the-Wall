@@ -1,6 +1,9 @@
 using Configs;
+using DI;
 using DTO;
+using DTO.Save;
 using IdentityCards;
+using InGameStrings;
 using Managers;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,54 +11,55 @@ using UnityEngine;
 namespace SO.Lists
 {
     [CreateAssetMenu(fileName = "ListOfAllWeapons", menuName = "SO/Lists/ListOfAllWeapons")]
-    public class ListOfAllWeapons : ConfigBase
+    public class ListOfAllWeapons : ConfigBase, IDIDependent
     {
         [field: SerializeField] public List<WeaponIdentityiCard> weapons { get; private set; } = new List<WeaponIdentityiCard>();
 
+        [Header("Debug")]
+        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
+        [SerializeField] private Weapons_DTO _weaponSave = new Weapons_DTO();
+
         public override void Initialize()
         {
-            var weaponsSave = GameSaveManager.GetWeaponsSave();
+            (this as IDIDependent).LoadDependencies();
+
+            _weaponSave = _gameSaveManager.GetWeaponsSave();
 
             foreach (var weaponsIdentifier in weapons)
             {
-                InitWeapon(weaponsIdentifier);
-            }
+                weaponsIdentifier.SetIsUnlockedStatus(false);
 
-            void InitWeapon(WeaponIdentityiCard weaponIdentityiCard)
+                InitWeapon(_weaponSave, weaponsIdentifier);
+            }
+        }
+
+        void InitWeapon(Weapons_DTO weaponsSave, WeaponIdentityiCard weaponIdentityiCard)
+        {
+            var aWeapon_DTO = weaponsSave.allWeapons.Find(x => x.weaponName == weaponIdentityiCard.targetName);
+
+            if (aWeapon_DTO == null)
             {
-                var aWeapon_DTO = weaponsSave.allWeapons.Find(x => x.weaponName == weaponIdentityiCard.targetName);
-
-                if (aWeapon_DTO == null)
+                aWeapon_DTO = new AWeapon_DTO
                 {
-                    var newAWeapon_STO = new AWeapon_DTO
-                    {
-                        weaponName = weaponIdentityiCard.targetName,
-                        isUnlocked = false
-                    };
+                    weaponName = weaponIdentityiCard.targetName,
+                    isUnlocked = false
+                };
 
-                    if (weaponIdentityiCard.isDefault == true)
-                    {
-                        newAWeapon_STO.isUnlocked = true;
-                    }
-
-                    weaponsSave.allWeapons.Add(newAWeapon_STO);
-                }
-
-                aWeapon_DTO = weaponsSave.allWeapons.Find(x => x.weaponName == weaponIdentityiCard.targetName);
-
-                weaponIdentityiCard.Initialize(aWeapon_DTO);
+                weaponsSave.allWeapons.Add(aWeapon_DTO);
             }
+
+            weaponIdentityiCard.Initialize(aWeapon_DTO);
         }
 
         public void ChooseWeapon(WeaponIdentityiCard weaponIdentityiCard)
         {
-            var weaponsSave = GameSaveManager.GetWeaponsSave();
+            var weaponsSave = _gameSaveManager.GetWeaponsSave();
             weaponsSave.currentWeaponIndex = weapons.IndexOf(weaponIdentityiCard);
         }
 
         public int GetCurrentWeaponIndex()
         {
-            var weaponsSave = GameSaveManager.GetWeaponsSave();
+            var weaponsSave = _gameSaveManager.GetWeaponsSave();
 
             if (weaponsSave.currentWeaponIndex >= weapons.Count)
             {
@@ -76,7 +80,7 @@ namespace SO.Lists
 
         public void UnlockWeapon(WeaponIdentityiCard weaponIdentityiCard)
         {
-            var weaponsSave = GameSaveManager.GetWeaponsSave();
+            var weaponsSave = _gameSaveManager.GetWeaponsSave();
 
             var weaponSaveUnit = weaponsSave.allWeapons.Find(x => x.weaponName == weaponIdentityiCard.targetName);
 

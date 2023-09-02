@@ -345,6 +345,7 @@ MonoBehaviour:
     isOpen: 1
     canvasGroup: {fileID: 0}
     openOnExit: {fileID: 0}
+    uIAnimationElements: []
   _uIConfigs: {fileID: 0}
   _gameConfigs: {fileID: 0}
   _closeButton: {fileID: 186685951631991997}

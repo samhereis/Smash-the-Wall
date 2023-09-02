@@ -20,6 +20,8 @@ namespace Managers.UIManagers
         [DI(DIStrings.listOfAllPictures)][SerializeField] private ListOfAllPictures _listOfAllPictures;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
 
+        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
+
         [Header("Components")]
         [SerializeField] private CanvasWindowBase _openOnStart;
         [SerializeField] private WinMenu _winMenu;
@@ -68,7 +70,7 @@ namespace Managers.UIManagers
 
             _listOfAllPictures.SetNextPicture();
 
-            GameSaveManager.IncreaseLevelIndex();
+            _gameSaveManager.IncreaseLevelIndex();
 
             _winMenu.Enable();
 

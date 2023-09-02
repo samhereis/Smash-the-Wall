@@ -23,6 +23,7 @@ namespace UI
         [DI(DIStrings.gameConfigs)] private GameConfigs _gameConfigs;
         [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
         [DI(DIStrings.lazyUpdator)][SerializeField] private LazyUpdator_SO _lazyUpdator;
+        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
 
         [Header("UI Components")]
         [SerializeField] private PauseMenu _pauseMenu;
@@ -111,7 +112,7 @@ namespace UI
 
             if (_currentLevelText != null)
             {
-                _currentLevelText.text = "current level: " + GameSaveManager.GetLevelIndex();
+                _currentLevelText.text = "current level: " + _gameSaveManager.GetLevelIndex();
             }
         }
 

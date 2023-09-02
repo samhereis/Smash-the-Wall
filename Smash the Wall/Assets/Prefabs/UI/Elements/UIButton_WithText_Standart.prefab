@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 7357083483590513256}
   - component: {fileID: 6015838707070125880}
   - component: {fileID: 5314811371653031956}
+  - component: {fileID: -8458693782932289028}
   m_Layer: 5
   m_Name: UIButton_WithText_Standart
   m_TagString: Untagged
@@ -392,3 +393,19 @@ MonoBehaviour:
     distance: 50
   _onOverScale: 0.75
   _animationDuration: 0.25
+--- !u!114 &-8458693782932289028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818240508952284196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a7fe5a5fe092749a2619d66529957f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseSettings:
+    ease: 27
+    turnOffDuration: 0.2
+    turnOnDuration: 0.5

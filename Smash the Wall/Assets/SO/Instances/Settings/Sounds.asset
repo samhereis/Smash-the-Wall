@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1aec168cc611649b820904505fb7e1, type: 3}
   m_Name: Sounds
   m_EditorClassIdentifier: 
-  _currentValue: 1
+  _currentValue: 0
   _key: Sounds_key
-  _defaultValue: true
+  _defaultValue: false
   _trueValue: true
   _falseValue: false

@@ -18,7 +18,14 @@ namespace IdentityCards
         {
             AutoSetTargetName();
 
-            SetIsUnlockedStatus(weapon_DTO.isUnlocked);
+            if (isDefault == true)
+            {
+                SetIsUnlockedStatus(true);
+            }
+            else
+            {
+                SetIsUnlockedStatus(weapon_DTO.isUnlocked);
+            }
         }
 
         public void SetIsUnlockedStatus(bool isUnlocked)

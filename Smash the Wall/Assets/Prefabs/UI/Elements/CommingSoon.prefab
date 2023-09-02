@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 3817403934615554209}
   - component: {fileID: 6317450205701797496}
   - component: {fileID: 1591043107950706775}
+  - component: {fileID: 3407552631497147001}
   m_Layer: 5
   m_Name: CommingSoon
   m_TagString: Untagged
@@ -456,3 +457,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &3407552631497147001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2701406762624584769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a7fe5a5fe092749a2619d66529957f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseSettings:
+    ease: 27
+    turnOffDuration: 0.2
+    turnOnDuration: 0.5

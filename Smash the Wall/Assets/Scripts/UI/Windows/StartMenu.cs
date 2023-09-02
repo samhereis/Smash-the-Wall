@@ -1,6 +1,9 @@
 using DI;
+using Helpers;
 using InGameStrings;
 using Managers;
+using SO.Lists;
+using Tools;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,19 +27,39 @@ namespace UI
         [DI(DIStrings.adsManager)][SerializeField] private AdsManager _adsManager;
         [DI(DIStrings.eventsLogManager)][SerializeField] private EventsLogManager _eventsLogManager;
 
+        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
+        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+
         [DI(DIStrings.isGameInitialized)][SerializeField] ValueEvent<bool> _isGameInitialized;
 
         [Header("Components")]
-        [SerializeField] private MainMenu _mainMenu;
         [SerializeField] private Toggle _adsTrackingConsent;
         [SerializeField] private Toggle _analyticsConsent;
         [SerializeField] private Button _startButton;
 
-        public override void Enable(float? duration = null)
+        protected override async void Awake()
+        {
+            base.Awake();
+
+            while (BindDIScene.isGLoballyInhected == false)
+            {
+                await AsyncHelper.Delay(1f);
+            }
+
+            Initialize(); 
+            
+            await AsyncHelper.Delay(1f);
+
+            Time.timeScale = 1f;
+
+            Enable();
+        }
+
+        public override async void Enable(float? duration = null)
         {
             if (_isGameInitialized.value == true)
             {
-                _mainMenu.Enable();
+                await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
             }
             else
             {
@@ -71,14 +94,14 @@ namespace UI
             StartGame();
         }
 
-        private void StartGame()
+        private async void StartGame()
         {
             _startButton.onClick.RemoveListener(StartGame);
 
             _adsManager.SetConsent(_isAdsConsentOn);
             _eventsLogManager.SetDataCollectionStatus(_isAnalyticsSendingOn);
 
-            _mainMenu.Enable();
+            await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
 
             _isGameInitialized.ChangeValue(true);
         }

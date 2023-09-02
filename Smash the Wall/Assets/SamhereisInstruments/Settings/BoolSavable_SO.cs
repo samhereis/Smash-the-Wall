@@ -17,7 +17,7 @@ namespace Settings
         [SerializeField] private string _key;
         public string key => _key;
 
-        [SerializeField] private string _defaultValue = "true";
+        [SerializeField] private string _defaultValue = "false";
         [SerializeField] private string _trueValue = "true";
         [SerializeField] private string _falseValue = "false";
 

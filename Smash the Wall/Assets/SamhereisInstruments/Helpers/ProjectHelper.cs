@@ -1,4 +1,6 @@
+using DI;
 using Helpers;
+using InGameStrings;
 using Managers;
 using System.Diagnostics;
 using System.IO;
@@ -16,6 +18,8 @@ namespace Samhereis.Helpers
 
         [SerializeField] private RemoteConfigManager _remoteConfigManager;
         [SerializeField] private EventsLogManager _eventsLogManager;
+
+        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
 
         private void Awake()
         {
@@ -47,7 +51,7 @@ namespace Samhereis.Helpers
 
         private void OnApplicationQuit()
         {
-            GameSaveManager.SaveAll();
+            _gameSaveManager.SaveAll();
         }
 
         [ContextMenu("DeleteAllPersistentDataPath")]

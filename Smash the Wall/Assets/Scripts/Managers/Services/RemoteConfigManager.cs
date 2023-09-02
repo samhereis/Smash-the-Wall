@@ -11,11 +11,12 @@ namespace Managers
 {
     public class RemoteConfigManager : MonoBehaviour, IDIDependent
     {
-        private const string _defaultMouseSensitivityString = "DefMouseSens";
-        private const string _defaultWinPercentageString = "WinPerce";
-        private const string _defaultLosePercentageString = "LosePerce";
+        private const string _uiAnimationElementForeachDelayString = "uiAnimationElementForeachDelay";
+        private const string _winPercentageString = "WinPerce";
+        private const string _losePercentageString = "LosePerce";
 
         [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
+        [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
 
         public struct UserAttributes { }
         public struct AppAttributes { }
@@ -73,8 +74,10 @@ namespace Managers
                     break;
             }
 
-            _gameConfigs.gameplaySettings.SetWinPercentage(RemoteConfigService.Instance.appConfig.GetFloat(_defaultWinPercentageString));
-            _gameConfigs.gameplaySettings.SetLosePercentage(RemoteConfigService.Instance.appConfig.GetFloat(_defaultLosePercentageString));
+            _gameConfigs.gameplaySettings.SetWinPercentage(RemoteConfigService.Instance.appConfig.GetFloat(_winPercentageString));
+            _gameConfigs.gameplaySettings.SetLosePercentage(RemoteConfigService.Instance.appConfig.GetFloat(_losePercentageString));
+
+            _uIConfigs.SetUIAnimationElementForeachDelay(RemoteConfigService.Instance.appConfig.GetFloat(_uiAnimationElementForeachDelayString));
         }
     }
 }

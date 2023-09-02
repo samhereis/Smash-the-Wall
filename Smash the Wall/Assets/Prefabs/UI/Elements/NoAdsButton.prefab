@@ -136,6 +136,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1522109256439792229}
+    - targetCorrespondingSourceObject: {fileID: 8818240508952284196, guid: f2fc0843b0a854841be4b0f7db43a304,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2088916650922777549}
   m_SourcePrefab: {fileID: 100100000, guid: f2fc0843b0a854841be4b0f7db43a304, type: 3}
 --- !u!114 &595829719837507760 stripped
 MonoBehaviour:
@@ -196,3 +200,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inAppPurchacesManager: {fileID: 0}
+  _adsShowManager: {fileID: 0}
+--- !u!114 &2088916650922777549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4316243070310114432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a7fe5a5fe092749a2619d66529957f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseSettings:
+    ease: 27
+    turnOffDuration: 0.2
+    turnOnDuration: 0.5

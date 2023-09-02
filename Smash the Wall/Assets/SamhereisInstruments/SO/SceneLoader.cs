@@ -1,5 +1,8 @@
 using DataClasses;
+using DI;
 using Helpers;
+using InGameStrings;
+using Interfaces;
 using Managers;
 using System;
 using System.Threading.Tasks;
@@ -10,15 +13,27 @@ using UnityEngine.SceneManagement;
 namespace Tools
 {
     [CreateAssetMenu(fileName = "Scene Loader", menuName = "Scriptables/Helpers/Scene Loader")]
-    public class SceneLoader : ScriptableObject
+    public class SceneLoader : ScriptableObject, IInitializable, IDIDependent
     {
         public readonly UnityEvent<AScene> onSceneStartLoading = new UnityEvent<AScene>();
 
         [SerializeField] private bool _loading = false;
 
+        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
+
+        public void Initialize()
+        {
+            (this as IDIDependent).LoadDependencies();
+        }
+
         public async Task LoadSceneAsync(AScene aScene, Action<float> onUpdate = null)
         {
-            GameSaveManager.SaveAll();
+            if (_gameSaveManager == null)
+            {
+                (this as IDIDependent).LoadDependencies();
+            }
+
+            _gameSaveManager.SaveAll();
 
             if (_loading == false)
             {

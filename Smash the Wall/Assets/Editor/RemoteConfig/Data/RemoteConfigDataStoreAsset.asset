@@ -12,21 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"8c9982ab-0291-4e6b-b5bb-a557a36a55f2\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"DefMouseSens\",\r\n      \"value\": 10.0,\r\n     
-    \"type\": \"float\"\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"1dc9b539-5650-46c2-8506-8e13abff7fba\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"WinPerce\",\r\n      \"value\": 75.0,\r\n      \"type\": \"float\"\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f84b99b1-72ce-413f-98ee-41234a232527\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"LosePerce\",\r\n      \"value\": 25.0,\r\n     
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"066022ad-fb00-442b-8efd-1ff07e924071\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"DefMouseSens\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"82909245-b116-41bd-ab59-da498b43b2e1\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"WinPerce\",\r\n      \"type\": \"float\",\r\n      \"value\": 75.0\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"ae78cdf9-2a84-4837-b66c-0ee01d04dc73\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"LosePerce\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 25.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"174cd15d-1365-4887-b983-2683575fb48f\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"uiAnimationElementForeachDelay\",\r\n      \"value\": 0.05,\r\n     
     \"type\": \"float\"\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"8c9982ab-0291-4e6b-b5bb-a557a36a55f2\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"DefMouseSens\",\r\n      \"value\": 10.0,\r\n     
-    \"type\": \"float\"\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"1dc9b539-5650-46c2-8506-8e13abff7fba\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"WinPerce\",\r\n      \"value\": 75.0,\r\n      \"type\": \"float\"\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f84b99b1-72ce-413f-98ee-41234a232527\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"LosePerce\",\r\n      \"value\": 25.0,\r\n     
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"066022ad-fb00-442b-8efd-1ff07e924071\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"DefMouseSens\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"82909245-b116-41bd-ab59-da498b43b2e1\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"WinPerce\",\r\n      \"type\": \"float\",\r\n      \"value\": 75.0\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"ae78cdf9-2a84-4837-b66c-0ee01d04dc73\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"LosePerce\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 25.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"174cd15d-1365-4887-b983-2683575fb48f\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"uiAnimationElementForeachDelay\",\r\n      \"value\": 0.05,\r\n     
     \"type\": \"float\"\r\n    }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"ae827122-d5e9-4c0e-8a06-811cbe703011\",\r\n   
     \"name\": \"production\",\r\n    \"id\": \"bdfe13c8-a96e-40bb-994a-8e30b29c21cc\",\r\n   

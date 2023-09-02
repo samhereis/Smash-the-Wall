@@ -13,6 +13,7 @@ namespace InGameStrings
         public const string adsManager = "adsManager";
         public const string eventsLogManager = "eventsLogManager";
         public const string inAppPurchacesManager = "inAppPurchacesManager";
+        public const string gameSaveManager = "gameSaveManager";
 
         public const string gameConfigs = "gameConfigs";
         public const string uiConfigs = "uiConfigs";

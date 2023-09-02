@@ -1,8 +1,12 @@
+using Configs;
 using DG.Tweening;
 using DI;
 using Helpers;
+using InGameStrings;
 using Interfaces;
 using System;
+using System.Threading;
+using UI.UIAnimationElements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,9 +22,12 @@ namespace UI.Canvases
 
         [SerializeField] protected BaseSettings _baseSettings = new BaseSettings();
 
+        private CancellationTokenSource _onDestroyCTS = new CancellationTokenSource();
+
         protected virtual void Awake()
         {
             if (_baseSettings.canvasGroup == null) _baseSettings.canvasGroup = GetComponent<CanvasGroup>();
+            _baseSettings.uIAnimationElements = GetComponentsInChildren<UIAnimationElement_Base>(true);
 
             onAWindowOpen += OnAWindowOpen;
 
@@ -33,11 +40,14 @@ namespace UI.Canvases
             onAWindowOpen -= OnAWindowOpen;
 
             _baseSettings.canvasGroup.DOKill();
+
+            _onDestroyCTS.Cancel();
         }
 
         public virtual void Initialize()
         {
             (this as IDIDependent).LoadDependencies();
+            _baseSettings.Initialize();
         }
 
         public virtual void OnAWindowOpen(IUIWindow uIWIndow)
@@ -69,6 +79,8 @@ namespace UI.Canvases
             if (_baseSettings.isOpen == true) return;
             _baseSettings.isOpen = true;
 
+            TurnOnUIAnimationElements_Async();
+
             if (_baseSettings.notifyOthers == true) onAWindowOpen?.Invoke(this);
 
             _baseSettings.canvasGroup.DOKill();
@@ -77,12 +89,37 @@ namespace UI.Canvases
 
             if (_baseSettings.enableDisable) gameObject.SetActive(true);
             _baseSettings.canvasGroup.FadeUp(duration.Value);
+
+            async void TurnOnUIAnimationElements_Async()
+            {
+                float uiAnimationElementForeachDelay = 0.025f;
+
+                if (_baseSettings.uIConfigs != null) uiAnimationElementForeachDelay = _baseSettings.uIConfigs.uiAnimationElementForeachDelay;
+
+                foreach (var uiAnimationElement in _baseSettings.uIAnimationElements)
+                {
+                    if (_onDestroyCTS.IsCancellationRequested == true) break;
+
+                    try
+                    {
+                        uiAnimationElement?.TurnOn();
+
+                        await AsyncHelper.Delay(uiAnimationElementForeachDelay);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogWarning("Error animating ui animation element: " + ex, gameObject);
+                    }
+                }
+            }
         }
 
         protected void TurnOff(float? duration = null)
         {
             if (_baseSettings.isOpen == false) return;
             _baseSettings.isOpen = false;
+
+            TurnOffUIAnimationElements();
 
             _baseSettings.canvasGroup.DOKill();
 
@@ -106,6 +143,21 @@ namespace UI.Canvases
                 if (_baseSettings.enableDisable) { gameObject.SetActive(false); }
                 if (_baseSettings.openOnExit != null && duration.Value != 0) { _baseSettings.openOnExit.Enable(); }
             }
+
+            void TurnOffUIAnimationElements()
+            {
+                foreach (var uiAnimationElement in _baseSettings.uIAnimationElements)
+                {
+                    try
+                    {
+                        uiAnimationElement?.TurnOff();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogWarning("Error animating ui animation element: " + ex, gameObject);
+                    }
+                }
+            }
         }
 
         protected virtual void SubscribeToEvents()
@@ -119,7 +171,7 @@ namespace UI.Canvases
         }
 
         [Serializable]
-        protected class BaseSettings
+        protected class BaseSettings : IDIDependent, IInitializable
         {
             [Header("Settings")]
             public bool enableDisable = true;
@@ -133,8 +185,19 @@ namespace UI.Canvases
             [Header("Components")]
             public CanvasGroup canvasGroup;
 
+            [Header("DI")]
+            [DI(DIStrings.uiConfigs)] public UIConfigs uIConfigs;
+
             [Header("Optional")]
             public CanvasWindowBase openOnExit;
+
+            [Header("Debug")]
+            public UIAnimationElement_Base[] uIAnimationElements;
+
+            public void Initialize()
+            {
+                (this as IDIDependent).LoadDependencies();
+            }
         }
     }
 }

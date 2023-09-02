@@ -1,9 +1,10 @@
 using DTO.Save;
 using Helpers;
+using UnityEngine;
 
 namespace Managers
 {
-    public class GameSaveManager
+    public class GameSaveManager : MonoBehaviour
     {
         private const string _levelSaveFolderPath = "Saves";
         private const string _levelSaveFileName = "LevelSave";
@@ -11,47 +12,47 @@ namespace Managers
         private const string _weaponsSaveFolderPath = "Saves";
         private const string _weaponsSaveFileName = "WeaponsSave";
 
-        private static LevelSave_DTO _levelSave_DTO;
-        private static Weapons_DTO _weapons_DTO;
+        [SerializeField] private LevelSave_DTO _levelSave_DTO;
+        [SerializeField] private Weapons_DTO _weapons_DTO;
 
-        public static Weapons_DTO GetWeaponsSave()
+        public Weapons_DTO GetWeaponsSave()
         {
             UpdateSaves();
             return _weapons_DTO;
         }
 
-        public static LevelSave_DTO GetLevelSave()
+        public LevelSave_DTO GetLevelSave()
         {
             UpdateSaves();
 
             return _levelSave_DTO;
         }
 
-        public static int GetLevelIndex()
+        public int GetLevelIndex()
         {
             UpdateSaves();
             return _levelSave_DTO.levelIndex;
         }
 
-        public static void IncreaseLevelIndex()
+        public void IncreaseLevelIndex()
         {
             UpdateSaves();
             _levelSave_DTO.levelIndex++;
         }
 
-        public static void SaveLevel()
+        public void SaveLevel()
         {
             UpdateSaves();
             SaveHelper.SaveToJson(_levelSave_DTO, _levelSaveFolderPath, _levelSaveFileName);
         }
 
-        public static void SaveWeapons()
+        public void SaveWeapons()
         {
             UpdateSaves();
             SaveHelper.SaveToJson(_weapons_DTO, _weaponsSaveFolderPath, _weaponsSaveFileName);
         }
 
-        public static void SaveAll()
+        public void SaveAll()
         {
             UpdateSaves();
 
@@ -59,7 +60,7 @@ namespace Managers
             SaveLevel();
         }
 
-        private static void UpdateSaves()
+        private void UpdateSaves()
         {
             if (_levelSave_DTO == null)
             {

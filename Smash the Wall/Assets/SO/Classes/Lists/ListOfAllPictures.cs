@@ -1,6 +1,8 @@
 using Configs;
+using DI;
 using Helpers;
 using IdentityCards;
+using InGameStrings;
 using Managers;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +10,16 @@ using UnityEngine;
 namespace SO.Lists
 {
     [CreateAssetMenu(fileName = "ListOfAllPictures", menuName = "SO/Lists/ListOfAllPictures")]
-    public class ListOfAllPictures : ConfigBase
+    public class ListOfAllPictures : ConfigBase, IDIDependent
     {
         [field: SerializeField] public List<PictureIdentityCard> pictures { get; private set; } = new List<PictureIdentityCard>();
 
+        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
+
         public override void Initialize()
         {
+            (this as IDIDependent).LoadDependencies();
+
             foreach (var picture in pictures)
             {
                 picture.AutoSetTargetName();
@@ -32,7 +38,7 @@ namespace SO.Lists
 
         public int GetCurrentIndex()
         {
-            var save = GameSaveManager.GetLevelSave();
+            var save = _gameSaveManager.GetLevelSave();
             int pictureIndex = 0;
 
             if (save != null) { pictureIndex = save.pictureIndex; }
@@ -47,7 +53,7 @@ namespace SO.Lists
 
         public void SetNextPicture()
         {
-            var save = GameSaveManager.GetLevelSave();
+            var save = _gameSaveManager.GetLevelSave();
             int pictureIndex = 0;
 
             if (save != null) { pictureIndex = save.pictureIndex; }
@@ -61,7 +67,7 @@ namespace SO.Lists
 
         public PictureIdentityCard GetCurrent()
         {
-            var save = GameSaveManager.GetLevelSave();
+            var save = _gameSaveManager.GetLevelSave();
             int pictureIndex = 0;
 
             if (save != null) { pictureIndex = save.pictureIndex; }

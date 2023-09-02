@@ -22,3 +22,4 @@ MonoBehaviour:
   <uiBackgroundColor_Shop_MainPart>k__BackingField: {r: 1, g: 0.5882353, b: 0, a: 0.09803922}
   <uiBackgroundColor_Shop_UpperPart>k__BackingField: {r: 0.002580996, g: 0.6862745,
     b: 0.6862745, a: 1}
+  <uiAnimationElementForeachDelay>k__BackingField: 0.05

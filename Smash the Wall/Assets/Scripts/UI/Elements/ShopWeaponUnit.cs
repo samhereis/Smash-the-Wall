@@ -19,6 +19,7 @@ namespace UI.Elements
         [DI(DIStrings.onChangedWeapon)][SerializeField] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
         [DI(DIStrings.listOfAllWeapons)][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
         [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
+        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
 
         [Header("Components")]
         [SerializeField] private Image _weaponImage;
@@ -33,6 +34,7 @@ namespace UI.Elements
 
         [Space(10)]
         [SerializeField] private Transform _holder;
+        [SerializeField] private Transform _getHolder;
 
         [Header("Settings")]
         [SerializeField] private float _shakeDuration = 0.5f;
@@ -68,27 +70,26 @@ namespace UI.Elements
             _itemButton.onClick.RemoveListener(OnClickWhileUnavailable);
             _lockImage.gameObject.SetActive(false);
             _tapToGetImage.gameObject.SetActive(false);
+            _getHolder.gameObject.SetActive(false);
 
-            var levelSave = GameSaveManager.GetLevelSave();
+            var levelSave = _gameSaveManager.GetLevelSave();
 
             if (levelSave.levelIndex >= weaponIdentityiCard.opensAtLevel)
             {
                 if (weaponIdentityiCard.isUnlocked == false)
                 {
+                    _getHolder.gameObject.SetActive(true);
                     _tapToGetImage.gameObject.SetActive(true);
                     _itemButton.onClick.AddListener(TryOpen);
 
-                    _label.text = "tap to unlock";
-
-                    _tapToGetImage.DOFade(0.25f, 1).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutBack);
-                    _tapToGetImage.transform.DOScale(0.5f, 1).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutBack);
+                    _tapToGetImage.transform.DOScale(0.5f, 1).SetLoops(-1, LoopType.Yoyo);
                 }
                 else
                 {
                     _itemButton.onClick.AddListener(Choose);
-
-                    _label.text = _weaponIdentityiCard.targetName;
                 }
+
+                _label.text = _weaponIdentityiCard.targetName;
             }
             else
             {

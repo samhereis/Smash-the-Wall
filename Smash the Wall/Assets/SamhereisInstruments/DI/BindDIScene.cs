@@ -46,7 +46,6 @@ namespace DI
             {
                 if (DIBox.Get(config.instance.GetType(), config.id, false) == null)
                 {
-                    config.instance.Initialize();
                     DIBox.Add(config.instance, config.id);
                 }
             }
@@ -55,11 +54,6 @@ namespace DI
             {
                 if (DIBox.Get(scriptableObject.instance.GetType(), scriptableObject.id, false) == null)
                 {
-                    if (scriptableObject is IInitializable)
-                    {
-                        (scriptableObject as IInitializable).Initialize();
-                    }
-
                     DIBox.Add(scriptableObject.instance, scriptableObject.id);
                 }
             }
@@ -68,7 +62,6 @@ namespace DI
             {
                 if (DIBox.Get(eventWithNoParameter.instance.GetType(), eventWithNoParameter.id, false) == null)
                 {
-                    eventWithNoParameter.Initialize();
                     DIBox.Add(eventWithNoParameter.instance, eventWithNoParameter.id);
                 }
             }
@@ -81,6 +74,8 @@ namespace DI
                 isGLoballyInhected = true;
                 DontDestroyOnLoad(gameObject);
             }
+
+            InitAll();
         }
 
         private void OnDestroy()
@@ -101,6 +96,35 @@ namespace DI
             }
 
             Clear();
+        }
+
+        private void InitAll()
+        {
+            foreach (var objectToInject in _objects)
+            {
+                if (objectToInject is IInitializable)
+                {
+                    (objectToInject as IInitializable).Initialize();
+                }
+            }
+
+            foreach (var config in _configs)
+            {
+                config.instance.Initialize();
+            }
+
+            foreach (var scriptableObject in _scriptableObjects)
+            {
+                if (scriptableObject is IInitializable)
+                {
+                    (scriptableObject as IInitializable).Initialize();
+                }
+            }
+
+            foreach (var eventWithNoParameter in _eventsWithNoParameters)
+            {
+                eventWithNoParameter.Initialize();
+            }
         }
 
         private void InjectEventsWithParameters()

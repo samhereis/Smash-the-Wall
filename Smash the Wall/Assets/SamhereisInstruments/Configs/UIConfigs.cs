@@ -1,4 +1,8 @@
-﻿using DG.Tweening;
+﻿using AYellowpaper.SerializedCollections;
+using DG.Tweening;
+using Helpers;
+using SO;
+using System;
 using UnityEngine;
 
 namespace Configs
@@ -11,19 +15,15 @@ namespace Configs
         public static float defaultUIFadeAnimationDuration { get; private set; } = 0.25f;
         public static Ease defaultUIFadeEase { get; private set; } = Ease.OutBack;
 
-        [field: SerializeField, Space(10)] public float uiScaleAnimationDuration { get; private set; } = 0.25f;
+        [field: SerializeField, Space(10), Header("Animations")] public float uiScaleAnimationDuration { get; private set; } = 0.25f;
         [field: SerializeField] public Ease uiScaleEase { get; private set; } = Ease.InOutBack;
         [field: SerializeField] public float uiFadeAnimationDuration { get; private set; } = 0.25f;
         [field: SerializeField] public Ease uiFadeEase { get; private set; } = Ease.InOutBack;
 
-        [field: SerializeField, Space(10)] public Color uiBackgroundColor_Standart { get; private set; } = Color.cyan;
-        [field: SerializeField] public Color uiBackgroundColor_Win { get; private set; } = Color.red;
-        [field: SerializeField] public Color uiBackgroundColor_Lose { get; private set; } = Color.green;
-        [field: SerializeField] public Color uiBackgroundColor_Shop_MainPart { get; private set; } = Color.yellow;
-        [field: SerializeField] public Color uiBackgroundColor_Shop_UpperPart { get; private set; } = Color.cyan;
-
-
         [field: SerializeField, Space(10)] public float uiAnimationElementForeachDelay { get; private set; } = 0.025f;
+
+        [SerializedDictionary("Color Name", ("Color Value"))]
+        [field: SerializeField] public SerializedDictionary<ColorSetUnitString, Color> colorSetUnits = new SerializedDictionary<ColorSetUnitString, Color>();
 
         public override void Initialize()
         {
@@ -33,6 +33,13 @@ namespace Configs
         public void SetUIAnimationElementForeachDelay(float newUIAnimationElementForeachDelay)
         {
             uiAnimationElementForeachDelay = newUIAnimationElementForeachDelay;
+        }
+
+        [Serializable]
+        public class ColorSet
+        {
+            [SerializedDictionary("Color Name", ("Color Value"))]
+            [field: SerializeField] public SerializedDictionary<ColorSetUnitString, Color> colorSetUnits = new SerializedDictionary<ColorSetUnitString, Color>();
         }
     }
 }

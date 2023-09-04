@@ -23,7 +23,6 @@ namespace UI
         [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
-        [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
         [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
 
         [Header("Components")]
@@ -45,9 +44,6 @@ namespace UI
             _starControl.SetActiveStars(CalculateStars());
 
             _gameConfigs.isRestart = false;
-
-            _winInfoBlock.color = _uIConfigs.uiBackgroundColor_Win;
-            _buttonsInfoBlock.color = _uIConfigs.uiBackgroundColor_Standart;
 
             SubscribeToEvents();
         }

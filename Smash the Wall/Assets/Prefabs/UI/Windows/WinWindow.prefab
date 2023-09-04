@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 909539210620541592}
   - component: {fileID: 2854179885721853284}
   - component: {fileID: 7984881144403979762}
+  - component: {fileID: 2621264994793939491}
   m_Layer: 5
   m_Name: WinWindow
   m_TagString: Untagged
@@ -372,13 +373,35 @@ MonoBehaviour:
   _gameConfigs: {fileID: 0}
   _listOfAllScenes: {fileID: 0}
   _sceneLoader: {fileID: 0}
-  _uIConfigs: {fileID: 0}
   _adsShowManager: {fileID: 0}
   _nextLevelButton: {fileID: 1521434032172089246}
   _goToMainMenuButton: {fileID: 8660523861662061310}
   _winInfoBlock: {fileID: 7614886493378642414}
   _buttonsInfoBlock: {fileID: 141892476811645242}
   _starControl: {fileID: 7817289575231691631}
+--- !u!114 &2621264994793939491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181043545211170021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa26421a59123624b9b13b378f07da44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorSetUnits:
+    _serializedList:
+    - Key: {fileID: 11400000, guid: 75ca7643717dbf6458351be3de91859f, type: 2}
+      Value:
+      - {fileID: 7614886493378642414}
+    - Key: {fileID: 11400000, guid: 0502c3732a3db4046986032e578a0b55, type: 2}
+      Value:
+      - {fileID: 6375476944908818237}
+    - Key: {fileID: 11400000, guid: fd9275beb52078d41a36970f671f3a12, type: 2}
+      Value:
+      - {fileID: 141892476811645242}
 --- !u!1 &3592260743036175012
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,7 +829,7 @@ PrefabInstance:
     - target: {fileID: 5616350396622972123, guid: 8ed7f5d9da73daf408155b6e8e6a9404,
         type: 3}
       propertyPath: m_fontSize
-      value: 50
+      value: 64.4
       objectReference: {fileID: 0}
     - target: {fileID: 6697565897775870723, guid: 8ed7f5d9da73daf408155b6e8e6a9404,
         type: 3}
@@ -1299,7 +1322,7 @@ PrefabInstance:
     - target: {fileID: 5616350396622972123, guid: 8ed7f5d9da73daf408155b6e8e6a9404,
         type: 3}
       propertyPath: m_fontSize
-      value: 50
+      value: 64.4
       objectReference: {fileID: 0}
     - target: {fileID: 6697565897775870723, guid: 8ed7f5d9da73daf408155b6e8e6a9404,
         type: 3}

@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 909539210620541592}
   - component: {fileID: 2854179885721853284}
   - component: {fileID: 3201094068043948741}
+  - component: {fileID: 4142035886362611357}
   m_Layer: 5
   m_Name: GameplayMenu
   m_TagString: Untagged
@@ -423,8 +424,14 @@ MonoBehaviour:
     animationDuration_Disable: 0.25
     isOpen: 1
     canvasGroup: {fileID: 0}
+    uIConfigs: {fileID: 0}
     openOnExit: {fileID: 0}
+    uIAnimationElements: []
+  _buttons: []
   _inputs: {fileID: 0}
+  _adsShowManager: {fileID: 0}
+  _lazyUpdator: {fileID: 0}
+  _gameSaveManager: {fileID: 0}
   _pauseMenu: {fileID: 0}
   _shopWindow: {fileID: 0}
   _pauseButton: {fileID: 8753265225334878226}
@@ -494,6 +501,23 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+--- !u!114 &4142035886362611357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181043545211170021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa26421a59123624b9b13b378f07da44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorSetUnits:
+    _serializedList:
+    - Key: {fileID: 11400000, guid: 5082f55dd4e99ac48869cff7ade4d930, type: 2}
+      Value:
+      - {fileID: 2175026712413335914}
 --- !u!1 &4800557863410400937
 GameObject:
   m_ObjectHideFlags: 0

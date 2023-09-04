@@ -39,6 +39,11 @@ namespace Settings
 
         private void OnEnable()
         {
+            Initialize();
+        }
+
+        public void Initialize()
+        {
             _currentValue = PlayerPrefs.GetString(key, _defaultValue) == _trueValue;
         }
 

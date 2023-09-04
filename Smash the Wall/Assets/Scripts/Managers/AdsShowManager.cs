@@ -35,6 +35,9 @@ namespace Managers
 
         private void OnApplicationFocus(bool focus)
         {
+
+#if UNITY_EDITOR == false
+
             if (focus == true)
             {
                 bool isAppOpenCountReached = _appOpenCount >= _openAppCountToShowAppOpenAdd;
@@ -46,6 +49,9 @@ namespace Managers
                     TryShowAppOpen();
                 }
             }
+
+#endif
+
         }
 
         public void RemoveAds()

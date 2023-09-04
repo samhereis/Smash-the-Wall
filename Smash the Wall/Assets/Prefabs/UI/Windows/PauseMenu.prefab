@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 6054250807425241662}
   - component: {fileID: 1616095592396660568}
   m_Layer: 5
-  m_Name: Background
+  m_Name: PauseButtonsHolderBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 909539210620541592}
   - component: {fileID: 2854179885721853284}
   - component: {fileID: 8002591916120266729}
+  - component: {fileID: 9030420475910838431}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -296,13 +297,29 @@ MonoBehaviour:
   _buttons: []
   _sceneLoader: {fileID: 0}
   _listOfAllScenes: {fileID: 0}
-  _uIConfigs: {fileID: 0}
   _settingsWindow: {fileID: 0}
   _gameplayWindow: {fileID: 0}
   _buttonsInfoBlock: {fileID: 1616095592396660568}
   _resumeButton: {fileID: 1711321228414990630}
   _settingsButton: {fileID: 8341487176683910994}
   _mainMenuButton: {fileID: 1623679718625117407}
+--- !u!114 &9030420475910838431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181043545211170021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa26421a59123624b9b13b378f07da44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorSetUnits:
+    _serializedList:
+    - Key: {fileID: 11400000, guid: fd9275beb52078d41a36970f671f3a12, type: 2}
+      Value:
+      - {fileID: 1616095592396660568}
 --- !u!1 &4800557863410400937
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +470,7 @@ PrefabInstance:
     - target: {fileID: 5616350396622972123, guid: 8ed7f5d9da73daf408155b6e8e6a9404,
         type: 3}
       propertyPath: m_fontSize
-      value: 50
+      value: 64.4
       objectReference: {fileID: 0}
     - target: {fileID: 6697565897775870723, guid: 8ed7f5d9da73daf408155b6e8e6a9404,
         type: 3}
@@ -639,7 +656,7 @@ PrefabInstance:
     - target: {fileID: 5616350396622972123, guid: 8ed7f5d9da73daf408155b6e8e6a9404,
         type: 3}
       propertyPath: m_fontSize
-      value: 50
+      value: 64.4
       objectReference: {fileID: 0}
     - target: {fileID: 6697565897775870723, guid: 8ed7f5d9da73daf408155b6e8e6a9404,
         type: 3}
@@ -846,7 +863,7 @@ PrefabInstance:
     - target: {fileID: 5616350396622972123, guid: 8ed7f5d9da73daf408155b6e8e6a9404,
         type: 3}
       propertyPath: m_fontSize
-      value: 50
+      value: 64.4
       objectReference: {fileID: 0}
     - target: {fileID: 6697565897775870723, guid: 8ed7f5d9da73daf408155b6e8e6a9404,
         type: 3}

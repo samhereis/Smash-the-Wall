@@ -47,6 +47,12 @@ namespace Configs
 
             public void Initialize()
             {
+                gunRotationSpeed.Initialize();
+                musicValue.Initialize();
+                soundsVolume.Initialize();
+                vibroSettings.Initialize();
+                randomPictureSettings.Initialize();
+
                 SetGunRotationSpeed(gunRotationSpeed.currentValue);
                 SetMusicVolume(musicValue.currentValue);
                 SetSoundsVolume(soundsVolume.currentValue);

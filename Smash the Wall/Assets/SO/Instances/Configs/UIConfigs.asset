@@ -16,10 +16,28 @@ MonoBehaviour:
   <uiScaleEase>k__BackingField: 28
   <uiFadeAnimationDuration>k__BackingField: 0.25
   <uiFadeEase>k__BackingField: 28
-  <uiBackgroundColor_Standart>k__BackingField: {r: 0, g: 0.5882353, b: 1, a: 0.5882353}
-  <uiBackgroundColor_Win>k__BackingField: {r: 0, g: 1, b: 0.6862745, a: 0.39215687}
-  <uiBackgroundColor_Lose>k__BackingField: {r: 1, g: 0.39215687, b: 0, a: 0.39215687}
-  <uiBackgroundColor_Shop_MainPart>k__BackingField: {r: 1, g: 0.5882353, b: 0, a: 0.09803922}
-  <uiBackgroundColor_Shop_UpperPart>k__BackingField: {r: 0.002580996, g: 0.6862745,
-    b: 0.6862745, a: 1}
   <uiAnimationElementForeachDelay>k__BackingField: 0.05
+  colorSetUnits:
+    _serializedList:
+    - Key: {fileID: 11400000, guid: 5082f55dd4e99ac48869cff7ade4d930, type: 2}
+      Value: {r: 1, g: 1, b: 1, a: 1}
+    - Key: {fileID: 11400000, guid: 6d5fd164ccdb0ab40960d8a6ba3cee6b, type: 2}
+      Value: {r: 0, g: 0, b: 0, a: 1}
+    - Key: {fileID: 11400000, guid: ea1bea0a679279e409910379047de6fc, type: 2}
+      Value: {r: 0.39215687, g: 0, b: 0, a: 0.78431374}
+    - Key: {fileID: 11400000, guid: ccd56b5fcafca5d41a1ccd542dd408e6, type: 2}
+      Value: {r: 1, g: 0, b: 0, a: 1}
+    - Key: {fileID: 11400000, guid: 75ca7643717dbf6458351be3de91859f, type: 2}
+      Value: {r: 0.1882353, g: 0.5882353, b: 0, a: 0.78431374}
+    - Key: {fileID: 11400000, guid: 0502c3732a3db4046986032e578a0b55, type: 2}
+      Value: {r: 0, g: 1, b: 0, a: 1}
+    - Key: {fileID: 11400000, guid: 4ba6cf71be6f23646b7a2cc9ed88ad48, type: 2}
+      Value: {r: 1, g: 1, b: 1, a: 1}
+    - Key: {fileID: 11400000, guid: 87d4a11373d9da547b8237ff8d321485, type: 2}
+      Value: {r: 1, g: 0.39215687, b: 0, a: 1}
+    - Key: {fileID: 11400000, guid: e2e15c57506f24448a019d08cce75700, type: 2}
+      Value: {r: 0, g: 1, b: 1, a: 1}
+    - Key: {fileID: 11400000, guid: fd9275beb52078d41a36970f671f3a12, type: 2}
+      Value: {r: 0, g: 0.52830195, b: 0.5660378, a: 0.78431374}
+    - Key: {fileID: 11400000, guid: de22bf0e1e7e54448808aa0fae1db634, type: 2}
+      Value: {r: 1, g: 1, b: 1, a: 1}

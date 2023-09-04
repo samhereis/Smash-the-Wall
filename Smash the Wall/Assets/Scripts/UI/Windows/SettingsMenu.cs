@@ -10,7 +10,6 @@ namespace UI
     public class SettingsMenu : CanvasWindowBase
     {
         [Header("DI")]
-        [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
         [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
 
         [Header("Components")]
@@ -26,15 +25,20 @@ namespace UI
         [Space(10)]
         [SerializeField] private Image _buttonsInfoBlock;
 
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            _gameConfigs.Initialize();
+        }
+
         public override void Enable(float? duration = null)
         {
             base.Enable(duration);
 
-            _buttonsInfoBlock.color = _uIConfigs.uiBackgroundColor_Standart;
-
             _gunRotationSpeed.value = _gameConfigs.gameSettings.gunRotationSpeed.currentValue;
             _musicVolume.value = _gameConfigs.gameSettings.musicValue.currentValue;
-            _soundsVolume.value = _gameConfigs.gameSettings.musicValue.currentValue;
+            _soundsVolume.value = _gameConfigs.gameSettings.soundsVolume.currentValue;
             _vibrationToggle.isOn = _gameConfigs.gameSettings.vibroSettings.currentValue;
             _randomPictureToggle.isOn = _gameConfigs.gameSettings.randomPictureSettings.currentValue;
 

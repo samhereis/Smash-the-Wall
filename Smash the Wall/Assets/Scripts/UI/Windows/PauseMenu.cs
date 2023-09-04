@@ -14,7 +14,6 @@ namespace UI
         [Header("DI")]
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
-        [DI(DIStrings.uiConfigs)][SerializeField] private UIConfigs _uIConfigs;
 
         [Header("Components")]
         [SerializeField] private CanvasWindowBase _settingsWindow;
@@ -34,8 +33,6 @@ namespace UI
             base.Enable(duration);
 
             SubscribeToEvents();
-
-            _buttonsInfoBlock.color = _uIConfigs.uiBackgroundColor_Standart;
         }
 
         public override void Disable(float? duration = null)

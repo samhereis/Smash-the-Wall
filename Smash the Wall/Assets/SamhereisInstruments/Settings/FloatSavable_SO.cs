@@ -1,10 +1,11 @@
 using Helpers;
+using Interfaces;
 using UnityEngine;
 
 namespace Settings
 {
     [CreateAssetMenu(fileName = "FloatSavable_SO", menuName = "Scriptables/Settings/FloatSavable_SO")]
-    public class FloatSavable_SO : ScriptableObject
+    public class FloatSavable_SO : ScriptableObject, IInitializable
     {
         [SerializeField] private float _currentValue;
         public float currentValue => _currentValue;
@@ -36,6 +37,11 @@ namespace Settings
         }
 
         private void OnEnable()
+        {
+            Initialize();
+        }
+
+        public void Initialize()
         {
             _currentValue = PlayerPrefs.GetFloat(key, _defaultValue);
         }

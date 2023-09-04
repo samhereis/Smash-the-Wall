@@ -3,9 +3,11 @@ using Helpers;
 using InGameStrings;
 using Managers;
 using SO.Lists;
+using System.Collections.Generic;
 using Tools;
 using UI.Canvases;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 using Values;
 
@@ -32,10 +34,17 @@ namespace UI
 
         [DI(DIStrings.isGameInitialized)][SerializeField] ValueEvent<bool> _isGameInitialized;
 
+        [Header("Addressables")]
+        [SerializeField] private List<AssetReferenceSprite> _backgroundSprites = new List<AssetReferenceSprite>();
+
         [Header("Components")]
         [SerializeField] private Toggle _adsTrackingConsent;
         [SerializeField] private Toggle _analyticsConsent;
         [SerializeField] private Button _startButton;
+
+        [Space(10)]
+        [SerializeField] private Image _backgroundImage;
+        [SerializeField] private GridLayoutGroup _gridLayoutGroup;
 
         protected override async void Awake()
         {
@@ -46,13 +55,18 @@ namespace UI
                 await AsyncHelper.Delay(1f);
             }
 
-            Initialize(); 
-            
+            Initialize();
+
             await AsyncHelper.Delay(1f);
 
             Time.timeScale = 1f;
 
             Enable();
+        }
+
+        private void Update()
+        {
+            _gridLayoutGroup.cellSize = new Vector2(Screen.height, Screen.height);
         }
 
         public override async void Enable(float? duration = null)
@@ -65,9 +79,17 @@ namespace UI
             {
                 if (_isFirstTimeInGame)
                 {
-                    base.Enable(duration);
+                    try
+                    {
+                        _backgroundSprites.RemoveNulls();
+                        _backgroundImage.sprite = await AddressablesHelper.GetAssetAsync<Sprite>(_backgroundSprites.GetRandom());
+                    }
+                    finally
+                    {
+                        base.Enable(duration);
 
-                    _startButton.onClick.AddListener(InitializeAndStartGame);
+                        _startButton.onClick.AddListener(InitializeAndStartGame);
+                    }
                 }
                 else
                 {

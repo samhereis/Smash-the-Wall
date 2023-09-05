@@ -1,4 +1,5 @@
 using DTO;
+using DTO.Save;
 using Interfaces;
 using System;
 using UnityEngine;
@@ -31,6 +32,11 @@ namespace IdentityCards
         public void SetIsUnlockedStatus(bool isUnlocked)
         {
             this.isUnlocked = isUnlocked;
+        }
+
+        public bool IsToUnlock(LevelSave_DTO levelSave)
+        {
+            return levelSave.levelIndex >= opensAtLevel && isUnlocked == false;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace ECS.CollisionEventJobs
 
         public void Execute(CollisionEvent collisionEvent)
         {
-            var entity = collisionEvent.EntityA;
+            /*var entity = collisionEvent.EntityA;
 
             if (entityManager.HasComponent<PicturePiece_ComponentData>(entity) == false)
             {
@@ -26,7 +26,7 @@ namespace ECS.CollisionEventJobs
                 var component = collisionEventDestroyData[entity];
                 component.isHit = true;
                 collisionEventDestroyData[entity] = component;
-            }
+            }*/
         }
     }
 }

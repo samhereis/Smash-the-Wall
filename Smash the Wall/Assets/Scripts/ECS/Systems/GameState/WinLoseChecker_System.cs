@@ -141,7 +141,11 @@ namespace ECS.Systems.GameState
             {
                 releasedWhatNeedsToBeDestroysPercentage = NumberHelper.GetPercentageOf100(numberOfAllReleasedWhatNeedsToBeDestroys, numberOfAllWhatNeedsToBeDestroys);
 
-                if (releasedWhatNeedsToBeDestroysPercentage >= _gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToBeDestroysToWin)
+                var percentageToWin = _gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToBeDestroysToWin;
+
+                if (percentageToWin < 50) percentageToWin = 85f;
+
+                if (releasedWhatNeedsToBeDestroysPercentage >= percentageToWin)
                 {
                     return true;
                 }

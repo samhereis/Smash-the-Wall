@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8b9cc8cfe2966cd41b4647504ec7de98
   m_SerializeEntries:
-  - m_GUID: ba583b570231b884a9cb8e4ad992eced
-    m_Address: FeelBrassBackgroundMusic
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 951c30c0e48dd214ca790be382f65534
     m_Address: FeelWheelMusic
     m_ReadOnly: 0

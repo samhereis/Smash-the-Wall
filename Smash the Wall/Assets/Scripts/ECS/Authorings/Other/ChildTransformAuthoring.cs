@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ECS.Authoring
 {
+    [DisallowMultipleComponent]
     public class ChildTransformAuthoring : MonoBehaviour
     {
         public class ShootBulletBaker : Baker<ChildTransformAuthoring>
@@ -28,8 +29,6 @@ namespace ECS.Authoring
         {
             localPosition = transform.position;
             rotation = transform.rotation;
-
-            Debug.Log(rotation);
         }
     }
 }

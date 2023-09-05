@@ -12,7 +12,7 @@ namespace ECS.Systems.CollisionUpdators
 
         public void Execute(CollisionEvent collisionEvent)
         {
-            var entity = collisionEvent.EntityA;
+            /*var entity = collisionEvent.EntityA;
 
             if (entityManager.HasComponent<Destroyable_ComponentData>(entity) == false)
             {
@@ -26,7 +26,7 @@ namespace ECS.Systems.CollisionUpdators
                 var component = collisionEventDestroyData[entity];
                 component.toDestroy = true;
                 collisionEventDestroyData[entity] = component;
-            }
+            }*/
         }
     }
 }

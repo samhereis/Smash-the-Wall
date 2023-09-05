@@ -145,10 +145,6 @@ MonoBehaviour:
   _audioSource: {fileID: 8234125342489737592}
   _transitionDuration: 1
   _audioClips:
-  - m_AssetGUID: ba583b570231b884a9cb8e4ad992eced
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 1
   - m_AssetGUID: 951c30c0e48dd214ca790be382f65534
     m_SubObjectName: 
     m_SubObjectType: 

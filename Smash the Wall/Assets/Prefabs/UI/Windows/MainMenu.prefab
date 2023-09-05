@@ -1573,6 +1573,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -131.25
       objectReference: {fileID: 0}
+    - target: {fileID: 876584008675105528, guid: 5772b2432aee38744b5bcfaa52cddd14,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 15edf145783fe4c4d9c3d2ea532a53c4,
+        type: 3}
     - target: {fileID: 1046227125452966673, guid: 5772b2432aee38744b5bcfaa52cddd14,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1676,12 +1682,17 @@ PrefabInstance:
     - target: {fileID: 2701406762624584769, guid: 5772b2432aee38744b5bcfaa52cddd14,
         type: 3}
       propertyPath: m_Name
-      value: CommingSoon_DestroyObjectMode
+      value: CommingSoon_Gun sounds
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341432344716273623, guid: 5772b2432aee38744b5bcfaa52cddd14,
+        type: 3}
+      propertyPath: m_text
+      value: gun sounds
       objectReference: {fileID: 0}
     - target: {fileID: 5341432344716273623, guid: 5772b2432aee38744b5bcfaa52cddd14,
         type: 3}
       propertyPath: m_fontSize
-      value: 29.75
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

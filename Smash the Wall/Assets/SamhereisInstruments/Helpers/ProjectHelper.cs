@@ -62,12 +62,16 @@ namespace Samhereis.Helpers
             _gameSaveManager.SaveAll();
         }
 
+#if UNITY_EDITOR
+
         [MenuItem("Samhereis/Delete All Data")]
         public static async void DeleAllData()
         {
             PlayerPrefs.DeleteAll();
             await TryDeleteAllPersistentDataPath();
         }
+
+#endif
 
         [ContextMenu("DeleteAllPersistentDataPath")]
         public async void DeleteAllPersistentDataPath()

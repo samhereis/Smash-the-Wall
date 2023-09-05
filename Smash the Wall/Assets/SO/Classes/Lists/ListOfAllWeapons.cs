@@ -2,10 +2,12 @@ using Configs;
 using DI;
 using DTO;
 using DTO.Save;
+using Helpers;
 using IdentityCards;
 using InGameStrings;
 using Managers;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace SO.Lists
@@ -33,7 +35,7 @@ namespace SO.Lists
             }
         }
 
-        void InitWeapon(Weapons_DTO weaponsSave, WeaponIdentityiCard weaponIdentityiCard)
+        private void InitWeapon(Weapons_DTO weaponsSave, WeaponIdentityiCard weaponIdentityiCard)
         {
             var aWeapon_DTO = weaponsSave.allWeapons.Find(x => x.weaponName == weaponIdentityiCard.targetName);
 
@@ -49,6 +51,25 @@ namespace SO.Lists
             }
 
             weaponIdentityiCard.Initialize(aWeapon_DTO);
+        }
+
+        public async Task<bool> HasWeaponToUnlock()
+        {
+            bool hasWeaponToUnlock = false;
+            var levelSave = _gameSaveManager.GetLevelSave();
+
+            foreach (var weapon in weapons)
+            {
+                await AsyncHelper.Delay();
+
+                if (weapon.IsToUnlock(levelSave))
+                {
+                    hasWeaponToUnlock = true;
+                    break;
+                }
+            }
+
+            return hasWeaponToUnlock;
         }
 
         public void ChooseWeapon(WeaponIdentityiCard weaponIdentityiCard)

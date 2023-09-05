@@ -21,7 +21,7 @@ namespace Helpers
 
             if (_gameConfigs.gameSettings.vibroSettings.currentValue == false) return;
 
-            Debug.Log("MediumImpact");
+            Debug.Log("LightImpact");
             try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact); } catch { }
         }
 
@@ -31,8 +31,8 @@ namespace Helpers
 
             if (_gameConfigs.gameSettings.vibroSettings.currentValue == false) return;
 
-            Debug.Log("HeavyImpact");
-            try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact); } catch { }
+            Debug.Log("MediumImpact");
+            try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.MediumImpact); } catch { }
         }
 
         public static void HardVibration()

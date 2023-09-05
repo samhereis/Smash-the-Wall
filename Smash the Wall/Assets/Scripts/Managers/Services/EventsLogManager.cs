@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
+using Unity.Services.RemoteConfig;
 using UnityEngine;
 
 namespace Managers
@@ -14,6 +15,11 @@ namespace Managers
 
         public async void Initialize()
         {
+            if (Utilities.CheckForInternetConnection() == false)
+            {
+                return;
+            }
+
             try
             {
                 await UnityServices.InitializeAsync();

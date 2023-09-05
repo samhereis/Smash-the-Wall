@@ -96,11 +96,15 @@ namespace Configs
 
             public void SetWinPercentage(float winPercantage)
             {
+                if (winPercantage < 50) winPercantage = 75f;
+
                 percentageOfReleasedWhatNeedsToBeDestroysToWin = winPercantage;
             }
 
             public void SetLosePercentage(float losePercantage)
             {
+                if (losePercantage < 25) losePercantage = 25;
+
                 percentageOfReleasedWhatNeedsToStaysToLose = losePercantage;
             }
         }

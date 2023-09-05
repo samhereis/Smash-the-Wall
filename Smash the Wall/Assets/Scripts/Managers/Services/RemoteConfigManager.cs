@@ -23,10 +23,12 @@ namespace Managers
 
         public async void Initialize()
         {
-            if (Utilities.CheckForInternetConnection() == true)
+            if (Utilities.CheckForInternetConnection() == false)
             {
-                await InitializeRemoteConfigAsync();
+                return;
             }
+
+            await InitializeRemoteConfigAsync();
 
             RemoteConfigService.Instance.FetchCompleted -= ApplyRemoteConfig;
             RemoteConfigService.Instance.FetchCompleted += ApplyRemoteConfig;

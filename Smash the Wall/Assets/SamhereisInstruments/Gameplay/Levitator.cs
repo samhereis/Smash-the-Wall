@@ -1,10 +1,10 @@
 using DG.Tweening;
 using Helpers;
+using LazyUpdators;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using LazyUpdators;
 
 namespace Gameplay
 {
@@ -27,13 +27,15 @@ namespace Gameplay
         {
             await AsyncHelper.Delay(1000);
 
-            _up = false;
-            _lift.originalYPosition = transform.localPosition.y;
+            _isLifting = false;
+            _isRotating = true;
 
+            _up = false;
+
+            _lift.originalYPosition = transform.localPosition.y;
             _lazyUpdator?.AddToQueue(Rotate);
 
             _rotation.originalRotation = transform.localEulerAngles;
-
             _lazyUpdator?.AddToQueue(Lift);
         }
 
@@ -47,8 +49,6 @@ namespace Gameplay
         {
             if (_isLifting == false)
             {
-                await AsyncHelper.Delay();
-
                 _isLifting = true;
 
                 _rotation.randomRotationDuration = Random.Range(_rotation.rotationDuration.x, _rotation.rotationDuration.y);
@@ -62,22 +62,22 @@ namespace Gameplay
                 if (_toRight)
                 {
                     _toRight = false;
-                    transform.DOLocalRotate(_rotation.originalRotation + _rotation.randomRot, _rotation.randomRotationDuration).SetEase(Ease.InOutBack).SetUpdate(true).OnComplete(() => _isLifting = false);
+                    transform.DOLocalRotate(_rotation.originalRotation + _rotation.randomRot, _rotation.randomRotationDuration).SetEase(Ease.InOutBack).OnComplete(() => _isLifting = false);
                 }
                 else
                 {
                     _toRight = true;
-                    transform.DOLocalRotate(_rotation.originalRotation + (_rotation.randomRot * -1), _rotation.randomRotationDuration).SetEase(Ease.InOutBack).SetUpdate(true).OnComplete(() => _isLifting = false);
+                    transform.DOLocalRotate(_rotation.originalRotation + (_rotation.randomRot * -1), _rotation.randomRotationDuration).SetEase(Ease.InOutBack).OnComplete(() => _isLifting = false);
                 }
             }
+
+            await AsyncHelper.Delay(100);
         }
 
         private async Task Lift()
         {
             if (_isRotating == false)
             {
-                await AsyncHelper.Delay();
-
                 _isRotating = true;
 
                 _lift.randomY = Random.Range(_lift.randomLiftValue.x, _lift.randomLiftValue.y);
@@ -85,21 +85,22 @@ namespace Gameplay
 
                 if (_up)
                 {
-                    transform.DOLocalMoveY(_lift.originalYPosition + _lift.randomY, _lift.randomLiftDuration).SetEase(Ease.InOutBack).SetUpdate(true).OnComplete(() => _isRotating = false);
+                    transform.DOLocalMoveY(_lift.originalYPosition + _lift.randomY, _lift.randomLiftDuration).SetEase(Ease.InOutBack).OnComplete(() => _isRotating = false);
                     _up = false;
                 }
                 else
                 {
-                    transform.DOLocalMoveY(_lift.originalYPosition - _lift.randomY, _lift.randomLiftDuration).SetEase(Ease.InOutBack).SetUpdate(true).OnComplete(() => _isRotating = false);
+                    transform.DOLocalMoveY(_lift.originalYPosition - _lift.randomY, _lift.randomLiftDuration).SetEase(Ease.InOutBack).OnComplete(() => _isRotating = false);
                     _up = true;
                 }
             }
+
+            await AsyncHelper.Delay(100);
         }
 
         [Serializable]
         internal class RotationData
         {
-            [field: SerializeField] public Vector3 originalRotation;
             [field: SerializeField] public Vector2 rotationDuration = new Vector2(3, 10);
 
             [Space(5)]
@@ -108,6 +109,7 @@ namespace Gameplay
             [field: SerializeField] public Vector2 rotationRandomZ = new Vector2(1, 20);
 
             [Header("Debug")]
+            [field: SerializeField] public Vector3 originalRotation;
             [field: SerializeField] public Vector3 randomRot;
             [field: SerializeField] public float randomRotationDuration = 0;
         }
@@ -116,12 +118,11 @@ namespace Gameplay
         internal class LiftData
         {
             [Header("Lift Settings")]
-            [field: SerializeField] public float originalYPosition;
             [field: SerializeField] public Vector2 liftDuration = new Vector2(4, 6);
             [field: SerializeField] public Vector2 randomLiftValue = new Vector2(0, 3);
-            [field: SerializeField] public Vector2 _originalMinAndMaxY = new Vector2(20, 100);
 
             [Header("Debug")]
+            [field: SerializeField] public float originalYPosition;
             [field: SerializeField] public float randomY;
             [field: SerializeField] public float randomLiftDuration = 0;
         }

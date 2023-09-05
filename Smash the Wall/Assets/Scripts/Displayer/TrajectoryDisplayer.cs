@@ -67,7 +67,7 @@ namespace Displayers
             if (_isScaledUp == false)
             {
                 transform.DOKill();
-                transform.DOScale(25f, _scaleUpDuration);
+                transform.DOScaleZ(25f, _scaleUpDuration).SetEase(Ease.Linear);
 
                 _isScaledUp = true;
             }
@@ -78,7 +78,7 @@ namespace Displayers
             if (_isScaledUp == true)
             {
                 transform.DOKill();
-                transform.DOScale(0, _scaleUpDuration);
+                transform.DOScaleZ(0, _scaleUpDuration).SetEase(Ease.Linear);
 
                 _isScaledUp = false;
             }

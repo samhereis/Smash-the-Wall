@@ -74,9 +74,13 @@ namespace UI.Elements
 
             var levelSave = _gameSaveManager.GetLevelSave();
 
-            if (levelSave.levelIndex >= weaponIdentityiCard.opensAtLevel)
+            if (weaponIdentityiCard.isUnlocked)
             {
-                if (weaponIdentityiCard.isUnlocked == false)
+                _itemButton.onClick.AddListener(Choose);
+            }
+            else
+            {
+                if (weaponIdentityiCard.IsToUnlock(levelSave))
                 {
                     _getHolder.gameObject.SetActive(true);
                     _tapToGetImage.gameObject.SetActive(true);
@@ -86,17 +90,13 @@ namespace UI.Elements
                 }
                 else
                 {
-                    _itemButton.onClick.AddListener(Choose);
+                    _itemButton.onClick.AddListener(OnClickWhileUnavailable);
+                    _lockImage.gameObject.SetActive(true);
+
+                    _label.text = "opens at level: " + _weaponIdentityiCard.opensAtLevel;
                 }
 
                 _label.text = _weaponIdentityiCard.targetName;
-            }
-            else
-            {
-                _itemButton.onClick.AddListener(OnClickWhileUnavailable);
-                _lockImage.gameObject.SetActive(true);
-
-                _label.text = "opens at level: " + _weaponIdentityiCard.opensAtLevel;
             }
 
             _weaponImage.sprite = _weaponIdentityiCard.icon;

@@ -8,6 +8,7 @@ using InGameStrings;
 using LazyUpdators;
 using Managers;
 using PlayerInputHolder;
+using SO.Lists;
 using System.Threading.Tasks;
 using TMPro;
 using UI.Canvases;
@@ -24,6 +25,7 @@ namespace UI
         [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
         [DI(DIStrings.lazyUpdator)][SerializeField] private LazyUpdator_SO _lazyUpdator;
         [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
+        [DI(DIStrings.listOfAllPictures)][SerializeField] private ListOfAllPictures _listOfAllPictures;
 
         [Header("UI Components")]
         [SerializeField] private PauseMenu _pauseMenu;
@@ -53,16 +55,21 @@ namespace UI
             base.Initialize();
 
             _whatNeedsToBeDestroyedProgressbarFillImage = _whatNeedsToBeDestroyedProgressbar.fillRect.GetComponent<Image>();
-            _whatNeedsToStayProgressbarFillImage = _whatNeedsToStayProgressbar.fillRect.GetComponent<Image>();
-
             var _whatNeedsToBeDestroyedProgressbarGradientKeys = _whatNeedsToBeDestroyedProgressbarGradient.colorKeys;
-            var _whatNeedsToStayProgressbarGradientKeys = _whatNeedsToStayProgressbarGradient.colorKeys;
-
             _whatNeedsToBeDestroyedProgressbarGradientKeys[1].time = _gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToBeDestroysToWin / 100;
-            _whatNeedsToStayProgressbarGradientKeys[0].time = _gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToStaysToLose / 100;
-
             _whatNeedsToBeDestroyedProgressbarGradient.SetKeys(_whatNeedsToBeDestroyedProgressbarGradientKeys, _whatNeedsToBeDestroyedProgressbarGradient.alphaKeys);
-            _whatNeedsToStayProgressbarGradient.SetKeys(_whatNeedsToStayProgressbarGradientKeys, _whatNeedsToStayProgressbarGradient.alphaKeys);
+
+            if (_listOfAllPictures.GetCurrent().pictureMode == DataClasses.Enums.PictureMode.DestroyBorder)
+            {
+                _whatNeedsToStayProgressbarFillImage = _whatNeedsToStayProgressbar.fillRect.GetComponent<Image>();
+                var _whatNeedsToStayProgressbarGradientKeys = _whatNeedsToStayProgressbarGradient.colorKeys;
+                _whatNeedsToStayProgressbarGradientKeys[0].time = _gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToStaysToLose / 100;
+                _whatNeedsToStayProgressbarGradient.SetKeys(_whatNeedsToStayProgressbarGradientKeys, _whatNeedsToStayProgressbarGradient.alphaKeys);
+            }
+            else
+            {
+                Destroy(_whatNeedsToStayProgressbar.gameObject);
+            }
         }
 
         protected override void OnDestroy()
@@ -147,10 +154,17 @@ namespace UI
 
         private async Task LazyUpdate()
         {
-            if (_whatNeedsToBeDestroyedProgressbar != null && _whatNeedsToStayProgressbar != null)
+            TryUpdatereWhatNeedsToBeDestroyProgressBar();
+            TryUpdatereWhatNeedsToStayProgressBar();
+
+            await AsyncHelper.Delay(100);
+        }
+
+        private void TryUpdatereWhatNeedsToBeDestroyProgressBar()
+        {
+            if (_whatNeedsToBeDestroyedProgressbar != null)
             {
                 var releasedWhatNeedsToBeDestroysPercentage = WinLoseChecker_System.releasedWhatNeedsToBeDestroysPercentage;
-                var releasedWhatNeedsToStaysPercentage = WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
 
                 if (_whatNeedsToBeDestroyedProgressbar.value != releasedWhatNeedsToBeDestroysPercentage)
                 {
@@ -159,6 +173,14 @@ namespace UI
                     var color = _whatNeedsToBeDestroyedProgressbarGradient.Evaluate(releasedWhatNeedsToBeDestroysPercentage / _whatNeedsToBeDestroyedProgressbar.maxValue);
                     _whatNeedsToBeDestroyedProgressbarFillImage?.DOColor(color, 0.1f);
                 }
+            }
+        }
+
+        private void TryUpdatereWhatNeedsToStayProgressBar()
+        {
+            if (_whatNeedsToStayProgressbar != null && _listOfAllPictures.GetCurrent().pictureMode == DataClasses.Enums.PictureMode.DestroyBorder)
+            {
+                var releasedWhatNeedsToStaysPercentage = WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
 
                 if (_whatNeedsToStayProgressbar.value != releasedWhatNeedsToStaysPercentage)
                 {
@@ -168,8 +190,6 @@ namespace UI
                     _whatNeedsToStayProgressbarFillImage?.DOColor(color, 0.1f);
                 }
             }
-
-            await AsyncHelper.Delay(100);
         }
 
         private void OpenPauseMenu()

@@ -13,12 +13,20 @@ MonoBehaviour:
   m_Name: ListOfAllPictures
   m_EditorClassIdentifier: 
   <pictures>k__BackingField:
+  - <targetName>k__BackingField: FunnyBlueCar
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: 7039560867eae2747bb46bdae9c56335,
+      type: 3}
+    <pictureMode>k__BackingField: 1
   - <targetName>k__BackingField: Crab
     <target>k__BackingField: {fileID: 6175686415919909157, guid: bfe06850adaeb374d98f2ae97be2ab8a,
       type: 3}
+    <pictureMode>k__BackingField: 0
   - <targetName>k__BackingField: Bomb
     <target>k__BackingField: {fileID: -6676753617988504395, guid: 53d418da7fdc5a9458366ffd2d748208,
       type: 3}
+    <pictureMode>k__BackingField: 0
   - <targetName>k__BackingField: Phone
     <target>k__BackingField: {fileID: 4188479979054571039, guid: 702a755c6bb64b54f8e2fa07110a36e5,
       type: 3}
+    <pictureMode>k__BackingField: 0
+  _gameSaveManager: {fileID: 0}

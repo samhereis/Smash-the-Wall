@@ -3,7 +3,9 @@ using DI;
 using ECS.ComponentData.Picture.Piece;
 using Events;
 using Helpers;
+using IdentityCards;
 using InGameStrings;
+using SO.Lists;
 using Unity.Entities;
 
 namespace ECS.Systems.GameState
@@ -16,9 +18,12 @@ namespace ECS.Systems.GameState
         public static float releasedWhatNeedsToBeDestroysPercentage;
         public static float releasedWhatNeedsToStaysPercentage;
 
-        private static EventWithNoParameters onWin;
-        private static EventWithNoParameters onLose;
-        private static GameConfigs gameConfigs;
+        private static EventWithNoParameters _onWin;
+        private static EventWithNoParameters _onLose;
+        private static GameConfigs _gameConfigs;
+        private static ListOfAllPictures _listOfAllPictures;
+
+        private static PictureIdentityCard _currentPictureIdentityCard;
 
         public bool isActive => _isActive;
 
@@ -27,6 +32,8 @@ namespace ECS.Systems.GameState
             _isActive = true;
 
             InjectDs();
+
+            _currentPictureIdentityCard = _listOfAllPictures.GetCurrent();
         }
 
         public void Disable()
@@ -42,30 +49,73 @@ namespace ECS.Systems.GameState
 
         private void InjectDs()
         {
-            onWin = DIBox.Get<EventWithNoParameters>(DIStrings.onWinEvent);
-            onLose = DIBox.Get<EventWithNoParameters>(DIStrings.onLoseEvent);
-            gameConfigs = DIBox.Get<GameConfigs>(DIStrings.gameConfigs);
+            _onWin = DIBox.Get<EventWithNoParameters>(DIStrings.onWinEvent);
+            _onLose = DIBox.Get<EventWithNoParameters>(DIStrings.onLoseEvent);
+            _gameConfigs = DIBox.Get<GameConfigs>(DIStrings.gameConfigs);
+            _listOfAllPictures = DIBox.Get<ListOfAllPictures>(DIStrings.listOfAllPictures);
         }
 
         public void OnUpdate(ref SystemState systemState)
         {
             if (isActive == false) return;
 
+            switch (_currentPictureIdentityCard.pictureMode)
+            {
+                case DataClasses.Enums.PictureMode.DestroyBorder:
+                    {
+                        Update_DestroyBorderMode(ref systemState);
+
+                        break;
+                    }
+                case DataClasses.Enums.PictureMode.DestroyWholeObject:
+                    {
+                        Update_DestroyWholeObjectMode(ref systemState);
+
+                        break;
+                    }
+                case DataClasses.Enums.PictureMode.Coloring:
+                    {
+                        Update_ColoringMode(ref systemState);
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void Update_DestroyBorderMode(ref SystemState systemState)
+        {
             if (HasWon(ref systemState))
             {
-                onWin?.Invoke();
+                _onWin?.Invoke();
                 Disable();
             }
             else if (HasLost(ref systemState))
             {
-                onLose?.Invoke();
+                _onLose?.Invoke();
                 Disable();
             }
         }
 
+        private void Update_DestroyWholeObjectMode(ref SystemState systemState)
+        {
+            if (HasWon(ref systemState))
+            {
+                _onWin?.Invoke();
+                Disable();
+            }
+        }
+
+        private void Update_ColoringMode(ref SystemState systemState)
+        {
+
+        }
+
         private bool HasWon(ref SystemState systemState)
         {
-            if (gameConfigs == null)
+            if (_gameConfigs == null)
             {
                 InjectDs();
                 return false;
@@ -91,7 +141,7 @@ namespace ECS.Systems.GameState
             {
                 releasedWhatNeedsToBeDestroysPercentage = NumberHelper.GetPercentageOf100(numberOfAllReleasedWhatNeedsToBeDestroys, numberOfAllWhatNeedsToBeDestroys);
 
-                if (releasedWhatNeedsToBeDestroysPercentage >= gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToBeDestroysToWin)
+                if (releasedWhatNeedsToBeDestroysPercentage >= _gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToBeDestroysToWin)
                 {
                     return true;
                 }
@@ -102,7 +152,7 @@ namespace ECS.Systems.GameState
 
         private bool HasLost(ref SystemState systemState)
         {
-            if (gameConfigs == null)
+            if (_gameConfigs == null)
             {
                 InjectDs();
                 return false;
@@ -128,7 +178,7 @@ namespace ECS.Systems.GameState
             {
                 releasedWhatNeedsToStaysPercentage = 100 - NumberHelper.GetPercentageOf100(numberOfAllReleasedWhatNeedsToStays, numberOfAllWhatNeedsToStays);
 
-                if (releasedWhatNeedsToStaysPercentage <= gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToStaysToLose)
+                if (releasedWhatNeedsToStaysPercentage <= _gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToStaysToLose)
                 {
                     return true;
                 }

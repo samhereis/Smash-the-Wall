@@ -5,6 +5,7 @@ using Managers;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using UnityEditor;
 using UnityEngine;
 
 namespace Samhereis.Helpers
@@ -59,6 +60,13 @@ namespace Samhereis.Helpers
         private void OnApplicationQuit()
         {
             _gameSaveManager.SaveAll();
+        }
+
+        [MenuItem("Samhereis/Delete All Data")]
+        public static async void DeleAllData()
+        {
+            PlayerPrefs.DeleteAll();
+            await TryDeleteAllPersistentDataPath();
         }
 
         [ContextMenu("DeleteAllPersistentDataPath")]

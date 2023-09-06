@@ -10,6 +10,6 @@ namespace DTO.Save
     public sealed class Weapons_DTO : ISavable
     {
         [JsonProperty][field: SerializeField] public List<AWeapon_DTO> allWeapons { get; set; } = new List<AWeapon_DTO>();
-        [JsonProperty][field: SerializeField] public int currentWeaponIndex { get; set; } = 0;
+        [JsonProperty][field: SerializeField] public int currentWeaponIndex { get; set; }
     }
 }

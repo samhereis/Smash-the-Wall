@@ -58,6 +58,7 @@ namespace ECS.Systems.GameState
         public void OnUpdate(ref SystemState systemState)
         {
             if (isActive == false) return;
+            if (_currentPictureIdentityCard == null) { return; }
 
             switch (_currentPictureIdentityCard.pictureMode)
             {

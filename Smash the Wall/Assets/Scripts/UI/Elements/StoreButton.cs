@@ -27,6 +27,7 @@ namespace UI.Elements
         {
             if (await _listOfAllWeapons.HasWeaponToUnlock())
             {
+                _dot.transform.localScale = Vector3.one;
                 _dot.DOScale(_upScale, _duration).SetLoops(-1, LoopType.Yoyo);
             }
             else
@@ -37,6 +38,7 @@ namespace UI.Elements
 
         private void OnDisable()
         {
+            _dot.transform.localScale = Vector3.one;
             _dot.DOKill();
         }
     }

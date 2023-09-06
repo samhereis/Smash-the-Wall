@@ -426,6 +426,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3725780565595435052, guid: 9ebc47bcee653b547be9d6a01e2ec745,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -187.46991
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725780565595435052, guid: 9ebc47bcee653b547be9d6a01e2ec745,
+        type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 31.24498
       objectReference: {fileID: 0}
@@ -579,6 +584,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 273.39362
       objectReference: {fileID: 0}
+    - target: {fileID: 5124260587698391389, guid: 9ebc47bcee653b547be9d6a01e2ec745,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -156.22491
+      objectReference: {fileID: 0}
     - target: {fileID: 5747049712529858306, guid: 9ebc47bcee653b547be9d6a01e2ec745,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -619,6 +629,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 273.39362
       objectReference: {fileID: 0}
+    - target: {fileID: 7564191654966426004, guid: 9ebc47bcee653b547be9d6a01e2ec745,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -156.22491
+      objectReference: {fileID: 0}
     - target: {fileID: 7663141487467842505, guid: 9ebc47bcee653b547be9d6a01e2ec745,
         type: 3}
       propertyPath: m_Size
@@ -633,6 +648,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -46.867474
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254519161000279652, guid: 9ebc47bcee653b547be9d6a01e2ec745,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -562.4097
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254519161000279652, guid: 9ebc47bcee653b547be9d6a01e2ec745,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -249.95987
       objectReference: {fileID: 0}
     - target: {fileID: 8254519161000279652, guid: 9ebc47bcee653b547be9d6a01e2ec745,
         type: 3}
@@ -726,6 +751,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DI
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
+        type: 3}
+      propertyPath: _levelSave_DTO.<levelIndex>k__BackingField
+      value: 333
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
+        type: 3}
+      propertyPath: _levelSave_DTO.<pictureIndex>k__BackingField
+      value: 33333333
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
+        type: 3}
+      propertyPath: _weapons_DTO.<allWeapons>k__BackingField.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
+        type: 3}
+      propertyPath: _weapons_DTO.<allWeapons>k__BackingField.Array.data[0].<weaponName>k__BackingField
+      value: SlingShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
+        type: 3}
+      propertyPath: _weapons_DTO.<allWeapons>k__BackingField.Array.data[1].<weaponName>k__BackingField
+      value: Red Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
+        type: 3}
+      propertyPath: _weapons_DTO.<allWeapons>k__BackingField.Array.data[2].<weaponName>k__BackingField
+      value: SCI-FI Rifle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

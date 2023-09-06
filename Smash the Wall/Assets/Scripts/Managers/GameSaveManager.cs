@@ -1,10 +1,11 @@
 using DTO.Save;
 using Helpers;
+using Interfaces;
 using UnityEngine;
 
 namespace Managers
 {
-    public class GameSaveManager : MonoBehaviour
+    public class GameSaveManager : MonoBehaviour, IInitializable
     {
         private const string _levelSaveFolderPath = "Saves";
         private const string _levelSaveFileName = "LevelSave";
@@ -14,6 +15,15 @@ namespace Managers
 
         [SerializeField] private LevelSave_DTO _levelSave_DTO;
         [SerializeField] private Weapons_DTO _weapons_DTO;
+
+        [ContextMenu(nameof(Initialize))]
+        public void Initialize()
+        {
+            _levelSave_DTO = null;
+            _weapons_DTO = null;
+
+            UpdateSaves(true);
+        }
 
         public Weapons_DTO GetWeaponsSave()
         {
@@ -42,13 +52,11 @@ namespace Managers
 
         public void SaveLevel()
         {
-            UpdateSaves();
             SaveHelper.SaveToJson(_levelSave_DTO, _levelSaveFolderPath, _levelSaveFileName);
         }
 
         public void SaveWeapons()
         {
-            UpdateSaves();
             SaveHelper.SaveToJson(_weapons_DTO, _weaponsSaveFolderPath, _weaponsSaveFileName);
         }
 
@@ -60,26 +68,36 @@ namespace Managers
             SaveLevel();
         }
 
-        private void UpdateSaves()
+        private void UpdateSaves(bool force = false)
         {
-            if (_levelSave_DTO == null)
+            if (force)
             {
-                _levelSave_DTO = SaveHelper.GetStoredDataClass<LevelSave_DTO>(_levelSaveFolderPath, _levelSaveFileName);
-
+                UpdateSavesForceUpdateSavesForce_LevelSave();
+                UpdateSavesForceUpdateSavesForce_Weapons();
+            }
+            else
+            {
                 if (_levelSave_DTO == null)
                 {
-                    _levelSave_DTO = new LevelSave_DTO();
+                    UpdateSavesForceUpdateSavesForce_LevelSave();
                 }
-            }
-
-            if (_weapons_DTO == null)
-            {
-                _weapons_DTO = SaveHelper.GetStoredDataClass<Weapons_DTO>(_weaponsSaveFolderPath, _weaponsSaveFileName);
 
                 if (_weapons_DTO == null)
                 {
-                    _weapons_DTO = new Weapons_DTO();
+                    UpdateSavesForceUpdateSavesForce_Weapons();
                 }
+            }
+
+            void UpdateSavesForceUpdateSavesForce_LevelSave()
+            {
+                _levelSave_DTO = SaveHelper.GetStoredDataClass<LevelSave_DTO>(_levelSaveFolderPath, _levelSaveFileName);
+                if (_levelSave_DTO == null) { _levelSave_DTO = new LevelSave_DTO(); }
+            }
+
+            void UpdateSavesForceUpdateSavesForce_Weapons()
+            {
+                _weapons_DTO = SaveHelper.GetStoredDataClass<Weapons_DTO>(_weaponsSaveFolderPath, _weaponsSaveFileName);
+                if (_weapons_DTO == null) { _weapons_DTO = new Weapons_DTO(); }
             }
         }
     }

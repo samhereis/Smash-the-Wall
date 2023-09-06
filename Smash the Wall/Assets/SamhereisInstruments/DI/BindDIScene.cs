@@ -69,13 +69,13 @@ namespace DI
             InjectEventsWithParameters();
             InjecValueEvents();
 
+            InitAll();
+
             if (_isGlobal == true)
             {
                 isGLoballyInhected = true;
                 DontDestroyOnLoad(gameObject);
             }
-
-            InitAll();
         }
 
         private void OnDestroy()
@@ -102,9 +102,9 @@ namespace DI
         {
             foreach (var objectToInject in _objects)
             {
-                if (objectToInject is IInitializable)
+                if (objectToInject.instance is IInitializable)
                 {
-                    (objectToInject as IInitializable).Initialize();
+                    (objectToInject.instance as IInitializable).Initialize();
                 }
             }
 
@@ -115,9 +115,9 @@ namespace DI
 
             foreach (var scriptableObject in _scriptableObjects)
             {
-                if (scriptableObject is IInitializable)
+                if (scriptableObject.instance is IInitializable)
                 {
-                    (scriptableObject as IInitializable).Initialize();
+                    (scriptableObject.instance as IInitializable).Initialize();
                 }
             }
 

@@ -67,10 +67,7 @@ namespace SO.Lists
 
         public PictureIdentityCard GetCurrent()
         {
-            var save = _gameSaveManager.GetLevelSave();
-            int pictureIndex = 0;
-
-            if (save != null) { pictureIndex = save.pictureIndex; }
+            int pictureIndex = GetCurrentIndex();
 
             return pictures[pictureIndex];
         }

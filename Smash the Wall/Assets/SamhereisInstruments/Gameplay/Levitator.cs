@@ -10,8 +10,6 @@ namespace Gameplay
 {
     public sealed class Levitator : MonoBehaviour
     {
-        [SerializeField] private LazyUpdator_SO _lazyUpdator;
-
         [SerializeField] private RotationData _rotation = new RotationData();
         [SerializeField] private LiftData _lift = new LiftData();
 
@@ -33,19 +31,22 @@ namespace Gameplay
             _up = false;
 
             _lift.originalYPosition = transform.localPosition.y;
-            _lazyUpdator?.AddToQueue(Rotate);
 
             _rotation.originalRotation = transform.localEulerAngles;
-            _lazyUpdator?.AddToQueue(Lift);
         }
 
         private void OnDisable()
         {
-            _lazyUpdator?.RemoveFromQueue(Rotate);
-            _lazyUpdator?.RemoveFromQueue(Lift);
+            transform.DOKill();
         }
 
-        private async Task Rotate()
+        private void Update()
+        {
+            Rotate();
+            Lift();
+        }
+
+        private void Rotate()
         {
             if (_isLifting == false)
             {
@@ -70,11 +71,9 @@ namespace Gameplay
                     transform.DOLocalRotate(_rotation.originalRotation + (_rotation.randomRot * -1), _rotation.randomRotationDuration).SetEase(Ease.InOutBack).OnComplete(() => _isLifting = false);
                 }
             }
-
-            await AsyncHelper.Delay(100);
         }
 
-        private async Task Lift()
+        private void Lift()
         {
             if (_isRotating == false)
             {
@@ -94,8 +93,6 @@ namespace Gameplay
                     _up = true;
                 }
             }
-
-            await AsyncHelper.Delay(100);
         }
 
         [Serializable]

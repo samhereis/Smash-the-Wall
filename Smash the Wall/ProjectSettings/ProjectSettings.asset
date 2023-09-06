@@ -137,7 +137,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 0.0.8
+  bundleVersion: 0.0.10
   preloadedAssets:
   - {fileID: 0}
   - {fileID: 0}
@@ -176,7 +176,7 @@ PlayerSettings:
     iPhone: 1
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 8
+  AndroidBundleVersionCode: 10
   AndroidMinSdkVersion: 22
   AndroidTargetSdkVersion: 33
   AndroidPreferredInstallLocation: 1
@@ -286,7 +286,7 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   chromeosInputEmulation: 1
-  AndroidMinifyRelease: 1
+  AndroidMinifyRelease: 0
   AndroidMinifyDebug: 0
   AndroidValidateAppBundleSize: 1
   AndroidAppBundleSizeToValidate: 150
@@ -847,7 +847,7 @@ PlayerSettings:
     PS4: PROBUILDER_EXPERIMENTAL_FEATURES
     PS5: PROBUILDER_EXPERIMENTAL_FEATURES
     Stadia: PROBUILDER_EXPERIMENTAL_FEATURES
-    Standalone: MOREMOUNTAINS_NICEVIBRATIONS;MOREMOUNTAINS_NICEVIBRATIONS_RUMBLE;PROBUILDER_EXPERIMENTAL_FEATURES;ODIN_INSPECTOR;ODIN_INSPECTOR_3;UNITY_PHYSICS_CUSTOM;ADMOB
+    Standalone: MOREMOUNTAINS_NICEVIBRATIONS;MOREMOUNTAINS_NICEVIBRATIONS_RUMBLE;PROBUILDER_EXPERIMENTAL_FEATURES;ODIN_INSPECTOR;ODIN_INSPECTOR_3;UNITY_PHYSICS_CUSTOM;ADMOB;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
     WebGL: PROBUILDER_EXPERIMENTAL_FEATURES
     Windows Store Apps: PROBUILDER_EXPERIMENTAL_FEATURES
     XboxOne: PROBUILDER_EXPERIMENTAL_FEATURES

@@ -34,7 +34,20 @@ namespace Helpers
 
             string file = GetFullFolderName(folder) + "/" + fileName + ".json";
 
-            if (File.Exists(file)) using (StreamReader reader = new StreamReader(file)) return JsonConvert.DeserializeObject<T>(reader.ReadToEnd()); else return default(T);
+            T result = default(T);
+
+            if (File.Exists(file))
+            {
+                using (StreamReader reader = new StreamReader(file))
+                {
+                    result = JsonConvert.DeserializeObject<T>(reader.ReadToEnd());
+
+                    Debug.Log("Got: " + JsonConvert.SerializeObject(result));
+                }
+            }
+
+            return result;
+
         }
 
         public static string ToJson<T>(T obj)

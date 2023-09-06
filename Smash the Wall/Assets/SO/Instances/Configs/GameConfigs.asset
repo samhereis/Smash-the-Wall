@@ -24,7 +24,7 @@ MonoBehaviour:
       type: 2}
     <randomPictureSettings>k__BackingField: {fileID: 11400000, guid: 18a6907e17174784697c4227efc236db,
       type: 2}
-    <percentageOfReleasedWhatNeedsToBeDestroysToWin>k__BackingField: 90
+    <percentageOfReleasedWhatNeedsToBeDestroysToWin>k__BackingField: 80
     <percentageOfReleasedWhatNeedsToStaysToLose>k__BackingField: 25
     <winLoseStarSettings>k__BackingField: []
     <audioMixer>k__BackingField: {fileID: 24100000, guid: f83bbb284e44b6940998af8f4dcb9c55,

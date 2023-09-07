@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Helpers;
 using Interfaces;
 using System;
 using UnityEngine;
@@ -23,7 +24,17 @@ namespace UI.Popups
 
         public virtual void OnAPopupOpen(PopupBase popup)
         {
-            if (popup != this) Disable();
+            if (popup != this) Close();
+        }
+
+        public void Open()
+        {
+            Enable();
+        }
+
+        public void Close()
+        {
+            Disable();
         }
 
         public virtual void Enable(float? duration = null)
@@ -31,10 +42,13 @@ namespace UI.Popups
             if (duration == null) duration = _baseSettings.animationDuration;
             if (_baseSettings.notifyOthers == true) _onAPopupOpen?.Invoke(this);
 
-            transform.DOKill();
+            _baseSettings.background?.DOKill();
+            _baseSettings.holder?.DOKill();
 
             if (_baseSettings.enableDisable) gameObject.SetActive(true);
-            transform.DOScale(1, duration.Value);
+
+            _baseSettings.background?.FadeUp(duration.Value);
+            _baseSettings.holder?.DOScale(1, duration.Value);
         }
 
         public virtual void Disable(float? duration = null)
@@ -43,14 +57,18 @@ namespace UI.Popups
 
             if (duration.Value == 0)
             {
-                transform.localScale = Vector3.zero;
+                _baseSettings.background?.FadeDownQuick();
+                if (_baseSettings.holder != null) _baseSettings.holder.localScale = Vector3.zero;
+
                 if (_baseSettings.enableDisable) gameObject.SetActive(false);
             }
             else
             {
-                transform.DOKill();
+                _baseSettings.background?.DOKill();
+                _baseSettings.holder?.DOKill();
 
-                transform.DOScale(0, duration.Value)?.OnComplete(() =>
+                _baseSettings.background?.FadeDown(duration.Value);
+                _baseSettings.holder?.DOScale(0, duration.Value)?.OnComplete(() =>
                 {
                     if (_baseSettings.enableDisable) gameObject.SetActive(false);
                 });
@@ -61,6 +79,9 @@ namespace UI.Popups
         [System.Serializable]
         protected class BaseSettings
         {
+            public CanvasGroup background;
+            public Transform holder;
+
             [Header("Settings")]
             public bool enableDisable = true;
             public bool notifyOthers = true;

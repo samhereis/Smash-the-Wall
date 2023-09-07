@@ -1,12 +1,32 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Popups
 {
-    public class InfoPopup : MonoBehaviour
+    public class InfoPopup : PopupBase
     {
-        private void Awake()
+        [SerializeField] private Button[] _closeButtons;
+
+        protected override void Awake()
         {
-            
+            base.Awake();
+
+            Disable(0);
+
+            foreach (var button in _closeButtons)
+            {
+                button.onClick.AddListener(Close);
+            }
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            foreach (var button in _closeButtons)
+            {
+                button.onClick.RemoveListener(Close);
+            }
         }
     }
 }

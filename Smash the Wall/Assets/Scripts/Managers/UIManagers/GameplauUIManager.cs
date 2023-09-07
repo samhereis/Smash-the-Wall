@@ -67,6 +67,7 @@ namespace Managers.UIManagers
         {
             int starsCount = _winMenu.CalculateStars();
             string levelName = _listOfAllPictures.GetCurrent().targetName;
+            string modeName = _listOfAllPictures.GetCurrent().pictureMode.ToString();
 
             _listOfAllPictures.SetNextPicture();
 
@@ -76,7 +77,7 @@ namespace Managers.UIManagers
 
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-               { "LevelMode", "DestroyBorder"},
+               { "LevelMode", modeName},
                { "LevelName", levelName},
                { "Stars", starsCount},
             };
@@ -86,6 +87,17 @@ namespace Managers.UIManagers
 
         private void OnLose()
         {
+            string levelName = _listOfAllPictures.GetCurrent().targetName;
+            string modeName = _listOfAllPictures.GetCurrent().pictureMode.ToString();
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+               { "LevelMode", modeName},
+               { "LevelName", levelName},
+            };
+
+            EventsLogManager.LogEvent("LevelFailed", parameters);
+
             _loseMenu.Enable();
         }
     }

@@ -752,36 +752,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DI
       objectReference: {fileID: 0}
-    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
-        type: 3}
-      propertyPath: _levelSave_DTO.<levelIndex>k__BackingField
-      value: 333
-      objectReference: {fileID: 0}
-    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
-        type: 3}
-      propertyPath: _levelSave_DTO.<pictureIndex>k__BackingField
-      value: 33333333
-      objectReference: {fileID: 0}
-    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
-        type: 3}
-      propertyPath: _weapons_DTO.<allWeapons>k__BackingField.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
-        type: 3}
-      propertyPath: _weapons_DTO.<allWeapons>k__BackingField.Array.data[0].<weaponName>k__BackingField
-      value: SlingShot
-      objectReference: {fileID: 0}
-    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
-        type: 3}
-      propertyPath: _weapons_DTO.<allWeapons>k__BackingField.Array.data[1].<weaponName>k__BackingField
-      value: Red Rifle
-      objectReference: {fileID: 0}
-    - target: {fileID: 9222194895599585003, guid: 3feff053b017268439be97d0cce0024f,
-        type: 3}
-      propertyPath: _weapons_DTO.<allWeapons>k__BackingField.Array.data[2].<weaponName>k__BackingField
-      value: SCI-FI Rifle
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

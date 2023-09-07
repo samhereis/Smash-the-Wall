@@ -3,29 +3,11 @@
     "m_SelectedPackage": {
         "deviceId": "eee578ab",
         "name": "com.erten_games.smash_the_wall.game",
-        "processId": 25673,
+        "processId": 28015,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
-        {
-            "deviceId": "eee578ab",
-            "name": "com.erten_games.smash_the_wall.game",
-            "processId": 11817,
-            "exited": true
-        },
-        {
-            "deviceId": "eee578ab",
-            "name": "com.erten_games.smash_the_wall.game",
-            "processId": 23059,
-            "exited": true
-        },
-        {
-            "deviceId": "eee578ab",
-            "name": "com.android.settings",
-            "processId": 17363,
-            "exited": true
-        },
         {
             "deviceId": "eee578ab",
             "name": "com.erten_games.smash_the_wall.game",
@@ -36,6 +18,24 @@
             "deviceId": "eee578ab",
             "name": "com.erten_games.smash_the_wall.game",
             "processId": 25673,
+            "exited": true
+        },
+        {
+            "deviceId": "eee578ab",
+            "name": "com.erten_games.smash_the_wall.game",
+            "processId": 15432,
+            "exited": true
+        },
+        {
+            "deviceId": "eee578ab",
+            "name": "com.erten_games.smash_the_wall.game",
+            "processId": 25966,
+            "exited": true
+        },
+        {
+            "deviceId": "eee578ab",
+            "name": "com.erten_games.smash_the_wall.game",
+            "processId": 28015,
             "exited": false
         }
     ],
@@ -90,7 +90,7 @@
         "Behavior": 0
     },
     "m_FilterOptions": {
-        "m_Filter": "",
+        "m_Filter": "onad",
         "m_UseRegularExpressions": false,
         "m_MatchCase": false
     },

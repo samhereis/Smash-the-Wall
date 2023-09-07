@@ -1,40 +1,39 @@
 {
   "project_info": {
-    "project_number": "1057728856412",
-    "firebase_url": "https://erten-smash-the-wall-default-rtdb.firebaseio.com",
-    "project_id": "erten-smash-the-wall",
-    "storage_bucket": "erten-smash-the-wall.appspot.com"
+    "project_number": "994604971439",
+    "project_id": "smash-the-wall-2bf0c",
+    "storage_bucket": "smash-the-wall-2bf0c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1057728856412:android:f2995ad062bc78fb830199",
+        "mobilesdk_app_id": "1:994604971439:android:f8d99c8c4638101459eb5a",
         "android_client_info": {
           "package_name": "com.erten_games.smash_the_wall.game"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1057728856412-sd2ivdlsc533rckpv09f05katr3ar51k.apps.googleusercontent.com",
+          "client_id": "994604971439-9nn3c2s87lgegr5eargp3alckh29u722.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBYTCTerB2MAZxInRM7PyRe0EfX9F4PfjI"
+          "current_key": "AIzaSyDWxEIbc-eWjuXPI1RJYHMYcJpn-s2-T3g"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1057728856412-sd2ivdlsc533rckpv09f05katr3ar51k.apps.googleusercontent.com",
+              "client_id": "994604971439-9nn3c2s87lgegr5eargp3alckh29u722.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
         }
       },
-      "admob_app_id": "ca-app-pub-3540187149252214~3820845105"
+      "admob_app_id": "ca-app-pub-7071298273844005~9207032563"
     }
   ],
   "configuration_version": "1"

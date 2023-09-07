@@ -93,7 +93,6 @@ namespace Managers
         [SerializeField] private int _defaultAppOpenAdDelay = 5;
         [SerializeField] private int _defaultInterstitialDelay = 45;
         [SerializeField] private int _defaultRewardedDelay = 0;
-        [SerializeField] private int _defaultInterstitialAfterRewardedDelay = 45;
         [SerializeField] private bool _isTest;
 
         [Header("Settings - Ads")]
@@ -107,13 +106,9 @@ namespace Managers
         [field: SerializeField] public bool isInitialized { get; private set; }
         [SerializeField] private float _currentAppOpenDelay;
 
-        [SerializeField] private bool _rewardEarned;
         [field: SerializeField] public bool removedAds { get; private set; }
         [field: SerializeField] public string advertisingId { get; private set; }
         [SerializeField] Placement _currentRequestedForShowPlacement;
-        [SerializeField] bool _showAdResultChanged;
-        [SerializeField] bool _rewardedStatusChanged;
-        [SerializeField] bool _lastAdShownSuccessfully;
 
         Dictionary<AdType, Placement> _currentPlacements = new Dictionary<AdType, Placement>();
         List<string> _defineSymbols = new List<string>();
@@ -121,8 +116,6 @@ namespace Managers
         public DateTime LastAppOpenAdWatch { get; private set; }
         public DateTime LastInterstitialShow { get; private set; }
         public DateTime LastRewardedShow { get; private set; }
-
-        public bool IsAppOpenDelayed => (DateTime.Now - LastAppOpenAdWatch).TotalSeconds < _defaultAppOpenAdDelay;
 
         private CancellationTokenSource _getRewardCancellationTokenSource = new CancellationTokenSource();
 
@@ -253,9 +246,9 @@ namespace Managers
             _defaultRewardedDelay = delay;
         }
 
-        public void SetInterstitialAfterRewardedDelay(int delay)
+        public void SetAppOpenDelay(int delay)
         {
-            _defaultInterstitialAfterRewardedDelay = delay;
+            _defaultAppOpenAdDelay = delay;
         }
 
         public async Task<bool> Request(string placementString, float timeout)
@@ -307,6 +300,8 @@ namespace Managers
 
         public async Task<bool> TryShowPlacement(string placementString)
         {
+            await AsyncHelper.Delay();
+
             var placement = GetPlacement(placementString);
 
             bool canShow = CanShow(placement);
@@ -318,27 +313,21 @@ namespace Managers
                 return false;
             }
 
-            return await ShowPlacement(placement);
+            return ShowPlacement(placement);
         }
 
-        private async Task<bool> ShowPlacement(Placement placement)
+        private bool ShowPlacement(Placement placement)
         {
-            _lastAdShownSuccessfully = false;
-            _showAdResultChanged = false;
-            _rewardedStatusChanged = false;
-            _rewardEarned = false;
+            bool canShow = CanShow(placement);
 
             _currentRequestedForShowPlacement = placement;
             _currentPlacements[placement.type] = placement;
 
             adProvider.Show(placement.type);
 
-            while (_showAdResultChanged == false) await AsyncHelper.Delay();
-            if (placement.type == AdType.Rewarded) while (_rewardedStatusChanged == false) await AsyncHelper.Delay();
-
             _currentRequestedForShowPlacement = null;
 
-            return _lastAdShownSuccessfully;
+            return canShow;
         }
 
         public void ShowMediationDebuger()
@@ -549,9 +538,9 @@ namespace Managers
             {
                 case AdType.AppOpen:
 
-                    if ((DateTime.Now - LastInterstitialShow).TotalSeconds < 5.0f || (DateTime.Now - LastRewardedShow).TotalSeconds < 5.0f)
+                    if ((DateTime.Now - LastAppOpenAdWatch).TotalSeconds < _defaultAppOpenAdDelay)
                     {
-                        Debug.Log($"OnAdDelayed: {placement.type}");
+                        //Debug.Log($"OnAdDelayed: {placement.type}");
                         return true;
                     }
 
@@ -559,13 +548,7 @@ namespace Managers
                 case AdType.Interstitial:
                     if ((DateTime.Now - LastInterstitialShow).TotalSeconds < _defaultInterstitialDelay)
                     {
-                        Debug.Log($"OnAdDelayed: {placement.type} Last interstitial displayed {(DateTime.Now - LastInterstitialShow).TotalSeconds}sec ago. Timeout: {_defaultInterstitialDelay}sec");
-                        return true;
-                    }
-
-                    if ((DateTime.Now - LastRewardedShow).TotalSeconds < _defaultInterstitialAfterRewardedDelay)
-                    {
-                        Debug.Log($"OnAdDelayed: {placement.type} Last rewarded displayed {(DateTime.Now - LastRewardedShow).TotalSeconds}sec ago. Timeout: {_defaultInterstitialAfterRewardedDelay}sec");
+                        //Debug.Log($"OnAdDelayed: {placement.type} Last interstitial displayed {(DateTime.Now - LastInterstitialShow).TotalSeconds}sec ago. Timeout: {_defaultInterstitialDelay}sec");
                         return true;
                     }
 
@@ -573,7 +556,7 @@ namespace Managers
                 case AdType.Rewarded:
                     if ((DateTime.Now - LastRewardedShow).TotalSeconds < _defaultRewardedDelay)
                     {
-                        Debug.Log($"OnAdDelayed: {placement.type} Last rewarded displayed {(DateTime.Now - LastRewardedShow).TotalSeconds}sec ago. Timeout: {_defaultRewardedDelay}sec");
+                        //Debug.Log($"OnAdDelayed: {placement.type} Last rewarded displayed {(DateTime.Now - LastRewardedShow).TotalSeconds}sec ago. Timeout: {_defaultRewardedDelay}sec");
                         return true;
                     }
                     break;
@@ -643,15 +626,13 @@ namespace Managers
         #region Callbacks
         private void OnAdPaid(Placement placement, Revenue revenue)
         {
+            Debug.Log($"OnAdPaid: {placement.type} - {placement.placement} - {revenue.value}");
+
             OnPaid?.Invoke(placement, revenue);
         }
 
         private void OnAdError(AdType adType, string adUnit, string errorMessage)
         {
-            _lastAdShownSuccessfully = false;
-
-            _rewardedStatusChanged = true;
-
             OnError?.Invoke(adType, errorMessage);
 
             Debug.LogWarning($"OnAdError: {adType} {adUnit} {errorMessage}");
@@ -669,8 +650,6 @@ namespace Managers
             {
                 _currentAppOpenDelay = 5.0f;
             }
-
-            _lastAdShownSuccessfully = true;
 
             switch (placement.type)
             {
@@ -700,43 +679,21 @@ namespace Managers
 
             if (placement.type == AdType.Rewarded)
             {
-                GetReward(placement);
+                LastInterstitialShow = DateTime.Now;
             }
 
-            if (_showAdResultChanged && _currentRequestedForShowPlacement != null && _currentRequestedForShowPlacement.Equals(placement))
+            if (placement.type != AdType.AppOpen)
             {
-                _showAdResultChanged = false;
+                LastAppOpenAdWatch = DateTime.Now;
             }
 
             RequestAll();
         }
 
-        private async void GetReward(Placement placement)
-        {
-            float timeout = 2.0f;
-
-            while (timeout > 0 && _rewardEarned == false)
-            {
-                if (_getRewardCancellationTokenSource.IsCancellationRequested)
-                {
-                    _getRewardCancellationTokenSource = new CancellationTokenSource();
-                    break;
-                }
-
-                timeout -= Time.deltaTime;
-                await AsyncHelper.Delay();
-            }
-
-            if (_rewardEarned) OnRewarded?.Invoke(placement);
-            else OnRewardedFailed?.Invoke(placement);
-
-            _rewardedStatusChanged = true;
-        }
-
         private void OnAdReward(Placement placement)
         {
             Debug.Log($"OnAdReward: {placement.placement}");
-            _rewardEarned = true;
+            OnRewarded?.Invoke(placement);
         }
 
         #endregion

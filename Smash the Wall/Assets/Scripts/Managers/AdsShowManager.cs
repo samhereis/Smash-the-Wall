@@ -68,9 +68,13 @@ namespace Managers
         {
             Debug.Log("Try Show ad: Rewarded");
 
+            bool gotRewarded = false;
+
+            _adsManager.OnPaid -= OnPaid;
             _adsManager.OnRewarded -= OnRewarded;
             _adsManager.OnClose -= OnAdClosed;
 
+            _adsManager.OnPaid += OnPaid;
             _adsManager.OnRewarded += OnRewarded;
             _adsManager.OnClose += OnAdClosed;
 
@@ -81,15 +85,32 @@ namespace Managers
                 await _adsManager.TryShowPlacement(AdsStrings.rewardedAd);
             }
 
+            void OnPaid(Placement placement, Revenue revenue)
+            {
+                TryGetReward();
+                _adsManager.OnPaid -= OnPaid;
+            }
+
             void OnRewarded(Placement placement)
             {
+                TryGetReward();
                 _adsManager.OnRewarded -= OnRewarded;
-                callback?.Invoke();
             }
 
             void OnAdClosed(Placement placement)
             {
+                TryGetReward();
                 _adsManager.OnClose -= OnAdClosed;
+            }
+
+            void TryGetReward()
+            {
+                if (gotRewarded == false)
+                {
+                    callback?.Invoke();
+
+                    gotRewarded = true;
+                }
             }
         }
 
@@ -150,12 +171,14 @@ namespace Managers
         {
             Debug.Log("Try Show ad: AppOpen");
 
-            if (await _adsManager.TryShowPlacement(AdsStrings.appOpenAd) == true)
+            if (await _adsManager.TryShowPlacement(AdsStrings.appOpenAd) == false)
+            {
+                await RequestAppOpen();
+            }
+            else
             {
                 _appOpenCount = 0;
             }
-
-            await RequestAppOpen();
         }
 
         private async Task RequestAppOpen()

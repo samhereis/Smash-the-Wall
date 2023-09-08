@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ecff9dffcb98641b00353604184d98, type: 3}
   m_Name: MusicVolume
   m_EditorClassIdentifier: 
-  _currentValue: -20
+  _currentValue: -12
   _key: MusicVolume_key
-  _defaultValue: -20
+  _defaultValue: -12

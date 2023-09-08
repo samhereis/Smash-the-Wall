@@ -72,9 +72,8 @@ MonoBehaviour:
   _initializeOnStart: 1
   _initializeOnSetConsent: 1
   _defaultAppOpenAdDelay: 60
-  _defaultInterstitialDelay: 45
+  _defaultInterstitialDelay: 60
   _defaultRewardedDelay: 0
-  _defaultInterstitialAfterRewardedDelay: 45
   _isTest: 0
   _enabledAd: 02000000000000000100000003000000
   _skipAd: 
@@ -91,15 +90,11 @@ MonoBehaviour:
   _adTrackingConsent: 0
   <isInitialized>k__BackingField: 0
   _currentAppOpenDelay: 0
-  _rewardEarned: 0
   <removedAds>k__BackingField: 0
   <advertisingId>k__BackingField: 
   _currentRequestedForShowPlacement:
     placement: 
     type: 0
-  _showAdResultChanged: 0
-  _rewardedStatusChanged: 0
-  _lastAdShownSuccessfully: 0
 --- !u!114 &7465894293229340108
 MonoBehaviour:
   m_ObjectHideFlags: 0

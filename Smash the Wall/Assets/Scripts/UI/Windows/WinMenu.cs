@@ -10,7 +10,9 @@ using Tools;
 using UI.Canvases;
 using UI.Elements;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
+using static DataClasses.Enums;
 
 namespace UI
 {
@@ -22,8 +24,12 @@ namespace UI
         [Header("DI")]
         [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [DI(DIStrings.listOfAllPictures)][SerializeField] private ListOfAllPictures _listOfAllPictures;
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
         [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
+
+        [Header("Addressables")]
+        [SerializeField] AssetReferenceSprite[] _winEmojis;
 
         [Header("Components")]
         [SerializeField] private Button _nextLevelButton;
@@ -34,18 +40,53 @@ namespace UI
         [SerializeField] private Image _buttonsInfoBlock;
 
         [Space(10)]
+        [SerializeField] private Image _winEmoji;
         [SerializeField] private Star_CustomControl _starControl;
 
-        public override void Enable(float? duration = null)
+        private PictureMode _currentPictureMode;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _currentPictureMode = _listOfAllPictures.GetCurrent().pictureMode;
+        }
+
+        public override async void Enable(float? duration = null)
         {
             base.Enable(duration);
 
-            _starControl.SetStarCount(_gameConfigs.gameSettings.winLoseStarSettings.Count);
-            _starControl.SetActiveStars(CalculateStars());
+            SubscribeToEvents();
+
+            _winEmoji.gameObject.SetActive(false);
+            _starControl.gameObject.SetActive(false);
 
             _gameConfigs.isRestart = false;
 
-            SubscribeToEvents();
+            switch (_currentPictureMode)
+            {
+                case Enums.PictureMode.DestroyBorder:
+                    {
+                        _starControl.gameObject.SetActive(true);
+
+                        _starControl.SetStarCount(_gameConfigs.gameSettings.winLoseStarSettings.Count);
+                        _starControl.SetActiveStars(CalculateStars());
+
+                        break;
+                    }
+                case Enums.PictureMode.DestroyWholeObject:
+                    {
+                        _winEmoji.sprite = await AddressablesHelper.GetAssetAsync<Sprite>(_winEmojis.GetRandom());
+
+                        _winEmoji.gameObject.SetActive(true);
+
+                        break;
+                    }
+                case Enums.PictureMode.Coloring:
+                    {
+                        break;
+                    }
+            }
         }
 
         public override void Disable(float? duration = null)

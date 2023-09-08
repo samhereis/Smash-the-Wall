@@ -137,13 +137,7 @@ namespace DI
 
         private void InjecValueEvents()
         {
-            if (DIBox.Get<ValueEvent<bool>>(DIStrings.isGameInitialized, false) == null)
-            {
-                var isGameInitializedValueEvent = new ValueEvent<bool>((DIStrings.isGameInitialized));
-                isGameInitializedValueEvent.ChangeValue(false);
 
-                DIBox.Add(isGameInitializedValueEvent, DIStrings.isGameInitialized);
-            }
         }
 
         private void ClearEventsWithParameters()
@@ -153,7 +147,7 @@ namespace DI
 
         private void ClearValueEvents()
         {
-            DIBox.Remove<ValueEvent<bool>>(DIStrings.isGameInitialized);
+
         }
 
         private void Clear()

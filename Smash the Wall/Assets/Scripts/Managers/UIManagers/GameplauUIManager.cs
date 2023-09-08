@@ -1,4 +1,7 @@
+using Configs;
+using DG.Tweening;
 using DI;
+using ECS.Systems.GameState;
 using Events;
 using InGameStrings;
 using SO.Lists;
@@ -21,6 +24,7 @@ namespace Managers.UIManagers
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
 
         [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
+        [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
 
         [Header("Components")]
         [SerializeField] private CanvasWindowBase _openOnStart;
@@ -32,6 +36,8 @@ namespace Managers.UIManagers
 
         [Header("Debug")]
         [SerializeField] private List<CanvasWindowBase> _menus = new List<CanvasWindowBase>();
+
+        private WaitForSecondsRealtime _waitForSecondsRealtime = new WaitForSecondsRealtime(1);
 
         private void Awake()
         {
@@ -55,12 +61,31 @@ namespace Managers.UIManagers
             yield return new WaitForSecondsRealtime(_openOnStartDelay);
 
             _openOnStart?.Enable();
+
+            if (_listOfAllPictures.GetCurrent().pictureMode == DataClasses.Enums.PictureMode.DestroyBorder)
+            {
+                yield return _waitForSecondsRealtime;
+
+                _gameConfigs.globalReferences.borderMaterial.color = _listOfAllPictures.borderDefaultColor;
+                _gameConfigs.globalReferences.borderMaterial.DOColor(_listOfAllPictures.GetCurrent().borderColor, _listOfAllPictures.borderMaterialAnimationDuration)
+                    .SetLoops(-1).SetEase(Ease.Linear);
+
+                while (WinLoseChecker_System.releasedWhatNeedsToBeDestroysPercentage < 10)
+                {
+                    yield return _waitForSecondsRealtime;
+                }
+
+                _gameConfigs.globalReferences.borderMaterial.DOKill();
+                _gameConfigs.globalReferences.borderMaterial.DOColor(_listOfAllPictures.GetCurrent().borderColor, 1);
+            }
         }
 
         private void OnDestroy()
         {
             _onWin.RemoveListener(OnWin);
             _onLose.RemoveListener(OnLose);
+
+            _gameConfigs.globalReferences.borderMaterial.DOKill();
         }
 
         private void OnWin()

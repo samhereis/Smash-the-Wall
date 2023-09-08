@@ -1,3 +1,4 @@
+using DG.Tweening;
 using DI;
 using Helpers;
 using InGameStrings;
@@ -9,7 +10,6 @@ using UI.Canvases;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
-using Values;
 
 namespace UI
 {
@@ -32,8 +32,6 @@ namespace UI
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
 
-        [DI(DIStrings.isGameInitialized)][SerializeField] ValueEvent<bool> _isGameInitialized;
-
         [Header("Addressables")]
         [SerializeField] private List<AssetReferenceSprite> _backgroundSprites = new List<AssetReferenceSprite>();
 
@@ -41,6 +39,7 @@ namespace UI
         [SerializeField] private Toggle _adsTrackingConsent;
         [SerializeField] private Toggle _analyticsConsent;
         [SerializeField] private Button _startButton;
+        [SerializeField] private Transform _buttonsHolder;
 
         [Space(10)]
         [SerializeField] private Image _backgroundImage;
@@ -48,6 +47,8 @@ namespace UI
 
         protected override async void Awake()
         {
+            Time.timeScale = 1f;
+
             base.Awake();
 
             while (BindDIScene.isGLoballyInhected == false)
@@ -55,11 +56,9 @@ namespace UI
                 await AsyncHelper.Delay(1f);
             }
 
+            _buttonsHolder.gameObject.SetActive(false);
+
             Initialize();
-
-            await AsyncHelper.Delay(1f);
-
-            Time.timeScale = 1f;
 
             Enable();
         }
@@ -71,30 +70,29 @@ namespace UI
 
         public override async void Enable(float? duration = null)
         {
-            if (_isGameInitialized.value == true)
+            if (_isFirstTimeInGame)
             {
-                await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
+                try
+                {
+                    _backgroundSprites.RemoveNulls();
+                    _backgroundImage.sprite = await AddressablesHelper.GetAssetAsync<Sprite>(_backgroundSprites.GetRandom());
+                }
+                finally
+                {
+                    base.Enable(duration);
+
+                    await AsyncHelper.Delay(2f);
+
+                    _buttonsHolder.transform.localScale = Vector3.zero;
+                    _buttonsHolder.gameObject.SetActive(true);
+                    _buttonsHolder.transform.DOScale(1, 1);
+
+                    _startButton.onClick.AddListener(InitializeAndStartGame);
+                }
             }
             else
             {
-                if (_isFirstTimeInGame)
-                {
-                    try
-                    {
-                        _backgroundSprites.RemoveNulls();
-                        _backgroundImage.sprite = await AddressablesHelper.GetAssetAsync<Sprite>(_backgroundSprites.GetRandom());
-                    }
-                    finally
-                    {
-                        base.Enable(duration);
-
-                        _startButton.onClick.AddListener(InitializeAndStartGame);
-                    }
-                }
-                else
-                {
-                    StartGame();
-                }
+                StartGame();
             }
         }
 
@@ -124,8 +122,6 @@ namespace UI
             _eventsLogManager.SetDataCollectionStatus(_isAnalyticsSendingOn);
 
             await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
-
-            _isGameInitialized.ChangeValue(true);
         }
     }
 }

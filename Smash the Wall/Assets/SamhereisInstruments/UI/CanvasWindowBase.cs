@@ -7,7 +7,6 @@ using Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using TMPro;
 using UI.Interaction;
 using UI.UIAnimationElements;
 using UnityEngine;
@@ -114,29 +113,6 @@ namespace UI.Canvases
 
             if (_baseSettings.enableDisable) gameObject.SetActive(true);
             _baseSettings.canvasGroup.FadeUp(duration.Value);
-
-            async void TurnOnUIAnimationElements_Async()
-            {
-                float uiAnimationElementForeachDelay = 0.025f;
-
-                if (_baseSettings.uIConfigs != null) uiAnimationElementForeachDelay = _baseSettings.uIConfigs.uiAnimationElementForeachDelay;
-
-                foreach (var uiAnimationElement in _baseSettings.uIAnimationElements)
-                {
-                    if (_onDestroyCTS.IsCancellationRequested == true) break;
-
-                    try
-                    {
-                        uiAnimationElement?.TurnOn();
-
-                        await AsyncHelper.Delay(uiAnimationElementForeachDelay);
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.LogWarning("Error animating ui animation element: " + ex, gameObject);
-                    }
-                }
-            }
         }
 
         protected void TurnOff(float? duration = null)
@@ -168,19 +144,42 @@ namespace UI.Canvases
                 if (_baseSettings.enableDisable) { gameObject.SetActive(false); }
                 if (_baseSettings.openOnExit != null && duration.Value != 0) { _baseSettings.openOnExit.Enable(); }
             }
+        }
 
-            void TurnOffUIAnimationElements()
+        protected async void TurnOnUIAnimationElements_Async()
+        {
+            float uiAnimationElementForeachDelay = 0.025f;
+
+            if (_baseSettings.uIConfigs != null) uiAnimationElementForeachDelay = _baseSettings.uIConfigs.uiAnimationElementForeachDelay;
+
+            foreach (var uiAnimationElement in _baseSettings.uIAnimationElements)
             {
-                foreach (var uiAnimationElement in _baseSettings.uIAnimationElements)
+                if (_onDestroyCTS.IsCancellationRequested == true) break;
+
+                try
                 {
-                    try
-                    {
-                        uiAnimationElement?.TurnOff();
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.LogWarning("Error animating ui animation element: " + ex, gameObject);
-                    }
+                    uiAnimationElement?.TurnOn();
+
+                    await AsyncHelper.Delay(uiAnimationElementForeachDelay);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning("Error animating ui animation element: " + ex, gameObject);
+                }
+            }
+        }
+
+        protected void TurnOffUIAnimationElements()
+        {
+            foreach (var uiAnimationElement in _baseSettings.uIAnimationElements)
+            {
+                try
+                {
+                    uiAnimationElement?.TurnOff();
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning("Error animating ui animation element: " + ex, gameObject);
                 }
             }
         }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using static Managers.GameSaveManager;
 
 namespace Configs
 {
@@ -15,6 +16,8 @@ namespace Configs
 
         [field: SerializeField] public GameSettings gameSettings = new GameSettings();
         [field: SerializeField] public RateUsConfigs rateUsSettings = new RateUsConfigs();
+
+        [SerializeField] public GlobalReferences globalReferences;
 
         public override void Initialize()
         {
@@ -155,6 +158,12 @@ namespace Configs
             {
 
             }
+        }
+
+        [Serializable]
+        public class GlobalReferences
+        {
+            [field: SerializeField] public Material borderMaterial { get; private set; }
         }
     }
 }

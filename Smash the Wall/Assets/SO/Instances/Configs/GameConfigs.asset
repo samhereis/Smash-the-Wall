@@ -26,10 +26,18 @@ MonoBehaviour:
       type: 2}
     <percentageOfReleasedWhatNeedsToBeDestroysToWin>k__BackingField: 80
     <percentageOfReleasedWhatNeedsToStaysToLose>k__BackingField: 25
-    <winLoseStarSettings>k__BackingField: []
+    <winLoseStarSettings>k__BackingField:
+    - <percentage>k__BackingField: 25
+    - <percentage>k__BackingField: 50
+    - <percentage>k__BackingField: 75
+    - <percentage>k__BackingField: 80
+    - <percentage>k__BackingField: 90
     <audioMixer>k__BackingField: {fileID: 24100000, guid: f83bbb284e44b6940998af8f4dcb9c55,
       type: 2}
   rateUsSettings:
     storeLink: 
     <firstAppearOnLevel>k__BackingField: 2
     <showLevelIncreaseValue>k__BackingField: 5
+  globalReferences:
+    <borderMaterial>k__BackingField: {fileID: 2100000, guid: a590562087ce73446a9f5880c17752c4,
+      type: 2}

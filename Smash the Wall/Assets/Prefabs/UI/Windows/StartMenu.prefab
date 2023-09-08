@@ -364,11 +364,6 @@ MonoBehaviour:
   _eventsLogManager: {fileID: 0}
   _sceneLoader: {fileID: 0}
   _listOfAllScenes: {fileID: 0}
-  _isGameInitialized:
-    <value>k__BackingField: 0
-    <eventName>k__BackingField: 
-    <currentSubscribedObjectsCount>k__BackingField: 0
-    <timesInvoked>k__BackingField: 0
   _backgroundSprites:
   - m_AssetGUID: 15edf145783fe4c4d9c3d2ea532a53c4
     m_SubObjectName: 
@@ -381,6 +376,7 @@ MonoBehaviour:
   _adsTrackingConsent: {fileID: 1444099869738909998}
   _analyticsConsent: {fileID: 129648697224074687}
   _startButton: {fileID: 9064022298395796099}
+  _buttonsHolder: {fileID: 1214261275686256505}
   _backgroundImage: {fileID: 8351192649526242049}
   _gridLayoutGroup: {fileID: 599784388963745863}
 --- !u!114 &2364849409553414792

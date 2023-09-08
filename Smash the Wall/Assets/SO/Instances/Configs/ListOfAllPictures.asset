@@ -17,20 +17,36 @@ MonoBehaviour:
     <target>k__BackingField: {fileID: 6175686415919909157, guid: bfe06850adaeb374d98f2ae97be2ab8a,
       type: 3}
     <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 0, g: 0.6070881, b: 1, a: 1}
   - <targetName>k__BackingField: Phone
     <target>k__BackingField: {fileID: 4188479979054571039, guid: 702a755c6bb64b54f8e2fa07110a36e5,
       type: 3}
     <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 1, g: 0.6173747, b: 0, a: 1}
   - <targetName>k__BackingField: Bomb
     <target>k__BackingField: {fileID: -6676753617988504395, guid: 53d418da7fdc5a9458366ffd2d748208,
       type: 3}
     <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 0.731091, g: 1, b: 0, a: 1}
   - <targetName>k__BackingField: FunnyBlueCar
     <target>k__BackingField: {fileID: 3473424340287848214, guid: 7039560867eae2747bb46bdae9c56335,
       type: 3}
     <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
   - <targetName>k__BackingField: Toaster
     <target>k__BackingField: {fileID: 3473424340287848214, guid: 0a2b76e2b5b4a3f45995772a908da308,
       type: 3}
     <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <pictures_DestroyObject>k__BackingField: []
+  <pictures_DestroyBorder>k__BackingField: []
+  <pictures_Draw>k__BackingField: []
   _gameSaveManager: {fileID: 0}
+  _lazyUpdator: {fileID: 11400000, guid: 5b7e6931e446568468aabd7b1edef3ee, type: 2}
+  borderDefaultColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 1}
+  _currentPicture:
+    <targetName>k__BackingField: FunnyBlueCar
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: 7039560867eae2747bb46bdae9c56335,
+      type: 3}
+    <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}

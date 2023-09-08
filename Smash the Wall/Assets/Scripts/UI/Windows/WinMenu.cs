@@ -45,9 +45,9 @@ namespace UI
 
         private PictureMode _currentPictureMode;
 
-        protected override void Awake()
+        public override void Initialize()
         {
-            base.Awake();
+            base.Initialize();
 
             _currentPictureMode = _listOfAllPictures.GetCurrent().pictureMode;
         }

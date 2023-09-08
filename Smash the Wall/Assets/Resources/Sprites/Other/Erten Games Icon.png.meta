@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-guid: 5a6531d4c9c484d679a2d6f9e6fefed5
-labels:
-- gvh
-- gvh_version-8.5.2
-- gvhp_exportpath-GoogleMobileAds/Editor/Resources/PlaceholderAds/AdImages/320x50.png
+guid: da1a4eafcca28c24a9df8c9d73e5038c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +39,7 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -69,7 +65,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform

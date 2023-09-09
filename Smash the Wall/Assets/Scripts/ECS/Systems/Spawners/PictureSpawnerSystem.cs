@@ -40,7 +40,7 @@ namespace ECS.Systems.Spawners
         private async void Inject()
         {
 
-            while (BindDIScene.isGLoballyInhected == false)
+            while (BindDIScene.isGLoballyInjected == false)
             {
                 await AsyncHelper.Delay();
             }

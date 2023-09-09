@@ -1,5 +1,6 @@
 using Configs;
 using DI;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -39,8 +40,10 @@ namespace Sound
             }
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return new WaitWhile(() => { return BindDIScene.isGLoballyInjected == false; });
+
             (this as IDIDependent).LoadDependencies();
         }
 

@@ -18,7 +18,6 @@ namespace Samhereis.Helpers
         [SerializeField] private int _targetFPS = 120;
 
         [SerializeField] private RemoteConfigManager _remoteConfigManager;
-        [SerializeField] private EventsLogManager _eventsLogManager;
 
         [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
 
@@ -28,7 +27,7 @@ namespace Samhereis.Helpers
 
             if (_instance == null)
             {
-                while (BindDIScene.isGLoballyInhected == false)
+                while (BindDIScene.isGLoballyInjected == false)
                 {
                     await AsyncHelper.Delay();
                 }
@@ -36,10 +35,8 @@ namespace Samhereis.Helpers
                 (this as IDIDependent).LoadDependencies();
 
                 _remoteConfigManager = GetComponent<RemoteConfigManager>();
-                _eventsLogManager = GetComponent<EventsLogManager>();
 
                 _remoteConfigManager.Initialize();
-                _eventsLogManager.Initialize();
 
                 _instance = this;
             }

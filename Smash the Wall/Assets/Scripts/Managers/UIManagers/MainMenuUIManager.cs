@@ -30,7 +30,7 @@ namespace Managers.UIManagers
 
         private IEnumerator Start()
         {
-            yield return new WaitUntil(() => BindDIScene.isGLoballyInhected == true);
+            yield return new WaitUntil(() => BindDIScene.isGLoballyInjected == true);
 
             foreach (CanvasWindowBase menu in _menus)
             {

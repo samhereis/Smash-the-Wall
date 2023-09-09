@@ -3,7 +3,10 @@ guid: fc016740aa277cc4ea79efcf8e731fa7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _parent: {instanceID: 0}
+  - _rectTransform: {instanceID: 0}
+  - _lazyUpdator: {fileID: 11400000, guid: 5b7e6931e446568468aabd7b1edef3ee, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

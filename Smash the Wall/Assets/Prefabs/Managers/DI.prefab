@@ -207,7 +207,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetFPS: 120
   _remoteConfigManager: {fileID: 0}
-  _eventsLogManager: {fileID: 0}
   _gameSaveManager: {fileID: 0}
 --- !u!114 &4734305114835173896
 MonoBehaviour:
@@ -432,11 +431,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6890465247782482409, guid: 4aa6c61fd195c5e479f68533d4fb8cd2,
-        type: 3}
-      propertyPath: _adColony
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

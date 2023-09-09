@@ -1097,8 +1097,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _listOfAllWeapons: {fileID: 0}
   _dot: {fileID: 1768212809358128058}
-  _upScale: 2
-  _duration: 1
 --- !u!224 &7237101620649977972 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6697565897775870723, guid: f2fc0843b0a854841be4b0f7db43a304,

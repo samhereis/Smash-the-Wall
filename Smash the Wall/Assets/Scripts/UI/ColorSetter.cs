@@ -17,8 +17,10 @@ namespace UI.Elements
         [Header("Components")]
         [SerializeField] private SerializedDictionary<ColorSetUnitString, Graphic[]> _colorSetUnits = new SerializedDictionary<ColorSetUnitString, Graphic[]>();
 
-        private void OnEnable()
+        private async void OnEnable()
         {
+            while (BindDIScene.isGLoballyInjected == false) { await AsyncHelper.Delay(20); }
+
             if (_uIConfigs == null)
             {
                 _uIConfigs = DIBox.Get<UIConfigs>(DIStrings.uiConfigs);

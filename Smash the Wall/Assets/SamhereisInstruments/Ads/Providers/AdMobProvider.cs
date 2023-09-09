@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 #if ADMOB_ADCOLONY
-using GoogleMobileAds.Api.Mediation.AdColony;
+using GoogleMobileAds.Mediation.AdColony.Api;
 #endif
 
 #if ADMOB_APPLOVIN
-using GoogleMobileAds.Api.Mediation.AppLovin;
+using GoogleMobileAds.Mediation.AppLovin.Api;
 #endif
 
 #if ADMOB_TAPJOY
@@ -59,11 +59,11 @@ namespace Managers.Providers
 
             // AdMob mediation adapters
 #if ADMOB_ADCOLONY
-            AdColonyAppOptions.SetGDPRRequired(true);
-            AdColonyAppOptions.SetGDPRConsentString(consent ? "1" : "0");
+            AdColonyAppOptions.SetPrivacyFrameworkRequired(GoogleMobileAds.Mediation.AdColony.Api.AdColonyPrivacyFramework.GDPR, true);
+            AdColonyAppOptions.SetPrivacyConsentString(AdColonyPrivacyFramework.GDPR, consent ? "1" : "0");
 #endif
 
-#if ADMOB_APPLOVIN
+#if  ADMOB_APPLOVIN
             AppLovin.SetHasUserConsent(consent);
             AppLovin.SetIsAgeRestrictedUser(false); // if user age defined
             AppLovin.SetDoNotSell(true); // Do not sell CCPA
@@ -112,6 +112,7 @@ namespace Managers.Providers
 
             RequestConfiguration requestConfiguration = new RequestConfiguration();
             requestConfiguration.SameAppKeyEnabled = consent;
+            requestConfiguration.TagForUnderAgeOfConsent = TagForUnderAgeOfConsent.False;
 
             MobileAds.SetRequestConfiguration(requestConfiguration);
 

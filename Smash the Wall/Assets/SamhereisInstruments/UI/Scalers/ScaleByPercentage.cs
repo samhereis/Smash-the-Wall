@@ -1,5 +1,6 @@
 using DI;
 using Helpers;
+using InGameStrings;
 using LazyUpdators;
 using System;
 using System.Collections;
@@ -11,14 +12,29 @@ namespace UI.Helpers
     [ExecuteAlways]
     public class ScaleByPercentage : MonoBehaviour, IDIDependent
     {
+        private static LazyUpdator_SO _lazyUpdator_s;
+
         [SerializeField] private RectTransform _parent;
         [SerializeField] private RectTransform _rectTransform;
 
         [SerializeField] private ScaleSettings _scaleSettings = new ScaleSettings();
         [SerializeField] private IgnoreSettings _ignoreSettings = new IgnoreSettings();
 
-        [Header("DI")]
-        [DI(InGameStrings.DIStrings.lazyUpdator)][SerializeField] private LazyUpdator_SO _lazyUpdator;
+        private LazyUpdator_SO _lazyUpdator
+        {
+            get
+            {
+                if (_lazyUpdator_s == null)
+                {
+                    if (BindDIScene.isGLoballyInjected == true)
+                    {
+                        _lazyUpdator_s = DIBox.Get<LazyUpdator_SO>(DIStrings.lazyUpdator);
+                    }
+                }
+
+                return _lazyUpdator_s;
+            }
+        }
 
         private void OnValidate()
         {
@@ -40,14 +56,6 @@ namespace UI.Helpers
             if (Application.isPlaying == true)
             {
                 if (_rectTransform == null) _rectTransform = GetComponent<RectTransform>();
-            }
-        }
-
-        private void Start()
-        {
-            if (Application.isPlaying == true)
-            {
-                (this as IDIDependent)?.LoadDependencies();
             }
         }
 

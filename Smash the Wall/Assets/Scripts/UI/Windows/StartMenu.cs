@@ -2,9 +2,12 @@ using DG.Tweening;
 using DI;
 using Helpers;
 using InGameStrings;
+using LazyUpdators;
 using Managers;
 using SO.Lists;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using TMPro;
 using Tools;
 using UI.Canvases;
 using UnityEngine;
@@ -31,6 +34,7 @@ namespace UI
 
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [DI(DIStrings.lazyUpdator)][SerializeField] private LazyUpdator_SO _lazyUpdator;
 
         [Header("Addressables")]
         [SerializeField] private List<AssetReferenceSprite> _backgroundSprites = new List<AssetReferenceSprite>();
@@ -45,22 +49,31 @@ namespace UI
         [SerializeField] private Image _backgroundImage;
         [SerializeField] private GridLayoutGroup _gridLayoutGroup;
 
+        [Space()]
+        [SerializeField] private TextMeshProUGUI _label;
+
+        [Header("")]
+        [SerializeField] private string _labelAfterInit;
+
         protected override async void Awake()
         {
-            Time.timeScale = 1f;
+            await ResetTimeScale();
 
             base.Awake();
 
-            while (BindDIScene.isGLoballyInhected == false)
-            {
-                await AsyncHelper.Delay();
-            }
-
             _buttonsHolder.gameObject.SetActive(false);
 
-            Initialize();
-
             Enable();
+
+            _lazyUpdator.RemoveFromQueue(ResetTimeScale);
+            _lazyUpdator.AddToQueue(ResetTimeScale);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            _lazyUpdator.RemoveFromQueue(ResetTimeScale);
         }
 
         private void Update()
@@ -70,8 +83,25 @@ namespace UI
 
         public override async void Enable(float? duration = null)
         {
+            base.Enable(duration);
+
+            while (BindDIScene.isGLoballyInjected == false)
+            {
+                await AsyncHelper.Delay();
+            }
+
+            Initialize();
+
+            _buttonsHolder.gameObject.SetActive(false);
+
             if (_isFirstTimeInGame)
             {
+                _label.transform.DOScale(0, 1f).SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    _label.text = _labelAfterInit;
+                    _label.transform.DOScale(1, 0.25f);
+                });
+
                 try
                 {
                     _backgroundSprites.RemoveNulls();
@@ -79,8 +109,6 @@ namespace UI
                 }
                 finally
                 {
-                    base.Enable(duration);
-
                     _buttonsHolder.transform.localScale = Vector3.zero;
                     _buttonsHolder.gameObject.SetActive(true);
                     _buttonsHolder.transform.DOScale(1, 1);
@@ -120,6 +148,12 @@ namespace UI
             _eventsLogManager.SetDataCollectionStatus(_isAnalyticsSendingOn);
 
             await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
+        }
+
+        private async Task ResetTimeScale()
+        {
+            Time.timeScale = 1;
+            await AsyncHelper.Delay(40);
         }
     }
 }

@@ -29,6 +29,8 @@ namespace ECS.Systems.GameState
 
         public void Enable()
         {
+            Clear();
+
             _isActive = true;
 
             InjectDs();
@@ -39,6 +41,8 @@ namespace ECS.Systems.GameState
         public void Disable()
         {
             _isActive = false;
+
+            Clear();
         }
 
         public void OnCreate(ref SystemState systemState)
@@ -190,6 +194,14 @@ namespace ECS.Systems.GameState
             }
 
             return false;
+        }
+
+        private void Clear()
+        {
+            releasedWhatNeedsToBeDestroysPercentage = 0;
+            releasedWhatNeedsToStaysPercentage = 0;
+
+            _currentPictureIdentityCard = null;
         }
     }
 }

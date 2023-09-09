@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _backgroundMusicPlayer: {fileID: 0}
   _openOnStart: {fileID: 6842106013637163772}
-  _openOnStartDelay: 2.5
+  _openOnStartDelay: 0.25
   _menus: []
 --- !u!1001 &1191271896494857208
 PrefabInstance:

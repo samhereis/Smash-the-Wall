@@ -53,7 +53,7 @@ namespace UI
 
             while (BindDIScene.isGLoballyInhected == false)
             {
-                await AsyncHelper.Delay(1f);
+                await AsyncHelper.Delay();
             }
 
             _buttonsHolder.gameObject.SetActive(false);
@@ -80,8 +80,6 @@ namespace UI
                 finally
                 {
                     base.Enable(duration);
-
-                    await AsyncHelper.Delay(2f);
 
                     _buttonsHolder.transform.localScale = Vector3.zero;
                     _buttonsHolder.gameObject.SetActive(true);

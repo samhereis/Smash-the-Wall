@@ -6,6 +6,7 @@ using Helpers;
 using InGameStrings;
 using Managers;
 using SO.Lists;
+using Sound;
 using Tools;
 using UI.Canvases;
 using UI.Elements;
@@ -30,6 +31,7 @@ namespace UI
 
         [Header("Addressables")]
         [SerializeField] AssetReferenceSprite[] _winEmojis;
+        [SerializeField] private AssetReferenceAudioClip _winAudio;
 
         [Header("Components")]
         [SerializeField] private Button _nextLevelButton;
@@ -43,13 +45,17 @@ namespace UI
         [SerializeField] private Image _winEmoji;
         [SerializeField] private Star_CustomControl _starControl;
 
+        [Header("Debug")]
+        [SerializeField] private SimpleSound _currentWinAudio;
+
         private PictureMode _currentPictureMode;
 
-        public override void Initialize()
+        public override async void Initialize()
         {
             base.Initialize();
 
             _currentPictureMode = _listOfAllPictures.GetCurrent().pictureMode;
+            _currentWinAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_winAudio));
         }
 
         public override async void Enable(float? duration = null)
@@ -87,6 +93,8 @@ namespace UI
                         break;
                     }
             }
+
+            SoundPlayer.instance?.TryPlay(_currentWinAudio);
         }
 
         public override void Disable(float? duration = null)

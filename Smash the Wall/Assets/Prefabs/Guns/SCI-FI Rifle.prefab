@@ -76,16 +76,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68398e84543c5484c80129b8e36aa13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <canShoot>k__BackingField: 0
-  <shootPosition>k__BackingField: {fileID: 3427566120165896289}
   _input: {fileID: 0}
-  _gunPoint: {fileID: 3427566120165896289}
+  _trajectoryDisplayer: {fileID: 0}
   _mesh:
     m_AssetGUID: 4d3954090301230418284fcfa57f5332
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  _rotationSpeed: 6
-  _waitBeforeFire: 2
-  _fireRate: 0
+  _gunPoint: {fileID: 3427566120165896289}
+  <shootPosition>k__BackingField: {fileID: 3427566120165896289}
+  <canShoot>k__BackingField: 0
   _weaponMesh: {fileID: 0}
+  _rotationSpeed: 6
+  _waitBeforeFire: 0.5
+  _fireRate: 0.25
+  _preShootAudio:
+    m_AssetGUID: 6bc59631f74f2ef4fbdbe0a53c8d1314
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _resetAudio:
+    m_AssetGUID: 8f5ae7e997955ec40b3fa136f7d12a6d
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _shootAudio:
+    m_AssetGUID: a54de615a3717a943992bdf5fb2b3ee3
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _currentPreShootAudio:
+    _audioClips: []
+    isMain: 0
+    loop: 0
+    disableOthers: 0
+    volume: 1
+    distance: 50
+  _currentResetAudio:
+    _audioClips: []
+    isMain: 0
+    loop: 0
+    disableOthers: 0
+    volume: 1
+    distance: 50
+  _currentShootAudio:
+    _audioClips: []
+    isMain: 0
+    loop: 0
+    disableOthers: 0
+    volume: 1
+    distance: 50

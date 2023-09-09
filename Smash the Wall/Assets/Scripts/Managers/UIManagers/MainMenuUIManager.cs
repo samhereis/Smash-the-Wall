@@ -1,5 +1,6 @@
 using DI;
 using InGameStrings;
+using SO.DataHolders;
 using Sound;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Managers.UIManagers
 
         [Header("Components")]
         [SerializeField] private CanvasWindowBase _openOnStart;
+        [SerializeField] private SoundsPack_DataHolder _mainMenuSoundsPack;
 
         [Header("Settings")]
         [SerializeField] private float _openOnStartDelay = 1f;
@@ -30,6 +32,8 @@ namespace Managers.UIManagers
 
         private IEnumerator Start()
         {
+            _backgroundMusicPlayer?.StopMusic();
+
             yield return new WaitUntil(() => BindDIScene.isGLoballyInjected == true);
 
             foreach (CanvasWindowBase menu in _menus)
@@ -43,12 +47,8 @@ namespace Managers.UIManagers
 
             _openOnStart?.Enable();
 
-            _backgroundMusicPlayer?.PlayMusic();
-        }
-
-        private void OnDisable()
-        {
-            _backgroundMusicPlayer?.StopMusic();
+            yield return new WaitForSecondsRealtime(1f);
+            _backgroundMusicPlayer?.PlayMusic(_mainMenuSoundsPack);
         }
     }
 }

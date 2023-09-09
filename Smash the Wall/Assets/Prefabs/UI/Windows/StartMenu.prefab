@@ -363,7 +363,6 @@ MonoBehaviour:
   _eventsLogManager: {fileID: 0}
   _sceneLoader: {fileID: 0}
   _listOfAllScenes: {fileID: 0}
-  _lazyUpdator: {fileID: 0}
   _backgroundSprites:
   - m_AssetGUID: 15edf145783fe4c4d9c3d2ea532a53c4
     m_SubObjectName: 

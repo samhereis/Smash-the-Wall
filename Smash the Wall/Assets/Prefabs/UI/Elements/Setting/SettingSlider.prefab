@@ -153,7 +153,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 1
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 1
-  _lazyUpdator: {fileID: 0}
 --- !u!222 &466437260331327288
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -584,7 +583,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 1
     <ignoreLeft>k__BackingField: 1
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!1 &8447729728611592249
 GameObject:
   m_ObjectHideFlags: 0

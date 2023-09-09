@@ -53,8 +53,20 @@ MonoBehaviour:
   _starsPrefab: {fileID: 3481870788508270940, guid: 0679ffff18073ab42864c265c86201d8,
     type: 3}
   _starsParent: {fileID: 3008340019104479354}
+  _starAudio:
+    m_AssetGUID: d0bef169e8027c146a516942e90cef6c
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   _instantiatedStars: []
   _starsCount: 0
+  _currentStarAudio:
+    _audioClips: []
+    isMain: 0
+    loop: 0
+    disableOthers: 0
+    volume: 1
+    distance: 50
 --- !u!114 &3981004184590742565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +91,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!1 &7384394981634316426
 GameObject:
   m_ObjectHideFlags: 0

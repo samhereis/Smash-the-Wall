@@ -1,12 +1,10 @@
 using DI;
 using ECS.Systems.Spawners;
 using Helpers;
-using Identifiers;
 using Interfaces;
-using System;
+using Sound;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.InputSystem;
 
 namespace Weapons
@@ -18,11 +16,25 @@ namespace Weapons
         [SerializeField] private float _waitBeforeFire = 2;
         [SerializeField] private float _fireRate = 0.25f;
 
+        [Header("Addressables")]
+        [SerializeField] private AssetReferenceAudioClip _preShootAudio;
+        [SerializeField] private AssetReferenceAudioClip _resetAudio;
+        [SerializeField] private AssetReferenceAudioClip _shootAudio;
+
+        [Header("Debug")]
+        [SerializeField] private SimpleSound _currentPreShootAudio;
+        [SerializeField] private SimpleSound _currentResetAudio;
+        [SerializeField] private SimpleSound _currentShootAudio;
+
         private float _currentRotationSpeed;
 
-        private void OnEnable()
+        private async void OnEnable()
         {
             canShoot = false;
+
+            _currentResetAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_resetAudio));
+            _currentShootAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_shootAudio));
+            _currentPreShootAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_preShootAudio));
         }
 
         private void OnDisable()
@@ -63,11 +75,16 @@ namespace Weapons
 
         protected override void Fire(InputAction.CallbackContext context)
         {
+            if (UIHelper.IsPointOverUI(Touchscreen.current.position.ReadValue())) { return; }
+
             if (context.ReadValueAsButton() == true)
             {
                 StartCoroutine(FireCouroutine());
 
                 _trajectoryDisplayer.Enable(shootPosition);
+
+                _soundPlayer.TryPlay(_currentPreShootAudio);
+                VibrationHelper.LightVibration();
             }
             else
             {
@@ -77,6 +94,9 @@ namespace Weapons
                 canShoot = false;
 
                 _trajectoryDisplayer.Disable();
+
+                _soundPlayer.TryPlay(_currentResetAudio);
+                VibrationHelper.LightVibration();
             }
 
             IEnumerator FireCouroutine()
@@ -99,6 +119,8 @@ namespace Weapons
                 yield return new WaitForSecondsRealtime(_fireRate);
                 canShoot = true;
             }
+
+            _soundPlayer.TryPlay(_currentShootAudio);
         }
     }
 }

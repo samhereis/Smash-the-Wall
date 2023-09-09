@@ -1,15 +1,14 @@
 using Configs;
 using DataClasses;
 using DI;
-using Events;
 using Helpers;
 using InGameStrings;
 using Managers;
 using SO.Lists;
+using Sound;
 using Tools;
 using UI.Canvases;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI
@@ -25,6 +24,9 @@ namespace UI
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
 
+        [Header("Addressables")]
+        [SerializeField] private AssetReferenceAudioClip _loseAudio;
+
         [Header("Components")]
         [SerializeField] private Button _restartButton;
         [SerializeField] private Button _goToMainMenuButton;
@@ -33,12 +35,24 @@ namespace UI
         [SerializeField] private Image _loseInfoBlock;
         [SerializeField] private Image _loseButtonsBlock;
 
+        [Header("Debug")]
+        [SerializeField] private SimpleSound _currentLoseAudio;
+
+        public async override void Initialize()
+        {
+            base.Initialize();
+
+            _currentLoseAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_loseAudio));
+        }
+
         public override void Enable(float? duration = null)
         {
             base.Enable(duration);
             _gameConfigs.isRestart = false;
 
             SubscribeToEvents();
+
+            SoundPlayer.instance?.TryPlay(_currentLoseAudio);
         }
 
         public override void Disable(float? duration = null)

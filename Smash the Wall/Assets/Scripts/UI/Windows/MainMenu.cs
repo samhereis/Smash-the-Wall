@@ -1,8 +1,10 @@
-using Configs;
 using DI;
+using Helpers;
 using InGameStrings;
 using Managers;
+using SO.DataHolders;
 using SO.Lists;
+using Sound;
 using Tools;
 using UI.Canvases;
 using UnityEngine;
@@ -16,9 +18,11 @@ namespace UI
         [Header("DI")]
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
+        [DI(DIStrings.backgrounMusicPlayer)][SerializeField] private BackgroundMusicPlayer _backgroundMusicPlayer;
 
         [Header("Components")]
         [SerializeField] private SettingsMenu _settingsMenu;
+        [SerializeField] private SoundsPack_DataHolder _mainMenuSoundsPack;
 
         [Space(10)]
         [SerializeField] private Image _buttonsInfoBlock;
@@ -73,6 +77,17 @@ namespace UI
             }
 
             EventsLogManager.LogEvent("PlayButtonClicked");
+
+            PlayGameplayAudio(_backgroundMusicPlayer, _mainMenuSoundsPack);
+        }
+
+        public static async void PlayGameplayAudio(BackgroundMusicPlayer backgroundMusicPlayer, SoundsPack_DataHolder soundsPack)
+        {
+            backgroundMusicPlayer.StopMusic();
+
+            await AsyncHelper.Delay(2f);
+
+            backgroundMusicPlayer.PlayMusic(soundsPack);
         }
 
         private void OpenSettings()

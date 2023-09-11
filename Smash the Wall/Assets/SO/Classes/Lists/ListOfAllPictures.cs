@@ -6,6 +6,7 @@ using InGameStrings;
 using LazyUpdators;
 using Managers;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -15,9 +16,6 @@ namespace SO.Lists
     public class ListOfAllPictures : ConfigBase, IDIDependent
     {
         [field: SerializeField] public List<PictureIdentityCard> pictures { get; private set; } = new List<PictureIdentityCard>();
-        [field: SerializeField] public List<PictureIdentityCard> pictures_DestroyObject { get; private set; } = new List<PictureIdentityCard>();
-        [field: SerializeField] public List<PictureIdentityCard> pictures_DestroyBorder { get; private set; } = new List<PictureIdentityCard>();
-        [field: SerializeField] public List<PictureIdentityCard> pictures_Draw { get; private set; } = new List<PictureIdentityCard>();
 
         [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
         [DI(DIStrings.lazyUpdator)][SerializeField] private LazyUpdator_SO _lazyUpdator;
@@ -25,9 +23,6 @@ namespace SO.Lists
         [Header("Border Animation")]
         [field: SerializeField] public Color borderDefaultColor = Color.cyan;
         [field: SerializeField] public float borderMaterialAnimationDuration = 1f;
-
-        [Header("Debug")]
-        [SerializeField] private PictureIdentityCard _currentPicture;
 
         public override void Initialize()
         {
@@ -37,25 +32,7 @@ namespace SO.Lists
             {
                 picture.AutoSetTargetName();
             }
-
-#if UNITY_EDITOR
-
-            _lazyUpdator.RemoveFromQueue(UpdateDebug);
-            _lazyUpdator.AddToQueue(UpdateDebug);
-
-#endif
         }
-
-#if UNITY_EDITOR
-
-        private async Task UpdateDebug()
-        {
-            await AsyncHelper.Delay();
-
-            _currentPicture = GetCurrent();
-        }
-
-#endif
 
         public PictureIdentityCard GetRandom()
         {

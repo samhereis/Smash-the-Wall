@@ -235,7 +235,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!1 &1638009949706434372
 GameObject:
   m_ObjectHideFlags: 0

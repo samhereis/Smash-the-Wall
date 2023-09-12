@@ -1,7 +1,7 @@
 using DG.Tweening;
 using Helpers;
+using SO.DataHolders;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Sound
@@ -12,17 +12,15 @@ namespace Sound
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private float _transitionDuration = 1;
 
-        [SerializeField] private List<AssetReferenceAudioClip> _audioClips = new List<AssetReferenceAudioClip>();
-
         private void OnDestroy()
         {
             _audioSource.DOKill();
         }
 
         [ContextMenu(nameof(PlayMusic))]
-        public async void PlayMusic()
+        public async void PlayMusic(SoundsPack_DataHolder soundsPack)
         {
-            var audioClip = await AddressablesHelper.GetAssetAsync<AudioClip>(_audioClips.GetRandom());
+            var audioClip = await AddressablesHelper.GetAssetAsync<AudioClip>(soundsPack.data.GetRandom());
 
             _audioSource.clip = audioClip;
             _audioSource.loop = true;
@@ -53,7 +51,7 @@ namespace Sound
             _audioSource.DOFade(volume, _transitionDuration).OnComplete(() =>
             {
                 onComplete?.Invoke();
-            });
+            }).SetUpdate(true);
         }
     }
 }

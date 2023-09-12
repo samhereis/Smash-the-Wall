@@ -101,7 +101,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!1 &2455204383295016244
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +422,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5b7e6931e446568468aabd7b1edef3ee, type: 2}
 --- !u!1 &4144175849596244532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,4 +1056,3 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 11400000, guid: 5b7e6931e446568468aabd7b1edef3ee, type: 2}

@@ -16,5 +16,11 @@ namespace Sound
         [SerializeField] internal float distance = 50;
 
         public bool hasAudio => _audioClips.Length > 0;
+
+        public void SetAudioClip(AudioClip audioClip)
+        {
+            _audioClips = new AudioClip[1];
+            _audioClips[0] = audioClip;
+        }
     }
 }

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Helpers;
+using Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,9 +15,18 @@ namespace UI.Elements
         [Header("Components")]
         [SerializeField] private Transform _starsParent;
 
+        [Header("Addressables")]
+        [SerializeField] private AssetReferenceAudioClip _starAudio;
+
         [Header("Debug")]
         [SerializeField] private List<SingleStarIdentifier> _instantiatedStars = new List<SingleStarIdentifier>();
         [SerializeField] private int _starsCount = 0;
+        [SerializeField] private SimpleSound _currentStarAudio;
+
+        private async void Awake()
+        {
+            _currentStarAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_starAudio));
+        }
 
         private void OnDisable()
         {
@@ -58,10 +68,10 @@ namespace UI.Elements
             for (int i = 0; i < _instantiatedStars.Count; i++)
             {
                 var starInstance = _instantiatedStars[i];
-                float scale = NumberHelper.GetPercentageOf1(i + 1, _starsCount) / 2;
-                starInstance.transform.DOScale(0.5f + scale, 0.5f);
+                float scale = 0.5f + NumberHelper.GetPercentageOf1(i + 1, _starsCount) / 2;
+                starInstance.transform.DOScale(scale, 0.5f);
 
-                yield return new WaitForSeconds(0.25f);
+                _currentStarAudio.volume = scale;
             }
 
             for (int i = 0; i < _instantiatedStars.Count; i++)
@@ -70,6 +80,8 @@ namespace UI.Elements
                 {
                     var starInstance = _instantiatedStars[i];
                     starInstance.Activate();
+
+                    SoundPlayer.instance.TryPlay(_currentStarAudio);
 
                     yield return new WaitForSeconds(0.5f);
                 }

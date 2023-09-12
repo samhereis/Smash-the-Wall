@@ -2,11 +2,9 @@ using DG.Tweening;
 using DI;
 using Helpers;
 using InGameStrings;
-using LazyUpdators;
 using Managers;
 using SO.Lists;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using TMPro;
 using Tools;
 using UI.Canvases;
@@ -34,7 +32,6 @@ namespace UI
 
         [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
         [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
-        [DI(DIStrings.lazyUpdator)][SerializeField] private LazyUpdator_SO _lazyUpdator;
 
         [Header("Addressables")]
         [SerializeField] private List<AssetReferenceSprite> _backgroundSprites = new List<AssetReferenceSprite>();
@@ -55,25 +52,20 @@ namespace UI
         [Header("")]
         [SerializeField] private string _labelAfterInit;
 
-        protected override async void Awake()
+        protected override void Awake()
         {
-            await ResetTimeScale();
+            ResetTimeScale();
 
             base.Awake();
 
             _buttonsHolder.gameObject.SetActive(false);
 
             Enable();
-
-            _lazyUpdator.RemoveFromQueue(ResetTimeScale);
-            _lazyUpdator.AddToQueue(ResetTimeScale);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-
-            _lazyUpdator.RemoveFromQueue(ResetTimeScale);
         }
 
         private void Update()
@@ -150,10 +142,9 @@ namespace UI
             await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
         }
 
-        private async Task ResetTimeScale()
+        private void ResetTimeScale()
         {
             Time.timeScale = 1;
-            await AsyncHelper.Delay(40);
         }
     }
 }

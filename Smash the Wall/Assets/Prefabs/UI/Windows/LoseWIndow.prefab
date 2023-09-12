@@ -426,7 +426,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!1 &2646920305298924939
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,10 +646,22 @@ MonoBehaviour:
   _sceneLoader: {fileID: 0}
   _listOfAllScenes: {fileID: 0}
   _adsShowManager: {fileID: 0}
+  _loseAudio:
+    m_AssetGUID: 5f7cec701fb90234ea65dcfe212b90a6
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   _restartButton: {fileID: 3839746550107668225}
   _goToMainMenuButton: {fileID: 8861188305433955777}
   _loseInfoBlock: {fileID: 1616095592396660568}
   _loseButtonsBlock: {fileID: 8501549526813337066}
+  _currentLoseAudio:
+    _audioClips: []
+    isMain: 0
+    loop: 0
+    disableOthers: 0
+    volume: 1
+    distance: 50
 --- !u!114 &7071742808797524996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,7 +785,6 @@ MonoBehaviour:
     <ignoreBottom>k__BackingField: 0
     <ignoreLeft>k__BackingField: 0
     <ignoreRight>k__BackingField: 0
-  _lazyUpdator: {fileID: 0}
 --- !u!1 &4800557863410400937
 GameObject:
   m_ObjectHideFlags: 0

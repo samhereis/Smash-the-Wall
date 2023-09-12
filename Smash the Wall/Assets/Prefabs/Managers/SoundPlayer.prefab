@@ -282,7 +282,7 @@ MonoBehaviour:
   - {fileID: 665163435740102694}
   - {fileID: 3469198074635285442}
   _auioSourcePoolCount: 4
-  _isGlobal: 1
+  _isGlobal: 0
   _gameConfigs: {fileID: 0}
 --- !u!1 &4446494596453596615
 GameObject:

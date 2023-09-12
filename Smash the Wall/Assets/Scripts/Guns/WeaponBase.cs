@@ -5,6 +5,7 @@ using Identifiers;
 using InGameStrings;
 using Interfaces;
 using PlayerInputHolder;
+using Sound;
 using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -29,6 +30,8 @@ namespace Weapons
 
         [Header("Debug")]
         [SerializeField] private WeaponMeshIdentifier _weaponMesh;
+
+        [SerializeField] protected SoundPlayer _soundPlayer => SoundPlayer.instance;
 
         private void OnDisable()
         {

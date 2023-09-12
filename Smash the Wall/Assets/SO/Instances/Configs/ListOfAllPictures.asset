@@ -13,6 +13,26 @@ MonoBehaviour:
   m_Name: ListOfAllPictures
   m_EditorClassIdentifier: 
   <pictures>k__BackingField:
+  - <targetName>k__BackingField: AngelAmoji
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 2f940ccfe48452144b389c374c43f078,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 0, g: 1, b: 0.8448343, a: 1}
+  - <targetName>k__BackingField: AngelAmoji
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: e0243bef4d8e7c04982b23767bc60fc6,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 0, g: 1, b: 0.8448343, a: 1}
+  - <targetName>k__BackingField: Cactus
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: cd7bb955cf82afb4daffd2f80688ce10,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 0.2334745, g: 1, b: 0, a: 1}
+  - <targetName>k__BackingField: Bird
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: fe98583576308af4e976bc735b0fd339,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0.81100655, a: 1}
   - <targetName>k__BackingField: Crab
     <target>k__BackingField: {fileID: 6175686415919909157, guid: bfe06850adaeb374d98f2ae97be2ab8a,
       type: 3}
@@ -28,25 +48,17 @@ MonoBehaviour:
       type: 3}
     <pictureMode>k__BackingField: 0
     <borderColor>k__BackingField: {r: 0.731091, g: 1, b: 0, a: 1}
+  - <targetName>k__BackingField: Toaster
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: 0a2b76e2b5b4a3f45995772a908da308,
+      type: 3}
+    <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 0.731091, g: 1, b: 0, a: 1}
   - <targetName>k__BackingField: FunnyBlueCar
     <target>k__BackingField: {fileID: 3473424340287848214, guid: 7039560867eae2747bb46bdae9c56335,
       type: 3}
     <pictureMode>k__BackingField: 1
     <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
-  - <targetName>k__BackingField: Toaster
-    <target>k__BackingField: {fileID: 3473424340287848214, guid: 0a2b76e2b5b4a3f45995772a908da308,
-      type: 3}
-    <pictureMode>k__BackingField: 1
-    <borderColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
-  <pictures_DestroyObject>k__BackingField: []
-  <pictures_DestroyBorder>k__BackingField: []
-  <pictures_Draw>k__BackingField: []
   _gameSaveManager: {fileID: 0}
   _lazyUpdator: {fileID: 11400000, guid: 5b7e6931e446568468aabd7b1edef3ee, type: 2}
   borderDefaultColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 1}
-  _currentPicture:
-    <targetName>k__BackingField: FunnyBlueCar
-    <target>k__BackingField: {fileID: 3473424340287848214, guid: 7039560867eae2747bb46bdae9c56335,
-      type: 3}
-    <pictureMode>k__BackingField: 1
-    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  borderMaterialAnimationDuration: 1

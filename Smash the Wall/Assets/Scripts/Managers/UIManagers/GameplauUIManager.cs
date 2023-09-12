@@ -62,6 +62,8 @@ namespace Managers.UIManagers
 
             _openOnStart?.Enable();
 
+            _gameConfigs.globalReferences.borderMaterial.DOKill();
+
             if (_listOfAllPictures.GetCurrent().pictureMode == DataClasses.Enums.PictureMode.DestroyBorder)
             {
                 yield return _waitForSecondsRealtime;
@@ -84,8 +86,6 @@ namespace Managers.UIManagers
         {
             _onWin.RemoveListener(OnWin);
             _onLose.RemoveListener(OnLose);
-
-            _gameConfigs.globalReferences.borderMaterial.DOKill();
         }
 
         private void OnWin()

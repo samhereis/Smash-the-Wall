@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5029079479247692875}
   - component: {fileID: 6738277081916857878}
   m_Layer: 0
-  m_Name: Slingshot
+  m_Name: SlingShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,4 +92,40 @@ MonoBehaviour:
   _shootElasticZScalse: 200
   _resetScaleDuration: 0.25
   _shootScaleDuration: 0.1
+  _elasticStretchAudio:
+    m_AssetGUID: 76d3dfe5cacd61146bc8442391234299
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _elasticResetAudio:
+    m_AssetGUID: 9c339b8dc6b45dd49bc383648bbc36c1
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _shootAudio:
+    m_AssetGUID: c52776700fb7ddd4ba20b9700d11ffdf
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   _debug: 0
+  _currentElasticStretchAudio:
+    _audioClips: []
+    isMain: 0
+    loop: 0
+    disableOthers: 0
+    volume: 1
+    distance: 50
+  _currentElasticResetAudio:
+    _audioClips: []
+    isMain: 0
+    loop: 0
+    disableOthers: 0
+    volume: 1
+    distance: 50
+  _currentShootAudio:
+    _audioClips: []
+    isMain: 0
+    loop: 0
+    disableOthers: 0
+    volume: 1
+    distance: 50

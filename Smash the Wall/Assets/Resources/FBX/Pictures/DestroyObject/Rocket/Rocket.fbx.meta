@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7a5a4ade26d2e324492a059765a03934
+guid: 457483684f321654d976edc3efaf5caa
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,13 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: CarBody.001
-    second: {fileID: 2100000, guid: a20810ae764813a4496d5bf1c4fd6ef5, type: 2}
+      name: Arm
+    second: {fileID: 2100000, guid: b559ca33cc89d6845a3f320f9fffa309, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: CarWheels.001
-    second: {fileID: 2100000, guid: 88c5f91511303184caa49917a20c1d61, type: 2}
+      name: Body
+    second: {fileID: 2100000, guid: 0dd928bf12c81ff46b814f77a83a2af9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Detailes
+    second: {fileID: 2100000, guid: 6d57fbfb5c62ce5489062854eeb82073, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2100000, guid: 312db6b2356046d4e96ec9c202d131ec, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -49,7 +59,7 @@ ModelImporter:
     meshCompression: 2
     addColliders: 0
     useSRGBMaterialColor: 1
-    sortHierarchyByName: 1
+    sortHierarchyByName: 0
     importPhysicalCameras: 1
     importVisibility: 0
     importBlendShapes: 0
@@ -82,7 +92,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 2
+    tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1

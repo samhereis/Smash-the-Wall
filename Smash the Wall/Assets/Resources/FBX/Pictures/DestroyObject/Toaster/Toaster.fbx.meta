@@ -3,7 +3,17 @@ guid: a9d16318fad12b54e83011206ea21ae5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: a22a4d60f9f9f79489561d86e48db1e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SwithElement
+    second: {fileID: 2100000, guid: bd212e8b5e0d7654cb1b9c74b466f054, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -41,7 +51,7 @@ ModelImporter:
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
-    importVisibility: 1
+    importVisibility: 0
     importBlendShapes: 0
     importCameras: 0
     importLights: 0

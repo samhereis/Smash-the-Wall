@@ -61,6 +61,7 @@ MonoBehaviour:
   _listOfAllPictures: {fileID: 0}
   _listOfAllScenes: {fileID: 0}
   _gameSaveManager: {fileID: 0}
+  _gameConfigs: {fileID: 0}
   _openOnStart: {fileID: 597406153550015335}
   _winMenu: {fileID: 0}
   _loseMenu: {fileID: 0}

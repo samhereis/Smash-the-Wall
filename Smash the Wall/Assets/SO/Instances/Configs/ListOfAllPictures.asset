@@ -13,7 +13,22 @@ MonoBehaviour:
   m_Name: ListOfAllPictures
   m_EditorClassIdentifier: 
   <pictures>k__BackingField:
-  - <targetName>k__BackingField: Rocket
+  - <targetName>k__BackingField: AngelAmoji
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 2f940ccfe48452144b389c374c43f078,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 0, g: 1, b: 0.8448343, a: 1}
+  - <targetName>k__BackingField: Ghost
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: f2d68826bd3563f49a01177eb6c89f1c,
+      type: 3}
+    <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  - <targetName>k__BackingField: TrashBig
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: 76968cbac9f55f142a3ef308a3b84209,
+      type: 3}
+    <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  - <targetName>k__BackingField: FriedChicken
     <target>k__BackingField: {fileID: 3473424340287848214, guid: bb66116fbc0a9de4d9e9325a2b86eede,
       type: 3}
     <pictureMode>k__BackingField: 1
@@ -23,11 +38,6 @@ MonoBehaviour:
       type: 3}
     <pictureMode>k__BackingField: 1
     <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
-  - <targetName>k__BackingField: AngelAmoji
-    <target>k__BackingField: {fileID: 4188479979054571039, guid: 2f940ccfe48452144b389c374c43f078,
-      type: 3}
-    <pictureMode>k__BackingField: 0
-    <borderColor>k__BackingField: {r: 0, g: 1, b: 0.8448343, a: 1}
   - <targetName>k__BackingField: Toilet
     <target>k__BackingField: {fileID: 4188479979054571039, guid: e0243bef4d8e7c04982b23767bc60fc6,
       type: 3}

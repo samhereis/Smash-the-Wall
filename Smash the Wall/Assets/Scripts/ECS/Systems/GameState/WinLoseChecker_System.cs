@@ -196,7 +196,7 @@ namespace ECS.Systems.GameState
             return false;
         }
 
-        private void Clear()
+        public void Clear()
         {
             releasedWhatNeedsToBeDestroysPercentage = 0;
             releasedWhatNeedsToStaysPercentage = 0;

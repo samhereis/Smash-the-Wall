@@ -649,7 +649,7 @@ PrefabInstance:
     - target: {fileID: 7354333616198503309, guid: 9ebc47bcee653b547be9d6a01e2ec745,
         type: 3}
       propertyPath: m_CellSize.x
-      value: 839.99677
+      value: 624.89966
       objectReference: {fileID: 0}
     - target: {fileID: 7564191654966426004, guid: 9ebc47bcee653b547be9d6a01e2ec745,
         type: 3}

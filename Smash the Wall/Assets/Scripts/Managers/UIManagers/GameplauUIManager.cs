@@ -3,6 +3,7 @@ using DG.Tweening;
 using DI;
 using ECS.Systems.GameState;
 using Events;
+using Helpers;
 using InGameStrings;
 using SO.Lists;
 using System.Collections;
@@ -39,6 +40,9 @@ namespace Managers.UIManagers
 
         private WaitForSecondsRealtime _waitForSecondsRealtime = new WaitForSecondsRealtime(1);
 
+        private bool _isAnimationWallMaterial = false;
+        private bool _shouldAnimatetWallMaterial => WinLoseChecker_System.releasedWhatNeedsToBeDestroysPercentage < 5;
+
         private void Awake()
         {
             _menus = GetComponentsInChildren<CanvasWindowBase>(true).ToList();
@@ -51,41 +55,55 @@ namespace Managers.UIManagers
             }
         }
 
-        private IEnumerator Start()
+        private async void Start()
         {
             (this as IDIDependent).LoadDependencies();
 
             _onWin.AddListener(OnWin);
             _onLose.AddListener(OnLose);
 
-            yield return new WaitForSecondsRealtime(_openOnStartDelay);
+            await AsyncHelper.Delay(_openOnStartDelay);
 
             _openOnStart?.Enable();
-
-            _gameConfigs.globalReferences.borderMaterial.DOKill();
-
-            if (_listOfAllPictures.GetCurrent().pictureMode == DataClasses.Enums.PictureMode.DestroyBorder)
-            {
-                yield return _waitForSecondsRealtime;
-
-                _gameConfigs.globalReferences.borderMaterial.color = _listOfAllPictures.borderDefaultColor;
-                _gameConfigs.globalReferences.borderMaterial.DOColor(_listOfAllPictures.GetCurrent().borderColor, _listOfAllPictures.borderMaterialAnimationDuration)
-                    .SetLoops(-1).SetEase(Ease.Linear);
-
-                while (WinLoseChecker_System.releasedWhatNeedsToBeDestroysPercentage < 10)
-                {
-                    yield return _waitForSecondsRealtime;
-                }
-
-                _gameConfigs.globalReferences.borderMaterial.DOKill();
-                _gameConfigs.globalReferences.borderMaterial.DOColor(_listOfAllPictures.GetCurrent().borderColor, 1);
-            }
         }
 
         private void OnDestroy()
         {
             _onWin.RemoveListener(OnWin);
             _onLose.RemoveListener(OnLose);
+        }
+
+        private void Update()
+        {
+            if (_shouldAnimatetWallMaterial == true && _isAnimationWallMaterial == false)
+            {
+                StopAllCoroutines();
+                StartCoroutine(StartAnimatingWallMaterial());
+            }
+        }
+
+        private IEnumerator StartAnimatingWallMaterial()
+        {
+            _gameConfigs.globalReferences.borderMaterial.DOKill();
+
+            if (_listOfAllPictures.GetCurrent().pictureMode == DataClasses.Enums.PictureMode.DestroyBorder)
+            {
+                _isAnimationWallMaterial = true;
+
+                _gameConfigs.globalReferences.borderMaterial.color = _listOfAllPictures.borderDefaultColor;
+                _gameConfigs.globalReferences.borderMaterial.DOColor(_listOfAllPictures.GetCurrent().borderColor, _listOfAllPictures.borderMaterialAnimationDuration)
+                    .SetLoops(-1).SetEase(Ease.Linear);
+
+                while (_shouldAnimatetWallMaterial)
+                {
+                    yield return _waitForSecondsRealtime;
+                }
+
+                _isAnimationWallMaterial = false;
+
+                _gameConfigs.globalReferences.borderMaterial.DOKill();
+                _gameConfigs.globalReferences.borderMaterial.DOColor(_listOfAllPictures.GetCurrent().borderColor, 1);
+            }
         }
 
         private void OnWin()

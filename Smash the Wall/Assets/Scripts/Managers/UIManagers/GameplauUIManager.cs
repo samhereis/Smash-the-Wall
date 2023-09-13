@@ -6,7 +6,6 @@ using Events;
 using Helpers;
 using InGameStrings;
 using SO.Lists;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UI;
@@ -77,12 +76,11 @@ namespace Managers.UIManagers
         {
             if (_shouldAnimatetWallMaterial == true && _isAnimationWallMaterial == false)
             {
-                StopAllCoroutines();
-                StartCoroutine(StartAnimatingWallMaterial());
+                StartAnimatingWallMaterial();
             }
         }
 
-        private IEnumerator StartAnimatingWallMaterial()
+        private async void StartAnimatingWallMaterial()
         {
             _gameConfigs.globalReferences.borderMaterial.DOKill();
 
@@ -92,17 +90,17 @@ namespace Managers.UIManagers
 
                 _gameConfigs.globalReferences.borderMaterial.color = _listOfAllPictures.borderDefaultColor;
                 _gameConfigs.globalReferences.borderMaterial.DOColor(_listOfAllPictures.GetCurrent().borderColor, _listOfAllPictures.borderMaterialAnimationDuration)
-                    .SetLoops(-1).SetEase(Ease.Linear);
+                    .SetLoops(-1).SetEase(Ease.Linear).SetUpdate(true);
 
                 while (_shouldAnimatetWallMaterial)
                 {
-                    yield return _waitForSecondsRealtime;
+                    await AsyncHelper.Delay(1);
                 }
 
                 _isAnimationWallMaterial = false;
 
                 _gameConfigs.globalReferences.borderMaterial.DOKill();
-                _gameConfigs.globalReferences.borderMaterial.DOColor(_listOfAllPictures.GetCurrent().borderColor, 1);
+                _gameConfigs.globalReferences.borderMaterial.DOColor(_listOfAllPictures.GetCurrent().borderColor, 1).SetUpdate(true); ;
             }
         }
 

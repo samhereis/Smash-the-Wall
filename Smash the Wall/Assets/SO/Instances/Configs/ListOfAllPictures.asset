@@ -13,36 +13,6 @@ MonoBehaviour:
   m_Name: ListOfAllPictures
   m_EditorClassIdentifier: 
   <pictures>k__BackingField:
-  - <targetName>k__BackingField: AngelAmoji
-    <target>k__BackingField: {fileID: 4188479979054571039, guid: 2f940ccfe48452144b389c374c43f078,
-      type: 3}
-    <pictureMode>k__BackingField: 0
-    <borderColor>k__BackingField: {r: 0, g: 1, b: 0.8448343, a: 1}
-  - <targetName>k__BackingField: Ghost
-    <target>k__BackingField: {fileID: 3473424340287848214, guid: f2d68826bd3563f49a01177eb6c89f1c,
-      type: 3}
-    <pictureMode>k__BackingField: 1
-    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
-  - <targetName>k__BackingField: TrashBig
-    <target>k__BackingField: {fileID: 3473424340287848214, guid: 76968cbac9f55f142a3ef308a3b84209,
-      type: 3}
-    <pictureMode>k__BackingField: 1
-    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
-  - <targetName>k__BackingField: FriedChicken
-    <target>k__BackingField: {fileID: 3473424340287848214, guid: bb66116fbc0a9de4d9e9325a2b86eede,
-      type: 3}
-    <pictureMode>k__BackingField: 1
-    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
-  - <targetName>k__BackingField: Rocket
-    <target>k__BackingField: {fileID: 3473424340287848214, guid: f6210d63d31909746882fc7e58579a26,
-      type: 3}
-    <pictureMode>k__BackingField: 1
-    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
-  - <targetName>k__BackingField: Toilet
-    <target>k__BackingField: {fileID: 4188479979054571039, guid: e0243bef4d8e7c04982b23767bc60fc6,
-      type: 3}
-    <pictureMode>k__BackingField: 0
-    <borderColor>k__BackingField: {r: 0, g: 1, b: 0.8448343, a: 1}
   - <targetName>k__BackingField: Cactus
     <target>k__BackingField: {fileID: 4188479979054571039, guid: cd7bb955cf82afb4daffd2f80688ce10,
       type: 3}
@@ -53,31 +23,61 @@ MonoBehaviour:
       type: 3}
     <pictureMode>k__BackingField: 0
     <borderColor>k__BackingField: {r: 1, g: 0, b: 0.81100655, a: 1}
-  - <targetName>k__BackingField: Crab
-    <target>k__BackingField: {fileID: 6175686415919909157, guid: bfe06850adaeb374d98f2ae97be2ab8a,
+  - <targetName>k__BackingField: Toilet
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: e0243bef4d8e7c04982b23767bc60fc6,
       type: 3}
     <pictureMode>k__BackingField: 0
-    <borderColor>k__BackingField: {r: 0, g: 0.6070881, b: 1, a: 1}
-  - <targetName>k__BackingField: Phone
-    <target>k__BackingField: {fileID: 4188479979054571039, guid: 702a755c6bb64b54f8e2fa07110a36e5,
+    <borderColor>k__BackingField: {r: 0, g: 1, b: 0.8448343, a: 1}
+  - <targetName>k__BackingField: FriedChicken
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: bb66116fbc0a9de4d9e9325a2b86eede,
       type: 3}
-    <pictureMode>k__BackingField: 0
-    <borderColor>k__BackingField: {r: 1, g: 0.6173747, b: 0, a: 1}
-  - <targetName>k__BackingField: Bomb
-    <target>k__BackingField: {fileID: -6676753617988504395, guid: 53d418da7fdc5a9458366ffd2d748208,
-      type: 3}
-    <pictureMode>k__BackingField: 0
-    <borderColor>k__BackingField: {r: 0.731091, g: 1, b: 0, a: 1}
+    <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
   - <targetName>k__BackingField: Toaster
     <target>k__BackingField: {fileID: 3473424340287848214, guid: 0a2b76e2b5b4a3f45995772a908da308,
       type: 3}
     <pictureMode>k__BackingField: 1
     <borderColor>k__BackingField: {r: 0.731091, g: 1, b: 0, a: 1}
+  - <targetName>k__BackingField: Ghost
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: f2d68826bd3563f49a01177eb6c89f1c,
+      type: 3}
+    <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  - <targetName>k__BackingField: Phone
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 702a755c6bb64b54f8e2fa07110a36e5,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 1, g: 0.6173747, b: 0, a: 1}
+  - <targetName>k__BackingField: Crab
+    <target>k__BackingField: {fileID: 6175686415919909157, guid: bfe06850adaeb374d98f2ae97be2ab8a,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 0, g: 0.6070881, b: 1, a: 1}
+  - <targetName>k__BackingField: Bomb
+    <target>k__BackingField: {fileID: -6676753617988504395, guid: 53d418da7fdc5a9458366ffd2d748208,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 0.731091, g: 1, b: 0, a: 1}
+  - <targetName>k__BackingField: Rocket
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: f6210d63d31909746882fc7e58579a26,
+      type: 3}
+    <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  - <targetName>k__BackingField: TrashBig
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: 76968cbac9f55f142a3ef308a3b84209,
+      type: 3}
+    <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
   - <targetName>k__BackingField: FunnyBlueCar
     <target>k__BackingField: {fileID: 3473424340287848214, guid: 7039560867eae2747bb46bdae9c56335,
       type: 3}
     <pictureMode>k__BackingField: 1
     <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  - <targetName>k__BackingField: AngelAmoji
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 2f940ccfe48452144b389c374c43f078,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 0, g: 1, b: 0.8448343, a: 1}
   _gameSaveManager: {fileID: 0}
   _lazyUpdator: {fileID: 11400000, guid: 5b7e6931e446568468aabd7b1edef3ee, type: 2}
   borderDefaultColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 1}

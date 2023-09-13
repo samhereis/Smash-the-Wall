@@ -16,12 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: e5f81fc0b9d89aa4aaf54e2999da1a3e
-  m_SerializeEntries:
-  - m_GUID: a09f7ed7feaa8c64dbfbea9f04fe47c9
-    m_Address: NatureCyberPunk_ECS
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5ed90d24bdcc2eb4386211027ee118a9, type: 2}
   m_SchemaSet:

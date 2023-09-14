@@ -75,7 +75,11 @@ namespace Weapons
 
         protected override void Fire(InputAction.CallbackContext context)
         {
+#if UNITY_EDITOR == false
+
             if (UIHelper.IsPointOverUI(Touchscreen.current.position.ReadValue())) { return; }
+
+#endif
 
             if (context.ReadValueAsButton() == true)
             {

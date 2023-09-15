@@ -8,17 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Eyes
-    second: {fileID: 2100000, guid: 47e3fc816dffde746a83d3953230ea0c, type: 2}
+    second: {fileID: 2100000, guid: 063fc76005cccc34d9e4e6d299d9fc50, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Left
-    second: {fileID: 2100000, guid: 61648eec8deadcc43b860dfcab0746af, type: 2}
+    second: {fileID: 2100000, guid: ef5572fa36d77cb4982626d191b7f152, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Right
-    second: {fileID: 2100000, guid: b64a14c6dfdb09f4fb5750b6d16241d5, type: 2}
+    second: {fileID: 2100000, guid: b559ca33cc89d6845a3f320f9fffa309, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

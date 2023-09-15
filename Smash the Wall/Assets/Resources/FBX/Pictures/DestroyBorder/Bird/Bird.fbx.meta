@@ -8,32 +8,32 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Body
-    second: {fileID: 2100000, guid: d5e47b10a49f9504490c64ba2a55bc14, type: 2}
+    second: {fileID: 2100000, guid: a04ebb9da7edc564d9b6e5fe5dd97c3e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Eyes
-    second: {fileID: 2100000, guid: f1f2a5858dcc44440a74b9ab4f6ae460, type: 2}
+    second: {fileID: 2100000, guid: 0c3da4a97201de1449f9669c21015fc4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Legs
-    second: {fileID: 2100000, guid: 69feb66c4a5a4094aba0f70b8d243ca9, type: 2}
+    second: {fileID: 2100000, guid: 5d640143928a85546ad9ae0ec324367f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Nose
-    second: {fileID: 2100000, guid: a424f2cfe1252544398ef53bb0ab5a0a, type: 2}
+    second: {fileID: 2100000, guid: ef5572fa36d77cb4982626d191b7f152, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Wing1
-    second: {fileID: 2100000, guid: 956d80beef84c7044a79ca496cd0386e, type: 2}
+    second: {fileID: 2100000, guid: a20810ae764813a4496d5bf1c4fd6ef5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Wing2
-    second: {fileID: 2100000, guid: 48de47bb7c0c8744ba9b6d8e93a8e4f4, type: 2}
+    second: {fileID: 2100000, guid: 312db6b2356046d4e96ec9c202d131ec, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

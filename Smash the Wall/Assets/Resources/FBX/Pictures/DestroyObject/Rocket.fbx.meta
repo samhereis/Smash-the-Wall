@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7cf5cccd16134ad4692cb635ca0b377f
+guid: 457483684f321654d976edc3efaf5caa
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,23 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Base
-    second: {fileID: 2100000, guid: a04ebb9da7edc564d9b6e5fe5dd97c3e, type: 2}
+      name: Arm
+    second: {fileID: 2100000, guid: b559ca33cc89d6845a3f320f9fffa309, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Blue
-    second: {fileID: 2100000, guid: 312db6b2356046d4e96ec9c202d131ec, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: SVGMat
-    second: {fileID: 2100000, guid: 0c3da4a97201de1449f9669c21015fc4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: SVGMat.005
+      name: Body
     second: {fileID: 2100000, guid: ef5572fa36d77cb4982626d191b7f152, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Detailes
+    second: {fileID: 2100000, guid: a20810ae764813a4496d5bf1c4fd6ef5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2100000, guid: 312db6b2356046d4e96ec9c202d131ec, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

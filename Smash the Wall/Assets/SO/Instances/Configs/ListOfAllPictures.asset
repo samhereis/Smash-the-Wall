@@ -18,6 +18,11 @@ MonoBehaviour:
       type: 3}
     <pictureMode>k__BackingField: 0
     <borderColor>k__BackingField: {r: 0.2334745, g: 1, b: 0, a: 1}
+  - <targetName>k__BackingField: Mountain
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: f2d68826bd3563f49a01177eb6c89f1c,
+      type: 3}
+    <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
   - <targetName>k__BackingField: Bird
     <target>k__BackingField: {fileID: 4188479979054571039, guid: fe98583576308af4e976bc735b0fd339,
       type: 3}
@@ -38,11 +43,6 @@ MonoBehaviour:
       type: 3}
     <pictureMode>k__BackingField: 1
     <borderColor>k__BackingField: {r: 0.731091, g: 1, b: 0, a: 1}
-  - <targetName>k__BackingField: Ghost
-    <target>k__BackingField: {fileID: 3473424340287848214, guid: f2d68826bd3563f49a01177eb6c89f1c,
-      type: 3}
-    <pictureMode>k__BackingField: 1
-    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
   - <targetName>k__BackingField: Phone
     <target>k__BackingField: {fileID: 4188479979054571039, guid: 702a755c6bb64b54f8e2fa07110a36e5,
       type: 3}

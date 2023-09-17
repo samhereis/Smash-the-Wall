@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 39c5b1da19f5bd148a26226e0d28d7f9
+guid: c3f94a50843bf9b4cbc807f16966bf0a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: COLOR
-    second: {fileID: 2100000, guid: 5dec7cb5a0ef74680ac6862c85e7baf3, type: 2}
+      name: BackgroundSkin
+    second: {fileID: 2100000, guid: 77f9f581139a80b45b5ec848d61b0c51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Border
+    second: {fileID: 2100000, guid: a590562087ce73446a9f5880c17752c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes
+    second: {fileID: 2100000, guid: 5d640143928a85546ad9ae0ec324367f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ForegroundSkin
+    second: {fileID: 2100000, guid: 063fc76005cccc34d9e4e6d299d9fc50, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -50,7 +65,7 @@ ModelImporter:
     importBlendShapes: 0
     importCameras: 0
     importLights: 0
-    nodeNameCollisionStrategy: 0
+    nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -77,7 +92,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 2
+    tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
@@ -107,7 +122,7 @@ ModelImporter:
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
-  remapMaterialsIfMaterialImportModeIsNone: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 39c5b1da19f5bd148a26226e0d28d7f9
+guid: c50a54ebe31f82249bfd7eed7e437120
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: COLOR
-    second: {fileID: 2100000, guid: 5dec7cb5a0ef74680ac6862c85e7baf3, type: 2}
+      name: Ears
+    second: {fileID: 2100000, guid: a04ebb9da7edc564d9b6e5fe5dd97c3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EyesForeground
+    second: {fileID: 2100000, guid: 0c3da4a97201de1449f9669c21015fc4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes_Back
+    second: {fileID: 2100000, guid: 063fc76005cccc34d9e4e6d299d9fc50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Face
+    second: {fileID: 2100000, guid: ef5572fa36d77cb4982626d191b7f152, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Face_Foreground
+    second: {fileID: 2100000, guid: a04ebb9da7edc564d9b6e5fe5dd97c3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Nose
+    second: {fileID: 2100000, guid: 0c3da4a97201de1449f9669c21015fc4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -50,7 +75,7 @@ ModelImporter:
     importBlendShapes: 0
     importCameras: 0
     importLights: 0
-    nodeNameCollisionStrategy: 0
+    nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -77,7 +102,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 2
+    tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
@@ -107,7 +132,7 @@ ModelImporter:
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
-  remapMaterialsIfMaterialImportModeIsNone: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

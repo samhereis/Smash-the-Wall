@@ -20,7 +20,7 @@ namespace IdentityCards
             if (autoSetTargetName == true) AutoSetTargetName();
         }
 
-        public void AutoSetTargetName()
+        public virtual void AutoSetTargetName()
         {
             targetName = target.ToString();
         }

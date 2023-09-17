@@ -13,6 +13,16 @@ MonoBehaviour:
   m_Name: ListOfAllPictures
   m_EditorClassIdentifier: 
   <pictures>k__BackingField:
+  - <targetName>k__BackingField: Deer_DestroyBorder
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 9e8da40b6d4e0704eb0f083c5a6a1740,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 0, g: 0.594635, b: 1, a: 1}
+  - <targetName>k__BackingField: ClownFace_DestroyBorder
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 33f2ec532c28d8843901fcf10680f0e8,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 1, g: 0.85932004, b: 0, a: 1}
   - <targetName>k__BackingField: Peach_DestroyWholeObject
     <target>k__BackingField: {fileID: 3473424340287848214, guid: bfa337880d71fcb49883b7b98336c489,
       type: 3}
@@ -23,21 +33,6 @@ MonoBehaviour:
       type: 3}
     <pictureMode>k__BackingField: 1
     <borderColor>k__BackingField: {r: 1, g: 0.85932004, b: 0, a: 1}
-  - <targetName>k__BackingField: Earth_DestroyWholeObject
-    <target>k__BackingField: {fileID: 3473424340287848214, guid: a934325b5e76fb74684360c15a8db0ea,
-      type: 3}
-    <pictureMode>k__BackingField: 1
-    <borderColor>k__BackingField: {r: 1, g: 0.85932004, b: 0, a: 1}
-  - <targetName>k__BackingField: ClownFace_DestroyBorder
-    <target>k__BackingField: {fileID: 4188479979054571039, guid: 33f2ec532c28d8843901fcf10680f0e8,
-      type: 3}
-    <pictureMode>k__BackingField: 0
-    <borderColor>k__BackingField: {r: 1, g: 0.85932004, b: 0, a: 1}
-  - <targetName>k__BackingField: Deer_DestroyBorder
-    <target>k__BackingField: {fileID: 4188479979054571039, guid: 9e8da40b6d4e0704eb0f083c5a6a1740,
-      type: 3}
-    <pictureMode>k__BackingField: 0
-    <borderColor>k__BackingField: {r: 0, g: 0.594635, b: 1, a: 1}
   - <targetName>k__BackingField: Broom_DestroyBorder
     <target>k__BackingField: {fileID: 4188479979054571039, guid: 7836fcfcd68852648834bf6695b626aa,
       type: 3}
@@ -48,18 +43,13 @@ MonoBehaviour:
       type: 3}
     <pictureMode>k__BackingField: 0
     <borderColor>k__BackingField: {r: 0.2334745, g: 1, b: 0, a: 1}
-  - <targetName>k__BackingField: Bird_DestroyBorder
-    <target>k__BackingField: {fileID: 4188479979054571039, guid: fe98583576308af4e976bc735b0fd339,
-      type: 3}
-    <pictureMode>k__BackingField: 0
-    <borderColor>k__BackingField: {r: 1, g: 0, b: 0.81100655, a: 1}
-  - <targetName>k__BackingField: Snowboardman_DestroyWholeObject
-    <target>k__BackingField: {fileID: 3473424340287848214, guid: 50d5766cdf100684c8ca77f8b294fab4,
+  - <targetName>k__BackingField: Earth_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: a934325b5e76fb74684360c15a8db0ea,
       type: 3}
     <pictureMode>k__BackingField: 1
-    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
-  - <targetName>k__BackingField: Mountain_DestroyWholeObject
-    <target>k__BackingField: {fileID: 3473424340287848214, guid: f2d68826bd3563f49a01177eb6c89f1c,
+    <borderColor>k__BackingField: {r: 1, g: 0.85932004, b: 0, a: 1}
+  - <targetName>k__BackingField: Snowboardman_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: 50d5766cdf100684c8ca77f8b294fab4,
       type: 3}
     <pictureMode>k__BackingField: 1
     <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
@@ -108,8 +98,18 @@ MonoBehaviour:
       type: 3}
     <pictureMode>k__BackingField: 0
     <borderColor>k__BackingField: {r: 0, g: 1, b: 0.8448343, a: 1}
+  - <targetName>k__BackingField: Bird_DestroyBorder
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: fe98583576308af4e976bc735b0fd339,
+      type: 3}
+    <pictureMode>k__BackingField: 0
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0.81100655, a: 1}
   - <targetName>k__BackingField: FunnyBlueCar_DestroyWholeObject
     <target>k__BackingField: {fileID: 3473424340287848214, guid: 7039560867eae2747bb46bdae9c56335,
+      type: 3}
+    <pictureMode>k__BackingField: 1
+    <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  - <targetName>k__BackingField: Mountain_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: f2d68826bd3563f49a01177eb6c89f1c,
       type: 3}
     <pictureMode>k__BackingField: 1
     <borderColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}

@@ -11,6 +11,7 @@ using UI.Interaction;
 using UI.UIAnimationElements;
 using UnityEngine;
 using UnityEngine.UI;
+using UI.Helpers;
 
 namespace UI.Canvases
 {
@@ -28,7 +29,8 @@ namespace UI.Canvases
 
 #if UNITY_EDITOR
 
-        [SerializeField] private List<Button> _buttons = new List<Button>();
+        public List<Button> _buttons = new List<Button>();
+        public ScaleByPercentage[] _scaleHelpers;
 
         private void OnValidate()
         {
@@ -44,6 +46,8 @@ namespace UI.Canvases
             {
                 Debug.Log(gameObject.name + " Has a standart button");
             }
+
+            _scaleHelpers = GetComponentsInChildren<ScaleByPercentage>(true);
         }
 
 #endif

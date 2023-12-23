@@ -1,4 +1,7 @@
+#if FirebaseInstalled
 using Firebase.Analytics;
+#endif
+
 using Interfaces;
 using System;
 using System.Collections.Generic;
@@ -94,7 +97,9 @@ namespace Managers
 
             try
             {
+#if FirebaseInstalled
                 Firebase.Analytics.FirebaseAnalytics.LogEvent(name);
+#endif
 
                 AnalyticsService.Instance.CustomData(name);
                 AnalyticsService.Instance.Flush();
@@ -111,6 +116,7 @@ namespace Managers
 
             try
             {
+#if FirebaseInstalled
                 List<Parameter> fbParameters = new List<Parameter>();
 
                 foreach (var parameter in parameters)
@@ -118,7 +124,8 @@ namespace Managers
                     fbParameters.Add(new Parameter(parameter.Key, parameter.Value.ToString()));
                 }
 
-                FirebaseAnalytics.LogEvent(name, fbParameters.ToArray());
+                FirebaseAnalytics.LogEvent(name, fbParameters.ToArray());          
+#endif
 
                 AnalyticsService.Instance.CustomData(name, parameters);
                 AnalyticsService.Instance.Flush();

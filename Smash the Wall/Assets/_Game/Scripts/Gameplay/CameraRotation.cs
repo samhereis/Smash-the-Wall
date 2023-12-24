@@ -44,6 +44,9 @@ namespace Gameplay
             _mouseX = contextValue.x;
             _mouseY = contextValue.y;
 
+
+
+            UpdateLook();
             UpdateLook();
         }
 

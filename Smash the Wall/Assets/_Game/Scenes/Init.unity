@@ -423,7 +423,7 @@ PrefabInstance:
     - target: {fileID: 3725780565595435052, guid: 9ebc47bcee653b547be9d6a01e2ec745,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -187.4699
+      value: -187.46991
       objectReference: {fileID: 0}
     - target: {fileID: 3725780565595435052, guid: 9ebc47bcee653b547be9d6a01e2ec745,
         type: 3}
@@ -624,6 +624,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 273.39362
+      objectReference: {fileID: 0}
+    - target: {fileID: 6653555981982410890, guid: 9ebc47bcee653b547be9d6a01e2ec745,
+        type: 3}
+      propertyPath: _backgroundSprites.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6653555981982410890, guid: 9ebc47bcee653b547be9d6a01e2ec745,
+        type: 3}
+      propertyPath: _backgroundSprites.Array.data[0].m_AssetGUID
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6653555981982410890, guid: 9ebc47bcee653b547be9d6a01e2ec745,
+        type: 3}
+      propertyPath: _backgroundSprites.Array.data[0].m_SubObjectName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6653555981982410890, guid: 9ebc47bcee653b547be9d6a01e2ec745,
+        type: 3}
+      propertyPath: _backgroundSprites.Array.data[0].m_SubObjectType
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6653555981982410890, guid: 9ebc47bcee653b547be9d6a01e2ec745,
+        type: 3}
+      propertyPath: _backgroundSprites.Array.data[0].m_EditorAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7354333616198503309, guid: 9ebc47bcee653b547be9d6a01e2ec745,
         type: 3}

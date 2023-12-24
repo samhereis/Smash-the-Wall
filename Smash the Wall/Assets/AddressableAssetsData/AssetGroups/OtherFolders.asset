@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: c2eb9e69461eeb7499cef88f94f46184
   m_SerializeEntries:
   - m_GUID: 9f52a9f3def38cf47b75e1021deead00
-    m_Address: Backgrounds
+    m_Address: Assets/AddressableResources/Backgrounds
     m_ReadOnly: 0
     m_SerializedLabels:
     - background

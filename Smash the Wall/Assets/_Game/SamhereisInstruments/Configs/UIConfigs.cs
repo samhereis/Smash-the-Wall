@@ -1,5 +1,4 @@
-﻿using AYellowpaper.SerializedCollections;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Helpers;
 using SO;
 using System;
@@ -22,9 +21,6 @@ namespace Configs
 
         [field: SerializeField, Space(10)] public float uiAnimationElementForeachDelay { get; private set; } = 0.025f;
 
-        [SerializedDictionary("Color Name", ("Color Value"))]
-        [field: SerializeField] public SerializedDictionary<ColorSetUnitString, Color> colorSetUnits = new SerializedDictionary<ColorSetUnitString, Color>();
-
         public override void Initialize()
         {
 
@@ -33,13 +29,6 @@ namespace Configs
         public void SetUIAnimationElementForeachDelay(float newUIAnimationElementForeachDelay)
         {
             uiAnimationElementForeachDelay = newUIAnimationElementForeachDelay;
-        }
-
-        [Serializable]
-        public class ColorSet
-        {
-            [SerializedDictionary("Color Name", ("Color Value"))]
-            [field: SerializeField] public SerializedDictionary<ColorSetUnitString, Color> colorSetUnits = new SerializedDictionary<ColorSetUnitString, Color>();
         }
     }
 }

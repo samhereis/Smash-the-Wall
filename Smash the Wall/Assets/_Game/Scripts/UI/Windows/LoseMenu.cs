@@ -1,12 +1,13 @@
 using Configs;
 using DataClasses;
-using DI;
+using DependencyInjection;
 using Helpers;
-using InGameStrings;
 using Managers;
+using Services;
+using Servies;
+using Sirenix.OdinInspector;
 using SO.Lists;
 using Sound;
-using Tools;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,30 +20,33 @@ namespace UI
         [SerializeField] private int _mainMenuSceneIndex;
 
         [Header("DI")]
-        [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
-        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
-        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
-        [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
+        [Inject][SerializeField] private GameConfigs _gameConfigs;
+        [Inject][SerializeField] private SceneLoader _sceneLoader;
+        [Inject][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [Inject][SerializeField] private AdsShowManager _adsShowManager;
 
         [Header("Addressables")]
-        [SerializeField] private AssetReferenceAudioClip _loseAudio;
+
+        [Required]
+        [SerializeField] private SimpleSound _loseAudio;
 
         [Header("Components")]
+
+        [Required]
         [SerializeField] private Button _restartButton;
+
+        [Required]
         [SerializeField] private Button _goToMainMenuButton;
 
-        [Space(10)]
+        [Required]
         [SerializeField] private Image _loseInfoBlock;
+
+        [Required]
         [SerializeField] private Image _loseButtonsBlock;
 
-        [Header("Debug")]
-        [SerializeField] private SimpleSound _currentLoseAudio;
-
-        public async override void Initialize()
+        public override void Initialize()
         {
             base.Initialize();
-
-            _currentLoseAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_loseAudio));
         }
 
         public override void Enable(float? duration = null)
@@ -52,7 +56,7 @@ namespace UI
 
             SubscribeToEvents();
 
-            SoundPlayer.instance?.TryPlay(_currentLoseAudio);
+            SoundPlayer.instance?.TryPlay(_loseAudio);
         }
 
         public override void Disable(float? duration = null)
@@ -96,7 +100,7 @@ namespace UI
 
             if (showInterstitial == true)
             {
-                await AsyncHelper.Delay(2000);
+                await AsyncHelper.DelayFloat(2000);
 
                 _adsShowManager?.TryShowInterstitial();
             }

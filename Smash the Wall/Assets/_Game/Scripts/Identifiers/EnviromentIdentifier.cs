@@ -1,24 +1,20 @@
-using Helpers;
 using Interfaces;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Identifiers
 {
     public sealed class EnviromentIdentifier : IdentifierBase, IInitializable
     {
-        [SerializeField] private AssetReferenceMaterial _skyBox;
+        [Required]
+        [SerializeField] private Material _skyBox;
 
-        public async void Initialize()
+        public void Initialize()
         {
-            if(_skyBox == null) return;
-
-            var skyBox = await AddressablesHelper.GetAssetAsync<Material>(_skyBox);
-
-            if (skyBox != null)
+            if (_skyBox != null)
             {
-                RenderSettings.skybox = skyBox;
+                RenderSettings.skybox = _skyBox;
             }
-
         }
     }
 }

@@ -1,14 +1,13 @@
-using DI;
-using Helpers;
+using DependencyInjection;
 using UnityEngine.InputSystem;
 
 namespace Weapons
 {
-    public class ProjectileWeaponBase : WeaponBase
+    public class ProjectileWeaponBase : WeaponBase, IDIDependent
     {
         public override void Initialize()
         {
-            (this as IDIDependent).LoadDependencies();
+            DependencyInjector.InjectDependencies(this);
 
             base.Initialize();
         }

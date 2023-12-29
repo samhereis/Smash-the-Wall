@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Displayers
@@ -6,6 +7,7 @@ namespace Displayers
     public class TrajectoryDisplayer : MonoBehaviour
     {
         [Header("Components")]
+        [Required]
         [SerializeField] private LineRenderer _lineRenderer;
 
         [Header("Settings")]

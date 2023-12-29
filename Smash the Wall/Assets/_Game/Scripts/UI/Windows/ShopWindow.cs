@@ -1,7 +1,4 @@
-using Configs;
-using DI;
-using InGameStrings;
-using ProjectSripts;
+using Sirenix.OdinInspector;
 using UI.Canvases;
 using UI.Elements;
 using UnityEngine;
@@ -12,9 +9,13 @@ namespace UI
     public class ShopWindow : CanvasWindowBase
     {
         [Header("Components")]
-        [SerializeField] private Button _backButton; 
+
+        [Required]
+        [SerializeField] private Button _backButton;
 
         [Header("Shops")]
+
+        [Required]
         [SerializeField] private WeaponsShop _weaponsShop;
 
         protected override void OnDestroy()
@@ -37,7 +38,7 @@ namespace UI
 
             UnsubscribeFromEvents();
 
-            _weaponsShop.Clear();
+            _weaponsShop.Dispose();
         }
 
         protected override void SubscribeToEvents()

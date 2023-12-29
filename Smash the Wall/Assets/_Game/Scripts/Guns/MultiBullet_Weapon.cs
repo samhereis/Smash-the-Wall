@@ -1,7 +1,6 @@
-using DI;
+using DependencyInjection;
 using ECS.Systems.Spawners;
 using Helpers;
-using Interfaces;
 using Sound;
 using System.Collections;
 using UnityEngine;
@@ -9,32 +8,25 @@ using UnityEngine.InputSystem;
 
 namespace Weapons
 {
-    public class MultiBullet_Weapon : ProjectileWeaponBase, IDIDependent, IInitializable
+    public class MultiBullet_Weapon : ProjectileWeaponBase
     {
         [Header("Settings")]
         [SerializeField] private float _rotationSpeed = 1;
         [SerializeField] private float _waitBeforeFire = 2;
         [SerializeField] private float _fireRate = 0.25f;
 
-        [Header("Addressables")]
-        [SerializeField] private AssetReferenceAudioClip _preShootAudio;
-        [SerializeField] private AssetReferenceAudioClip _resetAudio;
-        [SerializeField] private AssetReferenceAudioClip _shootAudio;
+        [Header("Sound")]
+        [SerializeField] private SimpleSound _preShootAudio;
+        [SerializeField] private SimpleSound _resetAudio;
+        [SerializeField] private SimpleSound _shootAudio;
 
-        [Header("Debug")]
-        [SerializeField] private SimpleSound _currentPreShootAudio;
-        [SerializeField] private SimpleSound _currentResetAudio;
-        [SerializeField] private SimpleSound _currentShootAudio;
+        [Inject] private VibrationHelper _vibrationHelper;
 
         private float _currentRotationSpeed;
 
-        private async void OnEnable()
+        private void OnEnable()
         {
             canShoot = false;
-
-            _currentResetAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_resetAudio));
-            _currentShootAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_shootAudio));
-            _currentPreShootAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_preShootAudio));
         }
 
         private void OnDisable()
@@ -70,7 +62,7 @@ namespace Weapons
             _input.input.Player.Fire.canceled -= Fire;
 
             ProjectileiGunBulletSpawner_System.instance.Disable();
-            ProjectileiGunBulletSpawner_System.instance.Clear();
+            ProjectileiGunBulletSpawner_System.instance.Dispose();
         }
 
         protected override void Fire(InputAction.CallbackContext context)
@@ -87,8 +79,8 @@ namespace Weapons
 
                 _trajectoryDisplayer.Enable(shootPosition);
 
-                _soundPlayer.TryPlay(_currentPreShootAudio);
-                VibrationHelper.LightVibration();
+                _soundPlayer.TryPlay(_preShootAudio);
+                _vibrationHelper.LightVibration();
             }
             else
             {
@@ -99,8 +91,8 @@ namespace Weapons
 
                 _trajectoryDisplayer.Disable();
 
-                _soundPlayer.TryPlay(_currentResetAudio);
-                VibrationHelper.LightVibration();
+                _soundPlayer.TryPlay(_resetAudio);
+                _vibrationHelper.LightVibration();
             }
 
             IEnumerator FireCouroutine()
@@ -124,7 +116,7 @@ namespace Weapons
                 canShoot = true;
             }
 
-            _soundPlayer.TryPlay(_currentShootAudio);
+            _soundPlayer.TryPlay(_shootAudio);
         }
     }
 }

@@ -1,8 +1,7 @@
-using Configs;
-using DI;
-using InGameStrings;
+using DependencyInjection;
+using Servies;
+using Sirenix.OdinInspector;
 using SO.Lists;
-using Tools;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,22 +10,35 @@ namespace UI
 {
     public class PauseMenu : CanvasWindowBase
     {
+        [Header("Dependencies")]
+        [SerializeField] private SettingsMenu _settingsWindow;
+        [SerializeField] private GameplayMenu _gameplayWindow;
+
         [Header("DI")]
-        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
-        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [Inject][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [Inject] private SceneLoader _sceneLoader;
 
         [Header("Components")]
-        [SerializeField] private CanvasWindowBase _settingsWindow;
-        [SerializeField] private CanvasWindowBase _gameplayWindow;
 
-        [Space(10)]
+        [Required]
         [SerializeField] private Image _buttonsInfoBlock;
 
-        [Space(10)]
-
+        [Required]
         [SerializeField] private Button _resumeButton;
+
+        [Required]
         [SerializeField] private Button _settingsButton;
+
+        [Required]
         [SerializeField] private Button _mainMenuButton;
+
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            if (_settingsWindow == null) { _settingsWindow = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include); }
+            if (_gameplayWindow == null) { _gameplayWindow = FindFirstObjectByType<GameplayMenu>(FindObjectsInactive.Include); }
+        }
 
         public override void Enable(float? duration = null)
         {

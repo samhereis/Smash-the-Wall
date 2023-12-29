@@ -1,16 +1,16 @@
+using DependencyInjection;
 using DG.Tweening;
-using DI;
 using Helpers;
-using InGameStrings;
 using Managers;
+using Services;
+using Servies;
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using SO.Lists;
 using System.Collections.Generic;
 using TMPro;
-using Tools;
 using UI.Canvases;
-using UI.Helpers;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 namespace UI
@@ -23,35 +23,78 @@ namespace UI
         private const string _falseString = "false";
         private const string _trueStrings = "true";
 
+        // ---
+
         private bool _isFirstTimeInGame => PlayerPrefs.GetString(_isFirstTimeInGameStrings, _trueStrings) == _trueStrings;
         private bool _isAdsConsentOn => PlayerPrefs.GetString(_adsTrackingOnString, _trueStrings) == _trueStrings;
         private bool _isAnalyticsSendingOn => PlayerPrefs.GetString(_analyticsOnString, _trueStrings) == _trueStrings;
 
-        [Header("DI")]
-        [DI(DIStrings.adsManager)][SerializeField] private AdsManager _adsManager;
-        [DI(DIStrings.eventsLogManager)][SerializeField] private EventsLogManager _eventsLogManager;
+        // ---
 
-        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
-        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [FoldoutGroup("Depencencies")]
+        [SerializeField] private List<Sprite> _backgroundSprites = new List<Sprite>();
 
-        [Header("Addressables")]
-        [SerializeField] private List<AssetReferenceSprite> _backgroundSprites = new List<AssetReferenceSprite>();
+        [Inject]
+        [FoldoutGroup("Depencencies/Injected")]
+        [SerializeField, ReadOnly] private AdsManager _adsManager;
 
-        [Header("Components")]
+        [Inject]
+        [FoldoutGroup("Depencencies/Injected")]
+        [SerializeField, ReadOnly] private EventsLogManager _eventsLogManager;
+
+        [Inject]
+        [FoldoutGroup("Depencencies/Injected")]
+        [SerializeField, ReadOnly] private SceneLoader _sceneLoader;
+
+        [Inject]
+        [FoldoutGroup("Depencencies/Injected")]
+        [SerializeField, ReadOnly] private ListOfAllScenes _listOfAllScenes;
+
+        // ---
+
+        [Required]
+        [FoldoutGroup("Components")]
         [SerializeField] private Toggle _adsTrackingConsent;
+
+        [Required]
+        [FoldoutGroup("Components")]
         [SerializeField] private Toggle _analyticsConsent;
+
+        [Required]
+        [FoldoutGroup("Components")]
         [SerializeField] private Button _startButton;
+
+        [Required]
+        [FoldoutGroup("Components")]
         [SerializeField] private Transform _buttonsHolder;
 
-        [Space(10)]
+        [Required]
+        [FoldoutGroup("Components")]
         [SerializeField] private Image _backgroundImage;
+
+        [Required]
+        [FoldoutGroup("Components")]
         [SerializeField] private GridLayoutGroup _gridLayoutGroup;
 
-        [Space()]
+        [Required]
+        [FoldoutGroup("Components")]
         [SerializeField] private TextMeshProUGUI _label;
 
-        [Header("")]
+        // ---
+
+        [Header("Settings")]
+        [Required]
         [SerializeField] private string _labelAfterInit;
+
+        public override void Validate(SelfValidationResult result)
+        {
+            base.Validate(result);
+
+            if (_backgroundSprites.IsNullOrEmpty())
+            {
+                result.AddWarning("Background sprites list is empty");
+            }
+        }
 
         protected override void Awake()
         {
@@ -78,9 +121,9 @@ namespace UI
         {
             base.Enable(duration);
 
-            while (BindDIScene.isGLoballyInjected == false)
+            while (DependencyInjector.isGloballyInjected == false)
             {
-                await AsyncHelper.Delay();
+                await AsyncHelper.Skip();
             }
 
             Initialize();
@@ -98,7 +141,7 @@ namespace UI
                 try
                 {
                     _backgroundSprites.RemoveNulls();
-                    _backgroundImage.sprite = await AddressablesHelper.GetAssetAsync<Sprite>(_backgroundSprites.GetRandom());
+                    _backgroundImage.sprite = _backgroundSprites.GetRandom();
                 }
                 finally
                 {

@@ -289,7 +289,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1317890471217610684}
   - component: {fileID: 634770239336223832}
-  - component: {fileID: 303701050255583610}
   m_Layer: 5
   m_Name: SettingSlider
   m_TagString: Untagged
@@ -331,23 +330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseSettings:
-    ease: 27
     turnOffDuration: 0.2
     turnOnDuration: 0.5
---- !u!114 &303701050255583610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4621446467072730179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa26421a59123624b9b13b378f07da44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _colorSetUnits:
-    _serializedList: []
 --- !u!1 &5288993719525073765
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,17 +440,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0

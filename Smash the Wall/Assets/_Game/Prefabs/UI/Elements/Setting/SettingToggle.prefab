@@ -108,17 +108,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -146,7 +144,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6366484342168314907}
   - component: {fileID: -8175188812853216088}
-  - component: {fileID: 8174159556497066072}
   m_Layer: 5
   m_Name: SettingToggle
   m_TagString: Untagged
@@ -188,23 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseSettings:
-    ease: 27
     turnOffDuration: 0.2
     turnOnDuration: 0.5
---- !u!114 &8174159556497066072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734914336854769636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa26421a59123624b9b13b378f07da44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _colorSetUnits:
-    _serializedList: []
 --- !u!1 &836209881099886622
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,8 +222,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 262.5, y: 0}
-  m_SizeDelta: {x: -525, y: -20}
+  m_AnchoredPosition: {x: 273.39362, y: 0}
+  m_SizeDelta: {x: -546.78723, y: -22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6437529687340510686
 MonoBehaviour:
@@ -527,8 +509,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -45.000015, y: 0}
-  m_SizeDelta: {x: -89.99998, y: 0}
+  m_AnchoredPosition: {x: -46.86749, y: 0}
+  m_SizeDelta: {x: -93.734924, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &315631937648673809
 CanvasRenderer:

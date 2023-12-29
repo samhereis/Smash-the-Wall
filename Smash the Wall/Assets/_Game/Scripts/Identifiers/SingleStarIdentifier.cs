@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ namespace UI.Elements
     public sealed class SingleStarIdentifier : MonoBehaviour
     {
         [Header("Components")]
+        [Required]
         [SerializeField] private Image _starImage;
 
         [Header("Settings")]

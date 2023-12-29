@@ -1,5 +1,5 @@
-using DI;
-using InGameStrings;
+using DependencyInjection;
+using Sirenix.OdinInspector;
 using SO.Lists;
 using UnityEngine;
 
@@ -8,14 +8,15 @@ namespace UI.Elements
     public class StoreButton : MonoBehaviour, IDIDependent
     {
         [Header("DI")]
-        [DI(DIStrings.listOfAllWeapons)][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
+        [Inject][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
 
         [Header("Components")]
+        [Required]
         [SerializeField] private Transform _dot;
 
         private void Awake()
         {
-            (this as IDIDependent).LoadDependencies();
+            DependencyInjector.InjectDependencies(this);
         }
 
         private async void OnEnable()

@@ -1,5 +1,6 @@
-using DI;
+using DependencyInjection;
 using InGameStrings;
+using Sirenix.OdinInspector;
 using SO.DataHolders;
 using Sound;
 using System.Collections;
@@ -13,10 +14,13 @@ namespace Managers.UIManagers
     public class MainMenuUIManager : MonoBehaviour, IDIDependent
     {
         [Header("DI")]
-        [DI(DIStrings.backgrounMusicPlayer)][SerializeField] private BackgroundMusicPlayer _backgroundMusicPlayer;
+        [Inject][SerializeField] private BackgroundMusicPlayer _backgroundMusicPlayer;
 
         [Header("Components")]
+        [Required]
         [SerializeField] private CanvasWindowBase _openOnStart;
+
+        [Required]
         [SerializeField] private SoundsPack_DataHolder _mainMenuSoundsPack;
 
         [Header("Settings")]
@@ -34,14 +38,14 @@ namespace Managers.UIManagers
         {
             _backgroundMusicPlayer?.StopMusic();
 
-            yield return new WaitUntil(() => BindDIScene.isGLoballyInjected == true);
+            yield return new WaitUntil(() => DependencyInjector.isGloballyInjected == true);
 
             foreach (CanvasWindowBase menu in _menus)
             {
                 menu?.Initialize();
             }
 
-            (this as IDIDependent).LoadDependencies();
+            DependencyInjector.InjectDependencies(this);
 
             yield return new WaitForSecondsRealtime(_openOnStartDelay);
 

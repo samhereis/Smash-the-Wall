@@ -1,54 +1,36 @@
-using DI;
+using DependencyInjection;
 using Displayers;
-using Helpers;
-using Identifiers;
-using InGameStrings;
 using Interfaces;
-using PlayerInputHolder;
+using Services;
+using Sirenix.OdinInspector;
 using Sound;
-using System;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.InputSystem;
 
 namespace Weapons
 {
     public abstract class WeaponBase : MonoBehaviour, IInitializable, IHasInput
     {
-        [Header("DI")]
-        [DI(DIStrings.inputHolder)][SerializeField] protected Input_SO _input;
-        [DI(DIStrings.trajectoryDisplayer)][SerializeField] protected TrajectoryDisplayer _trajectoryDisplayer;
+        [SerializeField] protected SoundPlayer _soundPlayer => SoundPlayer.instance;
 
-        [Header("Addressables")]
-        [SerializeField] AssetReferenceGameObject _mesh;
+        [Header("DI")]
+        [Inject][SerializeField] protected InputsService _input;
+        [Inject][SerializeField] protected TrajectoryDisplayer _trajectoryDisplayer;
 
         [Header("Components")]
+        [Required]
         [SerializeField] protected Transform _gunPoint;
+
         [field: SerializeField] public Transform shootPosition { get; protected set; }
 
         [field: SerializeField, Header("Current State")] public bool canShoot { get; protected set; }
-
-        [Header("Debug")]
-        [SerializeField] private WeaponMeshIdentifier _weaponMesh;
-
-        [SerializeField] protected SoundPlayer _soundPlayer => SoundPlayer.instance;
 
         private void OnDisable()
         {
             _trajectoryDisplayer.HideTrajectory();
         }
 
-        private void OnDestroy()
-        {
-            Clear();
-        }
-
         public virtual void Initialize()
-        {
-            ChangeWeaponMesh();
-        }
-
-        protected virtual void OnInitialized()
         {
 
         }
@@ -57,48 +39,6 @@ namespace Weapons
         public abstract void DisableInput();
         protected abstract void Fire(InputAction.CallbackContext context);
         public abstract void OnFired();
-
-        private async void ChangeWeaponMesh()
-        {
-            Clear();
-
-            if (_mesh == null) { return; }
-
-            _weaponMesh = await AddressablesHelper.InstantiateAsync<WeaponMeshIdentifier>(_mesh, parent: transform);
-
-            if (_weaponMesh != null)
-            {
-                _weaponMesh.transform.parent = transform;
-                _weaponMesh.transform.localPosition = Vector3.zero;
-                _weaponMesh.transform.localRotation = Quaternion.identity;
-
-                OnInitialized();
-            }
-        }
-
-        public void Clear()
-        {
-            Delete(_weaponMesh);
-
-            foreach (var weaponMesh in FindObjectsOfType<WeaponMeshIdentifier>(true))
-            {
-                Delete(weaponMesh);
-            }
-
-            void Delete(WeaponMeshIdentifier weaponMesh)
-            {
-                if (weaponMesh == null) { return; }
-
-                try
-                {
-                    AddressablesHelper.DestroyObject(weaponMesh.gameObject);
-                }
-                catch (Exception exception)
-                {
-                    Debug.LogWarning("Could not delete weaponm esh: " + exception.Message);
-                }
-            }
-        }
 
 
         public override string ToString()

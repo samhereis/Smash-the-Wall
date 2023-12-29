@@ -1,5 +1,5 @@
 using Configs;
-using DI;
+using DependencyInjection;
 using ECS.ComponentData.Picture.Piece;
 using Events;
 using Helpers;
@@ -53,10 +53,10 @@ namespace ECS.Systems.GameState
 
         private void InjectDs()
         {
-            _onWin = DIBox.Get<EventWithNoParameters>(DIStrings.onWinEvent);
-            _onLose = DIBox.Get<EventWithNoParameters>(DIStrings.onLoseEvent);
-            _gameConfigs = DIBox.Get<GameConfigs>(DIStrings.gameConfigs);
-            _listOfAllPictures = DIBox.Get<ListOfAllPictures>(DIStrings.listOfAllPictures);
+            _onWin = DependencyInjector.diBox.Get<EventWithNoParameters>(DIStrings.onWinEvent);
+            _onLose = DependencyInjector.diBox.Get<EventWithNoParameters>(DIStrings.onLoseEvent);
+            _gameConfigs = DependencyInjector.diBox.Get<GameConfigs>(DIStrings.gameConfigs);
+            _listOfAllPictures = DependencyInjector.diBox.Get<ListOfAllPictures>(DIStrings.listOfAllPictures);
         }
 
         public void OnUpdate(ref SystemState systemState)

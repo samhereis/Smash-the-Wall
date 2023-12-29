@@ -1,6 +1,6 @@
 using Configs;
-using DI;
-using InGameStrings;
+using DependencyInjection;
+using Sirenix.OdinInspector;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,19 +10,29 @@ namespace UI
     public class SettingsMenu : CanvasWindowBase
     {
         [Header("DI")]
-        [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
+        [Inject][SerializeField] private GameConfigs _gameConfigs;
 
         [Header("Components")]
+
+        [Required]
         [SerializeField] private Button[] _closeButtons;
 
-        [Space(10)]
+        [Required]
         [SerializeField] private Slider _gunRotationSpeed;
+
+        [Required]
         [SerializeField] private Slider _musicVolume;
+
+        [Required]
         [SerializeField] private Slider _soundsVolume;
+
+        [Required]
         [SerializeField] private Toggle _vibrationToggle;
+
+        [Required]
         [SerializeField] private Toggle _randomPictureToggle;
 
-        [Space(10)]
+        [Required]
         [SerializeField] private Image _buttonsInfoBlock;
 
         public override void Initialize()

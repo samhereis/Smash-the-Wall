@@ -224,18 +224,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSoundResponce:
-    _audioClips:
-    - {fileID: 8300000, guid: e3f0f78e3f6420a4e8d3580439f10b2b, type: 3}
-    isMain: 0
-    loop: 0
-    disableOthers: 0
-    volume: 1
-    distance: 50
-  _onOverScale: 0.75
-  _animationDuration: 0.25
-  _playSound: 1
-  _vibrate: 1
 --- !u!114 &4083532283969066130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,12 +254,10 @@ MonoBehaviour:
   _shakeStrenth: 30
   _shakeVibro: 30
   _weaponIdentityiCard:
-    <targetName>k__BackingField: 
-    <target>k__BackingField: {fileID: 0}
+    <icon>k__BackingField: {fileID: 0}
     <isDefault>k__BackingField: 0
     <isUnlocked>k__BackingField: 0
     <opensAtLevel>k__BackingField: 0
-    <icon>k__BackingField: {fileID: 0}
 --- !u!114 &1906610113147830517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,17 +706,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 0
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -856,17 +840,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0

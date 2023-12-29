@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.25
+  m_fontSize: 18.35
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -108,17 +108,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -326,7 +324,6 @@ GameObject:
   - component: {fileID: 6317450205701797496}
   - component: {fileID: 1591043107950706775}
   - component: {fileID: 3407552631497147001}
-  - component: {fileID: 7505881763782281674}
   m_Layer: 5
   m_Name: CommingSoon
   m_TagString: Untagged
@@ -400,7 +397,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2701406762624584769}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ec033025beef2a4fb965d4e756a8347, type: 3}
   m_Name: 
@@ -437,17 +434,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSoundResponce:
-    _audioClips: []
-    isMain: 0
-    loop: 0
-    disableOthers: 0
-    volume: 1
-    distance: 50
-  _onOverScale: 0.9
-  _animationDuration: 0.25
-  _playSound: 1
-  _vibrate: 1
 --- !u!114 &1591043107950706775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,26 +460,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseSettings:
-    ease: 27
     turnOffDuration: 0.2
     turnOnDuration: 0.5
---- !u!114 &7505881763782281674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2701406762624584769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa26421a59123624b9b13b378f07da44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _colorSetUnits:
-    _serializedList:
-    - Key: {fileID: 11400000, guid: fd9275beb52078d41a36970f671f3a12, type: 2}
-      Value:
-      - {fileID: 4456615662701689161}
-    - Key: {fileID: 11400000, guid: de22bf0e1e7e54448808aa0fae1db634, type: 2}
-      Value:
-      - {fileID: 5341432344716273623}

@@ -1,11 +1,11 @@
+using DependencyInjection;
 using DG.Tweening;
-using DI;
 using Events;
 using Helpers;
 using IdentityCards;
-using InGameStrings;
 using Interfaces;
-using PlayerInputHolder;
+using Services;
+using Sirenix.OdinInspector;
 using SO.Lists;
 using UnityEngine;
 using Weapons;
@@ -15,11 +15,12 @@ namespace Spawners
     public class GunSpawner : MonoBehaviour, IDIDependent, ISubscribesToEvents
     {
         [Header("Prefabs")]
-        [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _input;
-        [DI(DIStrings.listOfAllWeapons)][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
-        [DI(DIStrings.onChangedWeapon)][SerializeField] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
+        [Inject][SerializeField] private InputsService _input;
+        [Inject][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
+        [Inject][SerializeField] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
 
         [Header("Components")]
+        [Required]
         [SerializeField] private Transform _parent;
 
         [Header("Debug")]
@@ -27,7 +28,7 @@ namespace Spawners
 
         private void Start()
         {
-            (this as IDIDependent).LoadDependencies();
+            DependencyInjector.InjectDependencies(this);
 
             ChangeWeapon(_listOfAllWeapons.GetCurrentWeapon());
             SubscribeToEvents();
@@ -57,7 +58,7 @@ namespace Spawners
                 DeleteWeapon(weaponBase);
             }
 
-            await AsyncHelper.Delay(0.25f);
+            await AsyncHelper.DelayFloat(0.25f);
 
             _currentWeapon = Instantiate(weapon.target, _parent);
             _currentWeapon.Initialize();

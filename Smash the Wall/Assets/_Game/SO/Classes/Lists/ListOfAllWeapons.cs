@@ -1,29 +1,49 @@
 using Configs;
-using DI;
+using DependencyInjection;
 using DTO;
 using DTO.Save;
 using Helpers;
 using IdentityCards;
-using InGameStrings;
 using Managers;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using Weapons;
 
 namespace SO.Lists
 {
     [CreateAssetMenu(fileName = "ListOfAllWeapons", menuName = "SO/Lists/ListOfAllWeapons")]
-    public class ListOfAllWeapons : ConfigBase, IDIDependent
+    public class ListOfAllWeapons : ConfigBase, IDIDependent, ISelfValidator
     {
+        [Required]
         [field: SerializeField] public List<WeaponIdentityiCard> weapons { get; private set; } = new List<WeaponIdentityiCard>();
 
         [Header("Debug")]
-        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
+        [Inject][SerializeField] private GameSaveManager _gameSaveManager;
         [SerializeField] private Weapons_DTO _weaponSave = new Weapons_DTO();
+
+        public virtual void Validate(SelfValidationResult result)
+        {
+            foreach (var weapon in weapons)
+            {
+                if (weapon.target == null)
+                {
+                    result.AddError("Weapon Identifier at index" + weapons.IndexOf(weapon) + "is broken");
+                }
+                else
+                {
+                    if (weapon.targetName == string.Empty)
+                    {
+                        weapon.Validate();
+                    }
+                }
+            }
+        }
 
         public override void Initialize()
         {
-            (this as IDIDependent).LoadDependencies();
+            DependencyInjector.InjectDependencies(this);
 
             _weaponSave = _gameSaveManager.GetWeaponsSave();
 
@@ -60,7 +80,7 @@ namespace SO.Lists
 
             foreach (var weapon in weapons)
             {
-                await AsyncHelper.Delay();
+                await AsyncHelper.Skip();
 
                 if (weapon.IsToUnlock(levelSave))
                 {

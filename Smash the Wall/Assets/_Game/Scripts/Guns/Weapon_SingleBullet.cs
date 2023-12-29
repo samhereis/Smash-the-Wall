@@ -1,7 +1,8 @@
+using DependencyInjection;
 using DG.Tweening;
-using DI;
 using ECS.Systems.Spawners;
 using Helpers;
+using Sirenix.OdinInspector;
 using Sound;
 using System.Linq;
 using UnityEngine;
@@ -10,9 +11,10 @@ using Weapons;
 
 namespace ProjectSripts
 {
-    public sealed class Weapon_SingleBullet : ProjectileWeaponBase, IDIDependent
+    public sealed class Weapon_SingleBullet : ProjectileWeaponBase, ISelfValidator
     {
         [Header("Componenets")]
+        [Required]
         [SerializeField] private Transform _elasticPart;
 
         [Header("Settings")]
@@ -21,16 +23,18 @@ namespace ProjectSripts
         [SerializeField] private float _resetScaleDuration = 0.25f;
         [SerializeField] private float _shootScaleDuration = 0.1f;
 
-        [Header("Addressables")]
-        [SerializeField] private AssetReferenceAudioClip _elasticStretchAudio;
-        [SerializeField] private AssetReferenceAudioClip _elasticResetAudio;
-        [SerializeField] private AssetReferenceAudioClip _shootAudio;
-
-        [Header("Debug")]
+        [Header("Sounds")]
         [SerializeField] private bool _debug;
-        [SerializeField] private SimpleSound _currentElasticStretchAudio;
-        [SerializeField] private SimpleSound _currentElasticResetAudio;
-        [SerializeField] private SimpleSound _currentShootAudio;
+        [SerializeField] private SimpleSound _elasticStretchAudio;
+        [SerializeField] private SimpleSound _elasticResetAudio;
+        [SerializeField] private SimpleSound _shootAudio;
+
+        [Inject] private VibrationHelper _vibrationHelper;
+
+        public void Validate(SelfValidationResult result)
+        {
+            if (_elasticPart == null) { _elasticPart = GetComponentsInChildren<Transform>().ToList().Find(x => x.gameObject.name == "elastic"); }
+        }
 
         private void OnEnable()
         {
@@ -41,22 +45,6 @@ namespace ProjectSripts
         {
             DisableInput();
             canShoot = false;
-        }
-
-        public override async void Initialize()
-        {
-            base.Initialize();
-
-            _currentElasticStretchAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_elasticStretchAudio));
-            _currentElasticResetAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_elasticResetAudio));
-            _currentShootAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_shootAudio));
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            _elasticPart = GetComponentsInChildren<Transform>().ToList().Find(x => x.gameObject.name == "elastic");
         }
 
         public override void EnableInput()
@@ -81,7 +69,7 @@ namespace ProjectSripts
             canShoot = false;
 
             ProjectileiGunBulletSpawner_System.instance.Disable();
-            ProjectileiGunBulletSpawner_System.instance.Clear();
+            ProjectileiGunBulletSpawner_System.instance.Dispose();
         }
 
         protected override void Fire(InputAction.CallbackContext context)
@@ -105,8 +93,8 @@ namespace ProjectSripts
             {
                 _elasticPart.DOScaleZ(_shootElasticZScalse, _shootScaleDuration);
                 _trajectoryDisplayer.Enable(shootPosition);
-                _soundPlayer.TryPlay(_currentElasticStretchAudio);
-                VibrationHelper.LightVibration();
+                _soundPlayer.TryPlay(_elasticStretchAudio);
+                _vibrationHelper.LightVibration();
             }
             else
             {
@@ -114,16 +102,16 @@ namespace ProjectSripts
 
                 _elasticPart.DOScaleZ(_normalElasticZScalse, _resetScaleDuration);
                 _trajectoryDisplayer.Disable();
-                _soundPlayer.TryPlay(_currentElasticResetAudio);
+                _soundPlayer.TryPlay(_elasticResetAudio);
             }
         }
 
         public override void OnFired()
         {
             canShoot = false;
-            _soundPlayer.TryPlay(_currentShootAudio);
+            _soundPlayer.TryPlay(_shootAudio);
 
-            VibrationHelper.MeduimVibration();
+            _vibrationHelper.MeduimVibration();
         }
     }
 }

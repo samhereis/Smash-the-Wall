@@ -1,5 +1,6 @@
 using ECS.ComponentData;
 using Interfaces;
+using System;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -9,7 +10,7 @@ using Weapons;
 
 namespace ECS.Systems.Spawners
 {
-    public partial struct ProjectileiGunBulletSpawner_System : ISystem, IEnableableSystem, IInitializable<ProjectileWeaponBase>, IClearable
+    public partial struct ProjectileiGunBulletSpawner_System : ISystem, IEnableableSystem, IInitializable<ProjectileWeaponBase>, IDisposable
     {
         public static ProjectileiGunBulletSpawner_System instance { get; private set; }
         public static bool isCurrentlyActive { get; private set; }
@@ -22,7 +23,7 @@ namespace ECS.Systems.Spawners
             _projectileWeapon = projectileWeapon;
         }
 
-        public void Clear()
+        public void Dispose()
         {
             _projectileWeapon = null;
         }

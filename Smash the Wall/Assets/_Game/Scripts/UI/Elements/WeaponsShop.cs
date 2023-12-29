@@ -1,33 +1,36 @@
+using DependencyInjection;
 using DG.Tweening;
-using DI;
 using IdentityCards;
-using InGameStrings;
 using Interfaces;
+using Sirenix.OdinInspector;
 using SO.Lists;
+using System;
 using UnityEngine;
 
 namespace UI.Elements
 {
-    public sealed class WeaponsShop : MonoBehaviour, IDIDependent, IInitializable, IClearable
+    public sealed class WeaponsShop : MonoBehaviour, IDIDependent, IInitializable, IDisposable
     {
-        [DI(DIStrings.listOfAllWeapons)][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
+        [Inject][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
 
         [Header("Prefabs")]
+        [Required]
         [SerializeField] private ShopWeaponUnit _shopWeaponUnitsPrefab;
 
         [Header("Componenets")]
+        [Required]
         [SerializeField] private Transform _shopWeaponUnitsParent;
 
         private void OnDestroy()
         {
-            Clear();
+            Dispose();
         }
 
         public void Initialize()
         {
-            (this as IDIDependent).LoadDependencies();
+            DependencyInjector.InjectDependencies(this);
 
-            Clear();
+            Dispose();
 
             foreach (var weapon in _listOfAllWeapons.weapons)
             {
@@ -43,7 +46,7 @@ namespace UI.Elements
             shopWeaponUnit.transform.DOScale(1, 0.5f).SetEase(Ease.OutBack);
         }
 
-        public void Clear()
+        public void Dispose()
         {
             foreach (ShopWeaponUnit child in GetComponentsInChildren<ShopWeaponUnit>(true))
             {

@@ -1,7 +1,7 @@
-using InGameStrings;
-using DI;
+using DependencyInjection;
 using ECS.ComponentData;
 using Identifiers;
+using Sirenix.OdinInspector;
 using SO.Lists;
 using System.Collections.Generic;
 using Unity.Entities;
@@ -14,7 +14,7 @@ namespace ECS.Authoring
     {
         public struct PictureSpawnData_GameObject
         {
-            public GameObject picture;
+            [Required] public GameObject picture;
             public float3 position;
             public quaternion rotation;
         }
@@ -61,7 +61,10 @@ namespace ECS.Authoring
             }
         }
 
-        [DI(DIStrings.listOfAllPictures)][field: SerializeField] public ListOfAllPictures pictures { get; private set; }
+        [Inject]
+        [field: SerializeField] public ListOfAllPictures pictures { get; private set; }
+
+        [Required]
         [SerializeField] private PicturePlacesIdentifier _picturePlaces;
 
         public List<PictureSpawnData_GameObject> GetPictures()

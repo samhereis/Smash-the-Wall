@@ -197,18 +197,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSoundResponce:
-    _audioClips:
-    - {fileID: 8300000, guid: 9f87c789474605745ad6bf56f1831977, type: 3}
-    isMain: 0
-    loop: 0
-    disableOthers: 0
-    volume: 1
-    distance: 50
-  _onOverScale: 0.75
-  _animationDuration: 0.25
-  _playSound: 1
-  _vibrate: 1
 --- !u!114 &2711109667200621783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +210,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseSettings:
-    ease: 27
     turnOffDuration: 0.2
     turnOnDuration: 0.5

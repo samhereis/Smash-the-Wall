@@ -1,17 +1,16 @@
 using Configs;
 using DataClasses;
-using DI;
+using DependencyInjection;
 using ECS.Systems.GameState;
 using Helpers;
-using InGameStrings;
-using Managers;
+using Services;
+using Servies;
+using Sirenix.OdinInspector;
 using SO.Lists;
 using Sound;
-using Tools;
 using UI.Canvases;
 using UI.Elements;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 using static DataClasses.Enums;
 
@@ -23,42 +22,52 @@ namespace UI
         [SerializeField] private int _mainMenuSceneIndex;
 
         [Header("DI")]
-        [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
-        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
-        [DI(DIStrings.listOfAllPictures)][SerializeField] private ListOfAllPictures _listOfAllPictures;
-        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
-        [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
+        [Inject][SerializeField] private GameConfigs _gameConfigs;
+        [Inject][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [Inject][SerializeField] private ListOfAllPictures _listOfAllPictures;
+        [Inject][SerializeField] private SceneLoader _sceneLoader;
+        [Inject][SerializeField] private AdsShowManager _adsShowManager;
 
         [Header("Addressables")]
-        [SerializeField] AssetReferenceSprite[] _winEmojis;
-        [SerializeField] private AssetReferenceAudioClip _winAudio;
+
+        [Required]
+        [SerializeField] Sprite[] _winEmojis;
+
+        [Required]
+        [SerializeField] private SimpleSound _winAudio;
 
         [Header("Components")]
+
+        [Required]
         [SerializeField] private Button _nextLevelButton;
+
+        [Required]
         [SerializeField] private Button _goToMainMenuButton;
 
-        [Space(10)]
+        [Required]
         [SerializeField] private Image _winInfoBlock;
+
+        [Required]
         [SerializeField] private Image _buttonsInfoBlock;
 
-        [Space(10)]
+        [Required]
         [SerializeField] private Image _winEmoji;
+
+        [Required]
         [SerializeField] private Star_CustomControl _starControl;
 
         [Header("Debug")]
-        [SerializeField] private SimpleSound _currentWinAudio;
 
         private PictureMode _currentPictureMode;
 
-        public override async void Initialize()
+        public override void Initialize()
         {
             base.Initialize();
 
             _currentPictureMode = _listOfAllPictures.GetCurrent().pictureMode;
-            _currentWinAudio.SetAudioClip(await AddressablesHelper.GetAssetAsync<AudioClip>(_winAudio));
         }
 
-        public override async void Enable(float? duration = null)
+        public override void Enable(float? duration = null)
         {
             base.Enable(duration);
 
@@ -82,7 +91,7 @@ namespace UI
                     }
                 case Enums.PictureMode.DestroyWholeObject:
                     {
-                        _winEmoji.sprite = await AddressablesHelper.GetAssetAsync<Sprite>(_winEmojis.GetRandom());
+                        _winEmoji.sprite = _winEmojis.GetRandom();
 
                         _winEmoji.gameObject.SetActive(true);
 
@@ -94,7 +103,7 @@ namespace UI
                     }
             }
 
-            SoundPlayer.instance?.TryPlay(_currentWinAudio);
+            SoundPlayer.instance?.TryPlay(_winAudio);
         }
 
         public override void Disable(float? duration = null)
@@ -154,7 +163,7 @@ namespace UI
 
             if (showInterstitial == true)
             {
-                await AsyncHelper.Delay(2000);
+                await AsyncHelper.DelayInt(1000);
 
                 _adsShowManager?.TryShowInterstitial();
             }

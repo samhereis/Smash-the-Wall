@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GunRotationSpeed
   m_EditorClassIdentifier: 
   _currentValue: 0.1
-  _key: GunRotationSpeed_key
   _defaultValue: 0.1
+  _key: GunRotationSpeed_key

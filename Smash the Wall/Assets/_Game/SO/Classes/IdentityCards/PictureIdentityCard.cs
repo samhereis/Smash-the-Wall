@@ -1,4 +1,5 @@
 using ECS.Authoring;
+using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 using static DataClasses.Enums;
@@ -8,13 +9,20 @@ namespace IdentityCards
     [Serializable]
     public class PictureIdentityCard : IdentityCardBase<PictureAuthoring>
     {
-        [field: SerializeField] public PictureMode pictureMode { get; private set; } = PictureMode.DestroyBorder;
-        [field: SerializeField] public Color borderColor { get; private set; }
+        [ShowInInspector] public PictureMode pictureMode { get; private set; } = PictureMode.DestroyBorder;
+        [ShowInInspector] public Color borderColor { get; private set; }
 
-        public override void AutoSetTargetName()
+        public override void Validate()
         {
-            base.AutoSetTargetName();
-            targetName = targetName + "_" + pictureMode.ToString();
+            base.Validate();
+
+            if (target != null)
+            {
+                targetName = targetName + "_" + pictureMode.ToString();
+
+                if (pictureMode != target.pictureMode) { pictureMode = target.pictureMode; }
+                if (borderColor != target.borderColor) { borderColor = target.borderColor; }
+            }
         }
     }
 }

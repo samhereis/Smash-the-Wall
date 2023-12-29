@@ -1,10 +1,10 @@
 using Configs;
+using DependencyInjection;
 using DG.Tweening;
-using DI;
 using ECS.Systems.GameState;
 using Events;
 using Helpers;
-using InGameStrings;
+using Sirenix.OdinInspector;
 using SO.Lists;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,18 +17,23 @@ namespace Managers.UIManagers
     public class GameplauUIManager : MonoBehaviour, IDIDependent
     {
         [Header("DI")]
-        [DI(DIStrings.onWinEvent)][SerializeField] private EventWithNoParameters _onWin;
-        [DI(DIStrings.onLoseEvent)][SerializeField] private EventWithNoParameters _onLose;
+        [Inject][SerializeField] private EventWithNoParameters _onWin;
+        [Inject][SerializeField] private EventWithNoParameters _onLose;
 
-        [DI(DIStrings.listOfAllPictures)][SerializeField] private ListOfAllPictures _listOfAllPictures;
-        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [Inject][SerializeField] private ListOfAllPictures _listOfAllPictures;
+        [Inject][SerializeField] private ListOfAllScenes _listOfAllScenes;
 
-        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
-        [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
+        [Inject][SerializeField] private GameSaveManager _gameSaveManager;
+        [Inject][SerializeField] private GameConfigs _gameConfigs;
 
         [Header("Components")]
-        [SerializeField] private CanvasWindowBase _openOnStart;
+        [Required]
+        [SerializeField] private CanvasWindowBase _openOnStart; 
+        
+        [Required]
         [SerializeField] private WinMenu _winMenu;
+
+        [Required]
         [SerializeField] private LoseMenu _loseMenu;
 
         [Header("Settings")]
@@ -56,12 +61,12 @@ namespace Managers.UIManagers
 
         private async void Start()
         {
-            (this as IDIDependent).LoadDependencies();
+            DependencyInjector.InjectDependencies(this);
 
             _onWin.AddListener(OnWin);
             _onLose.AddListener(OnLose);
 
-            await AsyncHelper.Delay(_openOnStartDelay);
+            await AsyncHelper.DelayFloat(_openOnStartDelay);
 
             _openOnStart?.Enable();
         }
@@ -94,7 +99,7 @@ namespace Managers.UIManagers
 
                 while (_shouldAnimatetWallMaterial)
                 {
-                    await AsyncHelper.Delay(1);
+                    await AsyncHelper.DelayInt(1);
                 }
 
                 _isAnimationWallMaterial = false;

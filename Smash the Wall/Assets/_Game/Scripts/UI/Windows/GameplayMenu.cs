@@ -1,13 +1,12 @@
 using Configs;
+using DependencyInjection;
 using DG.Tweening;
-using DI;
 using ECS.Systems.GameState;
 using Helpers;
 using Identifiers;
-using InGameStrings;
-using LazyUpdators;
 using Managers;
-using PlayerInputHolder;
+using Services;
+using Sirenix.OdinInspector;
 using SO.Lists;
 using System.Threading.Tasks;
 using TMPro;
@@ -19,40 +18,48 @@ namespace UI
 {
     public class GameplayMenu : CanvasWindowBase
     {
-        [Header("DI")]
-        [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _inputs;
-        [DI(DIStrings.gameConfigs)] private GameConfigs _gameConfigs;
-        [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
-        [DI(DIStrings.lazyUpdator)][SerializeField] private LazyUpdator_SO _lazyUpdator;
-        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
-        [DI(DIStrings.listOfAllPictures)][SerializeField] private ListOfAllPictures _listOfAllPictures;
-
-        [Header("UI Components")]
+        [Header("Dependency")]
         [SerializeField] private PauseMenu _pauseMenu;
         [SerializeField] private ShopWindow _shopWindow;
 
-        [Space(10)]
+        [Header("DI")]
+        [Inject][SerializeField] private InputsService _inputs;
+        [Inject][SerializeField] private GameConfigs _gameConfigs;
+        [Inject][SerializeField] private AdsShowManager _adsShowManager;
+        [Inject][SerializeField] private LazyUpdator_Service _lazyUpdator;
+        [Inject][SerializeField] private GameSaveManager _gameSaveManager;
+        [Inject][SerializeField] private ListOfAllPictures _listOfAllPictures;
+
+        [Header("UI Components")]
+
+        [Required]
         [SerializeField] private Button _pauseButton;
+
+        [Required]
         [SerializeField] private Button _shopsButton;
 
-        [Space(10)]
+        [Required]
         [SerializeField] private Slider _whatNeedsToBeDestroyedProgressbar;
-        [SerializeField] private Image _whatNeedsToBeDestroyedProgressbarFillImage;
 
-        [Space(10)]
+        [Required]
         [SerializeField] private Slider _whatNeedsToStayProgressbar;
-        [SerializeField] private Image _whatNeedsToStayProgressbarFillImage;
 
-        [Space(10)]
+        [Required]
         [SerializeField] private TextMeshProUGUI _currentLevelText;
 
         [Header("Settings")]
         [SerializeField] private Gradient _whatNeedsToBeDestroyedProgressbarGradient;
         [SerializeField] private Gradient _whatNeedsToStayProgressbarGradient;
 
+        private Image _whatNeedsToBeDestroyedProgressbarFillImage;
+        private Image _whatNeedsToStayProgressbarFillImage;
+
         public override void Initialize()
         {
             base.Initialize();
+
+            if (_pauseMenu == null) { _pauseMenu = FindFirstObjectByType<PauseMenu>(FindObjectsInactive.Include); }
+            if (_shopWindow == null) { _shopWindow = FindFirstObjectByType<ShopWindow>(FindObjectsInactive.Include); }
 
             _whatNeedsToBeDestroyedProgressbarFillImage = _whatNeedsToBeDestroyedProgressbar.fillRect.GetComponent<Image>();
             var _whatNeedsToBeDestroyedProgressbarGradientKeys = _whatNeedsToBeDestroyedProgressbarGradient.colorKeys;
@@ -157,7 +164,7 @@ namespace UI
             TryUpdatereWhatNeedsToBeDestroyProgressBar();
             TryUpdatereWhatNeedsToStayProgressBar();
 
-            await AsyncHelper.Delay(100);
+            await AsyncHelper.DelayFloat(100);
         }
 
         private void TryUpdatereWhatNeedsToBeDestroyProgressBar()

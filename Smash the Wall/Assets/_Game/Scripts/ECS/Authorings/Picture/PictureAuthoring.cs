@@ -1,11 +1,16 @@
 using ECS.ComponentData.Picture;
+using Sirenix.OdinInspector;
 using Unity.Entities;
 using UnityEngine;
+using static DataClasses.Enums;
 
 namespace ECS.Authoring
 {
     public class PictureAuthoring : MonoBehaviour
     {
+        [ShowInInspector] public PictureMode pictureMode = PictureMode.DestroyBorder;
+        [ShowInInspector] public Color borderColor = Color.cyan;
+
         public class ShootBulletBaker : Baker<PictureAuthoring>
         {
             public override void Bake(PictureAuthoring authoring)
@@ -17,8 +22,8 @@ namespace ECS.Authoring
             }
         }
 
-        [ContextMenu(nameof(Validate))]
-        public void Validate()
+        [Button]
+        private void Validate()
         {
             foreach (var childTransformAuthoring in GetComponentsInChildren<PicturePieceAuthoring>(true))
             {

@@ -1,11 +1,11 @@
-using DI;
+using DependencyInjection;
 using Helpers;
-using InGameStrings;
 using Managers;
+using Servies;
+using Sirenix.OdinInspector;
 using SO.DataHolders;
 using SO.Lists;
 using Sound;
-using Tools;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,20 +16,32 @@ namespace UI
     public class MainMenu : CanvasWindowBase
     {
         [Header("DI")]
-        [DI(DIStrings.listOfAllScenes)][SerializeField] private ListOfAllScenes _listOfAllScenes;
-        [DI(DIStrings.sceneLoader)][SerializeField] private SceneLoader _sceneLoader;
-        [DI(DIStrings.backgrounMusicPlayer)][SerializeField] private BackgroundMusicPlayer _backgroundMusicPlayer;
+        [Inject][SerializeField] private ListOfAllScenes _listOfAllScenes;
+        [Inject][SerializeField] private SceneLoader _sceneLoader;
+        [Inject][SerializeField] private BackgroundMusicPlayer _backgroundMusicPlayer;
+
+        [Header("Dependencies")]
+
+        [SceneObjectsOnly]
+        [SerializeField] private SettingsMenu _settingsMenu;
 
         [Header("Components")]
-        [SerializeField] private SettingsMenu _settingsMenu;
+
+        [Required]
         [SerializeField] private SoundsPack_DataHolder _mainMenuSoundsPack;
 
-        [Space(10)]
+        [Required]
         [SerializeField] private Image _buttonsInfoBlock;
 
         [Header("Buttons")]
+
+        [Required]
         [SerializeField] private Button _playButton;
+
+        [Required]
         [SerializeField] private Button _settingsButton;
+
+        [Required]
         [SerializeField] private Button _quitButton;
 
         public override void Enable(float? duration = null)
@@ -85,7 +97,7 @@ namespace UI
         {
             backgroundMusicPlayer.StopMusic();
 
-            await AsyncHelper.Delay(2f);
+            await AsyncHelper.DelayFloat(2f);
 
             backgroundMusicPlayer.PlayMusic(soundsPack);
         }

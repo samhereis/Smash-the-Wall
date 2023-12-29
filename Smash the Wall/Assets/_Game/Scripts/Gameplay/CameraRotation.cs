@@ -1,7 +1,7 @@
 using Configs;
-using DI;
-using InGameStrings;
-using PlayerInputHolder;
+using DependencyInjection;
+using Services;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,12 +11,15 @@ namespace Gameplay
     {
         public float _gunRotationSpeed => _gameConfigs == null ? 0.2f : _gameConfigs.gameSettings.gunRotationSpeed.currentValue;
 
+        [Required]
         [SerializeField] private Transform _xRotatedObject;
+
+        [Required]
         [SerializeField] private Transform _yRotatedObject;
 
         [Header("DI")]
-        [DI(DIStrings.inputHolder)][SerializeField] private Input_SO _inputsHolder;
-        [DI(DIStrings.gameConfigs)][SerializeField] private GameConfigs _gameConfigs;
+        [Inject][SerializeField] private InputsService _inputsHolder;
+        [Inject][SerializeField] private GameConfigs _gameConfigs;
 
         private float _mouseX;
         private float _mouseY;
@@ -25,7 +28,7 @@ namespace Gameplay
 
         private void OnEnable()
         {
-            (this as IDIDependent).LoadDependencies();
+            DependencyInjector.InjectDependencies(this);
 
             _inputsHolder.input.Player.Look.performed += Look;
             _inputsHolder.input.Player.Look.canceled += Look;

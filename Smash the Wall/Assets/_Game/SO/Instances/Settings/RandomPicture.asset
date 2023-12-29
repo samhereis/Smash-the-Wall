@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RandomPicture
   m_EditorClassIdentifier: 
   _currentValue: 0
+  _defaultValue: 0
   _key: RandomPicture_key
-  _defaultValue: false
   _trueValue: true
   _falseValue: false

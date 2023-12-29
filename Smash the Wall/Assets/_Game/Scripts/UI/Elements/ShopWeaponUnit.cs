@@ -1,11 +1,12 @@
+using DependencyInjection;
 using DG.Tweening;
-using DI;
 using Events;
 using Helpers;
 using IdentityCards;
-using InGameStrings;
 using Interfaces;
 using Managers;
+using Services;
+using Sirenix.OdinInspector;
 using SO.Lists;
 using TMPro;
 using UnityEngine;
@@ -16,24 +17,35 @@ namespace UI.Elements
     public sealed class ShopWeaponUnit : MonoBehaviour, IDIDependent, IInitializable<WeaponIdentityiCard>
     {
         [Header("DI")]
-        [DI(DIStrings.onChangedWeapon)][SerializeField] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
-        [DI(DIStrings.listOfAllWeapons)][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
-        [DI(DIStrings.adsShowManager)][SerializeField] private AdsShowManager _adsShowManager;
-        [DI(DIStrings.gameSaveManager)][SerializeField] private GameSaveManager _gameSaveManager;
+        [Inject][SerializeField] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
+        [Inject][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
+        [Inject][SerializeField] private AdsShowManager _adsShowManager;
+        [Inject][SerializeField] private GameSaveManager _gameSaveManager;
 
         [Header("Components")]
+        [Required]
         [SerializeField] private Image _weaponImage;
+
+        [Required]
         [SerializeField] private Image _tapToGetImage;
+
+        [Required]
         [SerializeField] private Image _lockImage;
 
         [Space(10)]
+        [Required]
         [SerializeField] private TextMeshProUGUI _label;
 
         [Space(10)]
+        [Required]
         [SerializeField] private Button _itemButton;
 
         [Space(10)]
+        [Required]
         [SerializeField] private Transform _holder;
+
+
+        [Required]
         [SerializeField] private Transform _getHolder;
 
         [Header("Settings")]
@@ -59,7 +71,7 @@ namespace UI.Elements
 
         public void Initialize(WeaponIdentityiCard weaponIdentityiCard)
         {
-            (this as IDIDependent).LoadDependencies();
+            DependencyInjector.InjectDependencies(this);
 
             _weaponIdentityiCard = weaponIdentityiCard;
 
@@ -134,7 +146,7 @@ namespace UI.Elements
             _onChangedWeapon?.Invoke(_weaponIdentityiCard);
             _listOfAllWeapons.ChooseWeapon(_weaponIdentityiCard);
 
-            await AsyncHelper.Delay(1f);
+            await AsyncHelper.DelayFloat(1f);
             _canShoose = true;
         }
 

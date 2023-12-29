@@ -47,28 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <provider>k__BackingField: 1
   <adProvider>k__BackingField: {fileID: 0}
-  _ironSource: 0
-  _adColony: 0
-  _maxSdk: 0
-  _tapjoy: 0
-  _vungle: 0
-  _unityAds: 0
-  _myTarget: 0
-  _dtExchange: 0
-  _chartboost: 0
-  _admob_Android:
-    <appOpenId>k__BackingField: ca-app-pub-7071298273844005/2400885400
-    <interstitialId>k__BackingField: ca-app-pub-7071298273844005/3954705887
-    <rewardedId>k__BackingField: ca-app-pub-7071298273844005/9704660353
-    <bannerId>k__BackingField: ca-app-pub-7071298273844005/9896232044
-    <adapterDebug>k__BackingField: 
-  _admob_Ios:
-    <appOpenId>k__BackingField: 
-    <interstitialId>k__BackingField: 
-    <rewardedId>k__BackingField: 
-    <bannerId>k__BackingField: 
-    <adapterDebug>k__BackingField: 
-  _dontDestroyOnLoad: 1
   _initializeOnStart: 1
   _initializeOnSetConsent: 1
   _defaultAppOpenAdDelay: 60
@@ -104,9 +82,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3209343878217277981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a91fde9939d7c8c43bd6c59b8df59dfe, type: 3}
+  m_Script: {fileID: 11500000, guid: b6e825d1bbec8864caf050c2493e5309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _adsManager: {fileID: 0}
+  _adsManager: {fileID: 6890465247782482409}
   _openAppCountToShowAppOpenAdd: 1
+  _allowAppOpenInEditor: 1
   _appOpenCount: 0

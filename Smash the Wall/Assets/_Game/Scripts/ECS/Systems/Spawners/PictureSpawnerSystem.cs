@@ -1,10 +1,9 @@
 using Configs;
-using DI;
+using DependencyInjection;
 using ECS.ComponentData;
 using ECS.ComponentData.Other;
 using ECS.ComponentData.Picture.Piece;
 using Helpers;
-using InGameStrings;
 using SO.Lists;
 using System;
 using Unity.Entities;
@@ -28,8 +27,8 @@ namespace ECS.Systems.Spawners
         {
             _isActive = true;
 
-            _listOfAllPictures = DIBox.Get<ListOfAllPictures>(DIStrings.listOfAllPictures);
-            _gameConfigs = DIBox.Get<GameConfigs>(DIStrings.gameConfigs);
+            _listOfAllPictures = DependencyInjector.diBox.Get<ListOfAllPictures>();
+            _gameConfigs = DependencyInjector.diBox.Get<GameConfigs>();
         }
 
         public void Disable()
@@ -40,13 +39,13 @@ namespace ECS.Systems.Spawners
         private async void Inject()
         {
 
-            while (BindDIScene.isGLoballyInjected == false)
+            while (DependencyInjector.isGloballyInjected == false)
             {
-                await AsyncHelper.Delay();
+                await AsyncHelper.Skip();
             }
 
-            _listOfAllPictures = DIBox.Get<ListOfAllPictures>(DIStrings.listOfAllPictures);
-            _gameConfigs = DIBox.Get<GameConfigs>(DIStrings.gameConfigs);
+            _listOfAllPictures = DependencyInjector.diBox.Get<ListOfAllPictures>();
+            _gameConfigs = DependencyInjector.diBox.Get<GameConfigs>();
         }
 
         public void OnCreate(ref SystemState state)

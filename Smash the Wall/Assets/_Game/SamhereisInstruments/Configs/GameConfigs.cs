@@ -1,3 +1,4 @@
+using DependencyInjection;
 using Helpers;
 using Interfaces;
 using Settings;
@@ -5,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using static Managers.GameSaveManager;
 
 namespace Configs
 {
@@ -26,7 +26,7 @@ namespace Configs
         }
 
         [Serializable]
-        public class GameSettings : IInitializable
+        public class GameSettings : IInitializable, IDIDependent
         {
             [field: SerializeField, Header("Settings")] public FloatSavable_SO gunRotationSpeed { get; private set; }
             [field: SerializeField] public FloatSavable_SO musicValue { get; private set; }
@@ -41,6 +41,8 @@ namespace Configs
 
             [field: SerializeField, Header("Audio Mixer")] public AudioMixer audioMixer { get; private set; }
 
+            [Inject] private VibrationHelper _vibrationHelper;
+
             [Serializable]
             public class WinLoseStarSettings
             {
@@ -50,6 +52,8 @@ namespace Configs
 
             public void Initialize()
             {
+                DependencyInjector.InjectDependencies(this);
+
                 gunRotationSpeed.Initialize();
                 musicValue.Initialize();
                 soundsVolume.Initialize();
@@ -89,7 +93,7 @@ namespace Configs
             public void SetVibroEnabled(bool isVibroEnabledNewValue)
             {
                 vibroSettings.SetData(isVibroEnabledNewValue);
-                VibrationHelper.SetActive(isVibroEnabledNewValue);
+                _vibrationHelper.SetActive(isVibroEnabledNewValue);
             }
 
             public void SetRamdonPicturesEnabled(bool ramdonPicturesNewValue)

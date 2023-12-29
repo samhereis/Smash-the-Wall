@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SoundsVolume
   m_EditorClassIdentifier: 
   _currentValue: -10
-  _key: SoundsVolume_key
   _defaultValue: -10
+  _key: SoundsVolume_key

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class ShopWindow : CanvasWindowBase
+    public class ShopWindow : MenuBase
     {
         [Header("Components")]
 

@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SO.DataHolders
@@ -6,6 +5,6 @@ namespace SO.DataHolders
     //[CreateAssetMenu(fileName = "ADataHolder", menuName = "Scriptables/DataHolders/ADataHolder")]
     public abstract class DataHolder_Base<T> : ScriptableObject
     {
-        [ShowInInspector] public virtual T data { get; protected set; } = default(T);
+        [field: SerializeField] public virtual T data { get; protected set; } = default(T);
     }
 }

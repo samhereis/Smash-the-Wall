@@ -18,7 +18,7 @@ namespace Authorization.Data.Input
             if (StringHelper.IsNickName(nickName) == false)
             {
                 isCorrect = false;
-                MessageToUser.instance.Log("Invalid nickname");
+                MessageToUserMenu.instance.Log("Invalid nickname");
             }
             else
             {

@@ -11,12 +11,18 @@ namespace IdentityCards
     [Serializable]
     public class WeaponIdentityiCard : IdentityCardBase<WeaponBase>, IInitializable<AWeapon_DTO>
     {
-        [Required]
-        [field: SerializeField] public Sprite icon { get; private set; }
+        [field: SerializeField, HorizontalGroup("Row1"), VerticalGroup("Row1/Column1")]
+        public bool isDefault { get; private set; } = false;
 
-        [field: SerializeField] public bool isDefault { get; private set; } = false;
-        [field: SerializeField] public bool isUnlocked { get; private set; } = false;
-        [field: SerializeField] public int opensAtLevel { get; private set; } = 0;
+        [field: SerializeField, HorizontalGroup("Row1"), VerticalGroup("Row1/Column1")]
+        public bool isUnlocked { get; private set; } = false;
+
+        [field: SerializeField, HorizontalGroup("Row1"), VerticalGroup("Row1/Column1")]
+        public int opensAtLevel { get; private set; } = 0;
+
+        [Required]
+        [field: SerializeField, HorizontalGroup("Row1", width: 0.2f), VerticalGroup("Row1/Column2"), PreviewField(Height = 55), HideLabel]
+        public Sprite icon { get; private set; }
 
         public void Initialize(AWeapon_DTO weapon_DTO)
         {

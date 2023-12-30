@@ -5,14 +5,11 @@ using UnityEngine;
 using Services.Providers;
 using Helpers;
 using System.Threading;
-using UnityEditor.Build;
 using System.Threading.Tasks;
-
-
-
 
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEditor.Build;
 #endif
 
 namespace Services
@@ -419,7 +416,7 @@ namespace Services
             while (_isAdTrackingConsentValueSet == false) await AsyncHelper.Skip();
 
             Settings settings = null;
-            settings.ToString();
+            settings?.ToString();
 
 #if ADMOB
 

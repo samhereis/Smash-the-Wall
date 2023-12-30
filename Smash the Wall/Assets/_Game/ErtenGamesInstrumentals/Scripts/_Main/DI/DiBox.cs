@@ -11,10 +11,15 @@ namespace DependencyInjection
     [Serializable]
     public class DIBox
     {
-        [ShowInInspector] private readonly Dictionary<Type, Dictionary<string, object>> _dictionarySingle = new();
-        [ShowInInspector] private ILogger _logger;
+        [ShowInInspector, ReadOnly] private readonly Dictionary<Type, Dictionary<string, object>> _dictionarySingle = new();
+        [ShowInInspector, ReadOnly] private Loggers.ILogger _logger;
 
-        public DIBox(ILogger logger)
+        public DIBox()
+        {
+
+        }
+
+        public DIBox(Loggers.ILogger logger)
         {
             _logger = logger;
         }
@@ -24,21 +29,44 @@ namespace DependencyInjection
             _dictionarySingle.Clear();
         }
 
-        public void Add<T>(T instance, string id = "")
-        {
-            if (instance == null) Debug.LogWarning($"Instance is null - type {instance.GetType()}");
+        #region Contains
 
-            AddToDictionary(instance, id, instance.GetType());
+        public bool Contains<T>(string id = "", bool logErrors = true)
+        {
+            if (_dictionarySingle.ContainsKey(typeof(T)) == false) { return false; }
+            if (_dictionarySingle[typeof(T)].ContainsKey(id) == false) { return false; }
+
+            return true;
         }
 
-        public void Add(Object instance, string id = "")
+        public bool Contains(Type type, string id = "", bool logErrors = true)
         {
-            if (instance == null) Debug.LogWarning($"Instance is null");
+            if (_dictionarySingle.ContainsKey(type) == false) { return false; }
+            if (_dictionarySingle[type].ContainsKey(id) == false) { return false; }
 
-            Type typeInstance = instance.GetType();
-
-            AddToDictionary(instance, id, typeInstance);
+            return true;
         }
+
+        #endregion
+
+        #region Contains
+
+        public void Add<T>(T instance, string id = "", bool force = false, bool asTypeProvided = false)
+        {
+            if (instance == null) _logger.LogWarning($"Instance is null - type {instance.GetType()} || Id: '{id}'");
+
+            if (force == false)
+            {
+                if (Contains<T>(id) == true) { return; }
+            }
+
+            if (asTypeProvided == true) { AddToDictionary(instance, id, typeof(T)); }
+            else { AddToDictionary(instance, id, instance.GetType()); }
+        }
+
+        #endregion
+
+        #region Contains
 
         public void Remove<T>(string id = "") where T : class
         {
@@ -46,11 +74,9 @@ namespace DependencyInjection
             {
                 _dictionarySingle[typeof(T)].Remove(id);
 
-                _logger?.Log($"Removed from DI - Type: {typeof(T)} - Id: '{id}'");
-            }
-            if (_dictionarySingle.Count == 0)
-            {
-                _dictionarySingle.Remove(typeof(T));
+                _logger?.Log($"Removed from DI - Type: {typeof(T)} || Id: '{id}'");
+
+                if (_dictionarySingle[typeof(T)].Count == 0) { _dictionarySingle.Remove(typeof(T)); }
             }
         }
 
@@ -59,32 +85,28 @@ namespace DependencyInjection
             if (_dictionarySingle.ContainsKey(type))
             {
                 _dictionarySingle[type].Remove(id);
-                _logger?.Log($"Removed from DI - Type: {type} - Id: '{id}'");
-            }
-            if (_dictionarySingle.Count == 0)
-            {
-                _dictionarySingle.Remove(type);
+                _logger?.Log($"Removed from DI - Type: {type} || Id: '{id}'");
+
+                if (_dictionarySingle[type].Count == 0) { _dictionarySingle.Remove(type); }
             }
         }
+
+        #endregion
+
+        #region Contains
 
         public T Get<T>(string id = "", bool logErrors = true) where T : class
         {
             if (_dictionarySingle.ContainsKey(typeof(T)) == false)
             {
-                if (logErrors == true)
-                {
-                    Debug.LogWarning($"DI container does not contain this type  - Type: {typeof(T)}");
-                }
+                if (logErrors == true) { _logger.LogWarning($"DI container does not contain this type  - Type: {typeof(T)} || Id: '{id}'"); }
 
                 return null;
             }
 
             if (_dictionarySingle[typeof(T)].ContainsKey(id) == false)
             {
-                if (logErrors == true)
-                {
-                    Debug.LogWarning($"The container does not contain under this ID - Type: {typeof(T)} \\ Id: '{id}'");
-                }
+                if (logErrors == true) { _logger.LogWarning($"The container does not contain under this ID - Type: {typeof(T)} || Id: '{id}'"); }
 
                 return null;
             }
@@ -96,26 +118,22 @@ namespace DependencyInjection
         {
             if (_dictionarySingle.ContainsKey(type) == false)
             {
-                if (logErrors == true)
-                {
-                    Debug.LogWarning($"DI container does not contain this type  - Type: {type}");
-                }
+                if (logErrors == true) { _logger.LogWarning($"DI container does not contain this type  - Type: {type} || Id: '{id}'"); }
 
                 return null;
             }
 
             if (_dictionarySingle[type].ContainsKey(id) == false)
             {
-                if (logErrors == true)
-                {
-                    Debug.LogWarning($"The container does not contain under this ID - Type: {type} \\ Id: '{id}'");
-                }
+                if (logErrors == true) { _logger.LogWarning($"The container does not contain under this ID - Type: {type} || Id: '{id}'"); }
 
                 return null;
             }
 
             return _dictionarySingle[type][id];
         }
+
+        #endregion
 
         public void InjectDataTo(Object obj)
         {
@@ -165,13 +183,16 @@ namespace DependencyInjection
                 if (_dictionarySingle[typeInstance].ContainsValue(id) == false)
                 {
                     _dictionarySingle[typeInstance].Add(id, instance);
-                    _logger?.Log($"Added to DI - Type: {typeInstance}- Id: '{id}'");
+
+                    _logger?.Log($"Added to DI - Type: {typeInstance} - Id: '{id}'");
                 }
             }
             else
             {
                 _dictionarySingle.Add(typeInstance, new Dictionary<string, object>());
                 _dictionarySingle[typeInstance].Add(id, instance);
+
+                _logger?.Log($"Added to DI - Type: {typeInstance} - Id: '{id}'");
             }
         }
     }

@@ -6,13 +6,13 @@ namespace Feature.VisionCone
     public class VisionCone : MonoBehaviour
     {
         [Required]
-        [FoldoutGroup("Components"), ShowInInspector] private Material _visionConeMaterial;
+        [FoldoutGroup("Components"), SerializeField] private Material _visionConeMaterial;
 
-        [FoldoutGroup("Settings"), ShowInInspector] private float _visionRange;
-        [FoldoutGroup("Settings"), ShowInInspector] private float _visionAngle;
-        [FoldoutGroup("Settings"), ShowInInspector] private int _visionConeResolution = 120;
+        [FoldoutGroup("Settings"), SerializeField] private float _visionRange;
+        [FoldoutGroup("Settings"), SerializeField] private float _visionAngle;
+        [FoldoutGroup("Settings"), SerializeField] private int _visionConeResolution = 120;
 
-        [ShowInInspector] private LayerMask _visionObstructingLayer;
+        [SerializeField] private LayerMask _visionObstructingLayer;
 
         private Mesh _visionConeMesh;
         private MeshFilter _meshFilter;

@@ -1,10 +1,11 @@
-#if NewtonsoftInstalled
-
 using DataClasses;
-using Newtonsoft.Json;
 using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
+
+#if NewtonsoftInstalled
+using Newtonsoft.Json;
+#endif
 
 namespace Helpers
 {
@@ -31,7 +32,11 @@ namespace Helpers
 
             FileStream fileSteam = new FileStream(path + fileName + ".json", FileMode.Create);
 
-            var json = JsonConvert.SerializeObject(objectToSave);
+            string json = string.Empty;
+
+#if NewtonsoftInstalled
+            json = JsonConvert.SerializeObject(objectToSave);
+#endif
 
             using (StreamWriter writer = new StreamWriter(fileSteam))
             {
@@ -55,7 +60,11 @@ namespace Helpers
 
             FileStream fileSteam = new FileStream(path + fileName + ".json", FileMode.Create);
 
-            var json = JsonConvert.SerializeObject(objectToSave);
+            string json = string.Empty;
+
+#if NewtonsoftInstalled
+            json = JsonConvert.SerializeObject(objectToSave);
+#endif
 
             using (StreamWriter writer = new StreamWriter(fileSteam))
             {
@@ -88,14 +97,18 @@ namespace Helpers
             {
                 using (StreamReader reader = new StreamReader(file))
                 {
+#if NewtonsoftInstalled
                     result = JsonConvert.DeserializeObject<T>(await reader.ReadToEndAsync());
 
                     Debug.Log("Got: " + JsonConvert.SerializeObject(result));
+#endif
                 }
             }
 
 #if UNITY_2023_2_OR_NEWER
             await Awaitable.MainThreadAsync();
+#else
+            await AsyncHelper.Skip();
 #endif
 
             return result;
@@ -114,9 +127,11 @@ namespace Helpers
             {
                 using (StreamReader reader = new StreamReader(file))
                 {
+#if NewtonsoftInstalled
                     result = JsonConvert.DeserializeObject<T>(reader.ReadToEnd());
 
                     Debug.Log("Got: " + JsonConvert.SerializeObject(result));
+#endif
                 }
             }
 
@@ -125,12 +140,24 @@ namespace Helpers
 
         public static string ToJson<T>(T obj)
         {
-            return JsonConvert.SerializeObject(obj);
+            string json = string.Empty;
+
+#if NewtonsoftInstalled
+            json = JsonConvert.SerializeObject(obj);
+#endif
+
+            return json;
         }
 
         public static T FromJson<T>(string obj)
         {
-            return JsonConvert.DeserializeObject<T>(obj);
+            T result = default(T);
+
+#if NewtonsoftInstalled
+            result = JsonConvert.DeserializeObject<T>(obj);
+#endif
+
+            return result;
         }
 
         private static string GetFullFolderName(string folder)
@@ -139,5 +166,3 @@ namespace Helpers
         }
     }
 }
-
-#endif

@@ -1,6 +1,6 @@
 namespace Sirenix.OdinInspector
 {
-#if IdinInspectorInstalled == false
+#if OdinInspectorInstalled == false
     public class FoldoutGroupAttribute : System.Attribute
     {
         public FoldoutGroupAttribute(string groupName, float order = 0)

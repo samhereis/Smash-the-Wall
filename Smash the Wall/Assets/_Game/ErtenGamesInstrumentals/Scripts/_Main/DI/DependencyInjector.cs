@@ -1,6 +1,8 @@
 ﻿using Configs;
 using Events;
+using Helpers;
 using Interfaces;
+using Loggers;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEditor;
@@ -8,21 +10,25 @@ using UnityEngine;
 
 namespace DependencyInjection
 {
-    public class DependencyInjector : MonoBehaviour
+    public class DependencyInjector : MonoBehaviour, ISelfValidator
     {
-        [ShowInInspector] public static bool isGloballyInjected { get; private set; } = false;
-        [ShowInInspector, ReadOnly] private bool _isGlobal = false;
+        [FoldoutGroup("Debug"), ShowInInspector, ReadOnly] public static bool isGloballyInjected { get; private set; } = false;
 
-        [FoldoutGroup("Objects To DI"), ShowInInspector] private Dictionary<string, Component> _objects = new();
-        [FoldoutGroup("Objects To DI"), ShowInInspector] private Dictionary<string, ConfigBase> _configs = new();
-        [FoldoutGroup("Objects To DI"), ShowInInspector] private Dictionary<string, ScriptableObject> _scriptableObjects = new();
-        [FoldoutGroup("Objects To DI"), ShowInInspector] private Dictionary<string, EventWithNoParameters> _eventsWithNoParameters = new();
+        [SerializeField] private bool _isGlobal = false;
 
-        [FoldoutGroup("Debug"), ShowInInspector] private HardCodeDependencyInjectorBase[] _hardCodeDependencyInjectors;
-        [FoldoutGroup("Debug"), ShowInInspector] public bool isInjected { get; private set; } = false;
+        [FoldoutGroup("Objects To DI"), SerializeField] private List<Dependency_DTO<Component>> _objects = new();
+        [FoldoutGroup("Objects To DI"), SerializeField] private List<Dependency_DTO<ConfigBase>> _configs = new();
+        [FoldoutGroup("Objects To DI"), SerializeField] private List<Dependency_DTO<ScriptableObject>> _scriptableObjects = new();
 
-        [ShowInInspector] private ILogger _diLogger;
-        [ShowInInspector] public static DIBox diBox { get; private set; }
+        [ListDrawerSettings(ListElementLabelName = ("eventName"))]
+        [FoldoutGroup("Objects To DI"), SerializeField] private List<EventWithNoParameters> _eventsWithNoParameters = new();
+
+        [Required]
+        [FoldoutGroup("Objects To DI"), SerializeField] private LoggerBase _diLogger;
+
+        [FoldoutGroup("Debug"), SerializeField] private HardCodeDependencyInjectorBase[] _hardCodeDependencyInjectors;
+        [FoldoutGroup("Debug"), SerializeField, ReadOnly] public bool isInjected { get; private set; } = false;
+        [FoldoutGroup("Debug"), ShowInInspector, ReadOnly] public static DIBox diBox { get; private set; } = new DIBox();
 
         private void Awake()
         {
@@ -37,7 +43,6 @@ namespace DependencyInjection
 
             Clear();
             Inject();
-            InitAll();
 
             if (_isGlobal == true)
             {
@@ -46,25 +51,23 @@ namespace DependencyInjection
                 transform.parent = null;
                 DontDestroyOnLoad(gameObject);
             }
+
+            InitAll();
         }
 
         private void OnDestroy()
         {
+            Clear();
 
 #if UNITY_EDITOR
 
             if (EditorApplication.isPlayingOrWillChangePlaymode == false && EditorApplication.isPlaying)
             {
                 Debug.Log("Exiting playmode.");
-                Clear();
+                diBox = new();
             }
 
 #endif
-
-            if (_isGlobal == false)
-            {
-                Clear();
-            }
         }
 
         public static void InjectDependencies(IDIDependent dIDependent)
@@ -76,34 +79,22 @@ namespace DependencyInjection
         {
             foreach (var objectToInject in _objects)
             {
-                if (diBox.Get(objectToInject.Value.GetType(), objectToInject.Key, false) == null)
-                {
-                    diBox.Add(objectToInject.Value, objectToInject.Key);
-                }
+                diBox.Add(objectToInject.dependency, id: objectToInject.id);
             }
 
             foreach (var config in _configs)
             {
-                if (diBox.Get(config.Value.GetType(), config.Key, false) == null)
-                {
-                    diBox.Add(config.Value, config.Key);
-                }
+                diBox.Add(config.dependency, id: config.id);
             }
 
             foreach (var scriptableObject in _scriptableObjects)
             {
-                if (diBox.Get(scriptableObject.Value.GetType(), scriptableObject.Key, false) == null)
-                {
-                    diBox.Add(scriptableObject.Value, scriptableObject.Key);
-                }
+                diBox.Add(scriptableObject.dependency, id: scriptableObject.id);
             }
 
             foreach (var eventWithNoParameter in _eventsWithNoParameters)
             {
-                if (diBox.Get(eventWithNoParameter.Value.GetType(), eventWithNoParameter.Key, false) == null)
-                {
-                    diBox.Add(eventWithNoParameter.Value, eventWithNoParameter.Key);
-                }
+                diBox.Add(eventWithNoParameter, id: eventWithNoParameter.eventName);
             }
 
             foreach (var hcdi in _hardCodeDependencyInjectors)
@@ -116,52 +107,53 @@ namespace DependencyInjection
         {
             foreach (var objectToInject in _objects)
             {
-                if (objectToInject.Value is IInitializable)
+                if (objectToInject is IInitializable)
                 {
-                    var initializable = (objectToInject.Value as IInitializable);
+                    var initializable = (objectToInject.dependency as IInitializable);
                     initializable?.Initialize();
                 }
             }
 
             foreach (var config in _configs)
             {
-                config.Value.Initialize();
+                config.dependency.Initialize();
             }
 
             foreach (var scriptableObject in _scriptableObjects)
             {
-                if (scriptableObject.Value is IInitializable)
+                if (scriptableObject.dependency is IInitializable)
                 {
-                    (scriptableObject.Value as IInitializable).Initialize();
+                    (scriptableObject.dependency as IInitializable).Initialize();
                 }
             }
 
             foreach (var eventWithNoParameter in _eventsWithNoParameters)
             {
-                eventWithNoParameter.Value.Initialize(eventWithNoParameter.Key);
+                eventWithNoParameter.Initialize(eventWithNoParameter.eventName);
             }
         }
 
+        [Button]
         private void Clear()
         {
             foreach (var objectToInject in _objects)
             {
-                diBox.Remove(objectToInject.Value.GetType(), objectToInject.Key);
+                diBox.Remove(objectToInject.dependency.GetType(), objectToInject.id);
             }
 
             foreach (var config in _configs)
             {
-                diBox.Remove(config.Value.GetType(), config.Key);
+                diBox.Remove(config.dependency.GetType(), config.id);
             }
 
             foreach (var scriptableObject in _scriptableObjects)
             {
-                diBox.Remove(scriptableObject.Value.GetType(), scriptableObject.Key);
+                diBox.Remove(scriptableObject.dependency.GetType(), scriptableObject.id);
             }
 
             foreach (var eventWithNoParameter in _eventsWithNoParameters)
             {
-                diBox.Remove(eventWithNoParameter.Value.GetType(), eventWithNoParameter.Key);
+                diBox.Remove(eventWithNoParameter.GetType(), eventWithNoParameter.eventName);
             }
 
             foreach (var hcdi in _hardCodeDependencyInjectors)
@@ -174,6 +166,49 @@ namespace DependencyInjection
             if (_isGlobal == true)
             {
                 isGloballyInjected = false;
+            }
+
+            Debug.Log(gameObject.name + "Di Cleared: ", gameObject);
+        }
+
+        public void Validate(SelfValidationResult result)
+        {
+            foreach (var scriptableObject in _scriptableObjects)
+            {
+                var allDuplicateTypes = _scriptableObjects.FindAll((x =>
+                {
+                    return x.dependency.GetType() == scriptableObject.dependency.GetType() && x.id == scriptableObject.id;
+                }));
+
+                if (allDuplicateTypes.Count > 1)
+                {
+                    result.AddError("There is multiple types of " + scriptableObject.dependency.GetType()).WithFix(() =>
+                    {
+                        foreach (var duplicate in allDuplicateTypes)
+                        {
+                            duplicate.id = duplicate.dependency.name;
+                        }
+                    });
+
+                    break;
+                }
+            }
+
+            foreach (var anEvent in _eventsWithNoParameters)
+            {
+                if (anEvent.eventName == string.Empty)
+                {
+                    result.AddError("Event in index " + _eventsWithNoParameters.IndexOf(anEvent) + " has no event name");
+                }
+            }
+
+            if (_diLogger == null)
+            {
+                result.AddError("DI logger is null").WithFix(() =>
+                {
+                    _diLogger = GetComponentInChildren<LoggerBase>();
+                    this.TrySetDirty();
+                });
             }
         }
     }

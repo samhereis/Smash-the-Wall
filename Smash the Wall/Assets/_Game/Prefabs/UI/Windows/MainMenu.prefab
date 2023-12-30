@@ -108,15 +108,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -331,6 +333,11 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _clickSoundResponce:
+    _audioClips: []
+  _animationDuration: 0.25
+  _playSound: 1
+  _vibrate: 1
 --- !u!1 &644727929675035928
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,15 +768,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1165,15 +1174,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1294,7 +1305,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 1929}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -1362,6 +1373,7 @@ MonoBehaviour:
     - {fileID: 7983464637391671422}
     - {fileID: 9162086602536905074}
   _buttons: []
+  _scaleByPercentages: []
   _listOfAllScenes: {fileID: 0}
   _backgroundMusicPlayer: {fileID: 0}
   _settingsMenu: {fileID: 0}
@@ -1867,6 +1879,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _clickSoundResponce:
+    _audioClips: []
+  _animationDuration: 0.25
+  _playSound: 1
+  _vibrate: 1
 --- !u!114 &7957623595697701430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2486,7 +2503,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5314811371653031956, guid: f2fc0843b0a854841be4b0f7db43a304, type: 3}
-      propertyPath: _clickSoundResponce._audioClips.Array.data[0]
+      propertyPath: '_clickSoundResponce._audioClips.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: b418c2d9716911146a6844038c18d7d5, type: 3}
     - target: {fileID: 6697565897775870723, guid: f2fc0843b0a854841be4b0f7db43a304, type: 3}

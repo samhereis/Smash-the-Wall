@@ -10,14 +10,14 @@ namespace Music
 
         private enum Axis { X, Y, Z }
 
-        [ShowInInspector] private AFrequancyData _aFrequancyData;
+        [SerializeField] private AFrequancyData _aFrequancyData;
 
         [FoldoutGroup("Settings")]
-        [ShowInInspector] private float _smoothness = 0.25f;
-        [ShowInInspector] private float _minValue = 1;
-        [ShowInInspector] private float _multiplier = 1;
-        [ShowInInspector] private bool _useDefaultMultiplier;
-        [ShowInInspector] private Axis _axis;
+        [SerializeField] private float _smoothness = 0.25f;
+        [SerializeField] private float _minValue = 1;
+        [SerializeField] private float _multiplier = 1;
+        [SerializeField] private bool _useDefaultMultiplier;
+        [SerializeField] private Axis _axis;
 
         private float _value => _minValue + (_aFrequancyData.value * _multiplier);
 

@@ -21,15 +21,15 @@ namespace GOAP.GoapDataClasses
         public GOAPPlanner planner { get => _planner; set { _planner = value; } }
         public Queue<GOAPAction> actionQueue { get => _actionQueue; set { _actionQueue = value; } }
 
-        [FoldoutGroup("Debug"), ShowInInspector] private List<GOAPAction> _actions = new List<GOAPAction>();
-        [FoldoutGroup("Debug"), ShowInInspector] private GOAPInventory _inventory = new GOAPInventory();
-        [FoldoutGroup("Debug"), ShowInInspector] private GoapStates _localStates = new GoapStates();
-        [FoldoutGroup("Debug"), ShowInInspector] private GOAPAction _currentAction;
-        [FoldoutGroup("Debug"), ShowInInspector] private SubGoals _currentGoal;
-        [FoldoutGroup("Debug"), ShowInInspector] private Vector3 _destination = Vector3.zero;
-        [FoldoutGroup("Debug"), ShowInInspector] private bool _invoked = false;
+        [FoldoutGroup("Debug"), SerializeField] private List<GOAPAction> _actions = new List<GOAPAction>();
+        [FoldoutGroup("Debug"), SerializeField] private GOAPInventory _inventory = new GOAPInventory();
+        [FoldoutGroup("Debug"), SerializeField] private GoapStates _localStates = new GoapStates();
+        [FoldoutGroup("Debug"), SerializeField] private GOAPAction _currentAction;
+        [FoldoutGroup("Debug"), SerializeField] private SubGoals _currentGoal;
+        [FoldoutGroup("Debug"), SerializeField] private Vector3 _destination = Vector3.zero;
+        [FoldoutGroup("Debug"), SerializeField] private bool _invoked = false;
 
-        [ShowInInspector] private Dictionary<SubGoals, int> _goals = new Dictionary<SubGoals, int>();
+        [SerializeField] private Dictionary<SubGoals, int> _goals = new Dictionary<SubGoals, int>();
 
         private GOAPPlanner _planner;
         private Queue<GOAPAction> _actionQueue;

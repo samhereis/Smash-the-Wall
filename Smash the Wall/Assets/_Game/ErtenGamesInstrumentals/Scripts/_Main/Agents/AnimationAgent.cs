@@ -9,7 +9,7 @@ namespace Agents
         public Action<string> onAnimationCallback;
 
         [Required]
-        [ShowInInspector] public Animator animator { get; private set; }
+        [SerializeField] public Animator animator { get; private set; }
 
         public void CallCallback(string callbackName)
         {

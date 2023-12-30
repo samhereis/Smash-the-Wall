@@ -13,13 +13,16 @@ namespace UI.Interaction
     [DisallowMultipleComponent]
     public class AnimateButtons : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
     {
-        [FoldoutGroup("Scale Settings"), ShowInInspector] private float _onOverScale = 1.1f;
-        [FoldoutGroup("Scale Settings"), ShowInInspector] private float _normaleScale = 1;
+#if DoTweenInstalled
+        [FoldoutGroup("Scale Settings"), SerializeField] private float _onOverScale = 1.1f;
+        [FoldoutGroup("Scale Settings"), SerializeField] private float _normaleScale = 1;
 
-        [FoldoutGroup("Timing"), ShowInInspector] private float _animationDuration = 0.5f;
-        [FoldoutGroup("Timing"), ShowInInspector] private float _delayBetweenAnimations = 0.1f;
+        [FoldoutGroup("Timing"), SerializeField] private float _animationDuration = 0.5f;
+#endif
 
-        [FoldoutGroup("Events"), ShowInInspector] private AnimateButtonsEvents _events = new AnimateButtonsEvents();
+        [FoldoutGroup("Timing"), SerializeField] private float _delayBetweenAnimations = 0.1f;
+
+        [FoldoutGroup("Events"), SerializeField] private AnimateButtonsEvents _events = new AnimateButtonsEvents();
 
         [Button]
         public async void OnPointerEnter(PointerEventData eventData)
@@ -55,8 +58,8 @@ namespace UI.Interaction
     [System.Serializable]
     internal class AnimateButtonsEvents
     {
-        [SerializeField] internal UnityEvent _onHover = new UnityEvent();
-        [SerializeField] internal UnityEvent _onClick = new UnityEvent();
-        [SerializeField] internal UnityEvent _onExit = new UnityEvent();
+        [@SerializeField] internal UnityEvent _onHover = new UnityEvent();
+        [@SerializeField] internal UnityEvent _onClick = new UnityEvent();
+        [@SerializeField] internal UnityEvent _onExit = new UnityEvent();
     }
 }

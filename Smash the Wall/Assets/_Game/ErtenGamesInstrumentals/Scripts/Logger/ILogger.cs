@@ -6,8 +6,8 @@ namespace Loggers
     {
         public bool enableLogs { get; }
 
-        public void LogInfoToConsole(string message, Object context);
-        public void LogWarningToConsole(string message, Object context);
-        public void LogErrorToConsole(string message, Object context);
+        public void Log(string message, Object context = null);
+        public void LogWarning(string message, Object context = null);
+        public void LogError(string message, Object context = null);
     }
 }

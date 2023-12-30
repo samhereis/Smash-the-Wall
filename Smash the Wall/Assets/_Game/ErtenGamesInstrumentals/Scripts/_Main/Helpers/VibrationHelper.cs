@@ -1,3 +1,10 @@
+#if FeelInstalled
+
+using Lofelt.NiceVibrations;
+using UnityEngine;
+
+#endif
+
 namespace Helpers
 {
     public class VibrationHelper
@@ -19,8 +26,6 @@ namespace Helpers
 
             if (Validate() == false) return;
 
-            if (_gameConfigs.gameSettings.vibroSettings.currentValue == false) return;
-
             Debug.Log("LightImpact");
             try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact); } catch { }
 
@@ -31,10 +36,7 @@ namespace Helpers
         {
 #if FeelInstalled
 
-
             if (Validate() == false) return;
-
-            if (_gameConfigs.gameSettings.vibroSettings.currentValue == false) return;
 
             Debug.Log("MediumImpact");
             try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.MediumImpact); } catch { }
@@ -48,8 +50,6 @@ namespace Helpers
 
             if (Validate() == false) return;
 
-            if (_gameConfigs.gameSettings.vibroSettings.currentValue == false) return;
-
             Debug.Log("HeavyImpact");
             try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact); } catch { }
 
@@ -61,13 +61,6 @@ namespace Helpers
             bool isSuccesfull = false;
 
 #if FeelInstalled
-
-            if (_gameConfigs == null)
-            {
-                _gameConfigs = DIBox.Get<GameConfigs>(DIStrings.gameConfigs);
-            }
-
-            isSuccesfull = _gameConfigs != null;
 
 #endif
 

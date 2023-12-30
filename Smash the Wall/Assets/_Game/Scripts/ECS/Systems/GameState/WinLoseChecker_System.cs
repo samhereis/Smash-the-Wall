@@ -53,10 +53,10 @@ namespace ECS.Systems.GameState
 
         private void InjectDs()
         {
-            _onWin = DependencyInjector.diBox.Get<EventWithNoParameters>(DIStrings.onWinEvent);
-            _onLose = DependencyInjector.diBox.Get<EventWithNoParameters>(DIStrings.onLoseEvent);
-            _gameConfigs = DependencyInjector.diBox.Get<GameConfigs>(DIStrings.gameConfigs);
-            _listOfAllPictures = DependencyInjector.diBox.Get<ListOfAllPictures>(DIStrings.listOfAllPictures);
+            _onWin = DependencyInjector.diBox.Get<EventWithNoParameters>(DIStrings.OnWinEvent);
+            _onLose = DependencyInjector.diBox.Get<EventWithNoParameters>(DIStrings.OnLoseEvent);
+            _gameConfigs = DependencyInjector.diBox.Get<GameConfigs>();
+            _listOfAllPictures = DependencyInjector.diBox.Get<ListOfAllPictures>();
         }
 
         public void OnUpdate(ref SystemState systemState)

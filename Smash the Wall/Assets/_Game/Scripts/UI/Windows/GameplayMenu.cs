@@ -16,48 +16,65 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class GameplayMenu : CanvasWindowBase
+    public class GameplayMenu : MenuBase
     {
-        [Header("Dependency")]
-        [SerializeField] private PauseMenu _pauseMenu;
-        [SerializeField] private ShopWindow _shopWindow;
-
-        [Header("DI")]
-        [Inject][SerializeField] private InputsService _inputs;
-        [Inject][SerializeField] private GameConfigs _gameConfigs;
-        [Inject][SerializeField] private AdsShowManager _adsShowManager;
-        [Inject][SerializeField] private LazyUpdator_Service _lazyUpdator;
-        [Inject][SerializeField] private GameSaveManager _gameSaveManager;
-        [Inject][SerializeField] private ListOfAllPictures _listOfAllPictures;
-
-        [Header("UI Components")]
-
+        [ChildGameObjectsOnly]
         [Required]
-        [SerializeField] private Button _pauseButton;
+        [FoldoutGroup("UI Components"), SerializeField] private Button _pauseButton;
 
+        [ChildGameObjectsOnly]
         [Required]
-        [SerializeField] private Button _shopsButton;
+        [FoldoutGroup("UI Components"), SerializeField] private Button _shopsButton;
 
+        [ChildGameObjectsOnly]
         [Required]
-        [SerializeField] private Slider _whatNeedsToBeDestroyedProgressbar;
+        [FoldoutGroup("UI Components"), SerializeField] private Slider _whatNeedsToBeDestroyedProgressbar;
 
+        [ChildGameObjectsOnly]
         [Required]
-        [SerializeField] private Slider _whatNeedsToStayProgressbar;
+        [FoldoutGroup("UI Components"), SerializeField] private Slider _whatNeedsToStayProgressbar;
 
+        [ChildGameObjectsOnly]
         [Required]
-        [SerializeField] private TextMeshProUGUI _currentLevelText;
+        [FoldoutGroup("UI Components"), SerializeField] private TextMeshProUGUI _currentLevelText;
 
-        [Header("Settings")]
-        [SerializeField] private Gradient _whatNeedsToBeDestroyedProgressbarGradient;
-        [SerializeField] private Gradient _whatNeedsToStayProgressbarGradient;
+        [FoldoutGroup("Settings"), SerializeField] private Gradient _whatNeedsToBeDestroyedProgressbarGradient;
+        [FoldoutGroup("Settings"), SerializeField] private Gradient _whatNeedsToStayProgressbarGradient;
+
+        [FoldoutGroup("Dependency"), SerializeField, ReadOnly] private PauseMenu _pauseMenu;
+        [FoldoutGroup("Dependency"), SerializeField, ReadOnly] private ShopWindow _shopWindow;
+
+        [Inject]
+        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private InputsService _inputs;
+
+        [Inject]
+        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private GameConfigs _gameConfigs;
+
+        [Inject]
+        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private AdsShowManager _adsShowManager;
+
+        [Inject]
+        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private LazyUpdator_Service _lazyUpdator;
+
+        [Inject]
+        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private GameSaveManager _gameSaveManager;
+
+        [Inject]
+        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private ListOfAllPictures _listOfAllPictures;
 
         private Image _whatNeedsToBeDestroyedProgressbarFillImage;
         private Image _whatNeedsToStayProgressbarFillImage;
 
-        public override void Initialize()
+        public void Initialize(PauseMenu pauseMenu, ShopWindow shopWindow)
         {
-            base.Initialize();
+            _pauseMenu = pauseMenu;
+            _shopWindow = shopWindow;
 
+            Initialize();
+        }
+
+        public void Initialize()
+        {
             if (_pauseMenu == null) { _pauseMenu = FindFirstObjectByType<PauseMenu>(FindObjectsInactive.Include); }
             if (_shopWindow == null) { _shopWindow = FindFirstObjectByType<ShopWindow>(FindObjectsInactive.Include); }
 

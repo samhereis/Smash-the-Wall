@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class PauseMenu : CanvasWindowBase
+    public class PauseMenu : MenuBase
     {
         [Header("Dependencies")]
         [SerializeField] private SettingsMenu _settingsWindow;
@@ -32,10 +32,8 @@ namespace UI
         [Required]
         [SerializeField] private Button _mainMenuButton;
 
-        public override void Initialize()
+        public void Initialize()
         {
-            base.Initialize();
-
             if (_settingsWindow == null) { _settingsWindow = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include); }
             if (_gameplayWindow == null) { _gameplayWindow = FindFirstObjectByType<GameplayMenu>(FindObjectsInactive.Include); }
         }

@@ -9,7 +9,7 @@ namespace DataClasses
     [Serializable]
     public class AScene : IInitializable
     {
-        [ShowInInspector] public string sceneCode { get; private set; }
+        [field: SerializeField] public string sceneCode { get; private set; }
 
 #if UNITY_EDITOR
 

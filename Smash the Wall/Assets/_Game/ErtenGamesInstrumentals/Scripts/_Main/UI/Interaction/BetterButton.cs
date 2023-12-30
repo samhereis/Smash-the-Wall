@@ -15,12 +15,15 @@ namespace UI.Interaction
 {
     public class BetterButton : Button, IDIDependent, ISelfValidator
     {
-        [ShowInInspector] private SimpleSound _clickSoundResponce = new SimpleSound();
+        [SerializeField] private SimpleSound _clickSoundResponce = new SimpleSound();
 
-        [FoldoutGroup("Settings"), ShowInInspector] private float _onOverScale = 0.75f;
-        [FoldoutGroup("Settings"), ShowInInspector] private float _animationDuration = 0.25f;
-        [FoldoutGroup("Settings"), ShowInInspector] private bool _playSound = true;
-        [FoldoutGroup("Settings"), ShowInInspector] private bool _vibrate = true;
+#if DoTweenInstalled
+        [FoldoutGroup("Settings"), SerializeField] private float _onOverScale = 0.75f;
+#endif
+
+        [FoldoutGroup("Settings"), SerializeField] private float _animationDuration = 0.25f;
+        [FoldoutGroup("Settings"), SerializeField] private bool _playSound = true;
+        [FoldoutGroup("Settings"), SerializeField] private bool _vibrate = true;
 
         [Inject] private VibrationHelper _vibrationHelper;
 
@@ -52,7 +55,6 @@ namespace UI.Interaction
 
 #if DoTweenInstalled
             transform.DOKill();
-            
 #endif
 
 #if DoTweenInstalled
@@ -125,11 +127,11 @@ namespace UI.Interaction
             EditorGUILayout.Space();
 
             serializedObject.Update();
-            EditorGUILayout.PropertyField(_clickSoundResponce);
-            EditorGUILayout.PropertyField(_onOverScale);
-            EditorGUILayout.PropertyField(_animationDuration);
-            EditorGUILayout.PropertyField(_playSound);
-            EditorGUILayout.PropertyField(_vibrate);
+            if (_clickSoundResponce != null) EditorGUILayout.PropertyField(_clickSoundResponce);
+            if (_onOverScale != null) EditorGUILayout.PropertyField(_onOverScale);
+            if (_animationDuration != null) EditorGUILayout.PropertyField(_animationDuration);
+            if (_playSound != null) EditorGUILayout.PropertyField(_playSound);
+            if (_vibrate != null) EditorGUILayout.PropertyField(_vibrate);
             serializedObject.ApplyModifiedProperties();
         }
     }

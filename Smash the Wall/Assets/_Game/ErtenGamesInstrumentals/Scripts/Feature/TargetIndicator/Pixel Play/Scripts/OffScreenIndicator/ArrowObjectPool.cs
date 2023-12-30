@@ -6,14 +6,14 @@ namespace TargetIndicator
 {
     public class ArrowObjectPool : MonoBehaviour
     {
-        [ShowInInspector] public static ArrowObjectPool current;
+        [SerializeField] public static ArrowObjectPool current;
 
-        [ShowInInspector] public Indicator pooledObject;
+        [SerializeField] public Indicator pooledObject;
 
-        [FoldoutGroup("Settings"), ShowInInspector] private int _pooledAmount = 1;
-        [FoldoutGroup("Settings"), ShowInInspector] private bool _willGrow = true;
+        [FoldoutGroup("Settings"), SerializeField] private int _pooledAmount = 1;
+        [FoldoutGroup("Settings"), SerializeField] private bool _willGrow = true;
 
-        [FoldoutGroup("Debug"), ShowInInspector] private List<Indicator> _pooledObjects;
+        [FoldoutGroup("Debug"), SerializeField] private List<Indicator> _pooledObjects;
 
         private void Awake()
         {

@@ -1,6 +1,6 @@
-using Sirenix.OdinInspector;
 using Helpers;
 using Interfaces;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +15,10 @@ namespace Music
         public static string MusicFolderPath => $"{System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic)}/DHMMT";
 
         [Required]
-        [ShowInInspector] private List<AudioClip> _musicList = new List<AudioClip>();
+        [SerializeField] private List<AudioClip> _musicList = new List<AudioClip>();
 
         [Required]
-        [ShowInInspector] private List<AudioClip> _defaultMusicList;
+        [SerializeField] private List<AudioClip> _defaultMusicList;
 
         public bool hasMusic => count > 0;
         public int count => _musicList.Count;

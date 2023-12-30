@@ -7,22 +7,22 @@ namespace Gameplay
 {
     public class PaintOnTexture : MonoBehaviour
     {
-        [FoldoutGroup("Settings"), ShowInInspector] private Color _ccurrentColor;
-        [FoldoutGroup("Settings"), ShowInInspector] private int _size = 150;
+        [FoldoutGroup("Settings"), SerializeField] private Color _ccurrentColor;
+        [FoldoutGroup("Settings"), SerializeField] private int _size = 150;
 
-        [FoldoutGroup("Debug - Current Image"), ShowInInspector] private Texture2D _paintTexture;
-        [FoldoutGroup("Debug - Current Image"), ShowInInspector] private Texture2D _originalTexture;
-        [FoldoutGroup("Debug - Current Image"), ShowInInspector] private SpriteRenderer _spriteRenderer;
-        [FoldoutGroup("Debug - Current Image"), ShowInInspector] private Color _originalColor;
+        [FoldoutGroup("Debug - Current Image"), SerializeField] private Texture2D _paintTexture;
+        [FoldoutGroup("Debug - Current Image"), SerializeField] private Texture2D _originalTexture;
+        [FoldoutGroup("Debug - Current Image"), SerializeField] private SpriteRenderer _spriteRenderer;
+        [FoldoutGroup("Debug - Current Image"), SerializeField] private Color _originalColor;
 
-        [FoldoutGroup("Debug - Current Image Properties"), ShowInInspector] private Vector3 _offset;
-        [FoldoutGroup("Debug - Current Image Properties"), ShowInInspector] private int _rectWidth;
-        [FoldoutGroup("Debug - Current Image Properties"), ShowInInspector] private int _rectHeight;
-        [FoldoutGroup("Debug - Current Image Properties"), ShowInInspector] private int _textureWidth;
-        [FoldoutGroup("Debug - Current Image Properties"), ShowInInspector] private int _textureHeight;
-        [FoldoutGroup("Debug - Current Image Properties"), ShowInInspector] private float _pixelPerUnit;
-        [FoldoutGroup("Debug - Current Image Properties"), ShowInInspector] private Vector2 _pivot;
-        [FoldoutGroup("Debug - Current Image Properties"), ShowInInspector] private Rect _spriteRect;
+        [FoldoutGroup("Debug - Current Image Properties"), SerializeField] private Vector3 _offset;
+        [FoldoutGroup("Debug - Current Image Properties"), SerializeField] private int _rectWidth;
+        [FoldoutGroup("Debug - Current Image Properties"), SerializeField] private int _rectHeight;
+        [FoldoutGroup("Debug - Current Image Properties"), SerializeField] private int _textureWidth;
+        [FoldoutGroup("Debug - Current Image Properties"), SerializeField] private int _textureHeight;
+        [FoldoutGroup("Debug - Current Image Properties"), SerializeField] private float _pixelPerUnit;
+        [FoldoutGroup("Debug - Current Image Properties"), SerializeField] private Vector2 _pivot;
+        [FoldoutGroup("Debug - Current Image Properties"), SerializeField] private Rect _spriteRect;
 
         private Color32[] _allPixels;
 

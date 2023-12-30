@@ -1,6 +1,6 @@
 namespace Sirenix.OdinInspector
 {
-#if IdinInspectorInstalled == false
+#if OdinInspectorInstalled == false
     public class RequiredAttribute : System.Attribute
     {
 

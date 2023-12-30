@@ -27,7 +27,7 @@ namespace Managers
                     return false;
                 }
 
-                return _inAppPurchacesManager.IsPurchased(InGameStrings.PurchaseStrings.noAdsPurchaseString);
+                return _inAppPurchacesManager.IsPurchased(InGameStrings.PurchaseStrings.NoAdsPurchaseString);
             }
         }
 
@@ -75,7 +75,7 @@ namespace Managers
 
         private void OnAPurchaseCompleted(Item item)
         {
-            if (item.id == PurchaseStrings.noAdsPurchaseString)
+            if (item.id == PurchaseStrings.NoAdsPurchaseString)
             {
                 OnNoAdsEnabled();
             }
@@ -83,7 +83,7 @@ namespace Managers
 
         private void OnAPurchaseFailed(Item item)
         {
-            if (item.id == PurchaseStrings.noAdsPurchaseString)
+            if (item.id == PurchaseStrings.NoAdsPurchaseString)
             {
                 OnNoAdsDisabled();
             }
@@ -91,7 +91,7 @@ namespace Managers
 
         public void TryBuyNoAds()
         {
-            _inAppPurchacesManager?.Purchase(_inAppPurchacesManager.GetItem(PurchaseStrings.noAdsPurchaseString));
+            _inAppPurchacesManager?.Purchase(_inAppPurchacesManager.GetItem(PurchaseStrings.NoAdsPurchaseString));
         }
 
         private void UpdateStatus()

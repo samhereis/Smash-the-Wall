@@ -18,7 +18,7 @@ namespace UI.Helpers
         [SerializeField] private ScaleSettings _scaleSettings = new ScaleSettings();
         [SerializeField] private IgnoreSettings _ignoreSettings = new IgnoreSettings();
 
-        [FoldoutGroup("DI"), ShowInInspector]
+        [FoldoutGroup("DI"), SerializeField]
         [Inject] private LazyUpdator_Service _lazyUpdator;
 
         public void Validate(SelfValidationResult result)
@@ -92,19 +92,19 @@ namespace UI.Helpers
         [Serializable]
         public class ScaleSettings
         {
-            [field: SerializeField] public float top { get; private set; } = 0;
-            [field: SerializeField] public float bottom { get; private set; } = 0;
-            [field: SerializeField] public float left { get; private set; } = 0;
-            [field: SerializeField] public float right { get; private set; } = 0;
+            [field: @SerializeField] public float top { get; private set; } = 0;
+            [field: @SerializeField] public float bottom { get; private set; } = 0;
+            [field: @SerializeField] public float left { get; private set; } = 0;
+            [field: @SerializeField] public float right { get; private set; } = 0;
         }
 
         [Serializable]
         public class IgnoreSettings
         {
-            [field: SerializeField] public bool ignoreTop { get; private set; } = false;
-            [field: SerializeField] public bool ignoreBottom { get; private set; } = false;
-            [field: SerializeField] public bool ignoreLeft { get; private set; } = false;
-            [field: SerializeField] public bool ignoreRight { get; private set; } = false;
+            [field: @SerializeField] public bool ignoreTop { get; private set; } = false;
+            [field: @SerializeField] public bool ignoreBottom { get; private set; } = false;
+            [field: @SerializeField] public bool ignoreLeft { get; private set; } = false;
+            [field: @SerializeField] public bool ignoreRight { get; private set; } = false;
         }
     }
 }

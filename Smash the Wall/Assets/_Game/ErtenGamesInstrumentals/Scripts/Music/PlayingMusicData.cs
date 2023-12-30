@@ -10,18 +10,18 @@ namespace Music
     {
         [Required]
         [Inject]
-        [ShowInInspector] private SpectrumData _spectrumData;
+        [SerializeField] private SpectrumData _spectrumData;
 
         [Required]
         [Inject]
-        [ShowInInspector] private MusicList_SO _musicList;
+        [SerializeField] private MusicList_SO _musicList;
 
         [Header("Components")]
         [Required]
-        [ShowInInspector] private AudioSource _audioSource;
+        [SerializeField] private AudioSource _audioSource;
 
         [Header("Debug")]
-        [ShowInInspector] private bool _isCheckingForAudio = false;
+        [SerializeField] private bool _isCheckingForAudio = false;
 
         private void Awake()
         {

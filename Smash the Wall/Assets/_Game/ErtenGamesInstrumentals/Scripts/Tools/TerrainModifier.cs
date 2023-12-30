@@ -1,5 +1,5 @@
-using Sirenix.OdinInspector;
 using Helpers;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Experimental
@@ -7,7 +7,7 @@ namespace Experimental
     public sealed class TerrainModifier : MonoBehaviour
     {
         [Required]
-        [ShowInInspector] private Terrain _terrain;
+        [SerializeField] private Terrain _terrain;
 
         private float[,] _heights;
         private float[,] _initialHeights;

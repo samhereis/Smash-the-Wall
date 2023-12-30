@@ -1,5 +1,4 @@
 using DependencyInjection;
-using Helpers;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +14,14 @@ namespace Sound
         public AudioClip currentMainAudioCLip => _mainAudioSource.clip;
 
         [Required]
-        [FoldoutGroup("Componenets"), ShowInInspector] private AudioSource _mainAudioSource;
+        [FoldoutGroup("Componenets"), SerializeField] private AudioSource _mainAudioSource;
 
         [Required]
-        [FoldoutGroup("Componenets"), ShowInInspector] private List<AudioSource> _audioSourcePool = new List<AudioSource>();
+        [FoldoutGroup("Componenets"), SerializeField] private List<AudioSource> _audioSourcePool = new List<AudioSource>();
 
         [Header("Settings")]
-        [FoldoutGroup("Settings"), ShowInInspector] private int _auioSourcePoolCount = 2;
-        [FoldoutGroup("Settings"), ShowInInspector] private bool _isGlobal;
+        [FoldoutGroup("Settings"), SerializeField] private int _auioSourcePoolCount = 2;
+        [FoldoutGroup("Settings"), SerializeField] private bool _isGlobal;
 
         private void Awake()
         {
@@ -187,7 +186,7 @@ namespace Sound
         [Button]
         private void FillAudioSoursePool()
         {
-            if(_auioSourcePoolCount == 0) { _auioSourcePoolCount = 2; }
+            if (_auioSourcePoolCount == 0) { _auioSourcePoolCount = 2; }
 
             _audioSourcePool = GetComponentsInChildren<AudioSource>().ToList();
             _audioSourcePool.RemoveAll(x => x == null || x.gameObject == gameObject);

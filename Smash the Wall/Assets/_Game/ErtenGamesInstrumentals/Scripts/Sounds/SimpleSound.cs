@@ -1,12 +1,13 @@
 using Sirenix.OdinInspector;
 using SO;
 using System;
+using UnityEngine;
 
 namespace Sound
 {
     [Serializable]
     public class SimpleSound : SoundBase
     {
-        [ShowInInspector] public AString_SO soundName { get; private set; }
+        [SerializeField] public AString_SO soundName { get; private set; }
     }
 }

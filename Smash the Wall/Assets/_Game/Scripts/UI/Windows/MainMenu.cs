@@ -1,48 +1,44 @@
 using DependencyInjection;
-using Helpers;
-using Managers;
-using Servies;
 using Sirenix.OdinInspector;
 using SO.DataHolders;
-using SO.Lists;
 using Sound;
+using System;
 using UI.Canvases;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public class MainMenu : CanvasWindowBase
+    public class MainMenu : MenuBase
     {
-        [Header("DI")]
-        [Inject][SerializeField] private ListOfAllScenes _listOfAllScenes;
-        [Inject][SerializeField] private SceneLoader _sceneLoader;
-        [Inject][SerializeField] private BackgroundMusicPlayer _backgroundMusicPlayer;
-
-        [Header("Dependencies")]
-
-        [SceneObjectsOnly]
-        [SerializeField] private SettingsMenu _settingsMenu;
-
-        [Header("Components")]
+        public Action onPlayClicked;
+        public Action onOpenSettingsClicked;
+        public Action onQuitClicked;
 
         [Required]
-        [SerializeField] private SoundsPack_DataHolder _mainMenuSoundsPack;
+        [FoldoutGroup("Components"), SerializeField, ChildGameObjectsOnly] private SoundsPack_DataHolder _mainMenuSoundsPack;
 
         [Required]
-        [SerializeField] private Image _buttonsInfoBlock;
-
-        [Header("Buttons")]
+        [FoldoutGroup("Components"), SerializeField, ChildGameObjectsOnly] private Image _buttonsInfoBlock;
 
         [Required]
-        [SerializeField] private Button _playButton;
+        [FoldoutGroup("Buttons"), SerializeField, ChildGameObjectsOnly] private Button _playButton;
 
         [Required]
-        [SerializeField] private Button _settingsButton;
+        [FoldoutGroup("Buttons"), SerializeField, ChildGameObjectsOnly] private Button _settingsButton;
 
         [Required]
-        [SerializeField] private Button _quitButton;
+        [FoldoutGroup("Buttons"), SerializeField, ChildGameObjectsOnly] private Button _quitButton;
+
+        [Inject]
+        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private BackgroundMusicPlayer _backgroundMusicPlayer;
+
+        [FoldoutGroup("Dependencies"), SerializeField, ReadOnly] private SettingsMenu _settingsMenu;
+
+        public void Initialize(SettingsMenu settingsMenu)
+        {
+            _settingsMenu = settingsMenu;
+        }
 
         public override void Enable(float? duration = null)
         {
@@ -76,40 +72,21 @@ namespace UI
             _quitButton.onClick.RemoveListener(Quit);
         }
 
-        private async void StartGame()
+        private void StartGame()
         {
-            if (_listOfAllScenes != null)
-            {
-                await _sceneLoader.LoadSceneAsync(_listOfAllScenes.gameScene);
-            }
-            else
-            {
-                int sceneIndex = 1;
-                SceneManager.LoadScene(sceneIndex);
-            }
-
-            EventsLogManager.LogEvent("PlayButtonClicked");
-
-            PlayGameplayAudio(_backgroundMusicPlayer, _mainMenuSoundsPack);
-        }
-
-        public static async void PlayGameplayAudio(BackgroundMusicPlayer backgroundMusicPlayer, SoundsPack_DataHolder soundsPack)
-        {
-            backgroundMusicPlayer.StopMusic();
-
-            await AsyncHelper.DelayFloat(2f);
-
-            backgroundMusicPlayer.PlayMusic(soundsPack);
+            onPlayClicked?.Invoke();
         }
 
         private void OpenSettings()
         {
-            _settingsMenu.Enable();
+            onOpenSettingsClicked?.Invoke();
+
+            _settingsMenu?.Enable();
         }
 
         private void Quit()
         {
-            Application.Quit();
+            onQuitClicked?.Invoke();
         }
     }
 }

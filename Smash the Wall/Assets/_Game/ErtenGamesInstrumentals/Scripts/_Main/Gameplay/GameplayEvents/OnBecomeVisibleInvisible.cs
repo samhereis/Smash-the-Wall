@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,13 +5,13 @@ namespace GameplayEvents
 {
     public class OnBecomeVisibleInvisible : MonoBehaviour
     {
-        [ShowInInspector] public bool isVisible { get; private set; } = true;
+        [SerializeField] public bool isVisible { get; private set; } = true;
 
-        [ShowInInspector] public UnityEvent onBecomeVisible { get; private set; }
-        [ShowInInspector] public UnityEvent onBecomeInvisible { get; private set; }
+        [SerializeField] public UnityEvent onBecomeVisible { get; private set; }
+        [SerializeField] public UnityEvent onBecomeInvisible { get; private set; }
 
-        [ShowInInspector] private MonoBehaviour[] _activateOnVisible;
-        [ShowInInspector] private MonoBehaviour[] _deactivateOnVisible;
+        [SerializeField] private MonoBehaviour[] _activateOnVisible;
+        [SerializeField] private MonoBehaviour[] _deactivateOnVisible;
 
         private void OnBecameVisible()
         {

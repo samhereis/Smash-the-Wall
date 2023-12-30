@@ -11,11 +11,11 @@ namespace UI
         public Action<PointerEventData> onBeginRotate;
 
         [Required]
-        [ShowInInspector] private Transform[] _rotatedObject;
+        [SerializeField] private Transform[] _rotatedObject;
 
-        [FoldoutGroup("Settings"), ShowInInspector] private bool _canRotate = true;
+        [FoldoutGroup("Settings"), SerializeField] private bool _canRotate = true;
 
-        [FoldoutGroup("Debug"), ShowInInspector] private Vector2 _lastPosition;
+        [FoldoutGroup("Debug"), SerializeField] private Vector2 _lastPosition;
 
         public void OnBeginDrag(PointerEventData eventData)
         {

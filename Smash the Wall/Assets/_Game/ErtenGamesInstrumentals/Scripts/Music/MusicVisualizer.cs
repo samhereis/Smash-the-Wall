@@ -20,13 +20,13 @@ namespace Music
         [Required]
         [SerializeField] private Transform _parent;
 
-        [FoldoutGroup("Settings"), ShowInInspector] private Axis _axis;
-        [FoldoutGroup("Settings"), ShowInInspector] private float _multiplier = 1f;
-        [FoldoutGroup("Settings"), ShowInInspector] private float _indexMultiplier = 1f;
-        [FoldoutGroup("Settings"), ShowInInspector] private float _spawnCount = 1f;
-        [FoldoutGroup("Settings"), ShowInInspector] private float _smoothness = 0.03f;
-        [FoldoutGroup("Settings"), ShowInInspector] private float _minValue = 1;
-        [FoldoutGroup("Settings"), ShowInInspector] private bool _useDefaultMultiplier;
+        [FoldoutGroup("Settings"), SerializeField] private Axis _axis;
+        [FoldoutGroup("Settings"), SerializeField] private float _multiplier = 1f;
+        [FoldoutGroup("Settings"), SerializeField] private float _indexMultiplier = 1f;
+        [FoldoutGroup("Settings"), SerializeField] private float _spawnCount = 1f;
+        [FoldoutGroup("Settings"), SerializeField] private float _smoothness = 0.03f;
+        [FoldoutGroup("Settings"), SerializeField] private float _minValue = 1;
+        [FoldoutGroup("Settings"), SerializeField] private bool _useDefaultMultiplier;
 
         private List<Transform> _spawnedObjects = new List<Transform>();
 

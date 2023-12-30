@@ -20,7 +20,7 @@ namespace Authorization.Data.Input
             if (isCorrect == true)
             {
                 isCorrect = await DoesEmailExists(email) == true;
-                if (isCorrect == false) MessageToUser.instance.Log($"Email already taken");
+                if (isCorrect == false) MessageToUserMenu.instance.Log($"Email already taken");
             }
             IndicateCorrectOrNot();
         }
@@ -33,7 +33,7 @@ namespace Authorization.Data.Input
             if (isCorrect == true)
             {
                 isCorrect = await DoesEmailExists(email) == false;
-                if (isCorrect == false) MessageToUser.instance.Log($"Email does not exists");
+                if (isCorrect == false) MessageToUserMenu.instance.Log($"Email does not exists");
             }
 
             IndicateCorrectOrNot();
@@ -42,7 +42,7 @@ namespace Authorization.Data.Input
         private bool IsCorrectEmail(string email)
         {
             bool correct = StringHelper.IsEmail(email);
-            if (correct == false) MessageToUser.instance.Log("Invalid email");
+            if (correct == false) MessageToUserMenu.instance.Log("Invalid email");
 
             return correct;
         }

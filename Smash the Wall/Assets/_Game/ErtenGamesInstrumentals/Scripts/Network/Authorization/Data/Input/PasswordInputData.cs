@@ -27,12 +27,12 @@ namespace Authorization.Data.Input
             if (StringHelper.IsPassword(password) == false)
             {
                 isCorrect = false;
-                MessageToUser.instance.Log("Password must include only digits and Latin characters");
+                MessageToUserMenu.instance.Log("Password must include only digits and Latin characters");
             }
             else if (password.Length < 8)
             {
                 isCorrect = false;
-                MessageToUser.instance.Log("Password must be at least 8 characters long");
+                MessageToUserMenu.instance.Log("Password must be at least 8 characters long");
             }
             else
             {
@@ -48,7 +48,7 @@ namespace Authorization.Data.Input
 
             isConfirmed = password == passwordField.text;
 
-            if (isConfirmed == false) MessageToUser.instance.Log("Please confirm password");
+            if (isConfirmed == false) MessageToUserMenu.instance.Log("Please confirm password");
 
 #if DoTweenInstalled
             if (isConfirmed == true) _passwordConfirmationFrame.DOColor(correctColor, 0.5f); else _passwordConfirmationFrame.DOColor(notCorrectColor, 0.5f);

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Authorization.UI
 {
-    public sealed class SignUp : CanvasWindowBase
+    public sealed class SignUp : MenuBase
     {
         [Header("UI Elements")]
         [SerializeField] private EmailInputData _email;
@@ -34,7 +34,7 @@ namespace Authorization.UI
 
         private void OnEnable()
         {
-            if (ApplicationHelper.HasInternetConnection() == false) MessageToUser.instance.Log("You are offline");
+            if (ApplicationHelper.HasInternetConnection() == false) MessageToUserMenu.instance.Log("You are offline");
             SubscribeFromEvents();
         }
 
@@ -113,7 +113,7 @@ namespace Authorization.UI
 
             if (ApplicationHelper.HasInternetConnection() == false)
             {
-                MessageToUser.instance.Log("You are offline");
+                MessageToUserMenu.instance.Log("You are offline");
                 return;
             }
 

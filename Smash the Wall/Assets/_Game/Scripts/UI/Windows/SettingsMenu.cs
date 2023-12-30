@@ -7,11 +7,8 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class SettingsMenu : CanvasWindowBase
+    public class SettingsMenu : MenuBase
     {
-        [Header("DI")]
-        [Inject][SerializeField] private GameConfigs _gameConfigs;
-
         [Header("Components")]
 
         [Required]
@@ -35,10 +32,17 @@ namespace UI
         [Required]
         [SerializeField] private Image _buttonsInfoBlock;
 
-        public override void Initialize()
-        {
-            base.Initialize();
+        [Inject]
+        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private GameConfigs _gameConfigs;
+        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private MenuBase _menuBase;
 
+        public void Initialize(MainMenu mainMenu)
+        {
+            _menuBase = mainMenu;
+        }
+
+        public void Initialize()
+        {
             _gameConfigs.Initialize();
         }
 

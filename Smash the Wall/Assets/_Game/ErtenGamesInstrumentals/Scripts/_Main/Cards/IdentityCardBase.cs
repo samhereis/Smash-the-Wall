@@ -1,13 +1,14 @@
 using Sirenix.OdinInspector;
 using System;
+using UnityEngine;
 
 namespace IdentityCards
 {
     [Serializable]
     public abstract class IdentityCardBase<T>
     {
-        [ShowInInspector] public string targetName { get; protected set; }
-        [ShowInInspector] public T target { get; protected set; }
+        [field: FoldoutGroup("Base"), SerializeField] public string targetName { get; protected set; }
+        [field: FoldoutGroup("Base"), SerializeField] public T target { get; protected set; }
 
         public void SetTargetName(string targetName)
         {

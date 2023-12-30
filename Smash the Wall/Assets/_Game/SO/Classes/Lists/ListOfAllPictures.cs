@@ -12,17 +12,38 @@ using UnityEngine;
 
 namespace SO.Lists
 {
-    [CreateAssetMenu(fileName = "ListOfAllPictures", menuName = "SO/Lists/ListOfAllPictures")]
+    [CreateAssetMenu(fileName = "ListOfAllPictures", menuName = "Scriptables/Lists/ListOfAllPictures")]
     public class ListOfAllPictures : ConfigBase, IDIDependent, ISelfValidator
     {
+        public IEnumerable<PictureIdentityCard> pictures => _pictures;
+
+        [Required]
+        [ListDrawerSettings(ElementColor = nameof(GetColor), ListElementLabelName = ("targetName"))]
+        [SerializeField, ReadOnly]
+        private List<PictureIdentityCard> _pictures = new List<PictureIdentityCard>();
+
+        [field: FoldoutGroup("Border Animation"), SerializeField]
+        public Color borderDefaultColor { get; private set; } = Color.cyan;
+
+        [field: FoldoutGroup("Border Animation"), SerializeField]
+        public float borderMaterialAnimationDuration { get; private set; } = 1f;
+
+        [Inject]
+        [FoldoutGroup("Injected"), SerializeField, ReadOnly]
+        private GameSaveManager _gameSaveManager;
+
+        [Inject]
+        [FoldoutGroup("Injected"), SerializeField, ReadOnly]
+        private LazyUpdator_Service _lazyUpdator;
+
 #if UNITY_EDITOR
 
-        [ShowInInspector] private Color _destroyborderInspectorColor = Color.cyan;
-        [ShowInInspector] private Color _destroyWholeObjectInspectorColor = Color.red;
+        [FoldoutGroup("In Editor Settings"), SerializeField] private Color _destroyborderInspectorColor = Color.cyan;
+        [FoldoutGroup("In Editor Settings"), SerializeField] private Color _destroyWholeObjectInspectorColor = Color.red;
 
         [Required]
         [ListDrawerSettings(ElementColor = nameof(GetColor), AlwaysAddDefaultValue = true)]
-        [ShowInInspector] private List<PictureAuthoring> _picturesEditor = new List<PictureAuthoring>();
+        [FoldoutGroup("In Editor Settings"), SerializeField] private List<PictureAuthoring> _picturesEditor = new List<PictureAuthoring>();
 
         private Color GetColor(int index)
         {
@@ -43,17 +64,6 @@ namespace SO.Lists
 
 #endif
 
-        [Required]
-        [ListDrawerSettings(ElementColor = nameof(GetColor))]
-        [ShowInInspector, ReadOnly] public List<PictureIdentityCard> pictures { get; private set; } = new List<PictureIdentityCard>();
-
-        [Inject][SerializeField] private GameSaveManager _gameSaveManager;
-        [Inject][SerializeField] private LazyUpdator_Service _lazyUpdator;
-
-        [Header("Border Animation")]
-        [field: SerializeField] public Color borderDefaultColor = Color.cyan;
-        [field: SerializeField] public float borderMaterialAnimationDuration = 1f;
-
         public override void Initialize()
         {
             DependencyInjector.InjectDependencies(this);
@@ -61,12 +71,12 @@ namespace SO.Lists
 
         public PictureIdentityCard GetRandom()
         {
-            return pictures.GetRandom();
+            return _pictures.GetRandom();
         }
 
         public int GetRandomIndex()
         {
-            return pictures.IndexOf(GetRandom());
+            return _pictures.IndexOf(GetRandom());
         }
 
         public int GetCurrentIndex()
@@ -76,7 +86,7 @@ namespace SO.Lists
 
             if (save != null) { pictureIndex = save.pictureIndex; }
 
-            if (pictureIndex >= pictures.Count)
+            if (pictureIndex >= _pictures.Count)
             {
                 pictureIndex = 0;
             }
@@ -91,7 +101,7 @@ namespace SO.Lists
 
             pictureIndex++;
 
-            if (pictureIndex >= pictures.Count) { pictureIndex = 0; }
+            if (pictureIndex >= _pictures.Count) { pictureIndex = 0; }
 
             save.pictureIndex = pictureIndex;
         }
@@ -100,35 +110,37 @@ namespace SO.Lists
         {
             int pictureIndex = GetCurrentIndex();
 
-            return pictures[pictureIndex];
+            return _pictures[pictureIndex];
         }
 
         public void Validate(SelfValidationResult result)
         {
-            if (_picturesEditor.Count != pictures.Count)
+            if (_picturesEditor.Count != _pictures.Count)
             {
-                pictures.Clear();
-
-                foreach (var pictureInEditor in _picturesEditor)
-                {
-                    if (pictureInEditor == null) continue;
-
-                    PictureIdentityCard pictureIdentityCard = new PictureIdentityCard();
-                    pictureIdentityCard.SetTarget(pictureInEditor);
-                    pictures.Add(pictureIdentityCard);
-                }
+                Validate();
             }
         }
 
         [Button]
         private void Validate()
         {
-            foreach (var picture in pictures)
+            _picturesEditor = AutoSort();
+
+            _pictures.Clear();
+
+            foreach (var pictureInEditor in _picturesEditor)
+            {
+                if (pictureInEditor == null) continue;
+
+                PictureIdentityCard pictureIdentityCard = new PictureIdentityCard();
+                pictureIdentityCard.SetTarget(pictureInEditor);
+                _pictures.Add(pictureIdentityCard);
+            }
+
+            foreach (var picture in _pictures)
             {
                 picture.Validate();
             }
-
-            _picturesEditor = AutoSort();
         }
 
         private List<PictureAuthoring> AutoSort()

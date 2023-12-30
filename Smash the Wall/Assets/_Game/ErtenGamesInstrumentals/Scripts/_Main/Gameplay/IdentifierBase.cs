@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +6,7 @@ namespace Identifiers
 {
     public class IdentifierBase : MonoBehaviour
     {
-        [ShowInInspector] private Dictionary<Type, Component> _components = new Dictionary<Type, Component>();
+        [SerializeField] private Dictionary<Type, Component> _components = new Dictionary<Type, Component>();
 
         public T TryGet<T>() where T : Component
         {

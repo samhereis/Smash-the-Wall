@@ -2,8 +2,8 @@
 using DG.Tweening;
 #endif
 
-using Sirenix.OdinInspector;
 using Helpers;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,16 +13,16 @@ namespace UI.Helpers
     {
         private enum Origin { Left, Right }
 
-        [FoldoutGroup("Settings"), ShowInInspector] private Image _filledImage;
-        [FoldoutGroup("Settings"), ShowInInspector] private Image _fillToThisPoint;
-        [FoldoutGroup("Settings"), ShowInInspector] private RectTransform _borderHolder;
-        [FoldoutGroup("Settings"), ShowInInspector] private Origin _origin;
+        [FoldoutGroup("Settings"), SerializeField] private Image _filledImage;
+        [FoldoutGroup("Settings"), SerializeField] private Image _fillToThisPoint;
+        [FoldoutGroup("Settings"), SerializeField] private RectTransform _borderHolder;
+        [FoldoutGroup("Settings"), SerializeField] private Origin _origin;
 
-        [FoldoutGroup("Debug"), ShowInInspector] private float _percent;
-        [FoldoutGroup("Debug"), ShowInInspector] private Vector3 _wordPos;
-        [FoldoutGroup("Debug"), ShowInInspector] private float _value;
-        [FoldoutGroup("Debug"), ShowInInspector] private int _screenWidth;
-        [FoldoutGroup("Debug"), ShowInInspector] private Camera _camera_;
+        [FoldoutGroup("Debug"), SerializeField] private float _percent;
+        [FoldoutGroup("Debug"), SerializeField] private Vector3 _wordPos;
+        [FoldoutGroup("Debug"), SerializeField] private float _value;
+        [FoldoutGroup("Debug"), SerializeField] private int _screenWidth;
+        [FoldoutGroup("Debug"), SerializeField] private Camera _camera_;
 
         private Camera _camera => _camera_ != null ? _camera_ : _camera_ = FindFirstObjectByType<Camera>(FindObjectsInactive.Include);
 

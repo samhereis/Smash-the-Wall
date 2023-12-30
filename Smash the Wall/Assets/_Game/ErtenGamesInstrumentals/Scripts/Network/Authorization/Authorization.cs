@@ -8,12 +8,12 @@ namespace Authorization.UI
     public sealed class Authorization : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private CanvasWindowBase _openIfNotLoggedIn;
-        [SerializeField] private CanvasWindowBase _mainMenuCanvas;
+        [SerializeField] private MenuBase _openIfNotLoggedIn;
+        [SerializeField] private MenuBase _mainMenuCanvas;
 
         [SerializeField] private SignIn _signIn;
         [SerializeField] private SignUp _signUp;
-        [SerializeField] private CanvasWindowBase _codeVerificator;
+        [SerializeField] private MenuBase _codeVerificator;
 
         private void Awake()
         {
@@ -33,7 +33,7 @@ namespace Authorization.UI
         {
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
-                MessageToUser.instance.Log("You are offline");
+                MessageToUserMenu.instance.Log("You are offline");
             }
         }
 

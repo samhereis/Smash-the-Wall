@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c75c335c17275e4c91be6082af3db08, type: 3}
+  m_Name: ListOfAllPictures
+  m_EditorClassIdentifier: 
+  _pictures:
+  - <targetName>k__BackingField: AngelAmoji_DestroyBorder
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 2f940ccfe48452144b389c374c43f078, type: 3}
+  - <targetName>k__BackingField: Ape_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: 687879f957223ab419b48b858155c896, type: 3}
+  - <targetName>k__BackingField: Bird_DestroyBorder
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: fe98583576308af4e976bc735b0fd339, type: 3}
+  - <targetName>k__BackingField: Earth_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: a934325b5e76fb74684360c15a8db0ea, type: 3}
+  - <targetName>k__BackingField: Bomb_DestroyBorder
+    <target>k__BackingField: {fileID: -6676753617988504395, guid: 53d418da7fdc5a9458366ffd2d748208, type: 3}
+  - <targetName>k__BackingField: FriedChicken_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: bb66116fbc0a9de4d9e9325a2b86eede, type: 3}
+  - <targetName>k__BackingField: Broom_DestroyBorder
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 7836fcfcd68852648834bf6695b626aa, type: 3}
+  - <targetName>k__BackingField: FunnyBlueCar_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: 7039560867eae2747bb46bdae9c56335, type: 3}
+  - <targetName>k__BackingField: Cactus_DestroyBorder
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: cd7bb955cf82afb4daffd2f80688ce10, type: 3}
+  - <targetName>k__BackingField: Mountain_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: f2d68826bd3563f49a01177eb6c89f1c, type: 3}
+  - <targetName>k__BackingField: ClownFace_DestroyBorder
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 33f2ec532c28d8843901fcf10680f0e8, type: 3}
+  - <targetName>k__BackingField: Peach_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: bfa337880d71fcb49883b7b98336c489, type: 3}
+  - <targetName>k__BackingField: Crab_DestroyBorder
+    <target>k__BackingField: {fileID: 6175686415919909157, guid: bfe06850adaeb374d98f2ae97be2ab8a, type: 3}
+  - <targetName>k__BackingField: Rocket_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: f6210d63d31909746882fc7e58579a26, type: 3}
+  - <targetName>k__BackingField: Deer_DestroyBorder
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 9e8da40b6d4e0704eb0f083c5a6a1740, type: 3}
+  - <targetName>k__BackingField: Snowboardman_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: 50d5766cdf100684c8ca77f8b294fab4, type: 3}
+  - <targetName>k__BackingField: Phone_DestroyBorder
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: 702a755c6bb64b54f8e2fa07110a36e5, type: 3}
+  - <targetName>k__BackingField: Toaster_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: 0a2b76e2b5b4a3f45995772a908da308, type: 3}
+  - <targetName>k__BackingField: Toilet_DestroyBorder
+    <target>k__BackingField: {fileID: 4188479979054571039, guid: e0243bef4d8e7c04982b23767bc60fc6, type: 3}
+  - <targetName>k__BackingField: TrashBig_DestroyWholeObject
+    <target>k__BackingField: {fileID: 3473424340287848214, guid: 76968cbac9f55f142a3ef308a3b84209, type: 3}
+  <borderDefaultColor>k__BackingField: {r: 0, g: 1, b: 1, a: 1}
+  <borderMaterialAnimationDuration>k__BackingField: 1
+  _gameSaveManager: {fileID: 0}
+  _destroyborderInspectorColor: {r: 0, g: 0.39215687, b: 0.39215687, a: 0.39215687}
+  _destroyWholeObjectInspectorColor: {r: 0.39215687, g: 0.39215687, b: 0, a: 0.39215687}
+  _picturesEditor:
+  - {fileID: 4188479979054571039, guid: 2f940ccfe48452144b389c374c43f078, type: 3}
+  - {fileID: 3473424340287848214, guid: 687879f957223ab419b48b858155c896, type: 3}
+  - {fileID: 4188479979054571039, guid: fe98583576308af4e976bc735b0fd339, type: 3}
+  - {fileID: 3473424340287848214, guid: a934325b5e76fb74684360c15a8db0ea, type: 3}
+  - {fileID: -6676753617988504395, guid: 53d418da7fdc5a9458366ffd2d748208, type: 3}
+  - {fileID: 3473424340287848214, guid: bb66116fbc0a9de4d9e9325a2b86eede, type: 3}
+  - {fileID: 4188479979054571039, guid: 7836fcfcd68852648834bf6695b626aa, type: 3}
+  - {fileID: 3473424340287848214, guid: 7039560867eae2747bb46bdae9c56335, type: 3}
+  - {fileID: 4188479979054571039, guid: cd7bb955cf82afb4daffd2f80688ce10, type: 3}
+  - {fileID: 3473424340287848214, guid: f2d68826bd3563f49a01177eb6c89f1c, type: 3}
+  - {fileID: 4188479979054571039, guid: 33f2ec532c28d8843901fcf10680f0e8, type: 3}
+  - {fileID: 3473424340287848214, guid: bfa337880d71fcb49883b7b98336c489, type: 3}
+  - {fileID: 6175686415919909157, guid: bfe06850adaeb374d98f2ae97be2ab8a, type: 3}
+  - {fileID: 3473424340287848214, guid: f6210d63d31909746882fc7e58579a26, type: 3}
+  - {fileID: 4188479979054571039, guid: 9e8da40b6d4e0704eb0f083c5a6a1740, type: 3}
+  - {fileID: 3473424340287848214, guid: 50d5766cdf100684c8ca77f8b294fab4, type: 3}
+  - {fileID: 4188479979054571039, guid: 702a755c6bb64b54f8e2fa07110a36e5, type: 3}
+  - {fileID: 3473424340287848214, guid: 0a2b76e2b5b4a3f45995772a908da308, type: 3}
+  - {fileID: 4188479979054571039, guid: e0243bef4d8e7c04982b23767bc60fc6, type: 3}
+  - {fileID: 3473424340287848214, guid: 76968cbac9f55f142a3ef308a3b84209, type: 3}

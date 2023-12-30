@@ -16,11 +16,11 @@ namespace UI
         public Action onSwipeUp;
         public Action onSwipeDown;
 
-        [FoldoutGroup("Settings"), ShowInInspector] private float _distanceToUpDownDragDetect = 50;
-        [FoldoutGroup("Settings"), ShowInInspector] private float _distanceToRightLeftDragDetect = 100;
+        [FoldoutGroup("Settings"), SerializeField] private float _distanceToUpDownDragDetect = 50;
+        [FoldoutGroup("Settings"), SerializeField] private float _distanceToRightLeftDragDetect = 100;
 
-        [FoldoutGroup("Debug"), ShowInInspector] private Vector2 _startPos;
-        [FoldoutGroup("Debug"), ShowInInspector] private Vector2 _fingerPos;
+        [FoldoutGroup("Debug"), SerializeField] private Vector2 _startPos;
+        [FoldoutGroup("Debug"), SerializeField] private Vector2 _fingerPos;
 
         private void Awake()
         {

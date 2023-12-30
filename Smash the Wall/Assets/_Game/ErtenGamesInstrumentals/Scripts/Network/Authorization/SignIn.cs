@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Authorization.UI
 {
-    public sealed class SignIn : CanvasWindowBase
+    public sealed class SignIn : MenuBase
     {
         [Header("UI Elements")]
         [SerializeField] private EmailInputData _email;
@@ -61,7 +61,7 @@ namespace Authorization.UI
 
         private void OnOffline()
         {
-            MessageToUser.instance.Log("You are offline");
+            MessageToUserMenu.instance.Log("You are offline");
         }
 
         public override void Enable(float? duration = null)

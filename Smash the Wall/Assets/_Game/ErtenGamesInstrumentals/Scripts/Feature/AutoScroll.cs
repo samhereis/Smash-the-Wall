@@ -1,22 +1,29 @@
 using Helpers;
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor.Validation;
 using UnityEngine;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR && OdinInstalled
+using Sirenix.OdinInspector.Editor.Validation;
+#endif
+
 namespace UI
 {
-    public class AutoScroll : MonoBehaviour, ISelfValidator
+    public class AutoScroll : MonoBehaviour
+#if OdinInspectorInstalled
+        , ISelfValidator
+#endif
     {
         [Required]
-        [FoldoutGroup("Components"), ShowInInspector] private Scrollbar _scrollBar;
+        [FoldoutGroup("Components"), SerializeField] private Scrollbar _scrollBar;
 
-        [FoldoutGroup("Settings"), ShowInInspector] private float _startDelay = 3;
-        [FoldoutGroup("Settings"), ShowInInspector] private float _scrollSpeed = 1;
+        [FoldoutGroup("Settings"), SerializeField] private float _startDelay = 3;
+        [FoldoutGroup("Settings"), SerializeField] private float _scrollSpeed = 1;
 
-        [FoldoutGroup("Debug"), ShowInInspector] private bool _isScrolling = false;
-        [FoldoutGroup("Debug"), ShowInInspector] private bool _isReverse = false;
+        [FoldoutGroup("Debug"), SerializeField] private bool _isScrolling = false;
+        [FoldoutGroup("Debug"), SerializeField] private bool _isReverse = false;
 
+#if OdinInspectorInstalled
         public void Validate(SelfValidationResult result)
         {
             if (_scrollBar == null)
@@ -28,6 +35,7 @@ namespace UI
                 });
             }
         }
+#endif
 
         private void Validate()
         {

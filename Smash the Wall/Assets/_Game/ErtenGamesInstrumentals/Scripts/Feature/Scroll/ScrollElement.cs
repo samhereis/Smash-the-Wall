@@ -27,9 +27,11 @@ namespace UI
         [Required]
         [SerializeField] private Image _image;
 
+#if DoTweenInstalled
         [Header("Settings")]
         [SerializeField] private float _enableScale = 1.2f;
         [SerializeField] private float _disableScale = 1f; 
+#endif
 
         [Header("Debug")]
         [SerializeField] private Vector3 _initialPosition;

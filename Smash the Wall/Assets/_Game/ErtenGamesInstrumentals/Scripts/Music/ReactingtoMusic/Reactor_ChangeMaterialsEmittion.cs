@@ -5,14 +5,14 @@ namespace Music.Reactors
 {
     public class Reactor_ChangeMaterialsEmittion : MonoBehaviour
     {
-        [FoldoutGroup("Material Settings"), ShowInInspector] private Material _material;
-        [FoldoutGroup("Material Settings"), ShowInInspector] private string _property;
+        [FoldoutGroup("Material Settings"), SerializeField] private Material _material;
+        [FoldoutGroup("Material Settings"), SerializeField] private string _property;
 
-        [FoldoutGroup("SO"), ShowInInspector] private AFrequancyData _aFrequancyData;
+        [FoldoutGroup("SO"), SerializeField] private AFrequancyData _aFrequancyData;
 
-        [FoldoutGroup("Settings"), ShowInInspector] private float _minValue = 1.5f;
-        [FoldoutGroup("Settings"), ShowInInspector] private float _multiplier;
-        [FoldoutGroup("Settings"), ShowInInspector] private Color _originalColor;
+        [FoldoutGroup("Settings"), SerializeField] private float _minValue = 1.5f;
+        [FoldoutGroup("Settings"), SerializeField] private float _multiplier;
+        [FoldoutGroup("Settings"), SerializeField] private Color _originalColor;
 
         private void Awake()
         {

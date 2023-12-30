@@ -9,27 +9,31 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using Weapons;
 
 namespace SO.Lists
 {
-    [CreateAssetMenu(fileName = "ListOfAllWeapons", menuName = "SO/Lists/ListOfAllWeapons")]
+    [CreateAssetMenu(fileName = "ListOfAllWeapons", menuName = "Scriptables/Lists/ListOfAllWeapons")]
     public class ListOfAllWeapons : ConfigBase, IDIDependent, ISelfValidator
     {
+        public IEnumerable<WeaponIdentityiCard> weapons => _weapons;
+
         [Required]
-        [field: SerializeField] public List<WeaponIdentityiCard> weapons { get; private set; } = new List<WeaponIdentityiCard>();
+        [ListDrawerSettings(ListElementLabelName = ("targetName"))]
+        [SerializeField] private List<WeaponIdentityiCard> _weapons = new List<WeaponIdentityiCard>();
 
         [Header("Debug")]
-        [Inject][SerializeField] private GameSaveManager _gameSaveManager;
+        [Inject]
+        [SerializeField] private GameSaveManager _gameSaveManager;
+
         [SerializeField] private Weapons_DTO _weaponSave = new Weapons_DTO();
 
         public virtual void Validate(SelfValidationResult result)
         {
-            foreach (var weapon in weapons)
+            foreach (var weapon in _weapons)
             {
                 if (weapon.target == null)
                 {
-                    result.AddError("Weapon Identifier at index" + weapons.IndexOf(weapon) + "is broken");
+                    result.AddError("Weapon Identifier at index" + _weapons.IndexOf(weapon) + "is broken");
                 }
                 else
                 {
@@ -47,7 +51,7 @@ namespace SO.Lists
 
             _weaponSave = _gameSaveManager.GetWeaponsSave();
 
-            foreach (var weaponsIdentifier in weapons)
+            foreach (var weaponsIdentifier in _weapons)
             {
                 weaponsIdentifier.SetIsUnlockedStatus(false);
 
@@ -78,7 +82,7 @@ namespace SO.Lists
             bool hasWeaponToUnlock = false;
             var levelSave = _gameSaveManager.GetLevelSave();
 
-            foreach (var weapon in weapons)
+            foreach (var weapon in _weapons)
             {
                 await AsyncHelper.Skip();
 
@@ -95,14 +99,14 @@ namespace SO.Lists
         public void ChooseWeapon(WeaponIdentityiCard weaponIdentityiCard)
         {
             var weaponsSave = _gameSaveManager.GetWeaponsSave();
-            weaponsSave.currentWeaponIndex = weapons.IndexOf(weaponIdentityiCard);
+            weaponsSave.currentWeaponIndex = _weapons.IndexOf(weaponIdentityiCard);
         }
 
         public int GetCurrentWeaponIndex()
         {
             var weaponsSave = _gameSaveManager.GetWeaponsSave();
 
-            if (weaponsSave.currentWeaponIndex >= weapons.Count)
+            if (weaponsSave.currentWeaponIndex >= _weapons.Count)
             {
                 weaponsSave.currentWeaponIndex = 0;
             }
@@ -114,7 +118,7 @@ namespace SO.Lists
 
         public WeaponIdentityiCard GetCurrentWeapon()
         {
-            var currentWeapon = weapons[GetCurrentWeaponIndex()];
+            var currentWeapon = _weapons[GetCurrentWeaponIndex()];
 
             return currentWeapon;
         }

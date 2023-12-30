@@ -8,17 +8,17 @@ namespace Music
     [CreateAssetMenu(fileName = "A Frequancy Data", menuName = "Scriptables/Music/A Frequancy Data")]
     public class AFrequancyData : ScriptableObject, IInitializable, IDIDependent
     {
-        [FoldoutGroup("Multipliers"), ShowInInspector] private float _multiplier = 1;
-        [FoldoutGroup("Multipliers"), ShowInInspector] public float defaultMultiplier { get; private set; } = 1;
+        [FoldoutGroup("Multipliers"), SerializeField] private float _multiplier = 1;
+        [FoldoutGroup("Multipliers"), SerializeField] public float defaultMultiplier { get; private set; } = 1;
 
-        [FoldoutGroup("Frequency Ranges"), SerializeField] private int _rangeStart = 1;
-        [FoldoutGroup("Frequency Ranges"), SerializeField] private int _rangeEnd = 5;
+        [FoldoutGroup("Frequency Ranges"), @SerializeField] private int _rangeStart = 1;
+        [FoldoutGroup("Frequency Ranges"), @SerializeField] private int _rangeEnd = 5;
 
         [Inject]
-        [FoldoutGroup("SO"), ShowInInspector] private SpectrumData _playingMusicFrequencies;
+        [FoldoutGroup("SO"), SerializeField] private SpectrumData _playingMusicFrequencies;
 
-        [FoldoutGroup("Debug"), ShowInInspector, ReadOnly] public float value { get; private set; }
-        [FoldoutGroup("Debug"), ShowInInspector] public float valueWithDefaultMultiplier => value * defaultMultiplier;
+        [FoldoutGroup("Debug"), SerializeField, ReadOnly] public float value { get; private set; }
+        [FoldoutGroup("Debug"), SerializeField] public float valueWithDefaultMultiplier => value * defaultMultiplier;
 
         public virtual void Initialize()
         {

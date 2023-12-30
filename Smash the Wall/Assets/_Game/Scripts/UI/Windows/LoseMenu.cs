@@ -14,7 +14,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class LoseMenu : CanvasWindowBase
+    public class LoseMenu : MenuBase
     {
         [Header("Settings")]
         [SerializeField] private int _mainMenuSceneIndex;
@@ -43,11 +43,6 @@ namespace UI
 
         [Required]
         [SerializeField] private Image _loseButtonsBlock;
-
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
 
         public override void Enable(float? duration = null)
         {

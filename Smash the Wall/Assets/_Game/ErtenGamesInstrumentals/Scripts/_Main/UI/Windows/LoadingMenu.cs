@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UI.Windows
 {
-    public class LoadingMenu : CanvasWindowBase
+    public class LoadingMenu : MenuBase
     {
         [Header("UI Elements")]
         [Required]

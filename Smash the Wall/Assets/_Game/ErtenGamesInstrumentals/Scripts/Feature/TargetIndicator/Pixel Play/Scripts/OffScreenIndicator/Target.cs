@@ -6,12 +6,12 @@ namespace TargetIndicator
     [DefaultExecutionOrder(0)]
     public class Target : MonoBehaviour
     {
-        [FoldoutGroup("Settings"), ShowInInspector] private Color _targetColor = Color.red;
-        [FoldoutGroup("Settings"), ShowInInspector] private bool _needBoxIndicator = true;
-        [FoldoutGroup("Settings"), ShowInInspector] private bool _needArrowIndicator = true;
-        [FoldoutGroup("Settings"), ShowInInspector] private bool _needDistanceText = true;
+        [FoldoutGroup("Settings"), SerializeField] private Color _targetColor = Color.red;
+        [FoldoutGroup("Settings"), SerializeField] private bool _needBoxIndicator = true;
+        [FoldoutGroup("Settings"), SerializeField] private bool _needArrowIndicator = true;
+        [FoldoutGroup("Settings"), SerializeField] private bool _needDistanceText = true;
 
-        [ShowInInspector, ReadOnly] public Indicator indicator;
+        [SerializeField, ReadOnly] public Indicator indicator;
 
         public Color TargetColor
         {

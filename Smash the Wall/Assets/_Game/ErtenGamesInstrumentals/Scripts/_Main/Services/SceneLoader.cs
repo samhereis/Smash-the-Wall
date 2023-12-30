@@ -1,7 +1,6 @@
 using DataClasses;
 using DependencyInjection;
 using Helpers;
-using Sirenix.OdinInspector;
 using System;
 using System.Threading.Tasks;
 using UI.Windows;
@@ -15,7 +14,7 @@ namespace Servies
     {
         public readonly UnityEvent<AScene> onSceneStartLoading = new UnityEvent<AScene>();
 
-        [ShowInInspector] private bool _loading = false;
+        [SerializeField] private bool _loading = false;
 
         public virtual async
 #if UNITY_2023_2_OR_NEWER

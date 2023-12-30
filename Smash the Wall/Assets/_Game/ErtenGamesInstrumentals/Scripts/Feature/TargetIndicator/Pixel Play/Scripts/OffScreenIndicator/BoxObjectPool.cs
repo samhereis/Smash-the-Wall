@@ -10,11 +10,11 @@ namespace TargetIndicator
 
         public static BoxObjectPool current;
 
-        [FoldoutGroup("Settings"), ShowInInspector] private Indicator _pooledObject;
-        [FoldoutGroup("Settings"), ShowInInspector] private int _pooledAmount = 1;
-        [FoldoutGroup("Settings"), ShowInInspector] private bool _willGrow = true;
+        [FoldoutGroup("Settings"), SerializeField] private Indicator _pooledObject;
+        [FoldoutGroup("Settings"), SerializeField] private int _pooledAmount = 1;
+        [FoldoutGroup("Settings"), SerializeField] private bool _willGrow = true;
 
-        [FoldoutGroup("Debug"), ShowInInspector] private List<Indicator> _pooledObjects;
+        [FoldoutGroup("Debug"), SerializeField] private List<Indicator> _pooledObjects;
 
         private void Awake()
         {

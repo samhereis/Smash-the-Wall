@@ -17,12 +17,12 @@ namespace Helpers
             await Awaitable.NextFrameAsync();
         }
 
-        public static async Awaitable DelayFloat(float delay)
+        public static async Awaitable DelayFloat(float delay, CancellationToken cancellationToken = default)
         {
             await Awaitable.WaitForSecondsAsync(delay);
         }
 
-        public static async Awaitable DelayInt(int delay)
+        public static async Awaitable DelayInt(int delay, CancellationToken cancellationToken = default)
         {
             int duration = (int)Mathf.Max(delay * 1000, 0);
 
@@ -31,7 +31,7 @@ namespace Helpers
 
         public static async Awaitable FromAsyncOperation(AsyncOperation asyncOperation)
         {
-            await Awaitable.FromAsyncOperation(asyncOperation));
+            await Awaitable.FromAsyncOperation(asyncOperation);
         }
 #else
         public static async Task Skip()
@@ -44,14 +44,14 @@ namespace Helpers
             await Task.Delay(40);
         }
 
-        public static async Task DelayFloat(float delay)
+        public static async Task DelayFloat(float delay, CancellationToken cancellationToken = default)
         {
             int duration = (int)Mathf.Max(delay * 1000, 0);
 
             await Task.Delay(duration);
         }
 
-        public static async Task DelayInt(int delay)
+        public static async Task DelayInt(int delay, CancellationToken cancellationToken = default)
         {
             await Task.Delay(delay);
         }

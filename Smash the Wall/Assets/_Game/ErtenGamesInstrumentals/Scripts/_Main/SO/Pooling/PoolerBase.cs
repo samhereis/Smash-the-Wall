@@ -1,6 +1,6 @@
-using Sirenix.OdinInspector;
 using Helpers;
 using Interfaces;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -10,16 +10,16 @@ namespace Pooling
     public abstract class PoolerBase<T> : ScriptableObject, IInitializable<Transform>, IInitializable where T : Component
     {
         [Required]
-        [ShowInInspector] public T poolable { get; protected set; }
+        [SerializeField] public T poolable { get; protected set; }
 
-        [FoldoutGroup("Settings"), ShowInInspector] protected bool _setParent = true;
-        [FoldoutGroup("Settings"), ShowInInspector] private int _defaultSpawnQuantity = 2;
+        [FoldoutGroup("Settings"), SerializeField] protected bool _setParent = true;
+        [FoldoutGroup("Settings"), SerializeField] private int _defaultSpawnQuantity = 2;
 
-        [FoldoutGroup("Debug"), ShowInInspector] protected Queue<T> _poolablesQueue = new Queue<T>();
-        [FoldoutGroup("Debug"), ShowInInspector] protected List<T> _poolablesDequeued = new List<T>();
-        [FoldoutGroup("Debug"), ShowInInspector] protected List<T> _poolablesQueued = new List<T>();
-        [FoldoutGroup("Debug"), ShowInInspector] private int _spawnCount = 0;
-        [FoldoutGroup("Debug"), ShowInInspector] private Transform _parent;
+        [FoldoutGroup("Debug"), SerializeField] protected Queue<T> _poolablesQueue = new Queue<T>();
+        [FoldoutGroup("Debug"), SerializeField] protected List<T> _poolablesDequeued = new List<T>();
+        [FoldoutGroup("Debug"), SerializeField] protected List<T> _poolablesQueued = new List<T>();
+        [FoldoutGroup("Debug"), SerializeField] private int _spawnCount = 0;
+        [FoldoutGroup("Debug"), SerializeField] private Transform _parent;
 
         public virtual void Initialize(Transform parent)
         {

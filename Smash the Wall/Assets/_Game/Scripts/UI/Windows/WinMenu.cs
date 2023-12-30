@@ -16,7 +16,7 @@ using static DataClasses.Enums;
 
 namespace UI
 {
-    public class WinMenu : CanvasWindowBase
+    public class WinMenu : MenuBase
     {
         [Header("Settings")]
         [SerializeField] private int _mainMenuSceneIndex;
@@ -60,10 +60,8 @@ namespace UI
 
         private PictureMode _currentPictureMode;
 
-        public override void Initialize()
+        public void Initialize()
         {
-            base.Initialize();
-
             _currentPictureMode = _listOfAllPictures.GetCurrent().pictureMode;
         }
 

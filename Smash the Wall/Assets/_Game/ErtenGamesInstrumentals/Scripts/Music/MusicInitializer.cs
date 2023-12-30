@@ -8,13 +8,13 @@ namespace Music
     public class MusicInitializer : MonoBehaviour, IDIDependent
     {
         [Required]
-        [ShowInInspector] private List<SpectrumData> _spectrumData;
+        [SerializeField] private List<SpectrumData> _spectrumData;
 
         [Required]
-        [ShowInInspector] private List<MusicList_SO> _musicLists;
+        [SerializeField] private List<MusicList_SO> _musicLists;
 
         [Required]
-        [FoldoutGroup("Frequencies"), ShowInInspector] private List<AFrequancyData> _listOfAllFrequencies = new List<AFrequancyData>();
+        [FoldoutGroup("Frequencies"), SerializeField] private List<AFrequancyData> _listOfAllFrequencies = new List<AFrequancyData>();
 
         private void Awake()
         {

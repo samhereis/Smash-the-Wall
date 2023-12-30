@@ -9,9 +9,9 @@ namespace Events
     {
         public Action onInvoke { get; private set; }
 
-        [field: SerializeField] public string eventName { get; private set; }
-        [field: SerializeField] public int currentSubscribedObjectsCount { get; private set; }
-        [field: SerializeField] public int timesInvoked { get; private set; }
+        [SerializeField] public string eventName { get; private set; }
+        [SerializeField] public int currentSubscribedObjectsCount { get; private set; }
+        [SerializeField] public int timesInvoked { get; private set; }
 
         public EventWithNoParameters(string eventName)
         {

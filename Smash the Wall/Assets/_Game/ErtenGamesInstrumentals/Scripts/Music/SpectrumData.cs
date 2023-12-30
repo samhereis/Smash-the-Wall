@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using Interfaces;
 using System;
 using System.Linq;
@@ -11,7 +10,7 @@ namespace Music
     {
         public Action<float[]> onValueChanged;
 
-        [ShowInInspector] public float[] frequencies { get; private set; } = new float[64];
+        [SerializeField] public float[] frequencies { get; private set; } = new float[64];
 
         public void Initialize()
         {

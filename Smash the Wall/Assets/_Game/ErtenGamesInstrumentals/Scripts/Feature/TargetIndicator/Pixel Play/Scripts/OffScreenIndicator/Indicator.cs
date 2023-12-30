@@ -1,5 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,10 +6,10 @@ namespace TargetIndicator
 {
     public class Indicator : MonoBehaviour
     {
-        [ShowInInspector] private IndicatorType _indicatorType;
-        [ShowInInspector] private Image _indicatorImage;
-        [ShowInInspector] private Image _distanceTextHolder;
-        [ShowInInspector] private TextMeshProUGUI _distanceText;
+        [SerializeField] private IndicatorType _indicatorType;
+        [SerializeField] private Image _indicatorImage;
+        [SerializeField] private Image _distanceTextHolder;
+        [SerializeField] private TextMeshProUGUI _distanceText;
 
         public bool Active
         {

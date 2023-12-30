@@ -8,18 +8,16 @@ namespace TargetIndicator
     [DefaultExecutionOrder(-1)]
     public class OffScreenIndicator : MonoBehaviour
     {
-        [ShowInInspector]
         public static Action<Target, bool> targetStateChanged;
 
-        [ShowInInspector] private Camera _mainCamera_;
+        [SerializeField] private Camera _mainCamera_;
 
-        [ShowInInspector]
         [Range(0.5f, 0.9f)]
-        private float _screenBoundOffset = 0.9f;
+        [SerializeField] private float _screenBoundOffset = 0.9f;
 
-        [FoldoutGroup("Debug"), ShowInInspector] private List<Target> _targets = new List<Target>();
-        [FoldoutGroup("Debug"), ShowInInspector] private Vector3 _screenCentre;
-        [FoldoutGroup("Debug"), ShowInInspector] private Vector3 _screenBounds;
+        [FoldoutGroup("Debug"), SerializeField] private List<Target> _targets = new List<Target>();
+        [FoldoutGroup("Debug"), SerializeField] private Vector3 _screenCentre;
+        [FoldoutGroup("Debug"), SerializeField] private Vector3 _screenBounds;
 
         private Camera _mainCamera
         {

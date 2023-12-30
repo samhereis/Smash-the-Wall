@@ -28,7 +28,7 @@ namespace Managers.UIManagers
 
         [Header("Components")]
         [Required]
-        [SerializeField] private CanvasWindowBase _openOnStart; 
+        [SerializeField] private MenuBase _openOnStart; 
         
         [Required]
         [SerializeField] private WinMenu _winMenu;
@@ -40,7 +40,7 @@ namespace Managers.UIManagers
         [SerializeField] private float _openOnStartDelay = 1f;
 
         [Header("Debug")]
-        [SerializeField] private List<CanvasWindowBase> _menus = new List<CanvasWindowBase>();
+        [SerializeField] private List<MenuBase> _menus = new List<MenuBase>();
 
         private WaitForSecondsRealtime _waitForSecondsRealtime = new WaitForSecondsRealtime(1);
 
@@ -49,14 +49,9 @@ namespace Managers.UIManagers
 
         private void Awake()
         {
-            _menus = GetComponentsInChildren<CanvasWindowBase>(true).ToList();
+            _menus = GetComponentsInChildren<MenuBase>(true).ToList();
             _winMenu = GetComponentInChildren<WinMenu>(true);
             _loseMenu = GetComponentInChildren<LoseMenu>(true);
-
-            foreach (CanvasWindowBase menu in _menus)
-            {
-                menu?.Initialize();
-            }
         }
 
         private async void Start()

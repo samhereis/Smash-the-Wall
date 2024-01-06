@@ -1,8 +1,6 @@
 using Configs;
 using DataClasses;
-using DependencyInjection;
 using Helpers;
-using Managers;
 using Services;
 using Servies;
 using Sirenix.OdinInspector;
@@ -16,16 +14,7 @@ namespace UI
 {
     public class LoseMenu : MenuBase
     {
-        [Header("Settings")]
-        [SerializeField] private int _mainMenuSceneIndex;
-
-        [Header("DI")]
-        [Inject][SerializeField] private GameConfigs _gameConfigs;
-        [Inject][SerializeField] private SceneLoader _sceneLoader;
-        [Inject][SerializeField] private ListOfAllScenes _listOfAllScenes;
-        [Inject][SerializeField] private AdsShowManager _adsShowManager;
-
-        [Header("Addressables")]
+        [Header("Effects")]
 
         [Required]
         [SerializeField] private SimpleSound _loseAudio;
@@ -43,6 +32,11 @@ namespace UI
 
         [Required]
         [SerializeField] private Image _loseButtonsBlock;
+
+        private GameConfigs _gameConfigs;
+        private SceneLoader _sceneLoader;
+        private ListOfAllScenes _listOfAllScenes;
+        private AdsShowManager _adsShowManager;
 
         public override void Enable(float? duration = null)
         {

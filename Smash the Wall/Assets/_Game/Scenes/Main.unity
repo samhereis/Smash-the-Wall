@@ -321,35 +321,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationData:
-    duration: {x: 0.25, y: 0.75}
-    valueRandomX: {x: -25, y: 25}
-    valueRandomY: {x: -25, y: 25}
-    valueRandomZ: {x: -25, y: 25}
-    originalValue: {x: 0, y: 0, z: 0}
-    currentTargetValue: {x: 0, y: 0, z: 0}
-    currentDuration: 0
+    duration: {x: 5, y: 10}
+    valueRandomX: {x: -5, y: 5}
+    valueRandomY: {x: -5, y: 5}
+    valueRandomZ: {x: -5, y: 5}
+    originalValue: {x: 0.95507324, y: 359.37384, z: 359.674}
+    currentTargetValue: {x: -3.4602823, y: -3.1709995, z: 1.3922309}
+    currentDuration: 9.018663
   _positionData:
-    duration: {x: 0.25, y: 0.75}
+    duration: {x: 5, y: 10}
     valueRandomX: {x: -0.25, y: 0.25}
     valueRandomY: {x: -0.25, y: 0.25}
     valueRandomZ: {x: -0.25, y: 0.25}
-    originalValue: {x: 0, y: 0, z: 0}
-    currentTargetValue: {x: 0, y: 0, z: 0}
-    currentDuration: 0
+    originalValue: {x: 0.12826501, y: 4.775488, z: -25.133644}
+    currentTargetValue: {x: 0.08557462, y: 0.18412042, z: 0.21565884}
+    currentDuration: 5.1049147
   _scaleData:
-    duration: {x: 0.25, y: 0.75}
+    duration: {x: 3, y: 6}
     valueRandomX: {x: -0.5, y: 0.5}
     valueRandomY: {x: -0.25, y: 0.25}
     valueRandomZ: {x: -0.25, y: 0.25}
-    originalValue: {x: 0, y: 0, z: 0}
-    currentTargetValue: {x: 0, y: 0, z: 0}
-    currentDuration: 0
+    originalValue: {x: 1.2615494, y: 0.80604446, z: 1.063729}
+    currentTargetValue: {x: 0.26154935, y: -0.19395554, z: 0.0637291}
+    currentDuration: 4.842226
   _rotationEnable: 1
   _positionEnable: 1
-  _scaleEnable: 1
+  _scaleEnable: 0
   _rotationReached: 0
   _positionReached: 0
-  _scaleReached: 0
+  _scaleReached: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

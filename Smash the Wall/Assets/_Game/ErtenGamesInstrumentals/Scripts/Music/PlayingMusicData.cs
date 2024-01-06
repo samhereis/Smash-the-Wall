@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Music
 {
-    public class PlayingMusicData : MonoBehaviour, IDIDependent
+    public class PlayingMusicData : MonoBehaviour, INeedDependencyInjection
     {
         [Required]
         [Inject]
@@ -30,7 +30,7 @@ namespace Music
 
         private void Start()
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             CheckForAudio(destroyCancellationToken);
         }

@@ -13,7 +13,7 @@ using UnityEngine;
 namespace SO.Lists
 {
     [CreateAssetMenu(fileName = "ListOfAllPictures", menuName = "Scriptables/Lists/ListOfAllPictures")]
-    public class ListOfAllPictures : ConfigBase, IDIDependent, ISelfValidator
+    public class ListOfAllPictures : ConfigBase, INeedDependencyInjection, ISelfValidator
     {
         public IEnumerable<PictureIdentityCard> pictures => _pictures;
 
@@ -66,7 +66,7 @@ namespace SO.Lists
 
         public override void Initialize()
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
         }
 
         public PictureIdentityCard GetRandom()

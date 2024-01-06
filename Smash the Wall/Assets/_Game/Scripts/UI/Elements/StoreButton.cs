@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UI.Elements
 {
-    public class StoreButton : MonoBehaviour, IDIDependent
+    public class StoreButton : MonoBehaviour, INeedDependencyInjection
     {
         [Header("DI")]
         [Inject][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
@@ -16,7 +16,7 @@ namespace UI.Elements
 
         private void Awake()
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
         }
 
         private async void OnEnable()

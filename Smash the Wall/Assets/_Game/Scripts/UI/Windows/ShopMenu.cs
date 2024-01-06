@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class ShopWindow : MenuBase
+    public class ShopMenu : MenuBase
     {
         [Header("Components")]
 
@@ -17,6 +17,13 @@ namespace UI
 
         [Required]
         [SerializeField] private WeaponsShop _weaponsShop;
+
+        private MenuBase _openOnClose;
+
+        public void Initialize(MenuBase openOnClose)
+        {
+            _openOnClose = openOnClose;
+        }
 
         protected override void OnDestroy()
         {
@@ -39,6 +46,8 @@ namespace UI
             UnsubscribeFromEvents();
 
             _weaponsShop.Dispose();
+
+            _openOnClose?.Enable();
         }
 
         protected override void SubscribeToEvents()

@@ -7,7 +7,7 @@ using static Services.InAppPurchacesManager;
 
 namespace Managers
 {
-    public class NoAdsButton : MonoBehaviour, IDIDependent
+    public class NoAdsButton : MonoBehaviour, INeedDependencyInjection
     {
         [Header("DI")]
         [Inject][SerializeField] private InAppPurchacesManager _inAppPurchacesManager;
@@ -19,7 +19,7 @@ namespace Managers
             {
                 if (_inAppPurchacesManager == null)
                 {
-                    DependencyInjector.InjectDependencies(this);
+                    DependencyContext.InjectDependencies(this);
                 }
 
                 if (_inAppPurchacesManager == null)

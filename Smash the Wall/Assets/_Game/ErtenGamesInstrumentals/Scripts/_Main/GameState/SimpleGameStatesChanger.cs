@@ -7,18 +7,18 @@ using UnityEngine;
 namespace GameState
 {
     [Serializable]
-    public class SimpleGameStatesChanger : IGameStateChanger, IInitializable, IDIDependent
+    public class SimpleGameStatesChanger : IGameStateChanger, IInitializable, INeedDependencyInjection
     {
         [field: SerializeField] public GameStateBase currentGameState { get; private set; }
 
         public virtual async void Initialize()
         {
-            while (DependencyInjector.isGloballyInjected == false)
+            while (DependencyContext.isGloballyInjected == false)
             {
                 await AsyncHelper.DelayFloat(1f);
             }
 
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
         }
 
         public virtual void ChangeState(GameStateBase gameState)

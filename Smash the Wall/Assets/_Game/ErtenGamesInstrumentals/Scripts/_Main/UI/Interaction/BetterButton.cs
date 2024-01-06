@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 namespace UI.Interaction
 {
-    public class BetterButton : Button, IDIDependent, ISelfValidator
+    public class BetterButton : Button, INeedDependencyInjection, ISelfValidator
     {
         [SerializeField] private SimpleSound _clickSoundResponce = new SimpleSound();
 
@@ -32,11 +32,19 @@ namespace UI.Interaction
         public void Validate(SelfValidationResult result)
         {
             if (_clickSoundResponce == null) { _clickSoundResponce = new SimpleSound(); }
+            if (enabled == false)
+            {
+                enabled = true;
+            }
         }
 
         protected override void Awake()
         {
-            DependencyInjector.InjectDependencies(this);
+#if UNITY_EDITOR
+            if (Application.isPlaying == false) { return; }
+#endif
+
+            DependencyContext.InjectDependencies(this);
         }
 
         protected override void OnDestroy()
@@ -92,7 +100,7 @@ namespace UI.Interaction
 
 #if DoTweenInstalled
             transform.DOKill();
-            
+
 #endif
 
 #if DoTweenInstalled

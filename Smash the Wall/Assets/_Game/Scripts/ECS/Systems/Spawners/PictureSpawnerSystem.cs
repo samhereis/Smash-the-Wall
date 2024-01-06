@@ -27,8 +27,8 @@ namespace ECS.Systems.Spawners
         {
             _isActive = true;
 
-            _listOfAllPictures = DependencyInjector.diBox.Get<ListOfAllPictures>();
-            _gameConfigs = DependencyInjector.diBox.Get<GameConfigs>();
+            _listOfAllPictures = DependencyContext.diBox.Get<ListOfAllPictures>();
+            _gameConfigs = DependencyContext.diBox.Get<GameConfigs>();
         }
 
         public void Disable()
@@ -39,13 +39,13 @@ namespace ECS.Systems.Spawners
         private async void Inject()
         {
 
-            while (DependencyInjector.isGloballyInjected == false)
+            while (DependencyContext.isGloballyInjected == false)
             {
                 await AsyncHelper.Skip();
             }
 
-            _listOfAllPictures = DependencyInjector.diBox.Get<ListOfAllPictures>();
-            _gameConfigs = DependencyInjector.diBox.Get<GameConfigs>();
+            _listOfAllPictures = DependencyContext.diBox.Get<ListOfAllPictures>();
+            _gameConfigs = DependencyContext.diBox.Get<GameConfigs>();
         }
 
         public void OnCreate(ref SystemState state)

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UI.Window.Tutorial
 {
-    public abstract class TutorialMenuBase : MenuBase, IDIDependent
+    public abstract class TutorialMenuBase : MenuBase, INeedDependencyInjection
     {
         [field: SerializeField] public TutorialBaseSettings tutorialBaseSettings { get; private set; } = new TutorialBaseSettings();
 

@@ -3,11 +3,11 @@ using UnityEngine.InputSystem;
 
 namespace Weapons
 {
-    public class ProjectileWeaponBase : WeaponBase, IDIDependent
+    public class ProjectileWeaponBase : WeaponBase, INeedDependencyInjection
     {
         public override void Initialize()
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             base.Initialize();
         }

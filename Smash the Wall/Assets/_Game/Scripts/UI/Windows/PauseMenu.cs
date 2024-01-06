@@ -1,4 +1,3 @@
-using DependencyInjection;
 using Servies;
 using Sirenix.OdinInspector;
 using SO.Lists;
@@ -10,14 +9,6 @@ namespace UI
 {
     public class PauseMenu : MenuBase
     {
-        [Header("Dependencies")]
-        [SerializeField] private SettingsMenu _settingsWindow;
-        [SerializeField] private GameplayMenu _gameplayWindow;
-
-        [Header("DI")]
-        [Inject][SerializeField] private ListOfAllScenes _listOfAllScenes;
-        [Inject] private SceneLoader _sceneLoader;
-
         [Header("Components")]
 
         [Required]
@@ -32,10 +23,16 @@ namespace UI
         [Required]
         [SerializeField] private Button _mainMenuButton;
 
-        public void Initialize()
+        private SettingsMenu _settingsWindow;
+        private GameplayMenu _gameplayWindow;
+
+        private ListOfAllScenes _listOfAllScenes;
+        private SceneLoader _sceneLoader;
+
+        public void Initialize(SettingsMenu settingsWindow, GameplayMenu gameplayWindow)
         {
-            if (_settingsWindow == null) { _settingsWindow = FindFirstObjectByType<SettingsMenu>(FindObjectsInactive.Include); }
-            if (_gameplayWindow == null) { _gameplayWindow = FindFirstObjectByType<GameplayMenu>(FindObjectsInactive.Include); }
+            _settingsWindow = settingsWindow;
+            _gameplayWindow = gameplayWindow;
         }
 
         public override void Enable(float? duration = null)

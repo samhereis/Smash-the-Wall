@@ -14,7 +14,7 @@ using UnityEngine;
 
 namespace Managers.UIManagers
 {
-    public class GameplauUIManager : MonoBehaviour, IDIDependent
+    public class GameplauUIManager : MonoBehaviour, INeedDependencyInjection
     {
         [Header("DI")]
         [Inject][SerializeField] private EventWithNoParameters _onWin;
@@ -56,7 +56,7 @@ namespace Managers.UIManagers
 
         private async void Start()
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             _onWin.AddListener(OnWin);
             _onLose.AddListener(OnLose);

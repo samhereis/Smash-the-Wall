@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DependencyInjection
 {
-    public abstract class HardCodeDependencyInjectorBase : MonoBehaviour
+    public abstract class DependencyInstallerBase : MonoBehaviour
     {
         public virtual void Inject()
         {

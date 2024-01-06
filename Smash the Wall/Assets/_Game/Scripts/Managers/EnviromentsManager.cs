@@ -1,11 +1,13 @@
 using DependencyInjection;
+using Helpers;
 using Identifiers;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Managers
 {
-    public sealed class EnviromentsManager : MonoBehaviour, IDIDependent
+    public sealed class EnviromentsManager : MonoBehaviour, INeedDependencyInjection
     {
         [Header("Addressables")]
         [Required]
@@ -21,10 +23,14 @@ namespace Managers
 
         public void Initialize()
         {
+            if (_suitableEnviroments.IsNullOrEmpty() == false)
+            {
+                _enviroment = Instantiate(_suitableEnviroments.GetRandom());
+            }
+
             if (_enviroment != null)
             {
                 _enviroment.Initialize();
-                DontDestroyOnLoad(_enviroment);
             }
         }
     }

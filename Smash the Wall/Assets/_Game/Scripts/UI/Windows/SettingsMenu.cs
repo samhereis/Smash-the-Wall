@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class SettingsMenu : MenuBase
+    public class SettingsMenu : MenuBase, INeedDependencyInjection
     {
         [Header("Components")]
 
@@ -32,18 +32,14 @@ namespace UI
         [Required]
         [SerializeField] private Image _buttonsInfoBlock;
 
-        [Inject]
-        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private GameConfigs _gameConfigs;
-        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private MenuBase _menuBase;
+        private GameConfigs _gameConfigs;
+        private MenuBase _openOnClose;
 
-        public void Initialize(MainMenu mainMenu)
+        public void Initialize(MenuBase menuBase)
         {
-            _menuBase = mainMenu;
-        }
+            _openOnClose = menuBase;
 
-        public void Initialize()
-        {
-            _gameConfigs.Initialize();
+            DependencyContext.InjectDependencies(this);
         }
 
         public override void Enable(float? duration = null)
@@ -126,6 +122,8 @@ namespace UI
         private void Close()
         {
             Disable();
+
+            _openOnClose?.Enable();
         }
     }
 }

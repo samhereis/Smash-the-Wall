@@ -26,7 +26,7 @@ namespace Configs
         }
 
         [Serializable]
-        public class GameSettings : IInitializable, IDIDependent
+        public class GameSettings : IInitializable, INeedDependencyInjection
         {
             [field: SerializeField, Header("Settings")] public FloatSavable_SO gunRotationSpeed { get; private set; }
             [field: SerializeField] public FloatSavable_SO musicValue { get; private set; }
@@ -52,7 +52,7 @@ namespace Configs
 
             public void Initialize()
             {
-                DependencyInjector.InjectDependencies(this);
+                DependencyContext.InjectDependencies(this);
 
                 gunRotationSpeed.Initialize();
                 musicValue.Initialize();

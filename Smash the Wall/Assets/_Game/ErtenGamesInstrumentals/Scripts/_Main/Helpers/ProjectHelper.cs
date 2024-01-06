@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Samhereis.Helpers
 {
 
-    public sealed class ProjectHelper : MonoBehaviour, IDIDependent
+    public sealed class ProjectHelper : MonoBehaviour, INeedDependencyInjection
     {
         [SerializeField] private int _targetFPS = 120;
 

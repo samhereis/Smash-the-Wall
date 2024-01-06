@@ -10,7 +10,7 @@ using Unity.Entities;
 
 namespace ECS.Systems.GameState
 {
-    public partial struct WinLoseChecker_System : ISystem, IEnableableSystem, IDIDependent
+    public partial struct WinLoseChecker_System : ISystem, IEnableableSystem, INeedDependencyInjection
     {
         public static WinLoseChecker_System instance { get; private set; }
         public static bool _isActive { get; private set; }
@@ -53,10 +53,10 @@ namespace ECS.Systems.GameState
 
         private void InjectDs()
         {
-            _onWin = DependencyInjector.diBox.Get<EventWithNoParameters>(DIStrings.OnWinEvent);
-            _onLose = DependencyInjector.diBox.Get<EventWithNoParameters>(DIStrings.OnLoseEvent);
-            _gameConfigs = DependencyInjector.diBox.Get<GameConfigs>();
-            _listOfAllPictures = DependencyInjector.diBox.Get<ListOfAllPictures>();
+            _onWin = DependencyContext.diBox.Get<EventWithNoParameters>(DIStrings.OnWinEvent);
+            _onLose = DependencyContext.diBox.Get<EventWithNoParameters>(DIStrings.OnLoseEvent);
+            _gameConfigs = DependencyContext.diBox.Get<GameConfigs>();
+            _listOfAllPictures = DependencyContext.diBox.Get<ListOfAllPictures>();
         }
 
         public void OnUpdate(ref SystemState systemState)

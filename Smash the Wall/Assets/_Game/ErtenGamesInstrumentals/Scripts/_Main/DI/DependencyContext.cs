@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace DependencyInjection
 {
-    public class DependencyInjector : MonoBehaviour, ISelfValidator
+    public class DependencyContext : MonoBehaviour, ISelfValidator
     {
         [FoldoutGroup("Debug"), ShowInInspector, ReadOnly] public static bool isGloballyInjected { get; private set; } = false;
 
@@ -26,13 +26,13 @@ namespace DependencyInjection
         [Required]
         [FoldoutGroup("Objects To DI"), SerializeField] private LoggerBase _diLogger;
 
-        [FoldoutGroup("Debug"), SerializeField] private HardCodeDependencyInjectorBase[] _hardCodeDependencyInjectors;
+        [FoldoutGroup("Debug"), SerializeField] private DependencyInstallerBase[] _dependencyInstallers;
         [FoldoutGroup("Debug"), SerializeField, ReadOnly] public bool isInjected { get; private set; } = false;
         [FoldoutGroup("Debug"), ShowInInspector, ReadOnly] public static DIBox diBox { get; private set; } = new DIBox();
 
         private void Awake()
         {
-            _hardCodeDependencyInjectors = GetComponents<HardCodeDependencyInjectorBase>();
+            _dependencyInstallers = GetComponents<DependencyInstallerBase>();
             diBox = new DIBox(_diLogger);
 
             if (_isGlobal == true && isGloballyInjected == true)
@@ -70,7 +70,7 @@ namespace DependencyInjection
 #endif
         }
 
-        public static void InjectDependencies(IDIDependent dIDependent)
+        public static void InjectDependencies(INeedDependencyInjection dIDependent)
         {
             diBox.InjectDataTo(dIDependent);
         }
@@ -97,7 +97,7 @@ namespace DependencyInjection
                 diBox.Add(eventWithNoParameter, id: eventWithNoParameter.eventName);
             }
 
-            foreach (var hcdi in _hardCodeDependencyInjectors)
+            foreach (var hcdi in _dependencyInstallers)
             {
                 hcdi.Inject();
             }
@@ -156,7 +156,7 @@ namespace DependencyInjection
                 diBox.Remove(eventWithNoParameter.GetType(), eventWithNoParameter.eventName);
             }
 
-            foreach (var hcdi in _hardCodeDependencyInjectors)
+            foreach (var hcdi in _dependencyInstallers)
             {
                 hcdi.Clear();
             }

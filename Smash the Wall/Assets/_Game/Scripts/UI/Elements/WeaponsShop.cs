@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace UI.Elements
 {
-    public sealed class WeaponsShop : MonoBehaviour, IDIDependent, IInitializable, IDisposable
+    public sealed class WeaponsShop : MonoBehaviour, INeedDependencyInjection, IInitializable, IDisposable
     {
         [Inject][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
 
@@ -28,7 +28,7 @@ namespace UI.Elements
 
         public void Initialize()
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             Dispose();
 

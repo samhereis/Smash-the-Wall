@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Gameplay
 {
-    public class CameraRotation : MonoBehaviour, IDIDependent
+    public class CameraRotation : MonoBehaviour, INeedDependencyInjection
     {
         public float _gunRotationSpeed => _gameConfigs == null ? 0.2f : _gameConfigs.gameSettings.gunRotationSpeed.currentValue;
 
@@ -28,7 +28,7 @@ namespace Gameplay
 
         private void OnEnable()
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             _inputsHolder.input.Player.Look.performed += Look;
             _inputsHolder.input.Player.Look.canceled += Look;

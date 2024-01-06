@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 namespace UI.Interaction
 {
-    public class BackButton : MonoBehaviour, IPointerClickHandler, IDIDependent
+    public class BackButton : MonoBehaviour, IPointerClickHandler, INeedDependencyInjection
     {
         [ShowInInspector] public UnityEvent onBack { get; private set; } = new UnityEvent();
 
@@ -18,7 +18,7 @@ namespace UI.Interaction
 
         private void Awake()
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
         }
 
         public void SubscribeToEvents()

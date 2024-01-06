@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Music
 {
-    public class MusicInitializer : MonoBehaviour, IDIDependent
+    public class MusicInitializer : MonoBehaviour, INeedDependencyInjection
     {
         [Required]
         [SerializeField] private List<SpectrumData> _spectrumData;

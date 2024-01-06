@@ -110,15 +110,11 @@ namespace UI.Canvases
         {
             if (duration == null) duration = _baseSettings.animationDuration_Enable;
 
+            _baseSettings.isOpen = true;
+
 #if DoTweenInstalled
             _baseSettings.canvasGroup.DOKill();
-            _baseSettings.canvasGroup.FadeUp(duration.Value,
-
-            setActiveToTrue: _baseSettings.enableDisable,
-                completeCallback: () =>
-            {
-                _baseSettings.isOpen = true;
-            });
+            _baseSettings.canvasGroup.FadeUp(duration.Value);
 #endif
 
             TurnOnUIAnimationElements_Async();
@@ -130,6 +126,8 @@ namespace UI.Canvases
         {
             if (duration == null) duration = _baseSettings.animationDuration_Disable;
 
+            _baseSettings.isOpen = false;
+
             TurnOffUIAnimationElements();
 
 #if DoTweenInstalled
@@ -138,21 +136,10 @@ namespace UI.Canvases
             if (duration.Value == 0)
             {
                 _baseSettings.canvasGroup.FadeDownQuick(setActiveToFalse: _baseSettings.enableDisable);
-                OnClosed();
             }
             else
             {
-                _baseSettings.canvasGroup.FadeDown(duration.Value,
-                    setActiveToFalse: _baseSettings.enableDisable,
-                    completeCallback: () =>
-                {
-                    OnClosed();
-                });
-            }
-            
-            void OnClosed()
-            {
-                _baseSettings.isOpen = false;
+                _baseSettings.canvasGroup.FadeDown(duration.Value, setActiveToFalse: _baseSettings.enableDisable);
             }
 #endif
         }
@@ -214,15 +201,12 @@ namespace UI.Canvases
             public float uiAnimationElementForeachDelay = 0.025f;
 
             [Header("Components")]
-            public bool isOpen = true;
-
-            [Header("Components")]
-
             [Required]
             public CanvasGroup canvasGroup;
 
             [Header("Debug")]
             public UIAnimationElement_Base[] uIAnimationElements;
+            public bool isOpen = true;
         }
     }
 }

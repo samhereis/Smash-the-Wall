@@ -1,5 +1,4 @@
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using Sound;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,13 +10,17 @@ namespace SO.DataHolders
     {
         public void Validate(SelfValidationResult result)
         {
-            if (data.IsNullOrEmpty())
+            if (data == null)
             {
                 result.AddWarning("Data is null").WithFix(() =>
                 {
                     data = new List<SimpleSound>();
-                    data.Add(new SimpleSound());
                 });
+            }
+
+            if (data.Count == 0)
+            {
+                result.AddWarning("Sound list is empty");
             }
         }
     }

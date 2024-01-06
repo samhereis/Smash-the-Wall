@@ -18,20 +18,10 @@ namespace UI
 {
     public class WinMenu : MenuBase
     {
-        [Header("Settings")]
-        [SerializeField] private int _mainMenuSceneIndex;
-
-        [Header("DI")]
-        [Inject][SerializeField] private GameConfigs _gameConfigs;
-        [Inject][SerializeField] private ListOfAllScenes _listOfAllScenes;
-        [Inject][SerializeField] private ListOfAllPictures _listOfAllPictures;
-        [Inject][SerializeField] private SceneLoader _sceneLoader;
-        [Inject][SerializeField] private AdsShowManager _adsShowManager;
-
-        [Header("Addressables")]
+        [Header("Effects")]
 
         [Required]
-        [SerializeField] Sprite[] _winEmojis;
+        [SerializeField] private Sprite[] _winEmojis;
 
         [Required]
         [SerializeField] private SimpleSound _winAudio;
@@ -56,7 +46,11 @@ namespace UI
         [Required]
         [SerializeField] private Star_CustomControl _starControl;
 
-        [Header("Debug")]
+        private GameConfigs _gameConfigs;
+        private ListOfAllScenes _listOfAllScenes;
+        private ListOfAllPictures _listOfAllPictures;
+        private SceneLoader _sceneLoader;
+        private AdsShowManager _adsShowManager;
 
         private PictureMode _currentPictureMode;
 

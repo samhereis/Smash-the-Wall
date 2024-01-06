@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Music
 {
     [CreateAssetMenu(fileName = "A Frequancy Data", menuName = "Scriptables/Music/A Frequancy Data")]
-    public class AFrequancyData : ScriptableObject, IInitializable, IDIDependent
+    public class AFrequancyData : ScriptableObject, IInitializable, INeedDependencyInjection
     {
         [FoldoutGroup("Multipliers"), SerializeField] private float _multiplier = 1;
         [FoldoutGroup("Multipliers"), SerializeField] public float defaultMultiplier { get; private set; } = 1;
@@ -22,7 +22,7 @@ namespace Music
 
         public virtual void Initialize()
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             _playingMusicFrequencies.onValueChanged -= GetData;
             _playingMusicFrequencies.onValueChanged += GetData;

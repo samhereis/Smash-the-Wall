@@ -14,7 +14,7 @@ using UnityEngine.UI;
 
 namespace UI.Elements
 {
-    public sealed class ShopWeaponUnit : MonoBehaviour, IDIDependent, IInitializable<WeaponIdentityiCard>
+    public sealed class ShopWeaponUnit : MonoBehaviour, INeedDependencyInjection, IInitializable<WeaponIdentityiCard>
     {
         [Header("DI")]
         [Inject][SerializeField] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
@@ -71,7 +71,7 @@ namespace UI.Elements
 
         public void Initialize(WeaponIdentityiCard weaponIdentityiCard)
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             _weaponIdentityiCard = weaponIdentityiCard;
 

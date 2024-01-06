@@ -8,8 +8,10 @@ using UnityEngine;
 
 namespace UI.Helpers
 {
-    public class ScaleByPercentage : MonoBehaviour, IDIDependent, ISelfValidator
+    public class ScaleByPercentage : MonoBehaviour, INeedDependencyInjection, ISelfValidator
     {
+        private static LazyUpdator_Service _lazyUpdator = new LazyUpdator_Service();
+
         [SerializeField] private RectTransform _parent;
 
         [Required]
@@ -17,9 +19,6 @@ namespace UI.Helpers
 
         [SerializeField] private ScaleSettings _scaleSettings = new ScaleSettings();
         [SerializeField] private IgnoreSettings _ignoreSettings = new IgnoreSettings();
-
-        [FoldoutGroup("DI"), SerializeField]
-        [Inject] private LazyUpdator_Service _lazyUpdator;
 
         public void Validate(SelfValidationResult result)
         {
@@ -42,7 +41,6 @@ namespace UI.Helpers
 
         private void Start()
         {
-            DependencyInjector.InjectDependencies(this);
             Validate();
         }
 
@@ -86,7 +84,7 @@ namespace UI.Helpers
         private async Task DoAutoScaleAsync()
         {
             DoAutoScale();
-            await AsyncHelper.DelayFloat(0.25f);
+            await AsyncHelper.NextFrame();
         }
 
         [Serializable]

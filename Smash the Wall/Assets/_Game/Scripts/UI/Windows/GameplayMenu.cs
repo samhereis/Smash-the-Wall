@@ -4,6 +4,7 @@ using DG.Tweening;
 using ECS.Systems.GameState;
 using Helpers;
 using Identifiers;
+using Interfaces;
 using Managers;
 using Services;
 using Sirenix.OdinInspector;
@@ -16,56 +17,41 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class GameplayMenu : MenuBase
+    public class GameplayMenu : MenuBase, IInitializable
     {
-        [ChildGameObjectsOnly]
-        [Required]
+        [Required, ChildGameObjectsOnly]
         [FoldoutGroup("UI Components"), SerializeField] private Button _pauseButton;
 
-        [ChildGameObjectsOnly]
-        [Required]
+        [Required, ChildGameObjectsOnly]
         [FoldoutGroup("UI Components"), SerializeField] private Button _shopsButton;
 
-        [ChildGameObjectsOnly]
-        [Required]
+        [Required, ChildGameObjectsOnly]
         [FoldoutGroup("UI Components"), SerializeField] private Slider _whatNeedsToBeDestroyedProgressbar;
 
-        [ChildGameObjectsOnly]
-        [Required]
+        [Required, ChildGameObjectsOnly]
         [FoldoutGroup("UI Components"), SerializeField] private Slider _whatNeedsToStayProgressbar;
 
-        [ChildGameObjectsOnly]
-        [Required]
+        [Required, ChildGameObjectsOnly]
         [FoldoutGroup("UI Components"), SerializeField] private TextMeshProUGUI _currentLevelText;
 
         [FoldoutGroup("Settings"), SerializeField] private Gradient _whatNeedsToBeDestroyedProgressbarGradient;
         [FoldoutGroup("Settings"), SerializeField] private Gradient _whatNeedsToStayProgressbarGradient;
 
         [FoldoutGroup("Dependency"), SerializeField, ReadOnly] private PauseMenu _pauseMenu;
-        [FoldoutGroup("Dependency"), SerializeField, ReadOnly] private ShopWindow _shopWindow;
+        [FoldoutGroup("Dependency"), SerializeField, ReadOnly] private ShopMenu _shopWindow;
 
-        [Inject]
-        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private InputsService _inputs;
-
-        [Inject]
-        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private GameConfigs _gameConfigs;
-
-        [Inject]
-        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private AdsShowManager _adsShowManager;
-
-        [Inject]
-        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private LazyUpdator_Service _lazyUpdator;
-
-        [Inject]
-        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private GameSaveManager _gameSaveManager;
-
-        [Inject]
-        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private ListOfAllPictures _listOfAllPictures;
+        [Inject] private GameConfigs _gameConfigs;
+        [Inject] private AdsShowManager _adsShowManager;
+        [Inject] private GameSaveManager _gameSaveManager;
+        [Inject] private ListOfAllPictures _listOfAllPictures;
+        [Inject] private InputsService _inputs;
 
         private Image _whatNeedsToBeDestroyedProgressbarFillImage;
         private Image _whatNeedsToStayProgressbarFillImage;
 
-        public void Initialize(PauseMenu pauseMenu, ShopWindow shopWindow)
+        private LazyUpdator_Service _lazyUpdator = new LazyUpdator_Service();
+
+        public void Initialize(PauseMenu pauseMenu, ShopMenu shopWindow)
         {
             _pauseMenu = pauseMenu;
             _shopWindow = shopWindow;
@@ -75,9 +61,6 @@ namespace UI
 
         public void Initialize()
         {
-            if (_pauseMenu == null) { _pauseMenu = FindFirstObjectByType<PauseMenu>(FindObjectsInactive.Include); }
-            if (_shopWindow == null) { _shopWindow = FindFirstObjectByType<ShopWindow>(FindObjectsInactive.Include); }
-
             _whatNeedsToBeDestroyedProgressbarFillImage = _whatNeedsToBeDestroyedProgressbar.fillRect.GetComponent<Image>();
             var _whatNeedsToBeDestroyedProgressbarGradientKeys = _whatNeedsToBeDestroyedProgressbarGradient.colorKeys;
             _whatNeedsToBeDestroyedProgressbarGradientKeys[1].time = _gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToBeDestroysToWin / 100;
@@ -114,32 +97,7 @@ namespace UI
 
             SubscribeToEvents();
 
-            bool shouldDestroyBanner = false;
-
-            var banners = FindObjectsOfType<BannerIdentifier>(true);
-
-            foreach (var item in banners)
-            {
-                if (item.gameObject.activeInHierarchy == false)
-                {
-                    Destroy(item.gameObject);
-
-                    if (shouldDestroyBanner == false) { shouldDestroyBanner = true; }
-                }
-            }
-
-            if (banners.Length > 0)
-            {
-                if (shouldDestroyBanner == true)
-                {
-                    _adsShowManager?.DestroyBanner();
-                    _adsShowManager?.TryShowBanner();
-                }
-            }
-            else
-            {
-                _adsShowManager?.TryShowBanner();
-            }
+            TryShowBanner();
 
             if (_currentLevelText != null)
             {
@@ -224,6 +182,36 @@ namespace UI
         private void OnShopsButtonClicked()
         {
             _shopWindow?.Enable();
+        }
+
+        private void TryShowBanner()
+        {
+            bool shouldDestroyBanner = false;
+
+            var banners = FindObjectsOfType<BannerIdentifier>(true);
+
+            foreach (var item in banners)
+            {
+                if (item.gameObject.activeInHierarchy == false)
+                {
+                    Destroy(item.gameObject);
+
+                    if (shouldDestroyBanner == false) { shouldDestroyBanner = true; }
+                }
+            }
+
+            if (banners.Length > 0)
+            {
+                if (shouldDestroyBanner == true)
+                {
+                    _adsShowManager?.DestroyBanner();
+                    _adsShowManager?.TryShowBanner();
+                }
+            }
+            else
+            {
+                _adsShowManager?.TryShowBanner();
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace DependencyInjection
 {
-    public interface IDIDependent
+    public interface INeedDependencyInjection
     {
 
     }

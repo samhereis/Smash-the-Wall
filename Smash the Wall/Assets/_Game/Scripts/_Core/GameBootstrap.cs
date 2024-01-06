@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace GameState
 {
-    public class GameBootstrap : GameBootstrapBase, IDIDependent
+    public class GameBootstrap : GameBootstrapBase, INeedDependencyInjection
     {
         private const string _isFirstTimeInGameStrings = "IsFirstTimeInGame";
         private const string _adsTrackingOnString = "adsTrackingOnString";
@@ -57,9 +57,9 @@ namespace GameState
         {
             base.Initialize();
 
-            while (DependencyInjector.isGloballyInjected == false) { await AsyncHelper.Skip(); }
+            while (DependencyContext.isGloballyInjected == false) { await AsyncHelper.Skip(); }
 
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             if (isFirstTimeInGame == true)
             {

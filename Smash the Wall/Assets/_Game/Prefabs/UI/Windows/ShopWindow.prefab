@@ -120,7 +120,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6167292009485441499}
   m_HandleRect: {fileID: 4244169057652228233}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3143824794417414448}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ec033025beef2a4fb965d4e756a8347, type: 3}
   m_Name: 
@@ -450,6 +450,7 @@ MonoBehaviour:
       m_Calls: []
   _clickSoundResponce:
     _audioClips: []
+  _onOverScale: 0.75
   _animationDuration: 0.25
   _playSound: 1
   _vibrate: 1
@@ -490,7 +491,7 @@ GameObject:
   - component: {fileID: 335830571266568666}
   - component: {fileID: 909539210620541592}
   - component: {fileID: 2854179885721853284}
-  - component: {fileID: 632263108608419002}
+  - component: {fileID: 7458205613686312571}
   m_Layer: 5
   m_Name: ShopWindow
   m_TagString: Untagged
@@ -593,7 +594,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &632263108608419002
+--- !u!114 &7458205613686312571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -602,7 +603,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3181043545211170021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4470272b5481f3e4dbca5e9c77bb31ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 5421ebebdf71c8040bd0c624b1a5c3c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _baseSettings:
@@ -611,11 +612,16 @@ MonoBehaviour:
     animationDuration_Enable: 1
     animationDuration_Disable: 0.25
     uiAnimationElementForeachDelay: 0.025
-    isOpen: 1
     canvasGroup: {fileID: 2854179885721853284}
     uIAnimationElements: []
+    isOpen: 1
   _buttons: []
-  _scaleByPercentages: []
+  _scaleByPercentages:
+  - {fileID: 603003056682313427}
+  - {fileID: 1099504384113334569}
+  - {fileID: 6509525591848187176}
+  - {fileID: 4333245229479414111}
+  - {fileID: 6765830970872160705}
   _backButton: {fileID: 6733884235619374942}
   _weaponsShop: {fileID: 6395190221379763011}
 --- !u!1 &3445616385425865394
@@ -1205,7 +1211,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1

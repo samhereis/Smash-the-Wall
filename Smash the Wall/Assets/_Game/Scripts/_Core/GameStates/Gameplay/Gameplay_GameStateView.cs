@@ -9,13 +9,16 @@ using UI;
 
 namespace GameState
 {
-    public class MainMenu_GameStateView : GameStateViewBase, INeedDependencyInjection, ISubscribesToEvents
+    public class Gameplay_GameStateView : GameStateViewBase, INeedDependencyInjection, ISubscribesToEvents
     {
-        public Action onPlayClicked;
-        public Action onQuitClicked;
+        public Action onMainMenuClicked;
 
-        private MainMenu _mainMenu;
+        private GameplayMenu _gameplayMenu;
+        private ShopMenu _shopMenu;
+        private PauseMenu _pauseMenu;
         private SettingsMenu _settingsMenu;
+        private WinMenu _winMenu;
+        private LoseMenu _loseMenu;
 
         [Inject] private ListOfAllMenus _listOfAllMenus;
         [Inject] private BackgroundMusicPlayer _backgroundMusicPlayer;
@@ -43,35 +46,29 @@ namespace GameState
 
         public void SubscribeToEvents()
         {
-            _mainMenu.onPlayClicked += StartGame;
-            _mainMenu.onQuitClicked += Quit;
+
         }
 
         public void UnsubscribeFromEvents()
         {
-            _mainMenu.onPlayClicked -= StartGame;
-            _mainMenu.onQuitClicked -= Quit;
+
         }
 
         private void SetupUI()
         {
-            _mainMenu = UnityEngine.Object.Instantiate(_listOfAllMenus.GetMenu<MainMenu>());
+            _gameplayMenu = UnityEngine.Object.Instantiate(_listOfAllMenus.GetMenu<GameplayMenu>());
+            _shopMenu = UnityEngine.Object.Instantiate(_listOfAllMenus.GetMenu<ShopMenu>());
+            _pauseMenu = UnityEngine.Object.Instantiate(_listOfAllMenus.GetMenu<PauseMenu>());
             _settingsMenu = UnityEngine.Object.Instantiate(_listOfAllMenus.GetMenu<SettingsMenu>());
+            _winMenu = UnityEngine.Object.Instantiate(_listOfAllMenus.GetMenu<WinMenu>());
+            _loseMenu = UnityEngine.Object.Instantiate(_listOfAllMenus.GetMenu<LoseMenu>());
 
-            _mainMenu.Initialize(_settingsMenu);
-            _settingsMenu.Initialize(_mainMenu);
+            _gameplayMenu.Initialize(_pauseMenu, _shopMenu);
+            _shopMenu.Initialize(_gameplayMenu);
+            _pauseMenu.Initialize(_settingsMenu, _gameplayMenu);
+            _settingsMenu.Initialize(_pauseMenu);
 
-            _mainMenu.Enable();
-        }
-
-        private void StartGame()
-        {
-            onPlayClicked?.Invoke();
-        }
-
-        private void Quit()
-        {
-            onQuitClicked?.Invoke();
+            _pauseMenu.Enable();
         }
     }
 }

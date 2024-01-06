@@ -1,11 +1,14 @@
 using DependencyInjection;
+using Interfaces;
+using Managers;
 using Servies;
 using SO.Lists;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameState
 {
-    public class MainMenu_GameState : GameStateBase, IDIDependent
+    public class MainMenu_GameState : GameStateBase, INeedDependencyInjection, ISubscribesToEvents
     {
         private MainMenu_GameStateView _view;
         private MainMenu_GameStateModel _model;
@@ -18,7 +21,7 @@ namespace GameState
         {
             base.Enter();
 
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
 
@@ -27,16 +30,32 @@ namespace GameState
 
             _view?.Initialize();
             _model?.Initialize();
+
+            SubscribeToEvents();
         }
 
         public override void Exit()
         {
-            base.Exit();
+            UnsubscribeFromEvents();
+        }
+
+        public void SubscribeToEvents()
+        {
+            UnsubscribeFromEvents();
+
+            _view.onPlayClicked += Play;
+        }
+
+        public void UnsubscribeFromEvents()
+        {
+            _view.onPlayClicked -= Play;
         }
 
         private void Play()
         {
+            EventsLogManager.LogEvent("PlayButtonClicked");
 
+            _gameStateChanger.ChangeState(new Gameplay_GameState());
         }
     }
 }

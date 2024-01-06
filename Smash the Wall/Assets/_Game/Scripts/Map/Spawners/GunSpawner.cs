@@ -12,7 +12,7 @@ using Weapons;
 
 namespace Spawners
 {
-    public class GunSpawner : MonoBehaviour, IDIDependent, ISubscribesToEvents
+    public class GunSpawner : MonoBehaviour, INeedDependencyInjection, ISubscribesToEvents
     {
         [Header("Prefabs")]
         [Inject][SerializeField] private InputsService _input;
@@ -28,7 +28,7 @@ namespace Spawners
 
         private void Start()
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             ChangeWeapon(_listOfAllWeapons.GetCurrentWeapon());
             SubscribeToEvents();

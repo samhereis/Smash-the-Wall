@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Sound
 {
     [RequireComponent(typeof(AudioSource))]
-    public sealed class SoundPlayer : MonoBehaviour, IDIDependent, ISelfValidator
+    public sealed class SoundPlayer : MonoBehaviour, INeedDependencyInjection, ISelfValidator
     {
         public static SoundPlayer instance { get; private set; }
 

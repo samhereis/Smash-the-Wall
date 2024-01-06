@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 namespace Servies
 {
-    public class SceneLoader : IDIDependent
+    public class SceneLoader : INeedDependencyInjection
     {
         public readonly UnityEvent<AScene> onSceneStartLoading = new UnityEvent<AScene>();
 

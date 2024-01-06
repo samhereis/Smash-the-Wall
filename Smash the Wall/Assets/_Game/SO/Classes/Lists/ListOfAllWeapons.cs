@@ -13,7 +13,7 @@ using UnityEngine;
 namespace SO.Lists
 {
     [CreateAssetMenu(fileName = "ListOfAllWeapons", menuName = "Scriptables/Lists/ListOfAllWeapons")]
-    public class ListOfAllWeapons : ConfigBase, IDIDependent, ISelfValidator
+    public class ListOfAllWeapons : ConfigBase, INeedDependencyInjection, ISelfValidator
     {
         public IEnumerable<WeaponIdentityiCard> weapons => _weapons;
 
@@ -23,9 +23,8 @@ namespace SO.Lists
 
         [Header("Debug")]
         [Inject]
-        [SerializeField] private GameSaveManager _gameSaveManager;
-
-        [SerializeField] private Weapons_DTO _weaponSave = new Weapons_DTO();
+        [SerializeField, ReadOnly] private GameSaveManager _gameSaveManager;
+        [SerializeField, ReadOnly] private Weapons_DTO _weaponSave = new Weapons_DTO();
 
         public virtual void Validate(SelfValidationResult result)
         {
@@ -47,7 +46,7 @@ namespace SO.Lists
 
         public override void Initialize()
         {
-            DependencyInjector.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             _weaponSave = _gameSaveManager.GetWeaponsSave();
 

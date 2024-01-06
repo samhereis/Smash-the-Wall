@@ -22,6 +22,8 @@ namespace Sound
         [ContextMenu(nameof(PlayMusic))]
         public void PlayMusic(SoundsPack_DataHolder soundsPack)
         {
+            if (soundsPack.data.Count == 0) { return; }
+
             var sound = soundsPack.data.GetRandom();
 
             _audioSource.clip = sound.audioClip;

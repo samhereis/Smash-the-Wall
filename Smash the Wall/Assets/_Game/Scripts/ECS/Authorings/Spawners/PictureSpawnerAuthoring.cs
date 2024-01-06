@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace ECS.Authoring
 {
-    public class PictureSpawnerAuthoring : MonoBehaviour, IDIDependent
+    public class PictureSpawnerAuthoring : MonoBehaviour, INeedDependencyInjection
     {
         public struct PictureSpawnData_GameObject
         {
@@ -70,6 +70,8 @@ namespace ECS.Authoring
         public List<PictureSpawnData_GameObject> GetPictures()
         {
             var picturesList = new List<PictureSpawnData_GameObject>();
+
+            if (_picturePlaces == null) { _picturePlaces = FindObjectOfType<PicturePlacesIdentifier>(true); }
 
             foreach (var picturePlace in _picturePlaces.picturePlaces)
             {

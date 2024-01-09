@@ -46,8 +46,6 @@ namespace UI
             UnsubscribeFromEvents();
 
             _weaponsShop.Dispose();
-
-            _openOnClose?.Enable();
         }
 
         protected override void SubscribeToEvents()
@@ -67,6 +65,8 @@ namespace UI
         private void OnBackButtonClicked()
         {
             Disable();
+
+            _openOnClose?.Enable();
         }
     }
 }

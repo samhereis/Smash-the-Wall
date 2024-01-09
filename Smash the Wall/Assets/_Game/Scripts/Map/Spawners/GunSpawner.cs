@@ -1,8 +1,9 @@
 using DependencyInjection;
 using DG.Tweening;
-using Events;
+using Observables;
 using Helpers;
 using IdentityCards;
+using InGameStrings;
 using Interfaces;
 using Sirenix.OdinInspector;
 using SO.Lists;
@@ -21,7 +22,7 @@ namespace Spawners
         [SerializeField] private WeaponBase _currentWeapon;
 
         [Inject] private ListOfAllWeapons _listOfAllWeapons;
-        [Inject] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
+        [Inject(Event_DIStrings.onChangedWeapon)] private DataSignal<WeaponIdentityiCard> _onChangedWeapon;
 
         private void Start()
         {

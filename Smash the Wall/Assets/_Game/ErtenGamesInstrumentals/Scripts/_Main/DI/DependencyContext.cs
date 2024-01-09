@@ -1,5 +1,4 @@
 ﻿using Configs;
-using Events;
 using Helpers;
 using Interfaces;
 using Loggers;
@@ -20,17 +19,19 @@ namespace DependencyInjection
         [FoldoutGroup("Objects To DI"), SerializeField] private List<Dependency_DTO<ConfigBase>> _configs = new();
         [FoldoutGroup("Objects To DI"), SerializeField] private List<Dependency_DTO<ScriptableObject>> _scriptableObjects = new();
 
-        [Required]
-        [FoldoutGroup("Objects To DI"), SerializeField] private LoggerBase _diLogger;
+        [Space(10)]
+        [SerializeField] private LoggerBase _diLogger;
+        [Space(10)]
 
         [FoldoutGroup("Debug"), SerializeField] private DependencyInstallerBase[] _dependencyInstallers;
         [FoldoutGroup("Debug"), SerializeField, ReadOnly] public bool isInjected { get; private set; } = false;
-        [FoldoutGroup("Debug"), ShowInInspector, ReadOnly] public static DIBox diBox { get; private set; } = new DIBox();
+        [FoldoutGroup("Debug"), ShowInInspector, ReadOnly] public static DIBox diBox { get; private set; }
 
         private void Awake()
         {
             _dependencyInstallers = GetComponents<DependencyInstallerBase>();
-            diBox = new DIBox(_diLogger);
+
+            if (diBox == null) { diBox = new DIBox(_diLogger); }
 
             if (_isGlobal == true && isGloballyInjected == true)
             {
@@ -44,12 +45,13 @@ namespace DependencyInjection
             if (_isGlobal == true)
             {
                 isGloballyInjected = true;
-                isInjected = true;
                 transform.parent = null;
                 DontDestroyOnLoad(gameObject);
             }
 
             InitAll();
+
+            isInjected = true;
         }
 
         private void OnDestroy()
@@ -61,7 +63,7 @@ namespace DependencyInjection
             if (EditorApplication.isPlayingOrWillChangePlaymode == false && EditorApplication.isPlaying)
             {
                 Debug.Log("Exiting playmode.");
-                diBox = new();
+                diBox = null;
             }
 
 #endif
@@ -150,7 +152,7 @@ namespace DependencyInjection
                 isGloballyInjected = false;
             }
 
-            Debug.Log(gameObject.name + "Di Cleared: ", gameObject);
+            _diLogger?.Log("Di Cleared: ", gameObject);
         }
 
         public void Validate(SelfValidationResult result)

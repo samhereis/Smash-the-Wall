@@ -52,7 +52,7 @@ namespace ProjectSripts
             base.EnableInput();
 
 #if InputSystemInstalled
-            _input.input.Player.Fire.performed += Fire;
+            _input.input.Player.Fire.started += Fire;
             _input.input.Player.Fire.canceled += Fire;
 #endif
 
@@ -67,7 +67,7 @@ namespace ProjectSripts
             base.DisableInput();
 
 #if InputSystemInstalled
-            _input.input.Player.Fire.performed -= Fire;
+            _input.input.Player.Fire.started -= Fire;
             _input.input.Player.Fire.canceled -= Fire;
 #endif
 
@@ -79,12 +79,7 @@ namespace ProjectSripts
 
         protected override void Fire(InputAction.CallbackContext context)
         {
-
-#if UNITY_EDITOR == false
-
-            if (UIHelper.IsPointOverUI(Touchscreen.current.position.ReadValue())) { return; }
-
-#endif
+            if (UIHelper.IsPointOverUI() == true) { return; }
 
             if (_elasticPart == null)
             {
@@ -98,8 +93,8 @@ namespace ProjectSripts
             {
                 _elasticPart.DOScaleZ(_shootElasticZScalse, _shootScaleDuration);
                 _trajectoryDisplayer.Enable(shootPosition);
-                _soundPlayer.TryPlay(_elasticStretchAudio);
-                _vibrationHelper.LightVibration();
+                _soundPlayer?.TryPlay(_elasticStretchAudio);
+                _vibrationHelper?.LightVibration();
             }
             else
             {
@@ -107,16 +102,16 @@ namespace ProjectSripts
 
                 _elasticPart.DOScaleZ(_normalElasticZScalse, _resetScaleDuration);
                 _trajectoryDisplayer.Disable();
-                _soundPlayer.TryPlay(_elasticResetAudio);
+                _soundPlayer?.TryPlay(_elasticResetAudio);
             }
         }
 
         public override void OnFired()
         {
             canShoot = false;
-            _soundPlayer.TryPlay(_shootAudio);
+            _soundPlayer?.TryPlay(_shootAudio);
 
-            _vibrationHelper.MeduimVibration();
+            _vibrationHelper?.MeduimVibration();
         }
     }
 }

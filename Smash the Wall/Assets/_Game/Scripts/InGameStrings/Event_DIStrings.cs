@@ -4,24 +4,24 @@ namespace InGameStrings
     {
         #region With Parameters
 
-        public const string onASceneSelected = "OnASceneSelected";
-        public const string onASceneLoadRequested = "OnASceneLoadRequested";
-        public const string onEnemyDied = "OnEnemyDied";
+        public const string onASceneSelected = nameof(onASceneSelected);
+        public const string onASceneLoadRequested = nameof(onASceneLoadRequested);
+        public const string onEnemyDied = nameof(onEnemyDied);
 
         #endregion
 
         #region Without Parameters
 
-
+        public const string onChangedWeapon = nameof(onChangedWeapon);
 
         #endregion
 
         #region Values Events
 
-        public const string isPlayerAiming = "IsPlayerAiming";
-        public const string isPlayerJumping = "IsPlayerJumping";
-        public const string playerHealth = "PlayerHealth";
-        public const string playerWeaponData = "PlayerWeaponData";
+        public const string isPlayerAiming = nameof(isPlayerAiming);
+        public const string isPlayerJumping = nameof(isPlayerJumping);
+        public const string playerHealth = nameof(playerHealth);
+        public const string playerWeaponData = nameof(playerWeaponData);
 
         #endregion
     }

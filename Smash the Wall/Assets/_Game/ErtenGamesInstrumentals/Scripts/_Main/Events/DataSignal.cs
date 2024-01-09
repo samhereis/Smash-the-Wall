@@ -1,52 +1,54 @@
 using System;
 using UnityEngine;
 
-namespace Values
+namespace Observables
 {
     [Serializable]
-    public class ValueEvent<T>
+    public class DataSignal<T>
     {
-        [field: SerializeField] public T value { get; protected set; }
+        public Action<T> onInvoke { get; private set; }
+
         [field: SerializeField] public string eventName { get; private set; }
         [field: SerializeField] public int currentSubscribedObjectsCount { get; private set; }
         [field: SerializeField] public int timesInvoked { get; private set; }
 
-        [SerializeField] protected Action<T> onValueChange { get; set; }
-
-        public ValueEvent(string eventName)
+        public DataSignal(string eventName)
         {
             this.eventName = eventName;
         }
 
-        public virtual void AddListener(Action<T> listener)
+        public void AddListener(Action<T> action)
         {
-            onValueChange += listener;
+            onInvoke += action;
             UpdateCurrentSubscribedObjectsCount();
         }
 
-        public virtual void RemoveListener(Action<T> listener)
+        public void RemoveListener(Action<T> action)
         {
-            onValueChange -= listener;
+            onInvoke -= action;
             UpdateCurrentSubscribedObjectsCount();
         }
 
-        public virtual void ChangeValue(T sentValue)
+        public void Clear()
         {
-            value = sentValue;
-            onValueChange?.Invoke(sentValue);
+            onInvoke = null;
+        }
 
+        public void Invoke(T parameter)
+        {
+            onInvoke?.Invoke(parameter);
             timesInvoked++;
         }
 
         private void UpdateCurrentSubscribedObjectsCount()
         {
-            if (onValueChange == null)
+            if (onInvoke == null)
             {
                 currentSubscribedObjectsCount = 0;
             }
             else
             {
-                currentSubscribedObjectsCount = onValueChange.GetInvocationList().Length;
+                currentSubscribedObjectsCount = onInvoke.GetInvocationList().Length;
             }
         }
     }

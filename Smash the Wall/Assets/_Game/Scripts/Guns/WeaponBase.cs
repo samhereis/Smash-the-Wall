@@ -13,19 +13,17 @@ namespace Weapons
     {
         [SerializeField] protected SoundPlayer _soundPlayer => SoundPlayer.instance;
 
-        [Header("DI")]
-#if InputSystemInstalled
-        [Inject][SerializeField] protected InputsService _input;
-#endif
-        [Inject][SerializeField] protected TrajectoryDisplayer _trajectoryDisplayer;
-
         [Header("Components")]
         [Required]
         [SerializeField] protected Transform _gunPoint;
-
         [field: SerializeField] public Transform shootPosition { get; protected set; }
 
-        [field: SerializeField, Header("Current State")] public bool canShoot { get; protected set; }
+#if InputSystemInstalled
+        [Inject] protected InputsService _input;
+#endif
+        [Inject] protected TrajectoryDisplayer _trajectoryDisplayer;
+
+        [field: SerializeField, ReadOnly] public bool canShoot { get; protected set; }
 
         private void OnDisable()
         {

@@ -3,6 +3,7 @@ using ECS.Systems;
 using ECS.Systems.CollisionUpdators;
 using ECS.Systems.GameState;
 using ECS.Systems.Spawners;
+using Identifiers;
 using Interfaces;
 using Managers;
 using Servies;
@@ -21,6 +22,7 @@ namespace GameState
         [Inject] private ListOfAllScenes _listOfAllScenes;
         [Inject] private IGameStateChanger _gameStateChanger;
         [Inject] private SceneLoader _sceneLoader;
+        [Inject] private PlayerIdentifier _playerIdentifier;
 
         public async override void Enter()
         {
@@ -29,7 +31,7 @@ namespace GameState
             if (_listOfAllScenes != null) { await _sceneLoader.LoadSceneAsync(_listOfAllScenes.gameScene); }
             else { await LoadScene(2); }
 
-            /*DependencyContext.InjectDependencies(this);
+            DependencyContext.InjectDependencies(this);
 
             _systemsManager = new SystemsManager(new System.Collections.Generic.List<IEnableableSystem>
             {
@@ -43,8 +45,10 @@ namespace GameState
 
             _model = Object.FindObjectOfType<Gameplay_GameStateModel>();
 
+            Object.Instantiate(_playerIdentifier);
+
             SetupView();
-            SubscribeToEvents();*/
+            SubscribeToEvents();
         }
 
         public override void Exit()

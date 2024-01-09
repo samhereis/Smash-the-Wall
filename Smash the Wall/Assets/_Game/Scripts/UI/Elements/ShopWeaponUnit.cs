@@ -1,6 +1,6 @@
 using DependencyInjection;
 using DG.Tweening;
-using Events;
+using Observables;
 using Helpers;
 using IdentityCards;
 using Interfaces;
@@ -17,7 +17,7 @@ namespace UI.Elements
     public sealed class ShopWeaponUnit : MonoBehaviour, INeedDependencyInjection, IInitializable<WeaponIdentityiCard>
     {
         [Header("DI")]
-        [Inject][SerializeField] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
+        [Inject][SerializeField] private DataSignal<WeaponIdentityiCard> _onChangedWeapon;
         [Inject][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
         [Inject][SerializeField] private AdsShowManager _adsShowManager;
         [Inject][SerializeField] private GameSaveManager _gameSaveManager;

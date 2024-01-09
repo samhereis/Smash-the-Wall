@@ -68,7 +68,7 @@ namespace Services
 
         #region Rewarded
 
-        public async void TryShowRewarded(Action callback = null, string appID = "RewardedAd")
+        public async void TryShowRewarded(Action callback = null, string appID = "DefaultRewardedAd")
         {
             Debug.Log("Try Show ad: Rewarded");
 
@@ -118,7 +118,7 @@ namespace Services
             }
         }
 
-        private async Task RequestRewarded(string adID = "RewardedAd")
+        private async Task RequestRewarded(string adID = "DefaultRewardedAd")
         {
             await _adsManager.Request(adID, 5f);
         }
@@ -127,7 +127,7 @@ namespace Services
 
         #region Interstitial
 
-        public async void TryShowInterstitial(string adID = "Interstitial")
+        public async void TryShowInterstitial(string adID = "DefaultInterstitial")
         {
             Debug.Log("Try Show ad: Interstitial");
 
@@ -137,7 +137,7 @@ namespace Services
             }
         }
 
-        private async Task RequestInterstitial(string adID = "Interstitial")
+        private async Task RequestInterstitial(string adID = "DefaultInterstitial")
         {
             await _adsManager.Request(adID, 5f);
         }
@@ -146,7 +146,7 @@ namespace Services
 
         #region Banner
 
-        public async void TryShowBanner(string adID = "Banner")
+        public async void TryShowBanner(string adID = "DefaultBanner")
         {
             Debug.Log("Try Show ad: Banner");
 
@@ -157,12 +157,12 @@ namespace Services
             }
         }
 
-        public void DestroyBanner(string adID = "Banner")
+        public void DestroyBanner(string adID = "DefaultBanner")
         {
             _adsManager.Destroy(adID);
         }
 
-        private async Task RequestBanner(string adID = "Banner")
+        private async Task RequestBanner(string adID = "DefaultBanner")
         {
             await _adsManager.Request(adID, 5f);
         }
@@ -171,7 +171,7 @@ namespace Services
 
         #region AppOpen
 
-        public async void TryShowAppOpen(string adID = "AppOpen")
+        public async void TryShowAppOpen(string adID = "DefaultAppOpen")
         {
             Debug.Log("Try Show ad: AppOpen");
 
@@ -185,7 +185,7 @@ namespace Services
             }
         }
 
-        private async Task RequestAppOpen(string adID = "AppOpen")
+        private async Task RequestAppOpen(string adID = "DefaultAppOpen")
         {
             await _adsManager.Request(adID, 5f);
         }

@@ -2,7 +2,7 @@ using Configs;
 using DependencyInjection;
 using DG.Tweening;
 using ECS.Systems.GameState;
-using Events;
+using Observables;
 using Helpers;
 using Sirenix.OdinInspector;
 using SO.Lists;
@@ -17,8 +17,8 @@ namespace Managers.UIManagers
     public class GameplauUIManager : MonoBehaviour, INeedDependencyInjection
     {
         [Header("DI")]
-        [Inject][SerializeField] private EventWithNoParameters _onWin;
-        [Inject][SerializeField] private EventWithNoParameters _onLose;
+        [Inject][SerializeField] private Signal _onWin;
+        [Inject][SerializeField] private Signal _onLose;
 
         [Inject][SerializeField] private ListOfAllPictures _listOfAllPictures;
         [Inject][SerializeField] private ListOfAllScenes _listOfAllScenes;

@@ -1,7 +1,7 @@
 using Configs;
 using DependencyInjection;
 using ECS.ComponentData.Picture.Piece;
-using Events;
+using Observables;
 using Helpers;
 using IdentityCards;
 using InGameStrings;
@@ -18,8 +18,8 @@ namespace ECS.Systems.GameState
         public static float releasedWhatNeedsToBeDestroysPercentage;
         public static float releasedWhatNeedsToStaysPercentage;
 
-        private static EventWithNoParameters _onWin;
-        private static EventWithNoParameters _onLose;
+        private static Signal _onWin;
+        private static Signal _onLose;
         private static GameConfigs _gameConfigs;
         private static ListOfAllPictures _listOfAllPictures;
 
@@ -53,8 +53,8 @@ namespace ECS.Systems.GameState
 
         private void InjectDs()
         {
-            _onWin = DependencyContext.diBox.Get<EventWithNoParameters>(DIStrings.OnWinEvent);
-            _onLose = DependencyContext.diBox.Get<EventWithNoParameters>(DIStrings.OnLoseEvent);
+            _onWin = DependencyContext.diBox.Get<Signal>(DIStrings.OnWinEvent);
+            _onLose = DependencyContext.diBox.Get<Signal>(DIStrings.OnLoseEvent);
             _gameConfigs = DependencyContext.diBox.Get<GameConfigs>();
             _listOfAllPictures = DependencyContext.diBox.Get<ListOfAllPictures>();
         }

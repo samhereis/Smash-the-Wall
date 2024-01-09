@@ -11,7 +11,7 @@ namespace DependencyInjection
     [Serializable]
     public class DIBox
     {
-        [ShowInInspector, ReadOnly] private readonly Dictionary<Type, Dictionary<string, object>> _dictionarySingle = new();
+        [ShowInInspector, ReadOnly] private static readonly Dictionary<Type, Dictionary<string, object>> _dictionarySingle = new();
         [ShowInInspector, ReadOnly] private Loggers.ILogger _logger;
 
         public DIBox()
@@ -53,7 +53,7 @@ namespace DependencyInjection
 
         public void Add<T>(T instance, string id = "", bool force = false, bool asTypeProvided = false)
         {
-            if (instance == null) _logger.LogWarning($"Instance is null - type {instance.GetType()} || Id: '{id}'");
+            if (instance == null) _logger?.LogWarning($"Instance is null - type {instance.GetType()} || Id: '{id}'");
 
             if (force == false)
             {
@@ -99,14 +99,14 @@ namespace DependencyInjection
         {
             if (_dictionarySingle.ContainsKey(typeof(T)) == false)
             {
-                if (logErrors == true) { _logger.LogWarning($"DI container does not contain this type  - Type: {typeof(T)} || Id: '{id}'"); }
+                if (logErrors == true) { _logger?.LogWarning($"DI container does not contain this type  - Type: {typeof(T)} || Id: '{id}'"); }
 
                 return null;
             }
 
             if (_dictionarySingle[typeof(T)].ContainsKey(id) == false)
             {
-                if (logErrors == true) { _logger.LogWarning($"The container does not contain under this ID - Type: {typeof(T)} || Id: '{id}'"); }
+                if (logErrors == true) { _logger?.LogWarning($"The container does not contain under this ID - Type: {typeof(T)} || Id: '{id}'"); }
 
                 return null;
             }
@@ -118,14 +118,14 @@ namespace DependencyInjection
         {
             if (_dictionarySingle.ContainsKey(type) == false)
             {
-                if (logErrors == true) { _logger.LogWarning($"DI container does not contain this type  - Type: {type} || Id: '{id}'"); }
+                if (logErrors == true) { _logger?.LogWarning($"DI container does not contain this type  - Type: {type} || Id: '{id}'"); }
 
                 return null;
             }
 
             if (_dictionarySingle[type].ContainsKey(id) == false)
             {
-                if (logErrors == true) { _logger.LogWarning($"The container does not contain under this ID - Type: {type} || Id: '{id}'"); }
+                if (logErrors == true) { _logger?.LogWarning($"The container does not contain under this ID - Type: {type} || Id: '{id}'"); }
 
                 return null;
             }

@@ -7,6 +7,11 @@ namespace Loggers
         [Header("Settings")]
         [SerializeField] private string _prefix = string.Empty;
 
+        private void Reset()
+        {
+            _prefix = gameObject.name;
+        }
+
         public override void Log(string message, Object context)
         {
             if (enableLogs == false) { return; }

@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6aeb8cbc3a3264392753a3bd8ad12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <enableLogs>k__BackingField: 0
-  _prefix: 'DI: '
+  <enableLogs>k__BackingField: 1
+  _prefix: DILogger
 --- !u!1 &2189637656113575998
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +352,8 @@ MonoBehaviour:
     id: 
   - dependency: {fileID: 6119695272818563068}
     id: 
+  - dependency: {fileID: -4240976823624024753, guid: ddac7b5f05a2f1d47bbbf0a24786dde2, type: 3}
+    id: 
   _configs:
   - dependency: {fileID: 11400000, guid: 7516ebd22a60cd645ba168f241048310, type: 2}
     id: 
@@ -380,7 +382,6 @@ MonoBehaviour:
     id: GameplaySoundPack
   - dependency: {fileID: 11400000, guid: 89f4c4898dc2a284786a29fc48c0214f, type: 2}
     id: MainMenuSoundPack
-  _eventsWithNoParameters: []
   _diLogger: {fileID: 4460635710939671953}
   _dependencyInstallers: []
 --- !u!114 &246591267330117797
@@ -565,6 +566,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5802422689347854476}
     m_Modifications:
+    - target: {fileID: 1240846184423524480, guid: 44b7b7e60c4b3844f9ad19629440fe65, type: 3}
+      propertyPath: _isGlobal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1240846184423524480, guid: 44b7b7e60c4b3844f9ad19629440fe65, type: 3}
       propertyPath: _mainAudioSource
       value: 

@@ -72,6 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7773065475431232038}
+  - component: {fileID: -4240976823624024753}
   - component: {fileID: 8454919039937552942}
   - component: {fileID: 724284484201838638}
   m_Layer: 0
@@ -97,6 +98,18 @@ Transform:
   - {fileID: 7773065476089419294}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4240976823624024753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773065475431232033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1087bf640ead54f41b413928daf1f739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8454919039937552942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,12 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71dd570e3f77a65479027907e53abc28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _input: {fileID: 0}
-  _listOfAllWeapons: {fileID: 0}
-  _onChangedWeapon:
-    <eventName>k__BackingField: 
-    <currentSubscribedObjectsCount>k__BackingField: 0
-    <timesInvoked>k__BackingField: 0
   _parent: {fileID: 8571361916071457871}
   _currentWeapon: {fileID: 0}
 --- !u!114 &724284484201838638
@@ -131,8 +138,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _xRotatedObject: {fileID: 8571361916071457871}
   _yRotatedObject: {fileID: 4821988786035758897}
-  _inputsHolder: {fileID: 0}
-  _gameConfigs: {fileID: 0}
 --- !u!1 &7773065476089419291
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +255,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

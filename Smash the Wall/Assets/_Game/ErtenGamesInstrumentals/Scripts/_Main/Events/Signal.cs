@@ -1,29 +1,35 @@
+using Interfaces;
 using System;
 using UnityEngine;
 
-namespace Events
+namespace Observables
 {
     [Serializable]
-    public class EventWithOneParameters<T>
+    public class Signal : IInitializable<string>
     {
-        public Action<T> onInvoke { get; private set; }
+        public Action onInvoke { get; private set; }
 
-        [field: SerializeField] public string eventName { get; private set; }
-        [field: SerializeField] public int currentSubscribedObjectsCount { get; private set; }
-        [field: SerializeField] public int timesInvoked { get; private set; }
+        [SerializeField] public string eventName { get; private set; }
+        [SerializeField] public int currentSubscribedObjectsCount { get; private set; }
+        [SerializeField] public int timesInvoked { get; private set; }
 
-        public EventWithOneParameters(string eventName)
+        public Signal(string eventName)
+        {
+            Initialize(eventName);
+        }
+
+        public void Initialize(string eventName)
         {
             this.eventName = eventName;
         }
 
-        public void AddListener(Action<T> action)
+        public void AddListener(Action action)
         {
             onInvoke += action;
             UpdateCurrentSubscribedObjectsCount();
         }
 
-        public void RemoveListener(Action<T> action)
+        public void RemoveListener(Action action)
         {
             onInvoke -= action;
             UpdateCurrentSubscribedObjectsCount();
@@ -34,10 +40,12 @@ namespace Events
             onInvoke = null;
         }
 
-        public void Invoke(T parameter)
+        public void Invoke()
         {
-            onInvoke?.Invoke(parameter);
+            onInvoke?.Invoke();
             timesInvoked++;
+
+            Debug.Log("Invoked: " + eventName);
         }
 
         private void UpdateCurrentSubscribedObjectsCount()

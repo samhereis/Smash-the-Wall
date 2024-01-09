@@ -14,7 +14,6 @@ namespace ECS.Authoring
     {
         public struct PictureSpawnData_GameObject
         {
-            [Required] public GameObject picture;
             public float3 position;
             public quaternion rotation;
         }
@@ -61,7 +60,7 @@ namespace ECS.Authoring
             }
         }
 
-        [Inject]
+        [Required]
         [field: SerializeField] public ListOfAllPictures pictures { get; private set; }
 
         [Required]

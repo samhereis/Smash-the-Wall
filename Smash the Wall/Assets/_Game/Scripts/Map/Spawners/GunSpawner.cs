@@ -4,7 +4,6 @@ using Events;
 using Helpers;
 using IdentityCards;
 using Interfaces;
-using Services;
 using Sirenix.OdinInspector;
 using SO.Lists;
 using UnityEngine;
@@ -14,17 +13,15 @@ namespace Spawners
 {
     public class GunSpawner : MonoBehaviour, INeedDependencyInjection, ISubscribesToEvents
     {
-        [Header("Prefabs")]
-        [Inject][SerializeField] private InputsService _input;
-        [Inject][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
-        [Inject][SerializeField] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
-
         [Header("Components")]
         [Required]
         [SerializeField] private Transform _parent;
 
         [Header("Debug")]
         [SerializeField] private WeaponBase _currentWeapon;
+
+        [Inject] private ListOfAllWeapons _listOfAllWeapons;
+        [Inject] private EventWithOneParameters<WeaponIdentityiCard> _onChangedWeapon;
 
         private void Start()
         {
@@ -69,8 +66,6 @@ namespace Spawners
             {
                 _currentWeapon.EnableInput();
             });
-
-
         }
 
         private void DeleteWeapon(WeaponBase weapon)

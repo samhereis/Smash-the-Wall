@@ -51,8 +51,11 @@ namespace ProjectSripts
         {
             base.EnableInput();
 
+#if InputSystemInstalled
             _input.input.Player.Fire.performed += Fire;
             _input.input.Player.Fire.canceled += Fire;
+#endif
+
             canShoot = false;
 
             ProjectileiGunBulletSpawner_System.instance.Initialize(this);
@@ -63,8 +66,10 @@ namespace ProjectSripts
         {
             base.DisableInput();
 
+#if InputSystemInstalled
             _input.input.Player.Fire.performed -= Fire;
             _input.input.Player.Fire.canceled -= Fire;
+#endif
 
             canShoot = false;
 

@@ -29,7 +29,7 @@ namespace GameState
             if (_listOfAllScenes != null) { await _sceneLoader.LoadSceneAsync(_listOfAllScenes.gameScene); }
             else { await LoadScene(2); }
 
-            DependencyContext.InjectDependencies(this);
+            /*DependencyContext.InjectDependencies(this);
 
             _systemsManager = new SystemsManager(new System.Collections.Generic.List<IEnableableSystem>
             {
@@ -44,7 +44,7 @@ namespace GameState
             _model = Object.FindObjectOfType<Gameplay_GameStateModel>();
 
             SetupView();
-            SubscribeToEvents();
+            SubscribeToEvents();*/
         }
 
         public override void Exit()

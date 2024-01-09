@@ -53,7 +53,7 @@ namespace GameState
 
         private void Play()
         {
-            EventsLogManager.LogEvent("PlayButtonClicked");
+            //EventsLogManager.LogEvent("PlayButtonClicked");
 
             _gameStateChanger.ChangeState(new Gameplay_GameState());
         }

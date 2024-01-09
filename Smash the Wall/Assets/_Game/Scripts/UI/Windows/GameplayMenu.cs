@@ -44,7 +44,10 @@ namespace UI
         [Inject] private AdsShowManager _adsShowManager;
         [Inject] private GameSaveManager _gameSaveManager;
         [Inject] private ListOfAllPictures _listOfAllPictures;
+
+#if InputSystemInstalled
         [Inject] private InputsService _inputs;
+#endif
 
         private Image _whatNeedsToBeDestroyedProgressbarFillImage;
         private Image _whatNeedsToStayProgressbarFillImage;
@@ -95,8 +98,9 @@ namespace UI
         {
             base.Enable(duration);
 
+#if InputSystemInstalled
             _inputs.Enable();
-
+#endif
             SubscribeToEvents();
 
             TryShowBanner();
@@ -111,7 +115,9 @@ namespace UI
         {
             base.Disable(duration);
 
+#if InputSystemInstalled
             _inputs.Disable();
+#endif
 
             UnsubscribeFromEvents();
         }

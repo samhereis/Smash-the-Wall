@@ -18,8 +18,10 @@ namespace Gameplay
         [SerializeField] private Transform _yRotatedObject;
 
         [Header("DI")]
-        [Inject][SerializeField] private InputsService _inputsHolder;
-        [Inject][SerializeField] private GameConfigs _gameConfigs;
+#if InputSystemInstalled
+        [Inject]private InputsService _inputsHolder;
+#endif
+        [Inject]private GameConfigs _gameConfigs;
 
         private float _mouseX;
         private float _mouseY;
@@ -30,14 +32,18 @@ namespace Gameplay
         {
             DependencyContext.InjectDependencies(this);
 
+#if InputSystemInstalled
             _inputsHolder.input.Player.Look.performed += Look;
             _inputsHolder.input.Player.Look.canceled += Look;
+#endif
         }
 
         private void OnDisable()
         {
+#if InputSystemInstalled
             _inputsHolder.input.Player.Look.performed -= Look;
             _inputsHolder.input.Player.Look.canceled -= Look;
+#endif
         }
 
         private void Look(InputAction.CallbackContext context)
@@ -46,8 +52,6 @@ namespace Gameplay
 
             _mouseX = contextValue.x;
             _mouseY = contextValue.y;
-
-
 
             UpdateLook();
             UpdateLook();

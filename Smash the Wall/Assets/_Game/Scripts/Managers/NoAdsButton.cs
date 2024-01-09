@@ -1,8 +1,11 @@
+#if InAppPurchacesInstalled
+
 using DependencyInjection;
 using DG.Tweening;
-using UnityEngine;
-using Services;
 using InGameStrings;
+using Services;
+using UnityEngine;
+
 using static Services.InAppPurchacesManager;
 
 namespace Managers
@@ -10,7 +13,10 @@ namespace Managers
     public class NoAdsButton : MonoBehaviour, INeedDependencyInjection
     {
         [Header("DI")]
+#if InAppPurchacesInstalled
         [Inject][SerializeField] private InAppPurchacesManager _inAppPurchacesManager;
+#endif
+
         [Inject][SerializeField] private AdsShowManager _adsShowManager;
 
         public bool isNoAdsEnabled
@@ -119,3 +125,5 @@ namespace Managers
         }
     }
 }
+
+#endif

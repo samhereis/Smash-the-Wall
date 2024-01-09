@@ -14,7 +14,9 @@ namespace Weapons
         [SerializeField] protected SoundPlayer _soundPlayer => SoundPlayer.instance;
 
         [Header("DI")]
+#if InputSystemInstalled
         [Inject][SerializeField] protected InputsService _input;
+#endif
         [Inject][SerializeField] protected TrajectoryDisplayer _trajectoryDisplayer;
 
         [Header("Components")]

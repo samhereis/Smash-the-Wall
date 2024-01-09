@@ -22,9 +22,9 @@ namespace SO.Lists
         [SerializeField] private List<WeaponIdentityiCard> _weapons = new List<WeaponIdentityiCard>();
 
         [Header("Debug")]
-        [Inject]
-        [SerializeField, ReadOnly] private GameSaveManager _gameSaveManager;
         [SerializeField, ReadOnly] private Weapons_DTO _weaponSave = new Weapons_DTO();
+
+        [Inject] private GameSaveManager _gameSaveManager;
 
         public virtual void Validate(SelfValidationResult result)
         {

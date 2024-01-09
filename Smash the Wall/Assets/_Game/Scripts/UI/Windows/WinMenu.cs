@@ -16,7 +16,7 @@ using static DataClasses.Enums;
 
 namespace UI
 {
-    public class WinMenu : MenuBase
+    public class WinMenu : MenuBase, INeedDependencyInjection
     {
         [Header("Effects")]
 
@@ -46,16 +46,18 @@ namespace UI
         [Required]
         [SerializeField] private Star_CustomControl _starControl;
 
-        private GameConfigs _gameConfigs;
-        private ListOfAllScenes _listOfAllScenes;
-        private ListOfAllPictures _listOfAllPictures;
-        private SceneLoader _sceneLoader;
-        private AdsShowManager _adsShowManager;
+        [Inject] private GameConfigs _gameConfigs;
+        [Inject] private ListOfAllScenes _listOfAllScenes;
+        [Inject] private ListOfAllPictures _listOfAllPictures;
+        [Inject] private SceneLoader _sceneLoader;
+        [Inject] private AdsShowManager _adsShowManager;
 
         private PictureMode _currentPictureMode;
 
         public void Initialize()
         {
+            DependencyContext.InjectDependencies(this);
+
             _currentPictureMode = _listOfAllPictures.GetCurrent().pictureMode;
         }
 

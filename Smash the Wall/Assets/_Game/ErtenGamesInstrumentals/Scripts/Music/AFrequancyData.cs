@@ -11,8 +11,8 @@ namespace Music
         [FoldoutGroup("Multipliers"), SerializeField] private float _multiplier = 1;
         [FoldoutGroup("Multipliers"), SerializeField] public float defaultMultiplier { get; private set; } = 1;
 
-        [FoldoutGroup("Frequency Ranges"), @SerializeField] private int _rangeStart = 1;
-        [FoldoutGroup("Frequency Ranges"), @SerializeField] private int _rangeEnd = 5;
+        [FoldoutGroup("Frequency Ranges"), SerializeField] private int _rangeStart = 1;
+        [FoldoutGroup("Frequency Ranges"), SerializeField] private int _rangeEnd = 5;
 
         [Inject]
         [FoldoutGroup("SO"), SerializeField] private SpectrumData _playingMusicFrequencies;

@@ -58,8 +58,8 @@ namespace UI.Interaction
     [System.Serializable]
     internal class AnimateButtonsEvents
     {
-        [@SerializeField] internal UnityEvent _onHover = new UnityEvent();
-        [@SerializeField] internal UnityEvent _onClick = new UnityEvent();
-        [@SerializeField] internal UnityEvent _onExit = new UnityEvent();
+        [SerializeField] internal UnityEvent _onHover = new UnityEvent();
+        [SerializeField] internal UnityEvent _onClick = new UnityEvent();
+        [SerializeField] internal UnityEvent _onExit = new UnityEvent();
     }
 }

@@ -31,7 +31,6 @@ MonoBehaviour:
     <isUnlocked>k__BackingField: 0
     <opensAtLevel>k__BackingField: 7
     <icon>k__BackingField: {fileID: 21300000, guid: 7e13ff7eac66b354da921c5ff73ce8f6, type: 3}
-  _gameSaveManager: {fileID: 0}
   _weaponSave:
     <allWeapons>k__BackingField:
     - <weaponName>k__BackingField: SlingShot

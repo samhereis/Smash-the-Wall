@@ -2,7 +2,6 @@ using DataClasses;
 using DependencyInjection;
 using Helpers;
 using System;
-using System.Threading.Tasks;
 using UI.Windows;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,11 +17,11 @@ namespace Servies
 
         public virtual async
 #if UNITY_2023_2_OR_NEWER
-            Awaitable
+        Awaitable
 #else
-            Task
+        Task
 #endif
-            LoadSceneAsync(AScene aScene, Action<float> onUpdate = null)
+        LoadSceneAsync(AScene aScene, Action<float> onUpdate = null)
         {
             if (_loading == false)
             {
@@ -49,11 +48,11 @@ namespace Servies
 
         public virtual async
 #if UNITY_2023_2_OR_NEWER
-            Awaitable
+        Awaitable
 #else
-            Task
+        Task
 #endif
-             LoadSceneAsync(AScene scene, LoadingMenu loadingMenu, Action<float> onUpdate = null)
+        LoadSceneAsync(AScene scene, LoadingMenu loadingMenu, Action<float> onUpdate = null)
         {
             if (loadingMenu != null)
             {

@@ -1,6 +1,5 @@
-using Servies;
 using Sirenix.OdinInspector;
-using SO.Lists;
+using System;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +8,8 @@ namespace UI
 {
     public class PauseMenu : MenuBase
     {
+        public Action goToMainMenuRequested;
+
         [Header("Components")]
 
         [Required]
@@ -25,9 +26,6 @@ namespace UI
 
         private SettingsMenu _settingsWindow;
         private GameplayMenu _gameplayWindow;
-
-        private ListOfAllScenes _listOfAllScenes;
-        private SceneLoader _sceneLoader;
 
         public void Initialize(SettingsMenu settingsWindow, GameplayMenu gameplayWindow)
         {
@@ -77,9 +75,9 @@ namespace UI
             _settingsWindow?.Enable();
         }
 
-        private async void OpenMainMenu()
+        private void OpenMainMenu()
         {
-            await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
+            goToMainMenuRequested?.Invoke();
         }
     }
 }

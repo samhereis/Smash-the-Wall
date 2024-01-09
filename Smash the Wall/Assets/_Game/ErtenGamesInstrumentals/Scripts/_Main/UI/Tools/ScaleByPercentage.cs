@@ -22,20 +22,12 @@ namespace UI.Helpers
 
         public void Validate(SelfValidationResult result)
         {
-            if (_rectTransform == null)
-            {
-                _rectTransform = GetComponent<RectTransform>();
-            }
-
-            if (transform.parent != null)
-            {
-                _parent = transform.parent.GetComponent<RectTransform>();
-            }
+            Validate();
         }
 
         private void Validate()
         {
-            if (_rectTransform == null) _rectTransform = GetComponent<RectTransform>();
+            if (_rectTransform == null) { _rectTransform = GetComponent<RectTransform>(); }
             if (transform.parent != null) { _parent = transform.parent.GetComponent<RectTransform>(); }
         }
 
@@ -90,19 +82,19 @@ namespace UI.Helpers
         [Serializable]
         public class ScaleSettings
         {
-            [field: @SerializeField] public float top { get; private set; } = 0;
-            [field: @SerializeField] public float bottom { get; private set; } = 0;
-            [field: @SerializeField] public float left { get; private set; } = 0;
-            [field: @SerializeField] public float right { get; private set; } = 0;
+            [field: SerializeField] public float top { get; private set; } = 0;
+            [field: SerializeField] public float bottom { get; private set; } = 0;
+            [field: SerializeField] public float left { get; private set; } = 0;
+            [field: SerializeField] public float right { get; private set; } = 0;
         }
 
         [Serializable]
         public class IgnoreSettings
         {
-            [field: @SerializeField] public bool ignoreTop { get; private set; } = false;
-            [field: @SerializeField] public bool ignoreBottom { get; private set; } = false;
-            [field: @SerializeField] public bool ignoreLeft { get; private set; } = false;
-            [field: @SerializeField] public bool ignoreRight { get; private set; } = false;
+            [field: SerializeField] public bool ignoreTop { get; private set; } = false;
+            [field: SerializeField] public bool ignoreBottom { get; private set; } = false;
+            [field: SerializeField] public bool ignoreLeft { get; private set; } = false;
+            [field: SerializeField] public bool ignoreRight { get; private set; } = false;
         }
     }
 }

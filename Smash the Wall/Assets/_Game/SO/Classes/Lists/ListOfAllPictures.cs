@@ -4,7 +4,6 @@ using ECS.Authoring;
 using Helpers;
 using IdentityCards;
 using Managers;
-using Services;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,13 +27,7 @@ namespace SO.Lists
         [field: FoldoutGroup("Border Animation"), SerializeField]
         public float borderMaterialAnimationDuration { get; private set; } = 1f;
 
-        [Inject]
-        [FoldoutGroup("Injected"), SerializeField, ReadOnly]
-        private GameSaveManager _gameSaveManager;
-
-        [Inject]
-        [FoldoutGroup("Injected"), SerializeField, ReadOnly]
-        private LazyUpdator_Service _lazyUpdator;
+        [Inject] private GameSaveManager _gameSaveManager;
 
 #if UNITY_EDITOR
 
@@ -148,7 +141,6 @@ namespace SO.Lists
             List<PictureAuthoring> sortedPictureAuthorings = new();
 
             var groupedPictureAuthorings = _picturesEditor.GroupBy(w => w.pictureMode).ToList();
-
             int maxCount = groupedPictureAuthorings.Max(g => g.Count());
 
             for (int i = 0; i < maxCount; i++)

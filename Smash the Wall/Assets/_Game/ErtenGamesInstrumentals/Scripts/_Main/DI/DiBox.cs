@@ -139,6 +139,8 @@ namespace DependencyInjection
         {
             if (obj == null) return;
 
+            _logger?.Log($"Injecting to: " + obj.ToString());
+
             var listFeild = obj.GetType().GetFields(BindingFlags.Public
                 | BindingFlags.NonPublic
                 | BindingFlags.Instance).Where(x => CustomAttributeExtensions.GetCustomAttribute<InjectAttribute>((MemberInfo)x) != null);

@@ -67,8 +67,10 @@ namespace GameState
             _shopMenu.Initialize(_gameplayMenu);
             _pauseMenu.Initialize(_settingsMenu, _gameplayMenu);
             _settingsMenu.Initialize(_pauseMenu);
+            _winMenu.Initialize();
+            _loseMenu.Initialize();
 
-            _pauseMenu.Enable();
+            _gameplayMenu.Enable();
         }
     }
 }

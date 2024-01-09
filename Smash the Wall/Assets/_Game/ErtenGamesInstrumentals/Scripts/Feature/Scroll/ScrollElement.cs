@@ -9,7 +9,8 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public sealed class ScrollElement : MonoBehaviour
+    [RequireComponent(typeof(DragEvents), typeof(Image))]
+    public sealed class ScrollElement : MonoBehaviour, ISelfValidator
     {
         public static bool isInAction = false;
         private bool _canMove = false;
@@ -30,7 +31,7 @@ namespace UI
 #if DoTweenInstalled
         [Header("Settings")]
         [SerializeField] private float _enableScale = 1.2f;
-        [SerializeField] private float _disableScale = 1f; 
+        [SerializeField] private float _disableScale = 1f;
 #endif
 
         [Header("Debug")]
@@ -42,10 +43,23 @@ namespace UI
         public Action onEnable;
         public Action onDisable;
 
-        private void OnValidate()
+        public void Validate(SelfValidationResult selfValidationResult)
         {
-            if (_dragEvents == null) _dragEvents = GetComponent<DragEvents>();
-            if (_image == null) _image = GetComponent<Image>();
+            if (_dragEvents == null)
+            {
+                selfValidationResult.AddWarning("Drag Events is null").WithFix(() =>
+                {
+                    _dragEvents = GetComponent<DragEvents>();
+                });
+            }
+
+            if (_image == null)
+            {
+                selfValidationResult.AddWarning("Image is null").WithFix(() =>
+                {
+                    _image = GetComponent<Image>();
+                });
+            }
         }
 
         private void OnEnable()

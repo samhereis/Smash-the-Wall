@@ -2,28 +2,24 @@ using ECS.Systems;
 using ECS.Systems.CollisionUpdators;
 using ECS.Systems.GameState;
 using ECS.Systems.Spawners;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Managers
 {
-    public class SystemsManager : MonoBehaviour
+    public class SystemsManager : IDisposable
     {
-        [SerializeField] private List<IEnableableSystem> _currentSystems = new List<IEnableableSystem>();
+        [SerializeField] private List<IEnableableSystem> _currentSystems = new();
 
-        private void Awake()
+        public SystemsManager(List<IEnableableSystem> enableableSystems)
         {
-            _currentSystems.Add(PictureSpawner_System.instance);
-            _currentSystems.Add(DestroyableCollisionUpdator_System.instance);
-            _currentSystems.Add(ChangeKinematicOnCollided_Updator.instance);
-            _currentSystems.Add(CheckPicturePieceKinematic_System.instance);
-            _currentSystems.Add(DestroyDestroyables_System.instance);
-            _currentSystems.Add(WinLoseChecker_System.instance);
+            _currentSystems.AddRange(enableableSystems);
 
             TryEnableSystems();
         }
 
-        private void OnDestroy()
+        public void Dispose()
         {
             TryDisableSystems();
         }

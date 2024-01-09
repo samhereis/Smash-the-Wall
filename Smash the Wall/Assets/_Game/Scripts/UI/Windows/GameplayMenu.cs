@@ -17,7 +17,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class GameplayMenu : MenuBase, IInitializable
+    public class GameplayMenu : MenuBase, IInitializable, INeedDependencyInjection
     {
         [Required, ChildGameObjectsOnly]
         [FoldoutGroup("UI Components"), SerializeField] private Button _pauseButton;
@@ -61,6 +61,8 @@ namespace UI
 
         public void Initialize()
         {
+            DependencyContext.InjectDependencies(this);
+
             _whatNeedsToBeDestroyedProgressbarFillImage = _whatNeedsToBeDestroyedProgressbar.fillRect.GetComponent<Image>();
             var _whatNeedsToBeDestroyedProgressbarGradientKeys = _whatNeedsToBeDestroyedProgressbarGradient.colorKeys;
             _whatNeedsToBeDestroyedProgressbarGradientKeys[1].time = _gameConfigs.gameSettings.percentageOfReleasedWhatNeedsToBeDestroysToWin / 100;
@@ -86,7 +88,7 @@ namespace UI
             _whatNeedsToBeDestroyedProgressbarFillImage?.DOKill();
             _whatNeedsToStayProgressbarFillImage?.DOKill();
 
-            _lazyUpdator?.RemoveFromQueue(LazyUpdate);
+            UnsubscribeFromEvents();
         }
 
         public override void Enable(float? duration = null)

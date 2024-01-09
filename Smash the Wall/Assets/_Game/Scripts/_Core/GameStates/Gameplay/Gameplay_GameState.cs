@@ -1,10 +1,13 @@
 using DependencyInjection;
-using Helpers;
+using ECS.Systems;
+using ECS.Systems.CollisionUpdators;
+using ECS.Systems.GameState;
+using ECS.Systems.Spawners;
 using Interfaces;
+using Managers;
 using Servies;
 using SO.Lists;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace GameState
 {
@@ -12,6 +15,8 @@ namespace GameState
     {
         private Gameplay_GameStateView _view;
         private Gameplay_GameStateModel _model;
+
+        private SystemsManager _systemsManager;
 
         [Inject] private ListOfAllScenes _listOfAllScenes;
         [Inject] private IGameStateChanger _gameStateChanger;
@@ -21,29 +26,34 @@ namespace GameState
         {
             base.Enter();
 
+            if (_listOfAllScenes != null) { await _sceneLoader.LoadSceneAsync(_listOfAllScenes.gameScene); }
+            else { await LoadScene(2); }
+
             DependencyContext.InjectDependencies(this);
 
-            if (_listOfAllScenes != null)
+            _systemsManager = new SystemsManager(new System.Collections.Generic.List<IEnableableSystem>
             {
-                await _sceneLoader.LoadSceneAsync(_listOfAllScenes.gameScene);
-            }
-            else
-            {
-                int sceneIndex = 2;
-                var handler = SceneManager.LoadSceneAsync(sceneIndex);
-                while (handler.isDone == false) { await AsyncHelper.Skip(); }
-            }
+                PictureSpawner_System.instance,
+                DestroyableCollisionUpdator_System.instance,
+                ChangeKinematicOnCollided_Updator.instance,
+                CheckPicturePieceKinematic_System.instance,
+                DestroyDestroyables_System.instance,
+                WinLoseChecker_System.instance
+            });
 
             _model = Object.FindObjectOfType<Gameplay_GameStateModel>();
 
             SetupView();
-
             SubscribeToEvents();
         }
 
         public override void Exit()
         {
             UnsubscribeFromEvents();
+
+            _model?.Dispose();
+            _view?.Dispose();
+            _systemsManager?.Dispose();
         }
 
         public void SubscribeToEvents()
@@ -60,8 +70,8 @@ namespace GameState
         {
             _view = new Gameplay_GameStateView();
 
-            _view?.Initialize();
             _model?.Initialize();
+            _view?.Initialize();
         }
 
         private void GoToMainMenu()

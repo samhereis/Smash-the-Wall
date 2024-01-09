@@ -9,35 +9,34 @@ namespace UI
 {
     public class SettingsMenu : MenuBase, INeedDependencyInjection
     {
-        [Header("Components")]
+        [Required]
+        [FoldoutGroup("Components"), SerializeField] private Button[] _closeButtons;
 
         [Required]
-        [SerializeField] private Button[] _closeButtons;
+        [FoldoutGroup("Components"), SerializeField] private Slider _gunRotationSpeed;
 
         [Required]
-        [SerializeField] private Slider _gunRotationSpeed;
+        [FoldoutGroup("Components"), SerializeField] private Slider _musicVolume;
 
         [Required]
-        [SerializeField] private Slider _musicVolume;
+        [FoldoutGroup("Components"), SerializeField] private Slider _soundsVolume;
 
         [Required]
-        [SerializeField] private Slider _soundsVolume;
+        [FoldoutGroup("Components"), SerializeField] private Toggle _vibrationToggle;
 
         [Required]
-        [SerializeField] private Toggle _vibrationToggle;
+        [FoldoutGroup("Components"), SerializeField] private Toggle _randomPictureToggle;
 
         [Required]
-        [SerializeField] private Toggle _randomPictureToggle;
+        [FoldoutGroup("Components"), SerializeField] private Image _buttonsInfoBlock;
 
-        [Required]
-        [SerializeField] private Image _buttonsInfoBlock;
+        [Inject] private GameConfigs _gameConfigs;
 
-        private GameConfigs _gameConfigs;
         private MenuBase _openOnClose;
 
-        public void Initialize(MenuBase menuBase)
+        public void Initialize(MenuBase openOnClose)
         {
-            _openOnClose = menuBase;
+            _openOnClose = openOnClose;
 
             DependencyContext.InjectDependencies(this);
         }

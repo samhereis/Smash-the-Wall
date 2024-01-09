@@ -1,22 +1,24 @@
 using DependencyInjection;
 using Helpers;
+using Sirenix.OdinInspector;
 using System;
 using UI.Canvases;
 using UnityEngine;
 
 namespace UI.Window.Tutorial
 {
-    public abstract class TutorialMenuBase : MenuBase, INeedDependencyInjection
+    public abstract class TutorialMenuBase : MenuBase, INeedDependencyInjection, ISelfValidator
     {
         [field: SerializeField] public TutorialBaseSettings tutorialBaseSettings { get; private set; } = new TutorialBaseSettings();
 
         [SerializeField] private float _openDelay = 1f;
 
-        private void OnValidate()
+        public override void Validate(SelfValidationResult result)
         {
+            base.Validate(result);
+
             _baseSettings.notifyOthers = false;
             tutorialBaseSettings.tutorialName = gameObject.name;
-            this.TrySetDirty();
         }
 
         public override async void Enable(float? duration = null)

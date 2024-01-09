@@ -4,7 +4,7 @@ namespace Loggers
 {
     public abstract class LoggerBase : MonoBehaviour, ILogger
     {
-        [SerializeField] public bool enableLogs { get; private set; }
+        [field: SerializeField] public bool enableLogs { get; private set; }
 
         public virtual void Log(string message, Object context)
         {

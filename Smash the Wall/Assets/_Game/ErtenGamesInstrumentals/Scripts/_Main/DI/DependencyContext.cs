@@ -20,9 +20,6 @@ namespace DependencyInjection
         [FoldoutGroup("Objects To DI"), SerializeField] private List<Dependency_DTO<ConfigBase>> _configs = new();
         [FoldoutGroup("Objects To DI"), SerializeField] private List<Dependency_DTO<ScriptableObject>> _scriptableObjects = new();
 
-        [ListDrawerSettings(ListElementLabelName = ("eventName"))]
-        [FoldoutGroup("Objects To DI"), SerializeField] private List<EventWithNoParameters> _eventsWithNoParameters = new();
-
         [Required]
         [FoldoutGroup("Objects To DI"), SerializeField] private LoggerBase _diLogger;
 
@@ -92,11 +89,6 @@ namespace DependencyInjection
                 diBox.Add(scriptableObject.dependency, id: scriptableObject.id);
             }
 
-            foreach (var eventWithNoParameter in _eventsWithNoParameters)
-            {
-                diBox.Add(eventWithNoParameter, id: eventWithNoParameter.eventName);
-            }
-
             foreach (var hcdi in _dependencyInstallers)
             {
                 hcdi.Inject();
@@ -126,11 +118,6 @@ namespace DependencyInjection
                     (scriptableObject.dependency as IInitializable).Initialize();
                 }
             }
-
-            foreach (var eventWithNoParameter in _eventsWithNoParameters)
-            {
-                eventWithNoParameter.Initialize(eventWithNoParameter.eventName);
-            }
         }
 
         [Button]
@@ -149,11 +136,6 @@ namespace DependencyInjection
             foreach (var scriptableObject in _scriptableObjects)
             {
                 diBox.Remove(scriptableObject.dependency.GetType(), scriptableObject.id);
-            }
-
-            foreach (var eventWithNoParameter in _eventsWithNoParameters)
-            {
-                diBox.Remove(eventWithNoParameter.GetType(), eventWithNoParameter.eventName);
             }
 
             foreach (var hcdi in _dependencyInstallers)
@@ -191,14 +173,6 @@ namespace DependencyInjection
                     });
 
                     break;
-                }
-            }
-
-            foreach (var anEvent in _eventsWithNoParameters)
-            {
-                if (anEvent.eventName == string.Empty)
-                {
-                    result.AddError("Event in index " + _eventsWithNoParameters.IndexOf(anEvent) + " has no event name");
                 }
             }
 

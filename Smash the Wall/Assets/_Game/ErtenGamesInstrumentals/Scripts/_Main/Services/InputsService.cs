@@ -11,8 +11,9 @@ namespace Services
     {
         public Action onUIBackPressed;
 
-        [ShowInInspector] public InputActionsHolder input { get; private set; }
-        [ShowInInspector] public readonly UnityEvent<bool> onInputStatusChanged = new UnityEvent<bool>();
+        public readonly UnityEvent<bool> onInputStatusChanged = new UnityEvent<bool>();
+
+        public InputActionsHolder input { get; private set; }
 
         public InputsService()
         {

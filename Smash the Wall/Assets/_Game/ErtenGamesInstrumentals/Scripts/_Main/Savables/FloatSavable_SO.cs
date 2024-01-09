@@ -1,16 +1,16 @@
 using Helpers;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Settings
 {
     [CreateAssetMenu(fileName = "FloatSavable_SO", menuName = "Scriptables/Settings/FloatSavable_SO")]
-    public class FloatSavable_SO : BaseSavable_SO<float>
+    public class FloatSavable_SO : BaseSavable_SO<float>, ISelfValidator
     {
         public float currentValue => _currentValue;
         public string key => _key;
 
-
-        private void OnValidate()
+        public void Validate(SelfValidationResult result)
         {
             _currentValue = PlayerPrefs.GetFloat(key, _defaultValue);
 

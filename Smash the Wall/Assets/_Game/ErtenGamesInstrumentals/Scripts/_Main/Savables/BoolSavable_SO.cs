@@ -1,10 +1,11 @@
 using Helpers;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Settings
 {
     [CreateAssetMenu(fileName = "BoolSavable_SO", menuName = "Scriptables/Settings/BoolSavable_SO")]
-    public sealed class BoolSavable_SO : BaseSavable_SO<bool>
+    public sealed class BoolSavable_SO : BaseSavable_SO<bool>, ISelfValidator
     {
         public bool currentValue => _currentValue;
         public string key => _key;
@@ -12,7 +13,7 @@ namespace Settings
         [SerializeField] private string _trueValue = "true";
         [SerializeField] private string _falseValue = "false";
 
-        private void OnValidate()
+        public void Validate(SelfValidationResult result)
         {
             _currentValue = PlayerPrefs.GetString(key, _defaultValue.ToString()) == _trueValue;
 
@@ -25,7 +26,6 @@ namespace Settings
             }
 
 #endif
-
         }
 
         public override void Initialize()

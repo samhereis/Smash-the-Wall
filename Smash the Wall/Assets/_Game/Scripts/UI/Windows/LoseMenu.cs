@@ -1,6 +1,8 @@
 using Configs;
 using DataClasses;
+using DependencyInjection;
 using Helpers;
+using Interfaces;
 using Services;
 using Servies;
 using Sirenix.OdinInspector;
@@ -12,7 +14,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class LoseMenu : MenuBase
+    public class LoseMenu : MenuBase, IInitializable, INeedDependencyInjection
     {
         [Header("Effects")]
 
@@ -37,6 +39,11 @@ namespace UI
         private SceneLoader _sceneLoader;
         private ListOfAllScenes _listOfAllScenes;
         private AdsShowManager _adsShowManager;
+
+        public void Initialize()
+        {
+            DependencyContext.InjectDependencies(this);
+        }
 
         public override void Enable(float? duration = null)
         {

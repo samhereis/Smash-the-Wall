@@ -5,7 +5,6 @@ using UnityEngine;
 using Services.Providers;
 using Helpers;
 using System.Threading;
-using System.Threading.Tasks;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -367,12 +366,14 @@ namespace Services
             string advertisingID = "";
             try
             {
+#if UNITY_ANDROID
                 AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
                 AndroidJavaObject currentActivity = up.GetStatic<AndroidJavaObject>("currentActivity");
                 AndroidJavaClass client = new AndroidJavaClass("com.google.android.gms.ads.identifier.AdvertisingIdClient");
                 AndroidJavaObject adInfo = client.CallStatic<AndroidJavaObject>("getAdvertisingIdInfo", currentActivity);
 
                 advertisingID = adInfo.Call<string>("getId").ToString();
+#endif
             }
             catch (Exception e)
             {
@@ -405,9 +406,9 @@ namespace Services
 
         public async void Initialize()
         {
-#if UNITY_ANDROID
+#if UNITY_EDITOR == false && UNITY_ANDROID
             advertisingId = GetAndroidAdvertiserId();
-#else
+#elif UNITY_EDITOR == false && UNITY_IOS
             advertisingId = GetIOSAdvertiserId();
 #endif
 

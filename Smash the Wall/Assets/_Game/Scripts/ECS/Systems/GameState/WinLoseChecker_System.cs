@@ -41,8 +41,6 @@ namespace ECS.Systems.GameState
         public void Disable()
         {
             _isActive = false;
-
-            Clear();
         }
 
         public void OnCreate(ref SystemState systemState)

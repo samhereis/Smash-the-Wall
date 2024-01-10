@@ -1,5 +1,6 @@
 using Helpers;
 using Interfaces;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,9 +12,9 @@ namespace Services
     {
         [SerializeField] private List<Func<Task>> _tasks = new List<Func<Task>>();
 
-        [SerializeField] private int _tasksCount => _tasks.Count;
         [SerializeField] private bool _isRunning = false;
         [SerializeField] private float _foreachStepDelay = 0;
+        [ShowInInspector] private int _tasksCount => _tasks.Count;
 
         public virtual void Initialize(float foreachStepDelay)
         {

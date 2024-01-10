@@ -1,5 +1,6 @@
 using ECS.ComponentData.Picture;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 using static DataClasses.Enums;
@@ -8,8 +9,10 @@ namespace ECS.Authoring
 {
     public class PictureAuthoring : MonoBehaviour
     {
-        [ShowInInspector] public PictureMode pictureMode = PictureMode.DestroyBorder;
-        [ShowInInspector] public Color borderColor = Color.cyan;
+        [SerializeField] public PictureMode pictureMode = PictureMode.DestroyBorder;
+        [SerializeField] public Color borderColor = Color.cyan;
+
+        [SerializeField] private List<MeshFilter> _meshesWithNoPositionVertexData = new List<MeshFilter>();
 
         public class ShootBulletBaker : Baker<PictureAuthoring>
         {
@@ -36,9 +39,41 @@ namespace ECS.Authoring
             }
         }
 
-        public override string ToString()
+        private void OnValidate()
         {
-            return gameObject.name;
+            ChechMeshes();
+        }
+
+        [Button]
+        private void ChechMeshes()
+        {
+            _meshesWithNoPositionVertexData.Clear();
+
+            foreach (var meshFilter in GetComponentsInChildren<MeshFilter>(true))
+            {
+                if (HasPositionVertexData(meshFilter) == false)
+                {
+                    _meshesWithNoPositionVertexData.Add(meshFilter);
+                }
+            }
+        }
+
+        private bool HasPositionVertexData(MeshFilter meshFilter)
+        {
+            if (meshFilter != null)
+            {
+                Mesh mesh = meshFilter.sharedMesh;
+
+                if (mesh != null)
+                {
+                    if (mesh.vertices == null || mesh.vertices.Length == 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

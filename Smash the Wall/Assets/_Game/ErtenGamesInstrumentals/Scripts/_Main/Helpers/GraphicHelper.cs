@@ -7,7 +7,7 @@ namespace Helpers
     [DisallowMultipleComponent]
     public class GraphicHelper : MonoBehaviour
     {
-        [SerializeField] private List<MeshRenderer> _meshRenderers;
+        [SerializeField] private List<MeshRenderer> _meshRenderers = new List<MeshRenderer>();
 
         [ContextMenu(nameof(FindAllMeshRenderers))]
         public void FindAllMeshRenderers()

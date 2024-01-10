@@ -5,10 +5,8 @@ using ECS.ComponentData.Other;
 using ECS.ComponentData.Picture.Piece;
 using Helpers;
 using SO.Lists;
-using System;
 using Unity.Entities;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace ECS.Systems.Spawners
 {
@@ -71,70 +69,36 @@ namespace ECS.Systems.Spawners
 
         private void SpawnAllPictures(ref SystemState state)
         {
-            foreach (var (pictureSpawner, entity) in SystemAPI.Query<RefRW<PictureSpawner_ComponentData>>().WithEntityAccess())
+            foreach (var (picturePrefabsComponent, entity) in SystemAPI.Query<RefRW<PicturePrefabsComponent>>().WithEntityAccess())
             {
-                if (entityManager.HasBuffer<PictureSpawnBufferElement>(entity) == false) continue;
                 if (entityManager.HasBuffer<PicturePrefabBufferElement>(entity) == false) continue;
-                if (pictureSpawner.ValueRW.hasSpawnAll == true) continue;
 
                 var ecbSingleton = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
                 var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
 
-                int numberOfSpawnedPictures = 0;
+                var picturePrefabBuffer = entityManager.GetBuffer<PicturePrefabBufferElement>(entity);
 
-                try
+                var newPicture = Entity.Null;
+
+                if (_gameConfigs.isRestart == false)
                 {
-                    var pictureSpawnBuffer = entityManager.GetBuffer<PictureSpawnBufferElement>(entity);
-                    var picturePrefabBuffer = entityManager.GetBuffer<PicturePrefabBufferElement>(entity);
-
-                    foreach (var picture in pictureSpawnBuffer)
+                    if (_gameConfigs.gameSettings.randomPictureSettings.currentValue == true)
                     {
-                        var newPicture = Entity.Null;
-
-                        if (_gameConfigs.isRestart == false)
-                        {
-                            if (_gameConfigs.gameSettings.randomPictureSettings.currentValue == true)
-                            {
-                                newPicture = ecb.Instantiate(picturePrefabBuffer[_listOfAllPictures.GetRandomIndex()].value.prefab);
-                            }
-                            else
-                            {
-                                newPicture = ecb.Instantiate(picturePrefabBuffer[_listOfAllPictures.GetCurrentIndex()].value.prefab);
-                            }
-                        }
-                        else
-                        {
-                            newPicture = ecb.Instantiate(picturePrefabBuffer[_listOfAllPictures.GetCurrentIndex()].value.prefab);
-                        }
-
-                        Debug.Log($"Spawned {entityManager.GetName(entity)} at {picture.value.position}");
-
-                        var localTransformComponent = new LocalTransform
-                        {
-                            Position = picture.value.position,
-                            Rotation = picture.value.rotation,
-                            Scale = 2
-                        };
-
-                        ecb.AddComponent<LocalTransform>(newPicture, localTransformComponent);
-                        ecb.SetComponent<LocalTransform>(newPicture, localTransformComponent);
-
-                        numberOfSpawnedPictures++;
+                        newPicture = ecb.Instantiate(picturePrefabBuffer[_listOfAllPictures.GetRandomIndex()].value.prefab);
+                    }
+                    else
+                    {
+                        newPicture = ecb.Instantiate(picturePrefabBuffer[_listOfAllPictures.GetCurrentIndex()].value.prefab);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    Debug.Log(e);
+                    newPicture = ecb.Instantiate(picturePrefabBuffer[_listOfAllPictures.GetCurrentIndex()].value.prefab);
                 }
-                finally
+
+                if(newPicture != null)
                 {
-                    if (pictureSpawner.ValueRO.numberOfSpawnablePictures > 0)
-                    {
-                        if (numberOfSpawnedPictures == pictureSpawner.ValueRO.numberOfSpawnablePictures)
-                        {
-                            pictureSpawner.ValueRW.hasSpawnAll = true;
-                        }
-                    }
+                    Disable();
                 }
             }
         }

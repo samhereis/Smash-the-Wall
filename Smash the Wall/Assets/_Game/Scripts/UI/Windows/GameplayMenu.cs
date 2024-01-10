@@ -54,6 +54,9 @@ namespace UI
 
         private LazyUpdator_Service _lazyUpdator = new LazyUpdator_Service();
 
+        [ShowInInspector] private float _releasedWhatNeedsToStaysPercentage => WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
+        [ShowInInspector] private float _releasedWhatNeedsToBeDestroysPercentage => WinLoseChecker_System.releasedWhatNeedsToBeDestroysPercentage;
+
         public void Initialize(PauseMenu pauseMenu, ShopMenu shopWindow)
         {
             _pauseMenu = pauseMenu;
@@ -147,20 +150,18 @@ namespace UI
             TryUpdatereWhatNeedsToBeDestroyProgressBar();
             TryUpdatereWhatNeedsToStayProgressBar();
 
-            await AsyncHelper.DelayFloat(100);
+            await AsyncHelper.DelayFloat(1f);
         }
 
         private void TryUpdatereWhatNeedsToBeDestroyProgressBar()
         {
             if (_whatNeedsToBeDestroyedProgressbar != null)
             {
-                var releasedWhatNeedsToBeDestroysPercentage = WinLoseChecker_System.releasedWhatNeedsToBeDestroysPercentage;
-
-                if (_whatNeedsToBeDestroyedProgressbar.value != releasedWhatNeedsToBeDestroysPercentage)
+                if (_whatNeedsToBeDestroyedProgressbar.value != _releasedWhatNeedsToBeDestroysPercentage)
                 {
-                    _whatNeedsToBeDestroyedProgressbar?.DOValue(releasedWhatNeedsToBeDestroysPercentage, 0.1f);
+                    _whatNeedsToBeDestroyedProgressbar?.DOValue(_releasedWhatNeedsToBeDestroysPercentage, 0.1f);
 
-                    var color = _whatNeedsToBeDestroyedProgressbarGradient.Evaluate(releasedWhatNeedsToBeDestroysPercentage / _whatNeedsToBeDestroyedProgressbar.maxValue);
+                    var color = _whatNeedsToBeDestroyedProgressbarGradient.Evaluate(_releasedWhatNeedsToBeDestroysPercentage / _whatNeedsToBeDestroyedProgressbar.maxValue);
                     _whatNeedsToBeDestroyedProgressbarFillImage?.DOColor(color, 0.1f);
                 }
             }
@@ -170,13 +171,11 @@ namespace UI
         {
             if (_whatNeedsToStayProgressbar != null && _listOfAllPictures.GetCurrent().pictureMode == DataClasses.Enums.PictureMode.DestroyBorder)
             {
-                var releasedWhatNeedsToStaysPercentage = WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
-
-                if (_whatNeedsToStayProgressbar.value != releasedWhatNeedsToStaysPercentage)
+                if (_whatNeedsToStayProgressbar.value != _releasedWhatNeedsToStaysPercentage)
                 {
-                    _whatNeedsToStayProgressbar?.DOValue(releasedWhatNeedsToStaysPercentage, 0.1f);
+                    _whatNeedsToStayProgressbar?.DOValue(_releasedWhatNeedsToStaysPercentage, 0.1f);
 
-                    var color = _whatNeedsToStayProgressbarGradient.Evaluate(releasedWhatNeedsToStaysPercentage / _whatNeedsToStayProgressbar.maxValue);
+                    var color = _whatNeedsToStayProgressbarGradient.Evaluate(_releasedWhatNeedsToStaysPercentage / _whatNeedsToStayProgressbar.maxValue);
                     _whatNeedsToStayProgressbarFillImage?.DOColor(color, 0.1f);
                 }
             }

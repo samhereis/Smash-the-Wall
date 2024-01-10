@@ -12,10 +12,10 @@ using UnityEngine;
 
 namespace GameState
 {
-    public class Gameplay_GameState : GameStateBase, INeedDependencyInjection, ISubscribesToEvents
+    public class Gameplay_GameState_Controller : GameState_ControllerBase, INeedDependencyInjection, ISubscribesToEvents
     {
-        private Gameplay_GameStateView _view;
-        private Gameplay_GameStateModel _model;
+        private Gameplay_GameState_View _view;
+        private Gameplay_GameState_Model _model;
 
         private SystemsManager _systemsManager;
 
@@ -33,6 +33,11 @@ namespace GameState
 
             DependencyContext.InjectDependencies(this);
 
+            _model = new Gameplay_GameState_Model();
+            _view = new Gameplay_GameState_View(_model);
+
+            WinLoseChecker_System.Initialize(_model.onGameplayStatusChanged);
+
             _systemsManager = new SystemsManager(new System.Collections.Generic.List<IEnableableSystem>
             {
                 PictureSpawner_System.instance,
@@ -43,12 +48,14 @@ namespace GameState
                 WinLoseChecker_System.instance
             });
 
-            _model = Object.FindObjectOfType<Gameplay_GameStateModel>();
+            _model?.Initialize();
+            _view?.Initialize();
 
             Object.Instantiate(_playerIdentifier);
 
-            SetupView();
             SubscribeToEvents();
+
+            _model.onGameplayStatusChanged.Invoke(Gameplay_GameState_Model.GameplayState.Gameplay);
         }
 
         public override void Exit()
@@ -63,29 +70,32 @@ namespace GameState
         public void SubscribeToEvents()
         {
             UnsubscribeFromEvents();
+
+            _view.onMainMenuRequested += GoToMainMenu;
+            _view.onNextRequested += Next;
+            _view.onReplayRequested += Replay;
         }
 
         public void UnsubscribeFromEvents()
         {
-
-        }
-
-        private void SetupView()
-        {
-            _view = new Gameplay_GameStateView();
-
-            _model?.Initialize();
-            _view?.Initialize();
+            _view.onMainMenuRequested -= GoToMainMenu;
+            _view.onNextRequested -= Next;
+            _view.onReplayRequested -= Replay;
         }
 
         private void GoToMainMenu()
         {
-            _gameStateChanger.ChangeState(new MainMenu_GameState());
+            _gameStateChanger.ChangeState(new MainMenu_GameState_Controller());
+        }
+
+        private void Next()
+        {
+            _gameStateChanger.ChangeState(new Gameplay_GameState_Controller());
         }
 
         private void Replay()
         {
-            _gameStateChanger.ChangeState(new Gameplay_GameState());
+            _gameStateChanger.ChangeState(new Gameplay_GameState_Controller());
         }
     }
 }

@@ -3,11 +3,10 @@ using DataClasses;
 using DependencyInjection;
 using ECS.Systems.GameState;
 using Helpers;
-using Services;
-using Servies;
 using Sirenix.OdinInspector;
 using SO.Lists;
 using Sound;
+using System;
 using UI.Canvases;
 using UI.Elements;
 using UnityEngine;
@@ -18,6 +17,9 @@ namespace UI
 {
     public class WinMenu : MenuBase, INeedDependencyInjection
     {
+        public Action onMainMenuClicked;
+        public Action onNextClicked;
+
         [Header("Effects")]
 
         [Required]
@@ -47,10 +49,7 @@ namespace UI
         [SerializeField] private Star_CustomControl _starControl;
 
         [Inject] private GameConfigs _gameConfigs;
-        [Inject] private ListOfAllScenes _listOfAllScenes;
         [Inject] private ListOfAllPictures _listOfAllPictures;
-        [Inject] private SceneLoader _sceneLoader;
-        [Inject] private AdsShowManager _adsShowManager;
 
         private PictureMode _currentPictureMode;
 
@@ -143,24 +142,12 @@ namespace UI
 
         private void NextLevel()
         {
-            LoadLevel(_listOfAllScenes.gameScene);
+            onNextClicked?.Invoke();
         }
 
         private void GotoMainMenu()
         {
-            LoadLevel(_listOfAllScenes.mainMenuScene, false);
-        }
-
-        private async void LoadLevel(AScene scene, bool showInterstitial = true)
-        {
-            await _sceneLoader.LoadSceneAsync(scene);
-
-            if (showInterstitial == true)
-            {
-                await AsyncHelper.DelayInt(1000);
-
-                _adsShowManager?.TryShowInterstitial();
-            }
+            onMainMenuClicked?.Invoke();
         }
     }
 }

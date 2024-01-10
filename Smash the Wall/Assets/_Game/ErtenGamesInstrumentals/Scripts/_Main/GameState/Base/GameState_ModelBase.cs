@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameState
 {
-    public abstract class GameStateModelBase : MonoBehaviour, IInitializable, IDisposable
+    public abstract class GameState_ModelBase : IInitializable, IDisposable
     {
         [field: SerializeField, ReadOnly] public bool isInitialized { get; protected set; }
 

@@ -1,6 +1,3 @@
-#if InputSystemInstalled
-
-using Sirenix.OdinInspector;
 using System;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -13,7 +10,11 @@ namespace Services
 
         public readonly UnityEvent<bool> onInputStatusChanged = new UnityEvent<bool>();
 
+#if InputSystemInstalled
         public InputActionsHolder input { get; private set; }
+#else
+        public dynamic input { get; private set; }
+#endif
 
         public InputsService()
         {
@@ -35,5 +36,3 @@ namespace Services
         }
     }
 }
-
-#endif

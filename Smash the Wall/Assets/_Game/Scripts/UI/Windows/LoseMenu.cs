@@ -1,13 +1,8 @@
-using Configs;
-using DataClasses;
 using DependencyInjection;
-using Helpers;
 using Interfaces;
-using Services;
-using Servies;
 using Sirenix.OdinInspector;
-using SO.Lists;
 using Sound;
+using System;
 using UI.Canvases;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +11,9 @@ namespace UI
 {
     public class LoseMenu : MenuBase, IInitializable, INeedDependencyInjection
     {
+        public Action onMainMenuClicked;
+        public Action onReplayClicked;
+
         [Header("Effects")]
 
         [Required]
@@ -35,10 +33,7 @@ namespace UI
         [Required]
         [SerializeField] private Image _loseButtonsBlock;
 
-        private GameConfigs _gameConfigs;
-        private SceneLoader _sceneLoader;
-        private ListOfAllScenes _listOfAllScenes;
-        private AdsShowManager _adsShowManager;
+        [Inject] private SoundPlayer _soundPlayer;
 
         public void Initialize()
         {
@@ -48,11 +43,10 @@ namespace UI
         public override void Enable(float? duration = null)
         {
             base.Enable(duration);
-            _gameConfigs.isRestart = false;
 
             SubscribeToEvents();
 
-            SoundPlayer.instance?.TryPlay(_loseAudio);
+            _soundPlayer.TryPlay(_loseAudio);
         }
 
         public override void Disable(float? duration = null)
@@ -80,26 +74,12 @@ namespace UI
 
         private void RestartGame()
         {
-            _gameConfigs.isRestart = true;
-
-            LoadLevel(_listOfAllScenes.gameScene);
+            onReplayClicked?.Invoke();
         }
 
         private void GotoMainMenu()
         {
-            LoadLevel(_listOfAllScenes.mainMenuScene, false);
-        }
-
-        private async void LoadLevel(AScene scene, bool showInterstitial = true)
-        {
-            await _sceneLoader.LoadSceneAsync(scene);
-
-            if (showInterstitial == true)
-            {
-                await AsyncHelper.DelayFloat(2000);
-
-                _adsShowManager?.TryShowInterstitial();
-            }
+            onMainMenuClicked?.Invoke();
         }
     }
 }

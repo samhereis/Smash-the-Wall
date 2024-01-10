@@ -2,6 +2,6 @@
 {
     public interface IGameStateChanger
     {
-        public void ChangeState(GameStateBase gameState);
+        public void ChangeState(GameState_ControllerBase gameState);
     }
 }

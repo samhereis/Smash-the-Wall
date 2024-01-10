@@ -63,7 +63,6 @@ namespace DependencyInjection
             if (EditorApplication.isPlayingOrWillChangePlaymode == false && EditorApplication.isPlaying)
             {
                 Debug.Log("Exiting playmode.");
-                diBox = null;
             }
 
 #endif

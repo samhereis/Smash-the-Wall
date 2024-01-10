@@ -3,7 +3,7 @@ using System;
 
 namespace GameState
 {
-    public abstract class GameStateViewBase : IInitializable, IDisposable
+    public abstract class GameState_ViewBase : IInitializable, IDisposable
     {
         public virtual void Initialize()
         {

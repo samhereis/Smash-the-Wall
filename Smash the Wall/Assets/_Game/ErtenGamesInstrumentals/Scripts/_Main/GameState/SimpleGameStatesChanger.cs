@@ -9,7 +9,7 @@ namespace GameState
     [Serializable]
     public class SimpleGameStatesChanger : IGameStateChanger, IInitializable, INeedDependencyInjection
     {
-        [field: SerializeField] public GameStateBase currentGameState { get; private set; }
+        [field: SerializeField] public GameState_ControllerBase currentGameState { get; private set; }
 
         public virtual async void Initialize()
         {
@@ -21,7 +21,7 @@ namespace GameState
             DependencyContext.InjectDependencies(this);
         }
 
-        public virtual void ChangeState(GameStateBase gameState)
+        public virtual void ChangeState(GameState_ControllerBase gameState)
         {
             currentGameState?.Exit();
 

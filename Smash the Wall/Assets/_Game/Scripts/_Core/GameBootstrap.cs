@@ -83,7 +83,7 @@ namespace GameState
 
         private void EnterMainMenu()
         {
-            _gameStateChanger.ChangeState(new MainMenu_GameState());
+            _gameStateChanger.ChangeState(new MainMenu_GameState_Controller());
         }
 
         private void UpdateAnalyticsPreferences()

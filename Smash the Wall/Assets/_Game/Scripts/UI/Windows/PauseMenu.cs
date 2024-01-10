@@ -1,3 +1,4 @@
+using GameState;
 using Sirenix.OdinInspector;
 using System;
 using UI.Canvases;
@@ -8,7 +9,7 @@ namespace UI
 {
     public class PauseMenu : MenuBase
     {
-        public Action goToMainMenuRequested;
+        public Action onGoToMainMenuClicked;
 
         [Header("Components")]
 
@@ -25,12 +26,13 @@ namespace UI
         [SerializeField] private Button _mainMenuButton;
 
         private SettingsMenu _settingsWindow;
-        private GameplayMenu _gameplayWindow;
 
-        public void Initialize(SettingsMenu settingsWindow, GameplayMenu gameplayWindow)
+        private Gameplay_GameState_Model _gameplay_GameState_Model;
+
+        public void Initialize(SettingsMenu settingsWindow, Gameplay_GameState_Model gameplay_GameState_Model)
         {
             _settingsWindow = settingsWindow;
-            _gameplayWindow = gameplayWindow;
+            _gameplay_GameState_Model = gameplay_GameState_Model;
         }
 
         public override void Enable(float? duration = null)
@@ -67,7 +69,7 @@ namespace UI
 
         private void Resume()
         {
-            _gameplayWindow?.Enable();
+            _gameplay_GameState_Model?.onGameplayStatusChanged?.Invoke(Gameplay_GameState_Model.GameplayState.Gameplay);
         }
 
         private void OpenSettings()
@@ -77,7 +79,7 @@ namespace UI
 
         private void OpenMainMenu()
         {
-            goToMainMenuRequested?.Invoke();
+            onGoToMainMenuClicked?.Invoke();
         }
     }
 }

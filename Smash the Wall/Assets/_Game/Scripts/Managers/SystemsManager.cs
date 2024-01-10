@@ -1,7 +1,3 @@
-using ECS.Systems;
-using ECS.Systems.CollisionUpdators;
-using ECS.Systems.GameState;
-using ECS.Systems.Spawners;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

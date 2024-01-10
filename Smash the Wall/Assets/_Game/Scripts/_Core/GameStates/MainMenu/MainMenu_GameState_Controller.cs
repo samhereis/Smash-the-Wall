@@ -3,15 +3,13 @@ using Interfaces;
 using Managers;
 using Servies;
 using SO.Lists;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace GameState
 {
-    public class MainMenu_GameState : GameStateBase, INeedDependencyInjection, ISubscribesToEvents
+    public class MainMenu_GameState_Controller : GameState_ControllerBase, INeedDependencyInjection, ISubscribesToEvents
     {
-        private MainMenu_GameStateView _view;
-        private MainMenu_GameStateModel _model;
+        private MainMenu_GameState_View _view;
+        private MainMenu_GameState_Model _model;
 
         [Inject] private ListOfAllScenes _listOfAllScenes;
         [Inject] private IGameStateChanger _gameStateChanger;
@@ -25,8 +23,8 @@ namespace GameState
 
             await _sceneLoader.LoadSceneAsync(_listOfAllScenes.mainMenuScene);
 
-            _view = new MainMenu_GameStateView();
-            _model = Object.FindObjectOfType<MainMenu_GameStateModel>();
+            _view = new MainMenu_GameState_View();
+            _model = new MainMenu_GameState_Model();
 
             _view?.Initialize();
             _model?.Initialize();
@@ -53,9 +51,9 @@ namespace GameState
 
         private void Play()
         {
-            //EventsLogManager.LogEvent("PlayButtonClicked");
+            EventsLogManager.LogEvent("PlayButtonClicked");
 
-            _gameStateChanger.ChangeState(new Gameplay_GameState());
+            _gameStateChanger.ChangeState(new Gameplay_GameState_Controller());
         }
     }
 }

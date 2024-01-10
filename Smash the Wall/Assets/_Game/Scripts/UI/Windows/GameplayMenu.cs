@@ -1,7 +1,7 @@
 using Configs;
 using DependencyInjection;
 using DG.Tweening;
-using ECS.Systems.GameState;
+using GameState;
 using Helpers;
 using Identifiers;
 using Interfaces;
@@ -36,9 +36,7 @@ namespace UI
 
         [FoldoutGroup("Settings"), SerializeField] private Gradient _whatNeedsToBeDestroyedProgressbarGradient;
         [FoldoutGroup("Settings"), SerializeField] private Gradient _whatNeedsToStayProgressbarGradient;
-
-        [FoldoutGroup("Dependency"), SerializeField, ReadOnly] private PauseMenu _pauseMenu;
-        [FoldoutGroup("Dependency"), SerializeField, ReadOnly] private ShopMenu _shopWindow;
+        [FoldoutGroup("Settings"), SerializeField] private float _progressbarsUpdateRate = 1;
 
         [Inject] private GameConfigs _gameConfigs;
         [Inject] private AdsShowManager _adsShowManager;
@@ -49,18 +47,20 @@ namespace UI
         [Inject] private InputsService _inputs;
 #endif
 
+        private ShopMenu _shopWindow;
+
         private Image _whatNeedsToBeDestroyedProgressbarFillImage;
         private Image _whatNeedsToStayProgressbarFillImage;
 
         private LazyUpdator_Service _lazyUpdator = new LazyUpdator_Service();
 
-        [ShowInInspector] private float _releasedWhatNeedsToStaysPercentage => WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
-        [ShowInInspector] private float _releasedWhatNeedsToBeDestroysPercentage => WinLoseChecker_System.releasedWhatNeedsToBeDestroysPercentage;
+        private Gameplay_GameState_Model _gameplay_GameState_Model;
 
-        public void Initialize(PauseMenu pauseMenu, ShopMenu shopWindow)
+        public void Initialize(ShopMenu shopWindow,
+            Gameplay_GameState_Model gameplay_GameState_Model)
         {
-            _pauseMenu = pauseMenu;
             _shopWindow = shopWindow;
+            _gameplay_GameState_Model = gameplay_GameState_Model;
 
             Initialize();
         }
@@ -129,7 +129,7 @@ namespace UI
         {
             base.SubscribeToEvents();
 
-            _pauseButton.onClick.AddListener(OpenPauseMenu);
+            _pauseButton.onClick.AddListener(Pause);
             _shopsButton.onClick.AddListener(OnShopsButtonClicked);
 
             _lazyUpdator?.AddToQueue(LazyUpdate);
@@ -139,7 +139,7 @@ namespace UI
         {
             base.UnsubscribeFromEvents();
 
-            _pauseButton.onClick.RemoveListener(OpenPauseMenu);
+            _pauseButton.onClick.RemoveListener(Pause);
             _shopsButton.onClick.RemoveListener(OnShopsButtonClicked);
 
             _lazyUpdator?.RemoveFromQueue(LazyUpdate);
@@ -157,12 +157,12 @@ namespace UI
         {
             if (_whatNeedsToBeDestroyedProgressbar != null)
             {
-                if (_whatNeedsToBeDestroyedProgressbar.value != _releasedWhatNeedsToBeDestroysPercentage)
+                if (_whatNeedsToBeDestroyedProgressbar.value != _gameplay_GameState_Model.releasedWhatNeedsToBeDestroysPercentage)
                 {
-                    _whatNeedsToBeDestroyedProgressbar?.DOValue(_releasedWhatNeedsToBeDestroysPercentage, 0.1f);
+                    _whatNeedsToBeDestroyedProgressbar?.DOValue(_gameplay_GameState_Model.releasedWhatNeedsToBeDestroysPercentage, _progressbarsUpdateRate);
 
-                    var color = _whatNeedsToBeDestroyedProgressbarGradient.Evaluate(_releasedWhatNeedsToBeDestroysPercentage / _whatNeedsToBeDestroyedProgressbar.maxValue);
-                    _whatNeedsToBeDestroyedProgressbarFillImage?.DOColor(color, 0.1f);
+                    var color = _whatNeedsToBeDestroyedProgressbarGradient.Evaluate(_gameplay_GameState_Model.releasedWhatNeedsToBeDestroysPercentage / _whatNeedsToBeDestroyedProgressbar.maxValue);
+                    _whatNeedsToBeDestroyedProgressbarFillImage?.DOColor(color, _progressbarsUpdateRate);
                 }
             }
         }
@@ -171,19 +171,19 @@ namespace UI
         {
             if (_whatNeedsToStayProgressbar != null && _listOfAllPictures.GetCurrent().pictureMode == DataClasses.Enums.PictureMode.DestroyBorder)
             {
-                if (_whatNeedsToStayProgressbar.value != _releasedWhatNeedsToStaysPercentage)
+                if (_whatNeedsToStayProgressbar.value != _gameplay_GameState_Model.releasedWhatNeedsToStaysPercentage)
                 {
-                    _whatNeedsToStayProgressbar?.DOValue(_releasedWhatNeedsToStaysPercentage, 0.1f);
+                    _whatNeedsToStayProgressbar?.DOValue(_gameplay_GameState_Model.releasedWhatNeedsToStaysPercentage, _progressbarsUpdateRate);
 
-                    var color = _whatNeedsToStayProgressbarGradient.Evaluate(_releasedWhatNeedsToStaysPercentage / _whatNeedsToStayProgressbar.maxValue);
-                    _whatNeedsToStayProgressbarFillImage?.DOColor(color, 0.1f);
+                    var color = _whatNeedsToStayProgressbarGradient.Evaluate(_gameplay_GameState_Model.releasedWhatNeedsToStaysPercentage / _whatNeedsToStayProgressbar.maxValue);
+                    _whatNeedsToStayProgressbarFillImage?.DOColor(color, _progressbarsUpdateRate);
                 }
             }
         }
 
-        private void OpenPauseMenu()
+        private void Pause()
         {
-            _pauseMenu?.Enable();
+            _gameplay_GameState_Model.onGameplayStatusChanged?.Invoke(Gameplay_GameState_Model.GameplayState.Pause);
         }
 
         private void OnShopsButtonClicked()

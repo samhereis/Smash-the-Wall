@@ -9,7 +9,7 @@ using UI;
 
 namespace GameState
 {
-    public class MainMenu_GameStateView : GameStateViewBase, INeedDependencyInjection, ISubscribesToEvents
+    public class MainMenu_GameState_View : GameState_ViewBase, INeedDependencyInjection, ISubscribesToEvents
     {
         public Action onPlayClicked;
         public Action onQuitClicked;

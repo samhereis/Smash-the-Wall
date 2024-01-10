@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace GameState
 {
-    public abstract class GameStateBase
+    public abstract class GameState_ControllerBase
     {
         protected async
 #if UNITY_2023_1_OR_NEWER
@@ -32,6 +32,5 @@ namespace GameState
 
         public virtual void Enter() { }
         public virtual void Exit() { }
-        public virtual void Update() { }
     }
 }

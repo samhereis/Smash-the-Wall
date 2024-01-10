@@ -1,6 +1,6 @@
 namespace GameState
 {
-    public class MainMenu_GameStateModel : GameStateModelBase
+    public class MainMenu_GameState_Model : GameState_ModelBase
     {
         public override void Initialize()
         {

@@ -1,10 +1,10 @@
 using Configs;
 using DependencyInjection;
 using ECS.ComponentData.Picture.Piece;
-using Observables;
+using GameState;
 using Helpers;
 using IdentityCards;
-using InGameStrings;
+using Observables;
 using SO.Lists;
 using Unity.Entities;
 
@@ -18,14 +18,19 @@ namespace ECS.Systems.GameState
         public static float releasedWhatNeedsToBeDestroysPercentage;
         public static float releasedWhatNeedsToStaysPercentage;
 
-        private static Signal _onWin;
-        private static Signal _onLose;
+        private static DataSignal<Gameplay_GameState_Model.GameplayState> _onGameplayStateChanged;
+
         private static GameConfigs _gameConfigs;
         private static ListOfAllPictures _listOfAllPictures;
 
         private static PictureIdentityCard _currentPictureIdentityCard;
 
         public bool isActive => _isActive;
+
+        public static void Initialize(DataSignal<Gameplay_GameState_Model.GameplayState> onGameplayStateChanged)
+        {
+            _onGameplayStateChanged = onGameplayStateChanged;
+        }
 
         public void Enable()
         {
@@ -51,8 +56,6 @@ namespace ECS.Systems.GameState
 
         private void InjectDs()
         {
-            _onWin = DependencyContext.diBox.Get<Signal>(DIStrings.OnWinEvent);
-            _onLose = DependencyContext.diBox.Get<Signal>(DIStrings.OnLoseEvent);
             _gameConfigs = DependencyContext.diBox.Get<GameConfigs>();
             _listOfAllPictures = DependencyContext.diBox.Get<ListOfAllPictures>();
         }
@@ -92,12 +95,12 @@ namespace ECS.Systems.GameState
         {
             if (HasWon(ref systemState))
             {
-                _onWin?.Invoke();
+                _onGameplayStateChanged?.Invoke(Gameplay_GameState_Model.GameplayState.Win);
                 Disable();
             }
             else if (HasLost(ref systemState))
             {
-                _onLose?.Invoke();
+                _onGameplayStateChanged?.Invoke(Gameplay_GameState_Model.GameplayState.Lose);
                 Disable();
             }
         }
@@ -106,7 +109,7 @@ namespace ECS.Systems.GameState
         {
             if (HasWon(ref systemState))
             {
-                _onWin?.Invoke();
+                _onGameplayStateChanged?.Invoke(Gameplay_GameState_Model.GameplayState.Win);
                 Disable();
             }
         }

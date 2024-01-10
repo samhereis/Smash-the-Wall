@@ -11,13 +11,14 @@ using SO.Lists;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using InGameStrings;
 
 namespace UI.Elements
 {
     public sealed class ShopWeaponUnit : MonoBehaviour, INeedDependencyInjection, IInitializable<WeaponIdentityiCard>
     {
         [Header("DI")]
-        [Inject][SerializeField] private DataSignal<WeaponIdentityiCard> _onChangedWeapon;
+        [Inject(Event_DIStrings.onChangedWeapon)][SerializeField] private DataSignal<WeaponIdentityiCard> _onChangedWeapon;
         [Inject][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
         [Inject][SerializeField] private AdsShowManager _adsShowManager;
         [Inject][SerializeField] private GameSaveManager _gameSaveManager;
@@ -58,6 +59,11 @@ namespace UI.Elements
 
         private bool _canShoose = true;
 
+        private void Awake()
+        {
+            DependencyContext.InjectDependencies(this);
+        }
+
         private void OnDisable()
         {
             _itemButton.onClick.RemoveListener(TryOpen);
@@ -71,8 +77,6 @@ namespace UI.Elements
 
         public void Initialize(WeaponIdentityiCard weaponIdentityiCard)
         {
-            DependencyContext.InjectDependencies(this);
-
             _weaponIdentityiCard = weaponIdentityiCard;
 
             _label.text = weaponIdentityiCard.targetName;

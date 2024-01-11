@@ -1,28 +1,22 @@
 using DependencyInjection;
 using DG.Tweening;
-using Observables;
 using Helpers;
 using IdentityCards;
+using InGameStrings;
 using Interfaces;
 using Managers;
+using Observables;
 using Services;
 using Sirenix.OdinInspector;
 using SO.Lists;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using InGameStrings;
 
 namespace UI.Elements
 {
     public sealed class ShopWeaponUnit : MonoBehaviour, INeedDependencyInjection, IInitializable<WeaponIdentityiCard>
     {
-        [Header("DI")]
-        [Inject(Event_DIStrings.onChangedWeapon)][SerializeField] private DataSignal<WeaponIdentityiCard> _onChangedWeapon;
-        [Inject][SerializeField] private ListOfAllWeapons _listOfAllWeapons;
-        [Inject][SerializeField] private AdsShowManager _adsShowManager;
-        [Inject][SerializeField] private GameSaveManager _gameSaveManager;
-
         [Header("Components")]
         [Required]
         [SerializeField] private Image _weaponImage;
@@ -45,7 +39,6 @@ namespace UI.Elements
         [Required]
         [SerializeField] private Transform _holder;
 
-
         [Required]
         [SerializeField] private Transform _getHolder;
 
@@ -54,8 +47,12 @@ namespace UI.Elements
         [SerializeField] private float _shakeStrenth = 30f;
         [SerializeField] private int _shakeVibro = 30;
 
-        [Header("Debug")]
-        [SerializeField] private WeaponIdentityiCard _weaponIdentityiCard;
+        private WeaponIdentityiCard _weaponIdentityiCard;
+
+        [Inject(Event_DIStrings.onChangedWeapon)] private DataSignal<WeaponIdentityiCard> _onChangedWeapon;
+        [Inject] private ListOfAllWeapons _listOfAllWeapons;
+        [Inject] private AdsShowManager _adsShowManager;
+        [Inject] private GameSaveManager _gameSaveManager;
 
         private bool _canShoose = true;
 

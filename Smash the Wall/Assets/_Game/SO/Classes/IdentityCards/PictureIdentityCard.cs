@@ -1,5 +1,5 @@
 using ECS.Authoring;
-using Sirenix.OdinInspector;
+using ErtenGamesInstrumentals.DataClasses;
 using System;
 using UnityEngine;
 using static DataClasses.Enums;
@@ -7,18 +7,26 @@ using static DataClasses.Enums;
 namespace IdentityCards
 {
     [Serializable]
-    public class PictureIdentityCard : IdentityCardBase<PictureAuthoring>
+    public class PictureIdentityCard : PrefabReference<PictureAuthoring>
     {
-        [ShowInInspector] public PictureMode pictureMode { get; private set; } = PictureMode.DestroyBorder;
-        [ShowInInspector] public Color borderColor { get; private set; }
+        [SerializeField] public PictureMode pictureMode { get; private set; } = PictureMode.DestroyBorder;
+        [SerializeField] public Color borderColor { get; private set; }
+        [SerializeField] public string targetName { get; private set; }
 
-        public override void Validate()
+        public PictureIdentityCard(PictureAuthoring resourceReference) : base(resourceReference)
         {
-            base.Validate();
+
+        }
+
+        public override async void Setup()
+        {
+            base.Setup();
+
+            var target = await GetAssetAsync();
 
             if (target != null)
             {
-                targetName = targetName + "_" + pictureMode.ToString();
+                targetName = pictureMode.ToString() + "_" + target.name;
 
                 if (pictureMode != target.pictureMode) { pictureMode = target.pictureMode; }
                 if (borderColor != target.borderColor) { borderColor = target.borderColor; }

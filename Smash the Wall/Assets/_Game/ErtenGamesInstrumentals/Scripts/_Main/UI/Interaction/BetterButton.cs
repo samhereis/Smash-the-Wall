@@ -5,17 +5,18 @@ using DG.Tweening;
 using DependencyInjection;
 using Helpers;
 using Sirenix.OdinInspector;
-using Sound;
+using Sounds;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using SO;
 
 namespace UI.Interaction
 {
     public class BetterButton : Button, INeedDependencyInjection, ISelfValidator
     {
-        [SerializeField] private SimpleSound _clickSoundResponce = new SimpleSound();
+        [SerializeField] private Sound_String_SO _clickSound;
 
 #if DoTweenInstalled
         [FoldoutGroup("Settings"), SerializeField] private float _onOverScale = 0.75f;
@@ -24,6 +25,7 @@ namespace UI.Interaction
         [FoldoutGroup("Settings"), SerializeField] private float _animationDuration = 0.25f;
         [FoldoutGroup("Settings"), SerializeField] private bool _playSound = true;
         [FoldoutGroup("Settings"), SerializeField] private bool _vibrate = true;
+        [FoldoutGroup("Settings"), SerializeField] private bool _requireAudio = true;
 
         [Inject] private VibrationHelper _vibrationHelper;
 
@@ -31,10 +33,20 @@ namespace UI.Interaction
 
         public void Validate(SelfValidationResult result)
         {
-            if (_clickSoundResponce == null) { _clickSoundResponce = new SimpleSound(); }
             if (enabled == false)
             {
                 enabled = true;
+            }
+
+            if (_requireAudio == true)
+            {
+                if (_clickSound == null)
+                {
+                    result.AddError("Audio is not set").WithFix<Sound_String_SO>((soundString) =>
+                    {
+                        _clickSound = soundString;
+                    });
+                }
             }
         }
 
@@ -81,7 +93,7 @@ namespace UI.Interaction
 
             if (canClick)
             {
-                if (_playSound) { SoundPlayer.instance?.TryPlay(_clickSoundResponce); }
+                if (_playSound) { SoundPlayer.instance?.TryPlay(_clickSound); }
 
                 if (_vibrate) { _vibrationHelper?.LightVibration(); }
             }
@@ -113,20 +125,22 @@ namespace UI.Interaction
     [CustomEditor(typeof(BetterButton))]
     public class BetterButtonEditor : UnityEditor.UI.ButtonEditor
     {
-        SerializedProperty _clickSoundResponce;
+        SerializedProperty _clickSound;
         SerializedProperty _onOverScale;
         SerializedProperty _animationDuration;
         SerializedProperty _playSound;
         SerializedProperty _vibrate;
+        SerializedProperty _requireAudio;
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            _clickSoundResponce = serializedObject.FindProperty("_clickSoundResponce");
-            _onOverScale = serializedObject.FindProperty("_onOverScale");
-            _animationDuration = serializedObject.FindProperty("_animationDuration");
-            _playSound = serializedObject.FindProperty("_playSound");
-            _vibrate = serializedObject.FindProperty("_vibrate");
+            _clickSound = serializedObject.FindProperty(nameof(_clickSound));
+            _onOverScale = serializedObject.FindProperty(nameof(_onOverScale));
+            _animationDuration = serializedObject.FindProperty(nameof(_animationDuration));
+            _playSound = serializedObject.FindProperty(nameof(_playSound));
+            _vibrate = serializedObject.FindProperty(nameof(_vibrate));
+            _requireAudio = serializedObject.FindProperty(nameof(_requireAudio));
         }
 
         public override void OnInspectorGUI()
@@ -135,11 +149,14 @@ namespace UI.Interaction
             EditorGUILayout.Space();
 
             serializedObject.Update();
-            if (_clickSoundResponce != null) EditorGUILayout.PropertyField(_clickSoundResponce);
+
+            if (_clickSound != null) EditorGUILayout.PropertyField(_clickSound);
             if (_onOverScale != null) EditorGUILayout.PropertyField(_onOverScale);
             if (_animationDuration != null) EditorGUILayout.PropertyField(_animationDuration);
             if (_playSound != null) EditorGUILayout.PropertyField(_playSound);
             if (_vibrate != null) EditorGUILayout.PropertyField(_vibrate);
+            if (_requireAudio != null) EditorGUILayout.PropertyField(_requireAudio);
+
             serializedObject.ApplyModifiedProperties();
         }
     }

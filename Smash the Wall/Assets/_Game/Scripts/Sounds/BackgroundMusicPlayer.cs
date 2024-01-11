@@ -1,18 +1,23 @@
+using Configs;
+using DependencyInjection;
 using DG.Tweening;
-using Helpers;
 using Sirenix.OdinInspector;
-using SO.DataHolders;
+using SO;
 using System;
 using UnityEngine;
 
-namespace Sound
+namespace Sounds
 {
-    public sealed class BackgroundMusicPlayer : MonoBehaviour
+    public class BackgroundMusicPlayer : MonoBehaviour
     {
         [Header("Settings")]
         [Required]
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private float _transitionDuration = 1;
+
+        [Inject] private AudioConfigs _audioConfigs;
+
+        private Sound _currentMusic;
 
         private void OnDestroy()
         {
@@ -20,13 +25,14 @@ namespace Sound
         }
 
         [ContextMenu(nameof(PlayMusic))]
-        public void PlayMusic(SoundsPack_DataHolder soundsPack)
+        public void PlayMusic(Sound_String_SO soundsPack)
         {
-            if (soundsPack.data.Count == 0) { return; }
+            if (soundsPack == null) return;
+            if (_audioConfigs == null) return;
 
-            var sound = soundsPack.data.GetRandom();
+            _currentMusic = _audioConfigs.GetSound(soundsPack);
 
-            _audioSource.clip = sound.audioClip;
+            _audioSource.clip = _currentMusic.audioClip;
             _audioSource.loop = true;
 
             _audioSource.Play();

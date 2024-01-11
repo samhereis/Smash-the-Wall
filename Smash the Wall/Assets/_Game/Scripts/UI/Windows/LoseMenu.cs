@@ -1,7 +1,8 @@
 using DependencyInjection;
 using Interfaces;
 using Sirenix.OdinInspector;
-using Sound;
+using SO;
+using Sounds;
 using System;
 using UI.Canvases;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace UI
         [Header("Effects")]
 
         [Required]
-        [SerializeField] private SimpleSound _loseAudio;
+        [SerializeField] private Sound_String_SO _loseAudio;
 
         [Header("Components")]
 

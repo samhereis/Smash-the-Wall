@@ -95,13 +95,13 @@ namespace ECS.Systems.GameState
         {
             if (HasWon(ref systemState))
             {
-                _onGameplayStateChanged?.Invoke(Gameplay_GameState_Model.GameplayState.Win);
                 Disable();
+                _onGameplayStateChanged?.Invoke(Gameplay_GameState_Model.GameplayState.Win);
             }
             else if (HasLost(ref systemState))
             {
-                _onGameplayStateChanged?.Invoke(Gameplay_GameState_Model.GameplayState.Lose);
                 Disable();
+                _onGameplayStateChanged?.Invoke(Gameplay_GameState_Model.GameplayState.Lose);
             }
         }
 
@@ -109,8 +109,8 @@ namespace ECS.Systems.GameState
         {
             if (HasWon(ref systemState))
             {
-                _onGameplayStateChanged?.Invoke(Gameplay_GameState_Model.GameplayState.Win);
                 Disable();
+                _onGameplayStateChanged?.Invoke(Gameplay_GameState_Model.GameplayState.Win);
             }
         }
 

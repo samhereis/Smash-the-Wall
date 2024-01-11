@@ -3,7 +3,7 @@ using Displayers;
 using Interfaces;
 using Services;
 using Sirenix.OdinInspector;
-using Sound;
+using Sounds;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

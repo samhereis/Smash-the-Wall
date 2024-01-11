@@ -1,3 +1,4 @@
+using Configs;
 using DependencyInjection;
 using ECS.Systems;
 using ECS.Systems.CollisionUpdators;
@@ -8,7 +9,9 @@ using Interfaces;
 using Managers;
 using Servies;
 using SO.Lists;
+using System.Collections.Generic;
 using UnityEngine;
+using static GameState.Gameplay_GameState_Model;
 
 namespace GameState
 {
@@ -23,6 +26,9 @@ namespace GameState
         [Inject] private IGameStateChanger _gameStateChanger;
         [Inject] private SceneLoader _sceneLoader;
         [Inject] private PlayerIdentifier _playerIdentifier;
+        [Inject] private GameConfigs _gameConfigs;
+        [Inject] private ListOfAllPictures _listOfAllPictures;
+        [Inject] private GameSaveManager _gameSaveManager;
 
         public async override void Enter()
         {
@@ -74,6 +80,8 @@ namespace GameState
             _view.onMainMenuRequested += GoToMainMenu;
             _view.onNextRequested += Next;
             _view.onReplayRequested += Replay;
+
+            _model.onGameplayStatusChanged.RemoveListener(OnGameplayStatusChanged);
         }
 
         public void UnsubscribeFromEvents()
@@ -81,20 +89,61 @@ namespace GameState
             _view.onMainMenuRequested -= GoToMainMenu;
             _view.onNextRequested -= Next;
             _view.onReplayRequested -= Replay;
+
+            _model.onGameplayStatusChanged.AddListener(OnGameplayStatusChanged);
+        }
+
+        private void OnGameplayStatusChanged(GameplayState gameplayState)
+        {
+            switch (gameplayState)
+            {
+                case GameplayState.Lose:
+                    {
+                        OnLose();
+                        break;
+                    }
+            }
+        }
+
+        private void OnWin()
+        {
+            EventsLogManager.LogEvent("LevelCompleted", new Dictionary<string, object>()
+            {
+               { "LevelMode", _listOfAllPictures.GetCurrent().targetName},
+               { "LevelName", _listOfAllPictures.GetCurrent().pictureMode.ToString()},
+               { "Stars", _model.CalculateWinStars()},
+            });
+
+            _listOfAllPictures.SetNextPicture();
+            _gameSaveManager.IncreaseLevelIndex();
+        }
+
+        private void OnLose()
+        {
+            EventsLogManager.LogEvent("LevelFailed", new Dictionary<string, object>()
+            {
+               { "LevelMode", _listOfAllPictures.GetCurrent().pictureMode.ToString() },
+               { "LevelName", _listOfAllPictures.GetCurrent().targetName},
+            });
         }
 
         private void GoToMainMenu()
         {
+            _gameConfigs.isRestart = false;
             _gameStateChanger.ChangeState(new MainMenu_GameState_Controller());
         }
 
         private void Next()
         {
+            OnWin();
+
+            _gameConfigs.isRestart = false;
             _gameStateChanger.ChangeState(new Gameplay_GameState_Controller());
         }
 
         private void Replay()
         {
+            _gameConfigs.isRestart = true;
             _gameStateChanger.ChangeState(new Gameplay_GameState_Controller());
         }
     }

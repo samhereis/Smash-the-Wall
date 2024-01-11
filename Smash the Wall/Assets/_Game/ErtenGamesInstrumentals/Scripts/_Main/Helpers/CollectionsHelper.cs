@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Helpers
@@ -63,11 +62,13 @@ namespace Helpers
 
         public static T GetRandom<T>(this IEnumerable<T> list)
         {
+            if (list.Count() == 0) return default(T);
             return list.ElementAt(Random.Range(0, list.Count()));
         }
 
         public static int GetRandomIndex<T>(this IEnumerable<T> list)
         {
+            if (list.Count() == 0) return 0;
             return Random.Range(0, list.Count());
         }
 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UI.Popups
 {
-    public class InfoPopup : PopupBase_Scale
+    public class InfoPopup : PopupBase_Position
     {
         [Required]
         [SerializeField] private Button[] _closeButtons;

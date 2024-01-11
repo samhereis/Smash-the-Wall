@@ -1,4 +1,5 @@
 using DependencyInjection;
+using ErtenGamesInstrumentals.DataClasses;
 using Helpers;
 using Identifiers;
 using Sirenix.OdinInspector;
@@ -7,25 +8,34 @@ using UnityEngine;
 
 namespace Managers
 {
-    public sealed class EnviromentsManager : MonoBehaviour, INeedDependencyInjection
+    public sealed class EnviromentsManager : MonoBehaviour, INeedDependencyInjection, ISelfValidator
     {
         [Header("Addressables")]
         [Required]
-        [SerializeField] private EnviromentIdentifier[] _suitableEnviroments;
+        [ListDrawerSettings(ListElementLabelName = (nameof(PrefabReference<EnviromentIdentifier>.objectName)))]
+        [SerializeField] private PrefabReference<EnviromentIdentifier>[] _suitableEnviroments;
 
         [Header("Debug")]
         [SerializeField] private EnviromentIdentifier _enviroment;
+
+        public void Validate(SelfValidationResult result)
+        {
+            foreach (var enviroment in _suitableEnviroments)
+            {
+                enviroment.Setup();
+            }
+        }
 
         private void Start()
         {
             Initialize();
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
             if (_suitableEnviroments.IsNullOrEmpty() == false)
             {
-                _enviroment = Instantiate(_suitableEnviroments.GetRandom());
+                _enviroment = Instantiate(await _suitableEnviroments.GetRandom().GetAssetAsync());
             }
 
             if (_enviroment != null)

@@ -1,7 +1,7 @@
 using DependencyInjection;
 using Sirenix.OdinInspector;
 using SO.DataHolders;
-using Sound;
+using Sounds;
 using System;
 using UI.Canvases;
 using UnityEngine;
@@ -16,9 +16,6 @@ namespace UI
         public Action onQuitClicked;
 
         [Required]
-        [FoldoutGroup("Components"), SerializeField, ChildGameObjectsOnly] private SoundsPack_DataHolder _mainMenuSoundsPack;
-
-        [Required]
         [FoldoutGroup("Components"), SerializeField, ChildGameObjectsOnly] private Image _buttonsInfoBlock;
 
         [Required]
@@ -29,9 +26,6 @@ namespace UI
 
         [Required]
         [FoldoutGroup("Buttons"), SerializeField, ChildGameObjectsOnly] private Button _quitButton;
-
-        [Inject]
-        [FoldoutGroup("Injected"), SerializeField, ReadOnly] private BackgroundMusicPlayer _backgroundMusicPlayer;
 
         [FoldoutGroup("Dependencies"), SerializeField, ReadOnly] private SettingsMenu _settingsMenu;
 

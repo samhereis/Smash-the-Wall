@@ -1,10 +1,10 @@
 using DependencyInjection;
 using DG.Tweening;
-using Observables;
 using Helpers;
 using IdentityCards;
 using InGameStrings;
 using Interfaces;
+using Observables;
 using Sirenix.OdinInspector;
 using SO.Lists;
 using UnityEngine;
@@ -58,7 +58,7 @@ namespace Spawners
 
             await AsyncHelper.DelayFloat(0.25f);
 
-            _currentWeapon = Instantiate(weapon.target, _parent);
+            _currentWeapon = Instantiate(await weapon.GetAssetAsync(), _parent);
             _currentWeapon.Initialize();
             _currentWeapon.transform.localScale = Vector3.zero;
             _currentWeapon.transform.localPosition = Vector3.zero;

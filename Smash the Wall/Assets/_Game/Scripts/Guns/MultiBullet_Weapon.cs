@@ -1,7 +1,8 @@
 using DependencyInjection;
 using ECS.Systems.Spawners;
 using Helpers;
-using Sound;
+using Sirenix.OdinInspector;
+using SO;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,9 +17,9 @@ namespace Weapons
         [SerializeField] private float _fireRate = 0.25f;
 
         [Header("Sound")]
-        [SerializeField] private SimpleSound _preShootAudio;
-        [SerializeField] private SimpleSound _resetAudio;
-        [SerializeField] private SimpleSound _shootAudio;
+        [SerializeField, Required] private Sound_String_SO _preShootAudio;
+        [SerializeField, Required] private Sound_String_SO _resetAudio;
+        [SerializeField, Required] private Sound_String_SO _shootAudio;
 
         [Inject] private VibrationHelper _vibrationHelper;
 
@@ -71,18 +72,13 @@ namespace Weapons
 
         protected override void Fire(InputAction.CallbackContext context)
         {
-#if UNITY_EDITOR == false
-
-            if (UIHelper.IsPointOverUI(Touchscreen.current.position.ReadValue())) { return; }
-
-#endif
+            if (UIHelper.IsPointOverUI()) { return; }
 
             if (context.ReadValueAsButton() == true)
             {
                 StartCoroutine(FireCouroutine());
 
                 _trajectoryDisplayer.Enable(shootPosition);
-
                 _soundPlayer.TryPlay(_preShootAudio);
                 _vibrationHelper.LightVibration();
             }
@@ -94,7 +90,6 @@ namespace Weapons
                 canShoot = false;
 
                 _trajectoryDisplayer.Disable();
-
                 _soundPlayer.TryPlay(_resetAudio);
                 _vibrationHelper.LightVibration();
             }

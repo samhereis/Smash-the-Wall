@@ -13,7 +13,7 @@ using UnityEngine;
 namespace SO.Lists
 {
     [CreateAssetMenu(fileName = "ListOfAllWeapons", menuName = "Scriptables/Lists/ListOfAllWeapons")]
-    public class ListOfAllWeapons : ConfigBase, INeedDependencyInjection, ISelfValidator
+    public class ListOfAllWeapons : ConfigBase, INeedDependencyInjection
     {
         public IEnumerable<WeaponIdentityiCard> weapons => _weapons;
 
@@ -26,21 +26,12 @@ namespace SO.Lists
 
         [Inject] private GameSaveManager _gameSaveManager;
 
-        public virtual void Validate(SelfValidationResult result)
+        [Button]
+        public virtual void Validate()
         {
             foreach (var weapon in _weapons)
             {
-                if (weapon.target == null)
-                {
-                    result.AddError("Weapon Identifier at index" + _weapons.IndexOf(weapon) + "is broken");
-                }
-                else
-                {
-                    if (weapon.targetName == string.Empty)
-                    {
-                        weapon.Validate();
-                    }
-                }
+                weapon.Setup();
             }
         }
 
@@ -72,8 +63,6 @@ namespace SO.Lists
 
                 weaponsSave.allWeapons.Add(aWeapon_DTO);
             }
-
-            weaponIdentityiCard.Initialize(aWeapon_DTO);
         }
 
         public async Task<bool> HasWeaponToUnlock()

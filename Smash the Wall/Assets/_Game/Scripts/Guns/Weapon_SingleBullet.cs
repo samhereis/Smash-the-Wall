@@ -3,7 +3,7 @@ using DG.Tweening;
 using ECS.Systems.Spawners;
 using Helpers;
 using Sirenix.OdinInspector;
-using Sound;
+using SO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,9 +25,9 @@ namespace ProjectSripts
 
         [Header("Sounds")]
         [SerializeField] private bool _debug;
-        [SerializeField] private SimpleSound _elasticStretchAudio;
-        [SerializeField] private SimpleSound _elasticResetAudio;
-        [SerializeField] private SimpleSound _shootAudio;
+        [SerializeField, Required] private Sound_String_SO _elasticStretchAudio;
+        [SerializeField, Required] private Sound_String_SO _elasticResetAudio;
+        [SerializeField, Required] private Sound_String_SO _shootAudio;
 
         [Inject] private VibrationHelper _vibrationHelper;
 

@@ -1,9 +1,6 @@
 using DependencyInjection;
-using InGameStrings;
 using Interfaces;
-using SO.DataHolders;
 using SO.Lists;
-using Sound;
 using System;
 using UI;
 
@@ -18,8 +15,6 @@ namespace GameState
         private SettingsMenu _settingsMenu;
 
         [Inject] private ListOfAllMenus _listOfAllMenus;
-        [Inject] private BackgroundMusicPlayer _backgroundMusicPlayer;
-        [Inject(DIStrings.MainMenuSoundPack)] private SoundsPack_DataHolder _mainMenuSoundsPack;
 
         public override void Initialize()
         {
@@ -30,8 +25,6 @@ namespace GameState
             SetupUI();
 
             SubscribeToEvents();
-
-            _backgroundMusicPlayer?.PlayMusic(_mainMenuSoundsPack);
         }
 
         public override void Dispose()

@@ -1,10 +1,12 @@
+using Configs;
 using DependencyInjection;
 using Sirenix.OdinInspector;
+using SO;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Sound
+namespace Sounds
 {
     [RequireComponent(typeof(AudioSource))]
     public sealed class SoundPlayer : MonoBehaviour, INeedDependencyInjection, ISelfValidator
@@ -22,6 +24,8 @@ namespace Sound
         [Header("Settings")]
         [FoldoutGroup("Settings"), SerializeField] private int _auioSourcePoolCount = 2;
         [FoldoutGroup("Settings"), SerializeField] private bool _isGlobal;
+
+        [Inject] private AudioConfigs _audioConfigs;
 
         private void Awake()
         {
@@ -43,8 +47,17 @@ namespace Sound
             if (instance == this && _isGlobal == true) instance = null;
         }
 
-        public void TryPlay(SoundBase sound)
+        public void TryPlay(String_SO soundString)
         {
+            if (soundString == null) return;
+
+            Sound sound = _audioConfigs?.GetSound(soundString);
+            TryPlay(sound);
+        }
+
+        public void TryPlay(Sound sound)
+        {
+            if (sound == null) return;
             if (sound.audioClip == null) return;
 
             if (sound.isMain)
@@ -57,7 +70,7 @@ namespace Sound
             }
         }
 
-        public void TryPlayMain(SoundBase sound)
+        public void TryPlayMain(Sound sound)
         {
             if (_mainAudioSource.clip == sound.audioClip && _mainAudioSource.isPlaying) return;
             StopMain();
@@ -77,7 +90,7 @@ namespace Sound
             if (sound.disableOthers) StopPool();
         }
 
-        public void TryPlayPool(SoundBase sound)
+        public void TryPlayPool(Sound sound)
         {
             var freeAudioSurce = _audioSourcePool.Find(x => x.isPlaying == false);
 
@@ -121,7 +134,7 @@ namespace Sound
             }
         }
 
-        public void SetPauseAllInstanceOF(SoundBase sound, bool pause)
+        public void SetPauseAllInstanceOF(Sound sound, bool pause)
         {
             if (_mainAudioSource.clip == sound.audioClip) SetPauseMain(pause);
 
@@ -157,7 +170,7 @@ namespace Sound
             foreach (AudioSource audioSource in _audioSourcePool) audioSource.Stop();
         }
 
-        public void StopAllInstanceOF(SoundBase sound)
+        public void StopAllInstancesOf(Sound sound)
         {
             if (_mainAudioSource.clip == sound.audioClip) StopMain();
 

@@ -18,7 +18,7 @@ namespace SO.Lists
 
         [Required]
         [ListDrawerSettings(ElementColor = nameof(GetColor), ListElementLabelName = ("targetName"))]
-        [SerializeField, ReadOnly]
+        [SerializeField]
         private List<PictureIdentityCard> _pictures = new List<PictureIdentityCard>();
 
         [field: FoldoutGroup("Border Animation"), SerializeField]
@@ -125,14 +125,13 @@ namespace SO.Lists
             {
                 if (pictureInEditor == null) continue;
 
-                PictureIdentityCard pictureIdentityCard = new PictureIdentityCard();
-                pictureIdentityCard.SetTarget(pictureInEditor);
+                PictureIdentityCard pictureIdentityCard = new PictureIdentityCard(pictureInEditor);
                 _pictures.Add(pictureIdentityCard);
             }
 
             foreach (var picture in _pictures)
             {
-                picture.Validate();
+                picture.Setup();
             }
         }
 

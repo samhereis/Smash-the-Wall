@@ -176,15 +176,6 @@ namespace DependencyInjection
                     break;
                 }
             }
-
-            if (_diLogger == null)
-            {
-                result.AddError("DI logger is null").WithFix(() =>
-                {
-                    _diLogger = GetComponentInChildren<LoggerBase>();
-                    this.TrySetDirty();
-                });
-            }
         }
     }
 }

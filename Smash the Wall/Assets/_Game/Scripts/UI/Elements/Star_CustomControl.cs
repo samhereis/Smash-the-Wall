@@ -1,7 +1,8 @@
 using DG.Tweening;
 using Helpers;
 using Sirenix.OdinInspector;
-using Sound;
+using SO;
+using Sounds;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace UI.Elements
         [SerializeField] private Transform _starsParent;
 
         [Header("Audio")]
-        [SerializeField] private SimpleSound _starAudio;
+        [SerializeField, Required] private Sound_String_SO _starAudio;
 
         [Header("Debug")]
         [SerializeField] private List<SingleStarIdentifier> _instantiatedStars = new List<SingleStarIdentifier>();

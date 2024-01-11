@@ -1,11 +1,10 @@
 using Configs;
 using DataClasses;
 using DependencyInjection;
-using ECS.Systems.GameState;
 using Helpers;
 using Sirenix.OdinInspector;
 using SO.Lists;
-using Sound;
+using Sounds;
 using System;
 using UI.Canvases;
 using UI.Elements;
@@ -26,7 +25,7 @@ namespace UI
         [SerializeField] private Sprite[] _winEmojis;
 
         [Required]
-        [SerializeField] private SimpleSound _winAudio;
+        [SerializeField] private Sound _winAudio;
 
         [Header("Components")]
 
@@ -51,7 +50,16 @@ namespace UI
         [Inject] private GameConfigs _gameConfigs;
         [Inject] private ListOfAllPictures _listOfAllPictures;
 
+        private IWinStarCalculator _winStarCalculator;
+
         private PictureMode _currentPictureMode;
+
+        public void Initialize(IWinStarCalculator winStarCalculator)
+        {
+            _winStarCalculator = winStarCalculator;
+
+            Initialize();
+        }
 
         public void Initialize()
         {
@@ -78,7 +86,7 @@ namespace UI
                         _starControl.gameObject.SetActive(true);
 
                         _starControl.SetStarCount(_gameConfigs.gameSettings.winLoseStarSettings.Count);
-                        _starControl.SetActiveStars(CalculateStars());
+                        _starControl.SetActiveStars(_winStarCalculator != null ? _winStarCalculator.CalculateWinStars() : 5);
 
                         break;
                     }
@@ -120,24 +128,6 @@ namespace UI
 
             _nextLevelButton.onClick.RemoveListener(NextLevel);
             _goToMainMenuButton.onClick.RemoveListener(GotoMainMenu);
-        }
-
-        public int CalculateStars()
-        {
-            int stars = 0;
-            float currentPercentage = WinLoseChecker_System.releasedWhatNeedsToStaysPercentage;
-
-            for (int i = 0; i < _gameConfigs.gameSettings.winLoseStarSettings.Count; i++)
-            {
-                float percentage = _gameConfigs.gameSettings.winLoseStarSettings[i].percentage;
-
-                if (currentPercentage >= percentage)
-                {
-                    stars = i + 1;
-                }
-            }
-
-            return stars;
         }
 
         private void NextLevel()

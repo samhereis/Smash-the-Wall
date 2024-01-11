@@ -1,6 +1,5 @@
-using DTO;
 using DTO.Save;
-using Interfaces;
+using ErtenGamesInstrumentals.DataClasses;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
@@ -9,33 +8,28 @@ using Weapons;
 namespace IdentityCards
 {
     [Serializable]
-    public class WeaponIdentityiCard : IdentityCardBase<WeaponBase>, IInitializable<AWeapon_DTO>
+    public class WeaponIdentityiCard : PrefabReference<WeaponBase>
     {
-        [field: SerializeField, HorizontalGroup("Row1"), VerticalGroup("Row1/Column1")]
-        public bool isDefault { get; private set; } = false;
-
-        [field: SerializeField, HorizontalGroup("Row1"), VerticalGroup("Row1/Column1")]
-        public bool isUnlocked { get; private set; } = false;
-
-        [field: SerializeField, HorizontalGroup("Row1"), VerticalGroup("Row1/Column1")]
-        public int opensAtLevel { get; private set; } = 0;
+        [field: SerializeField] public bool isDefault { get; private set; } = false;
+        [field: SerializeField] public int opensAtLevel { get; private set; } = 0;
 
         [Required]
-        [field: SerializeField, HorizontalGroup("Row1", width: 0.2f), VerticalGroup("Row1/Column2"), PreviewField(Height = 55), HideLabel]
-        public Sprite icon { get; private set; }
+        [field: SerializeField] public Sprite icon { get; private set; }
 
-        public void Initialize(AWeapon_DTO weapon_DTO)
+        [field: SerializeField, ReadOnly] public bool isUnlocked { get; private set; } = false;
+        [field: SerializeField, ReadOnly] public string targetName { get; private set; }
+
+        public WeaponIdentityiCard(WeaponBase resourceReference) : base(resourceReference)
         {
-            Validate();
 
-            if (isDefault == true)
-            {
-                SetIsUnlockedStatus(true);
-            }
-            else
-            {
-                SetIsUnlockedStatus(weapon_DTO.isUnlocked);
-            }
+        }
+
+        public override async void Setup()
+        {
+            base.Setup();
+
+            var target = await GetAssetAsync();
+            targetName = target.name;
         }
 
         public void SetIsUnlockedStatus(bool isUnlocked)

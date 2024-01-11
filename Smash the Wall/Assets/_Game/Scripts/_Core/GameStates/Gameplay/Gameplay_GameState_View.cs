@@ -1,9 +1,7 @@
 using DependencyInjection;
-using InGameStrings;
 using Interfaces;
-using SO.DataHolders;
 using SO.Lists;
-using Sound;
+using Sounds;
 using System;
 using UI;
 
@@ -24,7 +22,6 @@ namespace GameState
 
         [Inject] private ListOfAllMenus _listOfAllMenus;
         [Inject] private BackgroundMusicPlayer _backgroundMusicPlayer;
-        [Inject(DIStrings.MainMenuSoundPack)] private SoundsPack_DataHolder _mainMenuSoundsPack;
 
         private Gameplay_GameState_Model _model;
 
@@ -42,8 +39,6 @@ namespace GameState
             SetupUI();
 
             SubscribeToEvents();
-
-            _backgroundMusicPlayer?.PlayMusic(_mainMenuSoundsPack);
         }
 
         public override void Dispose()
@@ -94,7 +89,7 @@ namespace GameState
             _shopMenu.Initialize(_gameplayMenu);
             _pauseMenu.Initialize(_settingsMenu, _model);
             _settingsMenu.Initialize(_pauseMenu);
-            _winMenu.Initialize();
+            _winMenu.Initialize(_model);
             _loseMenu.Initialize();
         }
 

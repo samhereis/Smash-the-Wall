@@ -35,16 +35,6 @@ namespace UI.Popups
             if (popup != this) Close();
         }
 
-        public void Open()
-        {
-            Enable();
-        }
-
-        public void Close()
-        {
-            Disable();
-        }
-
         public override void Enable(float? duration = null)
         {
             if (duration == null) duration = _baseSettings.animationDuration;

@@ -17,7 +17,9 @@ namespace SO.Lists
         public IEnumerable<PictureIdentityCard> pictures => _pictures;
 
         [Required]
+#if UNITY_EDITOR
         [ListDrawerSettings(ElementColor = nameof(GetColor), ListElementLabelName = ("targetName"))]
+#endif
         [SerializeField]
         private List<PictureIdentityCard> _pictures = new List<PictureIdentityCard>();
 

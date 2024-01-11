@@ -1,5 +1,6 @@
 using GameState;
 using Helpers;
+using Inputs;
 using Services;
 using Servies;
 
@@ -15,7 +16,7 @@ namespace DependencyInjection
             DependencyContext.diBox.Add<LazyUpdator_Service>(new LazyUpdator_Service());
             DependencyContext.diBox.Add<SceneLoader>(new SceneLoader());
 #if InputSystemInstalled
-            DependencyContext.diBox.Add<InputsService>(new InputsService());
+            DependencyContext.diBox.Add<PlayerInputData>(new PlayerInputData());
 #endif
             DependencyContext.diBox.Add<IGameStateChanger>(new SimpleGameStatesChanger(), asTypeProvided: true);
         }

@@ -406,9 +406,9 @@ namespace Services
 
         public async void Initialize()
         {
-#if UNITY_EDITOR == false && UNITY_ANDROID
+#if UNITY_ANDROID
             advertisingId = GetAndroidAdvertiserId();
-#elif UNITY_EDITOR == false && UNITY_IOS
+#elif UNITY_IOS
             advertisingId = GetIOSAdvertiserId();
 #endif
 

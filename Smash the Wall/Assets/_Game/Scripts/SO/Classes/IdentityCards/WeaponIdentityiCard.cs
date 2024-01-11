@@ -19,10 +19,13 @@ namespace IdentityCards
         [field: SerializeField, ReadOnly] public bool isUnlocked { get; private set; } = false;
         [field: SerializeField, ReadOnly] public string targetName { get; private set; }
 
+
+#if UNITY_EDITOR
         public WeaponIdentityiCard(WeaponBase resourceReference) : base(resourceReference)
         {
 
         }
+#endif
 
         public override async void Setup()
         {

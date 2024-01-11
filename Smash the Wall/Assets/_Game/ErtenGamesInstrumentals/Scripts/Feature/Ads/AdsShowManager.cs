@@ -1,4 +1,3 @@
-using InGameStrings;
 using Sirenix.OdinInspector;
 using System;
 using System.Threading.Tasks;
@@ -9,6 +8,14 @@ namespace Services
     [RequireComponent(typeof(AdsManager))]
     public class AdsShowManager : MonoBehaviour
     {
+        public class AdsStrings
+        {
+            public const string DefaultInterstitial = nameof(DefaultInterstitial);
+            public const string DefaultAppOpen = nameof(DefaultAppOpen);
+            public const string DefaultRewarded = nameof(DefaultRewarded);
+            public const string DefaultBanner = nameof(DefaultBanner);
+        }
+
         [Header("Comonents")]
 
         [Required]
@@ -42,7 +49,7 @@ namespace Services
 
         private void OnApplicationFocus(bool focus)
         {
-#if UNITY_EDITOR
+/*#if UNITY_EDITOR
             if (_allowAppOpenInEditor == false) { return; }
 #endif
             if (focus == true)
@@ -55,8 +62,7 @@ namespace Services
                 {
                     TryShowAppOpen();
                 }
-            }
-
+            }*/
         }
 
         public void RemoveAds()

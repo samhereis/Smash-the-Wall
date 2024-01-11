@@ -44,7 +44,7 @@ namespace UI
         [Inject] private ListOfAllPictures _listOfAllPictures;
 
 #if InputSystemInstalled
-        [Inject] private InputsService _inputs;
+        [Inject] private Inputs.PlayerInputData _inputs;
 #endif
 
         private ShopMenu _shopWindow;

@@ -1,6 +1,5 @@
 using Configs;
 using DependencyInjection;
-using Services;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,9 +18,9 @@ namespace Gameplay
 
         [Header("DI")]
 #if InputSystemInstalled
-        [Inject]private InputsService _inputsHolder;
+        [Inject] private Inputs.PlayerInputData _inputsHolder;
 #endif
-        [Inject]private GameConfigs _gameConfigs;
+        [Inject] private GameConfigs _gameConfigs;
 
         private float _mouseX;
         private float _mouseY;

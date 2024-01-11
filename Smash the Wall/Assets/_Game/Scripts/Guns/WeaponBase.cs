@@ -19,7 +19,7 @@ namespace Weapons
         [field: SerializeField] public Transform shootPosition { get; protected set; }
 
 #if InputSystemInstalled
-        [Inject] protected InputsService _input;
+        [Inject] protected Inputs.PlayerInputData _input;
 #endif
         [Inject] protected TrajectoryDisplayer _trajectoryDisplayer;
 

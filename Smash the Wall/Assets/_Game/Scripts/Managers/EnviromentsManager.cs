@@ -12,7 +12,9 @@ namespace Managers
     {
         [Header("Addressables")]
         [Required]
+#if UNITY_EDITOR
         [ListDrawerSettings(ListElementLabelName = (nameof(PrefabReference<EnviromentIdentifier>.objectName)))]
+#endif
         [SerializeField] private PrefabReference<EnviromentIdentifier>[] _suitableEnviroments;
 
         [Header("Debug")]

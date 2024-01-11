@@ -76,22 +76,27 @@ namespace GameState
         {
             _startMenu.onStartClicked -= StartGame;
 
-            UpdateAnalyticsPreferences();
+            UpdateUserConsentPrefs();
 
             EnterMainMenu();
         }
 
         private void EnterMainMenu()
         {
+            SetupUserConsent();
+
             _gameStateChanger.ChangeState(new MainMenu_GameState_Controller());
         }
 
-        private void UpdateAnalyticsPreferences()
+        private void UpdateUserConsentPrefs()
         {
             PlayerPrefs.SetString(_adsTrackingOnString, _startMenu.adsTrackingConsent == true ? _trueStrings : _falseString);
             PlayerPrefs.SetString(_analyticsOnString, _startMenu.analyticsConsent == true ? _trueStrings : _falseString);
             PlayerPrefs.SetString(_isFirstTimeInGameStrings, _falseString);
+        }
 
+        private void SetupUserConsent()
+        {
             _adsManager.SetConsent(isAdsConsentOn);
             _eventsLogManager.SetDataCollectionStatus(isAnalyticsSendingOn);
         }

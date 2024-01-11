@@ -58,10 +58,10 @@ MonoBehaviour:
   _dtExchange: 0
   _chartboost: 0
   _admob_Android:
-    <appOpenId>k__BackingField: 
-    <interstitialId>k__BackingField: 
-    <rewardedId>k__BackingField: 
-    <bannerId>k__BackingField: 
+    <appOpenId>k__BackingField: ca-app-pub-7071298273844005/2400885400
+    <interstitialId>k__BackingField: ca-app-pub-7071298273844005/3954705887
+    <rewardedId>k__BackingField: ca-app-pub-7071298273844005/9704660353
+    <bannerId>k__BackingField: ca-app-pub-7071298273844005/9896232044
     <adapterDebug>k__BackingField: 
   _admob_Ios:
     <appOpenId>k__BackingField: 

@@ -103,9 +103,12 @@ namespace ErtenGamesInstrumentals.DataClasses
 
         private void SetObjectName()
         {
+#if UNITY_EDITOR
+
             if (_resourceReference == null) { return; }
 
             _objectName = _resourceReference.name;
+#endif
         }
     }
 }

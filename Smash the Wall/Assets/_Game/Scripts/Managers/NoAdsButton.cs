@@ -39,7 +39,7 @@ namespace Managers
 
         private void Start()
         {
-            /*(this as IDIDependent).LoadDependencies();
+            DependencyContext.diBox.InjectDataTo(this);
 
             if (_inAppPurchacesManager != null)
             {
@@ -48,7 +48,7 @@ namespace Managers
                 _inAppPurchacesManager.onInitialize += OnInAppPurchacesManagerInitialized;
             }
 
-            UpdateStatus();*/
+            UpdateStatus();
 
             transform.localScale = Vector3.zero;
 
@@ -114,7 +114,7 @@ namespace Managers
 
         private void OnNoAdsEnabled()
         {
-            //_adsShowManager.RemoveAds();
+            _adsShowManager?.RemoveAds();
 
             transform.DOScale(0, 1);
         }

@@ -58,7 +58,7 @@ namespace SO.Lists
                 aWeapon_DTO = new AWeapon_DTO
                 {
                     weaponName = weaponIdentityiCard.targetName,
-                    isUnlocked = false
+                    isUnlocked = weaponIdentityiCard.isDefault ? true : aWeapon_DTO.isUnlocked
                 };
 
                 weaponsSave.allWeapons.Add(aWeapon_DTO);

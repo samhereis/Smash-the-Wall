@@ -18,7 +18,7 @@ namespace Services
         [Button]
         public void ShowInterstitial()
         {
-            Debug.Log(nameof(ShowBanner));
+            Debug.Log(nameof(ShowInterstitial));
             _adsShowManager.TryShowInterstitial();
         }
 

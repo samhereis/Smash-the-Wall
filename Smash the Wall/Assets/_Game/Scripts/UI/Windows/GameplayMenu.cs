@@ -39,7 +39,6 @@ namespace UI
         [FoldoutGroup("Settings"), SerializeField] private float _progressbarsUpdateRate = 1;
 
         [Inject] private GameConfigs _gameConfigs;
-        [Inject] private AdsShowManager _adsShowManager;
         [Inject] private GameSaveManager _gameSaveManager;
         [Inject] private ListOfAllPictures _listOfAllPictures;
 
@@ -105,8 +104,6 @@ namespace UI
             _inputs.Enable();
 #endif
             SubscribeToEvents();
-
-            TryShowBanner();
 
             if (_currentLevelText != null)
             {
@@ -189,36 +186,6 @@ namespace UI
         private void OnShopsButtonClicked()
         {
             _shopWindow?.Enable();
-        }
-
-        private void TryShowBanner()
-        {
-            bool shouldDestroyBanner = false;
-
-            var banners = FindObjectsOfType<BannerIdentifier>(true);
-
-            foreach (var item in banners)
-            {
-                if (item.gameObject.activeInHierarchy == false)
-                {
-                    Destroy(item.gameObject);
-
-                    if (shouldDestroyBanner == false) { shouldDestroyBanner = true; }
-                }
-            }
-
-            if (banners.Length > 0)
-            {
-                if (shouldDestroyBanner == true)
-                {
-                    _adsShowManager?.DestroyBanner();
-                    _adsShowManager?.TryShowBanner();
-                }
-            }
-            else
-            {
-                _adsShowManager?.TryShowBanner();
-            }
         }
     }
 }

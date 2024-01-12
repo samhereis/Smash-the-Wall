@@ -163,10 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1304e4d9fc9d37c4284fac14dc915a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _adsManager: {fileID: 0}
   _eventsLogManager: {fileID: 0}
   _listOfAllScenes: {fileID: 0}
-  _listOfAllMenus: {fileID: 0}
 --- !u!1 &1196573186
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,35 +20,35 @@ MonoBehaviour:
     _resourceReference: {fileID: 6738277081916857878, guid: 14f989eb764386941bacf72fa51c75bf, type: 3}
     <isDefault>k__BackingField: 1
     <opensAtLevel>k__BackingField: 0
+    _isUnlocked: 0
     <icon>k__BackingField: {fileID: 21300000, guid: 56bf189d32e046245b7d8676166287a0, type: 3}
-    <isUnlocked>k__BackingField: 1
     <targetName>k__BackingField: SlingShot
   - <stringReference>k__BackingField: Prefabs/Guns/Red Rifle
     <typeReference>k__BackingField: MultiBullet_Weapon
     _removeFromStringReference:
     - .prefab
     _resourceReference: {fileID: 1754635865819145469, guid: d817b8c2bbedf5e43845b317ab5cf7bd, type: 3}
-    <isDefault>k__BackingField: 0
+    <isDefault>k__BackingField: 1
     <opensAtLevel>k__BackingField: 3
+    _isUnlocked: 0
     <icon>k__BackingField: {fileID: 21300000, guid: 1a115afd63b563b4faad6a6fe263eee7, type: 3}
-    <isUnlocked>k__BackingField: 0
     <targetName>k__BackingField: Red Rifle
   - <stringReference>k__BackingField: Prefabs/Guns/SCI-FI Rifle
     <typeReference>k__BackingField: MultiBullet_Weapon
     _removeFromStringReference:
     - .prefab
     _resourceReference: {fileID: 1754635865819145469, guid: f216dbcff9d9727478184e636cca290b, type: 3}
-    <isDefault>k__BackingField: 0
+    <isDefault>k__BackingField: 1
     <opensAtLevel>k__BackingField: 7
+    _isUnlocked: 0
     <icon>k__BackingField: {fileID: 21300000, guid: 7e13ff7eac66b354da921c5ff73ce8f6, type: 3}
-    <isUnlocked>k__BackingField: 0
     <targetName>k__BackingField: SCI-FI Rifle
   _weaponSave:
     <allWeapons>k__BackingField:
     - <weaponName>k__BackingField: SlingShot
-      <isUnlocked>k__BackingField: 0
+      <isUnlocked>k__BackingField: 1
     - <weaponName>k__BackingField: Red Rifle
-      <isUnlocked>k__BackingField: 0
+      <isUnlocked>k__BackingField: 1
     - <weaponName>k__BackingField: SCI-FI Rifle
-      <isUnlocked>k__BackingField: 0
+      <isUnlocked>k__BackingField: 1
     <currentWeaponIndex>k__BackingField: 0

@@ -10,13 +10,14 @@ namespace IdentityCards
     [Serializable]
     public class WeaponIdentityiCard : PrefabReference<WeaponBase>
     {
+        [ShowInInspector] public bool isUnlocked => IsUnclocked();
+
         [field: SerializeField] public bool isDefault { get; private set; } = false;
         [field: SerializeField] public int opensAtLevel { get; private set; } = 0;
+        [SerializeField] private bool _isUnlocked = false;
 
         [Required]
         [field: SerializeField] public Sprite icon { get; private set; }
-
-        [field: SerializeField, ReadOnly] public bool isUnlocked { get; private set; } = false;
         [field: SerializeField, ReadOnly] public string targetName { get; private set; }
 
 
@@ -26,6 +27,16 @@ namespace IdentityCards
 
         }
 #endif
+
+        private bool IsUnclocked()
+        {
+            return _isUnlocked || isDefault;
+        }
+
+        public bool IsToUnlock(LevelSave_DTO levelSave)
+        {
+            return levelSave.levelIndex >= opensAtLevel && isUnlocked == false;
+        }
 
         public override async void Setup()
         {
@@ -37,12 +48,7 @@ namespace IdentityCards
 
         public void SetIsUnlockedStatus(bool isUnlocked)
         {
-            this.isUnlocked = isUnlocked;
-        }
-
-        public bool IsToUnlock(LevelSave_DTO levelSave)
-        {
-            return levelSave.levelIndex >= opensAtLevel && isUnlocked == false;
+            _isUnlocked = isUnlocked;
         }
     }
 }

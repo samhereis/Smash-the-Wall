@@ -10,6 +10,7 @@ namespace Helpers
 {
     public class StringSearcher : MonoBehaviour
     {
+#if UNITY_EDITOR
         private enum SearchMode { Contains, DoesNotContain }
 
         [SerializeField, FolderPath] private string _folderPath = "Assets";
@@ -79,5 +80,7 @@ namespace Helpers
 
             return result;
         }
+
+#endif
     }
 }

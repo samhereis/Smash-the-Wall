@@ -12,7 +12,7 @@ using UnityEngine;
 namespace SO.Lists
 {
     [CreateAssetMenu(fileName = "ListOfAllPictures", menuName = "Scriptables/Lists/ListOfAllPictures")]
-    public class ListOfAllPictures : ConfigBase, INeedDependencyInjection, ISelfValidator
+    public class ListOfAllPictures : ConfigBase, INeedDependencyInjection
     {
         public IEnumerable<PictureIdentityCard> pictures => _pictures;
 
@@ -55,6 +55,48 @@ namespace SO.Lists
             }
 
             return Color.black;
+        }
+
+        [Button]
+        private void Validate()
+        {
+            _picturesEditor = AutoSort();
+
+            _pictures.Clear();
+
+            foreach (var pictureInEditor in _picturesEditor)
+            {
+                if (pictureInEditor == null) continue;
+
+                PictureIdentityCard pictureIdentityCard = new PictureIdentityCard(pictureInEditor);
+                _pictures.Add(pictureIdentityCard);
+            }
+
+            foreach (var picture in _pictures)
+            {
+                picture.Setup();
+            }
+        }
+
+        private List<PictureAuthoring> AutoSort()
+        {
+            List<PictureAuthoring> sortedPictureAuthorings = new();
+
+            var groupedPictureAuthorings = _picturesEditor.GroupBy(w => w.pictureMode).ToList();
+            int maxCount = groupedPictureAuthorings.Max(g => g.Count());
+
+            for (int i = 0; i < maxCount; i++)
+            {
+                foreach (var group in groupedPictureAuthorings)
+                {
+                    if (i < group.Count())
+                    {
+                        sortedPictureAuthorings.Add(group.ElementAt(i));
+                    }
+                }
+            }
+
+            return sortedPictureAuthorings;
         }
 
 #endif
@@ -106,56 +148,6 @@ namespace SO.Lists
             int pictureIndex = GetCurrentIndex();
 
             return _pictures[pictureIndex];
-        }
-
-        public void Validate(SelfValidationResult result)
-        {
-            if (_picturesEditor.Count != _pictures.Count)
-            {
-                Validate();
-            }
-        }
-
-        [Button]
-        private void Validate()
-        {
-            _picturesEditor = AutoSort();
-
-            _pictures.Clear();
-
-            foreach (var pictureInEditor in _picturesEditor)
-            {
-                if (pictureInEditor == null) continue;
-
-                PictureIdentityCard pictureIdentityCard = new PictureIdentityCard(pictureInEditor);
-                _pictures.Add(pictureIdentityCard);
-            }
-
-            foreach (var picture in _pictures)
-            {
-                picture.Setup();
-            }
-        }
-
-        private List<PictureAuthoring> AutoSort()
-        {
-            List<PictureAuthoring> sortedPictureAuthorings = new();
-
-            var groupedPictureAuthorings = _picturesEditor.GroupBy(w => w.pictureMode).ToList();
-            int maxCount = groupedPictureAuthorings.Max(g => g.Count());
-
-            for (int i = 0; i < maxCount; i++)
-            {
-                foreach (var group in groupedPictureAuthorings)
-                {
-                    if (i < group.Count())
-                    {
-                        sortedPictureAuthorings.Add(group.ElementAt(i));
-                    }
-                }
-            }
-
-            return sortedPictureAuthorings;
         }
     }
 }

@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 40
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1196,7 +1196,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1407,7 +1407,6 @@ MonoBehaviour:
     - {fileID: 3502749921963513530}
     - {fileID: 6185366448672204087}
     - {fileID: 8829892354779449005}
-    - {fileID: 0}
     - {fileID: 9162086602536905074}
     isOpen: 1
   _buttons: []
@@ -1928,7 +1927,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _clickSound: {fileID: 0}
+  _clickSound: {fileID: 11400000, guid: 8c20cf04578d1ab45976caed652df26c, type: 2}
   _onOverScale: 0.75
   _animationDuration: 0.25
   _playSound: 1
@@ -2851,6 +2850,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5314811371653031956, guid: f2fc0843b0a854841be4b0f7db43a304, type: 3}
+      propertyPath: _clickSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c20cf04578d1ab45976caed652df26c, type: 2}
     - target: {fileID: 5314811371653031956, guid: f2fc0843b0a854841be4b0f7db43a304, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

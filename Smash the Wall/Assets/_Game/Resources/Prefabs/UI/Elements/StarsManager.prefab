@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _starsPrefab: {fileID: 3481870788508270940, guid: 0679ffff18073ab42864c265c86201d8, type: 3}
   _starsParent: {fileID: 3008340019104479354}
+  _starAudio: {fileID: 11400000, guid: 85458d6edf5b69e49b1f47f40de2371f, type: 2}
   _instantiatedStars: []
   _starsCount: 0
 --- !u!114 &3981004184590742565

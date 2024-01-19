@@ -197,6 +197,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _clickSound: {fileID: 11400000, guid: 85458d6edf5b69e49b1f47f40de2371f, type: 2}
+  _onOverScale: 0.75
+  _animationDuration: 0.25
+  _playSound: 1
+  _vibrate: 1
+  _requireAudio: 1
 --- !u!114 &2711109667200621783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,5 +216,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseSettings:
+    ease: 27
     turnOffDuration: 0.2
     turnOnDuration: 0.5

@@ -17,7 +17,6 @@ namespace Services
         }
 
         [Header("Comonents")]
-
         [Required]
         [SerializeField] private AdsManager _adsManager;
 

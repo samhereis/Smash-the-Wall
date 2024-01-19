@@ -1,13 +1,12 @@
 #if DoTweenInstalled
 using DG.Tweening;
-using Helpers;
-using Interfaces;
-
 #endif
 
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
+using Helpers;
+using Interfaces;
 
 namespace UI.Popups
 {

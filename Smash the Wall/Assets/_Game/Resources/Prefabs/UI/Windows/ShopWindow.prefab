@@ -448,12 +448,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _clickSoundResponce:
-    _audioClips: []
+  _clickSound: {fileID: 11400000, guid: b1f00bbb6f54c4d47bb0aa80774a9549, type: 2}
   _onOverScale: 0.75
   _animationDuration: 0.25
   _playSound: 1
   _vibrate: 1
+  _requireAudio: 1
 --- !u!114 &4333245229479414111
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
 ﻿using Configs;
-using Helpers;
 using Interfaces;
 using Loggers;
 using Sirenix.OdinInspector;
@@ -9,11 +8,12 @@ using UnityEngine;
 
 namespace DependencyInjection
 {
-    public class DependencyContext : MonoBehaviour, ISelfValidator
+    public class DependencyContext : MonoBehaviour, ISelfValidator, IInitializable
     {
         [FoldoutGroup("Debug"), ShowInInspector, ReadOnly] public static bool isGloballyInjected { get; private set; } = false;
 
         [SerializeField] private bool _isGlobal = false;
+        [SerializeField] private bool _autoΙnitialize = false;
 
         [FoldoutGroup("Objects To DI"), SerializeField] private List<Dependency_DTO<Component>> _objects = new();
         [FoldoutGroup("Objects To DI"), SerializeField] private List<Dependency_DTO<ConfigBase>> _configs = new();
@@ -28,6 +28,25 @@ namespace DependencyInjection
         [FoldoutGroup("Debug"), ShowInInspector, ReadOnly] public static DIBox diBox { get; private set; }
 
         private void Awake()
+        {
+            if (_autoΙnitialize == true) { Initialize(); }
+        }
+
+        private void OnDestroy()
+        {
+            Clear();
+
+#if UNITY_EDITOR
+
+            if (EditorApplication.isPlayingOrWillChangePlaymode == false && EditorApplication.isPlaying)
+            {
+                Debug.Log("Exiting playmode.");
+            }
+
+#endif
+        }
+
+        public void Initialize()
         {
             _dependencyInstallers = GetComponents<DependencyInstallerBase>();
 
@@ -52,25 +71,6 @@ namespace DependencyInjection
             InitAll();
 
             isInjected = true;
-        }
-
-        private void OnDestroy()
-        {
-            Clear();
-
-#if UNITY_EDITOR
-
-            if (EditorApplication.isPlayingOrWillChangePlaymode == false && EditorApplication.isPlaying)
-            {
-                Debug.Log("Exiting playmode.");
-            }
-
-#endif
-        }
-
-        public static void InjectDependencies(INeedDependencyInjection dIDependent)
-        {
-            diBox.InjectDataTo(dIDependent);
         }
 
         private void Inject()
@@ -176,6 +176,11 @@ namespace DependencyInjection
                     break;
                 }
             }
+        }
+
+        public static void InjectDependencies(INeedDependencyInjection dIDependent)
+        {
+            diBox.InjectDataTo(dIDependent);
         }
     }
 }

@@ -4,13 +4,14 @@ using Managers;
 using Servies;
 using Sirenix.OdinInspector;
 using SO.Lists;
-using UI;
 using UnityEngine;
 
 namespace GameState
 {
     public class GameBootstrap : GameBootstrapBase, INeedDependencyInjection
     {
+        [SerializeField] private DependencyContext _dependencyContextPrefab;
+
         [Inject]
         [FoldoutGroup("Depencencies"), SerializeField, ReadOnly] private EventsLogManager _eventsLogManager;
 
@@ -23,20 +24,22 @@ namespace GameState
         [Inject]
         [FoldoutGroup("Depencencies"), ShowInInspector, ReadOnly] protected IGameStateChanger _gameStateChanger;
 
-        private StartMenu _startMenu;
-
-        private void Start()
+        private void Update()
         {
-            DontDestroyOnLoad(gameObject);
-
-            Initialize();
+            if (Input.GetMouseButtonUp(0))
+            {
+                Initialize();
+            }
         }
 
         public async override void Initialize()
         {
             base.Initialize();
 
-            while (DependencyContext.isGloballyInjected == false) { await AsyncHelper.Skip(); }
+            DependencyContext dependencyContext = Instantiate(_dependencyContextPrefab);
+            dependencyContext.Initialize();
+
+            while (DependencyContext.isGloballyInjected == false) { await AsyncHelper.DelayFloat(1); }
 
             DependencyContext.InjectDependencies(this);
 
@@ -45,6 +48,8 @@ namespace GameState
 
         private void EnterMainMenu()
         {
+            DontDestroyOnLoad(gameObject);
+
             _gameStateChanger.ChangeState(new MainMenu_GameState_Controller());
         }
     }

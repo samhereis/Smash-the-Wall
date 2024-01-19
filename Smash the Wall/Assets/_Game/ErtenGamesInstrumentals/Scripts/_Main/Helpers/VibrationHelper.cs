@@ -1,6 +1,6 @@
 #if FeelInstalled
 
-using Lofelt.NiceVibrations;
+//using Lofelt.NiceVibrations;
 using UnityEngine;
 
 #endif
@@ -15,7 +15,7 @@ namespace Helpers
         {
 #if FeelInstalled
 
-            HapticController.hapticsEnabled = active;
+            //HapticController.hapticsEnabled = active;
 
 #endif
         }
@@ -27,7 +27,7 @@ namespace Helpers
             if (Validate() == false) return;
 
             Debug.Log("LightImpact");
-            try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact); } catch { }
+            //try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact); } catch { }
 
 #endif
         }
@@ -39,7 +39,7 @@ namespace Helpers
             if (Validate() == false) return;
 
             Debug.Log("MediumImpact");
-            try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.MediumImpact); } catch { }
+            //try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.MediumImpact); } catch { }
 
 #endif
         }
@@ -51,14 +51,14 @@ namespace Helpers
             if (Validate() == false) return;
 
             Debug.Log("HeavyImpact");
-            try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact); } catch { }
+            //try { HapticPatterns.PlayPreset(HapticPatterns.PresetType.HeavyImpact); } catch { }
 
 #endif
         }
 
         protected virtual bool Validate()
         {
-            bool isSuccesfull = false;
+            bool isSuccesfull = true;
 
 #if FeelInstalled
 

@@ -44,12 +44,10 @@ namespace Experimental
             await AsyncHelper.Skip();
         }
 
-#if UNITY_EDITOR
-        [ContextMenu("Setup")]
-        public void Setup()
+        [Button]
+        private void Setup()
         {
             if (_terrain == null) _terrain = GetComponent<Terrain>();
         }
-#endif
     }
 }

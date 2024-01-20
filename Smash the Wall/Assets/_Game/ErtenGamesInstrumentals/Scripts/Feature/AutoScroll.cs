@@ -1,41 +1,21 @@
 using Helpers;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
-
-#if UNITY_EDITOR && OdinInstalled
-using Sirenix.OdinInspector.Editor.Validation;
-#endif
 
 namespace UI
 {
     public class AutoScroll : MonoBehaviour
-#if OdinInspectorInstalled
-        , ISelfValidator
-#endif
     {
-        [Required]
-        [FoldoutGroup("Components"), SerializeField] private Scrollbar _scrollBar;
+        [Header("Components")]
+        [SerializeField] private Scrollbar _scrollBar;
 
-        [FoldoutGroup("Settings"), SerializeField] private float _startDelay = 3;
-        [FoldoutGroup("Settings"), SerializeField] private float _scrollSpeed = 1;
+        [Header("Settings")]
+        [SerializeField] private float _startDelay = 3;
+        [SerializeField] private float _scrollSpeed = 1;
 
-        [FoldoutGroup("Debug"), SerializeField] private bool _isScrolling = false;
-        [FoldoutGroup("Debug"), SerializeField] private bool _isReverse = false;
-
-#if OdinInspectorInstalled
-        public void Validate(SelfValidationResult result)
-        {
-            if (_scrollBar == null)
-            {
-                result.Add(ValidatorSeverity.Warning, "Scrollbar is null").WithFix(() =>
-                {
-                    Validate();
-                    this.TrySetDirty();
-                });
-            }
-        }
-#endif
+        [Header("Debug")]
+        [SerializeField] private bool _isScrolling = false;
+        [SerializeField] private bool _isReverse = false;
 
         private void Validate()
         {

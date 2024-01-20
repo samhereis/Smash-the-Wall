@@ -6,8 +6,8 @@ using Helpers;
 using Interfaces;
 using System;
 using System.Collections.Generic;
-using Unity.Services.Analytics;
-using Unity.Services.Core;
+//using Unity.Services.Analytics;
+//using Unity.Services.Core;
 using UnityEngine;
 
 namespace Managers
@@ -25,7 +25,8 @@ namespace Managers
 
             try
             {
-                await UnityServices.InitializeAsync();
+                await AsyncHelper.Skip();
+                //await UnityServices.InitializeAsync();
             }
             catch (Exception e)
             {
@@ -42,11 +43,11 @@ namespace Managers
 
                 if (_isDataCollectionEnabled == true)
                 {
-                    AnalyticsService.Instance.StartDataCollection();
+                    //AnalyticsService.Instance.StartDataCollection();
                 }
                 else
                 {
-                    AnalyticsService.Instance.StopDataCollection();
+                    //AnalyticsService.Instance.StopDataCollection();
                 }
             }
             catch (Exception e)
@@ -101,8 +102,8 @@ namespace Managers
                 Firebase.Analytics.FirebaseAnalytics.LogEvent(name);
 #endif
 
-                AnalyticsService.Instance.CustomData(name);
-                AnalyticsService.Instance.Flush();
+                //AnalyticsService.Instance.CustomData(name);
+                //AnalyticsService.Instance.Flush();
             }
             catch (Exception e)
             {
@@ -127,8 +128,8 @@ namespace Managers
                 FirebaseAnalytics.LogEvent(name, fbParameters.ToArray());          
 #endif
 
-                AnalyticsService.Instance.CustomData(name, parameters);
-                AnalyticsService.Instance.Flush();
+                //AnalyticsService.Instance.CustomData(name, parameters);
+                //AnalyticsService.Instance.Flush();
             }
             catch (Exception e)
             {

@@ -10,7 +10,6 @@ namespace Helpers
 {
     public class StringSearcher : MonoBehaviour
     {
-#if UNITY_EDITOR
         private enum SearchMode { Contains, DoesNotContain }
 
         [SerializeField, FolderPath] private string _folderPath = "Assets";
@@ -20,12 +19,13 @@ namespace Helpers
         [SerializeField] private bool _asynchronous = false;
 
         [Space(20)]
-        [SerializeField, ReadOnly] private Object _currentCheckedObject;
-        [SerializeField, ReadOnly] private List<Object> _files = new List<Object>();
+        [SerializeField] private Object _currentCheckedObject;
+        [SerializeField] private List<Object> _files = new List<Object>();
 
         [Button]
         private async void SearchForScripts()
         {
+#if UNITY_EDITOR
             _files.Clear();
 
             if (Directory.Exists(_folderPath))
@@ -41,12 +41,15 @@ namespace Helpers
                     if (_asynchronous == true) await AsyncHelper.Skip();
                 }
             }
+#endif
         }
 
         private async Task<List<string>> GetAllFiles(string folderPath, string checkFor, string extension, SearchMode searchMode)
         {
             string[] scriptFiles = Directory.GetFiles(folderPath, extension, SearchOption.AllDirectories);
             List<string> result = new List<string>();
+
+#if UNITY_EDITOR
 
             foreach (string scriptFile in scriptFiles)
             {
@@ -78,9 +81,9 @@ namespace Helpers
                 }
             }
 
+#endif
+
             return result;
         }
-
-#endif
     }
 }

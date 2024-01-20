@@ -4,17 +4,19 @@ using Helpers;
 using Identifiers;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using System;
 using UnityEngine;
 
 namespace Managers
 {
+
+    [ListDrawerSettings(ListElementLabelName = (nameof(PrefabReference<EnviromentIdentifier>.objectName)))]
+    [Required]
+    public class EnviromentsManager_SuitableEnviromentsAttribute : Attribute { }
+
     public sealed class EnviromentsManager : MonoBehaviour, INeedDependencyInjection, ISelfValidator
     {
         [Header("Addressables")]
-        [Required]
-#if UNITY_EDITOR
-        [ListDrawerSettings(ListElementLabelName = (nameof(PrefabReference<EnviromentIdentifier>.objectName)))]
-#endif
         [SerializeField] private PrefabReference<EnviromentIdentifier>[] _suitableEnviroments;
 
         [Header("Debug")]

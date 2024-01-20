@@ -50,11 +50,8 @@ namespace ProjectSripts
         public override void EnableInput()
         {
             base.EnableInput();
-
-#if InputSystemInstalled
             _input.input.Player.Fire.started += Fire;
             _input.input.Player.Fire.canceled += Fire;
-#endif
 
             canShoot = false;
 
@@ -66,10 +63,8 @@ namespace ProjectSripts
         {
             base.DisableInput();
 
-#if InputSystemInstalled
             _input.input.Player.Fire.started -= Fire;
             _input.input.Player.Fire.canceled -= Fire;
-#endif
 
             canShoot = false;
 

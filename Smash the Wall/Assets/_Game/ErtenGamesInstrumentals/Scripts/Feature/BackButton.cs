@@ -1,5 +1,3 @@
-#if InputSystemInstalled
-
 using DependencyInjection;
 using Services;
 using Sirenix.OdinInspector;
@@ -14,11 +12,11 @@ namespace UI.Interaction
         [ShowInInspector] public UnityEvent onBack { get; private set; } = new UnityEvent();
 
         [Inject]
-        [SerializeField] private InputsService _inputContainer;
+        [SerializeField] private static InputsService _inputContainer;
 
         private void Awake()
         {
-            DependencyContext.InjectDependencies(this);
+            if (_inputContainer == null) { DependencyContext.InjectDependencies(this); }
         }
 
         public void SubscribeToEvents()
@@ -42,5 +40,3 @@ namespace UI.Interaction
         }
     }
 }
-
-#endif

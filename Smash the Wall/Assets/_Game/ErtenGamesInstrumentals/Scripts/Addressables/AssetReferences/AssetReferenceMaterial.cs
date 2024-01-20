@@ -1,19 +1,25 @@
-#if AddressablesInstalled
-
 using System;
-using UnityEngine;
+
+#if AddressablesInstalled
 using UnityEngine.AddressableAssets;
+using UnityEngine;
+#endif
 
 namespace AssetReferences
 {
     [Serializable]
-    public class AssetReferenceMaterial : AssetReferenceT<Material>
+    public class AssetReferenceMaterial
+
+#if AddressablesInstalled
+                                        : AssetReferenceT<Material>
+#endif
     {
-        public AssetReferenceMaterial(string guid) : base(guid)
+        public AssetReferenceMaterial(string guid)
+#if AddressablesInstalled
+                                                    : base(guid)
+#endif
         {
 
         }
     }
 }
-
-#endif

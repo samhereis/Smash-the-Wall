@@ -13,14 +13,6 @@ namespace IdentityCards
         [SerializeField] public Color borderColor { get; private set; }
         [SerializeField] public string targetName { get; private set; }
 
-
-#if UNITY_EDITOR
-        public PictureIdentityCard(PictureAuthoring resourceReference) : base(resourceReference)
-        {
-
-        }
-#endif
-
         public override async void Setup()
         {
             base.Setup();

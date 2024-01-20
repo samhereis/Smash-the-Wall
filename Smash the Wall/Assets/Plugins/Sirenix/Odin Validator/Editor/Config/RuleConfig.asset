@@ -15,6 +15,11 @@ MonoBehaviour:
   projectRules:
   - Enabled: 1
     EnabledOverridden: 1
+    Type: Sirenix.OdinValidator.Editor.Validators.ShaderCompilerErrorsValidator,
+      Sirenix.OdinValidator.Editor
+    Override: 
+  - Enabled: 1
+    EnabledOverridden: 1
     Type: Sirenix.OdinValidator.Editor.Validators.SceneNotInBuildSettingsValidator,
       Sirenix.OdinValidator.Editor
     Override: 
@@ -30,6 +35,10 @@ MonoBehaviour:
   - Enabled: 1
     EnabledOverridden: 1
     Type: Sirenix.OdinValidator.Editor.Validators.MustBeAPrefabValidator, Sirenix.OdinValidator.Editor
+    Override: 
+  - Enabled: 1
+    EnabledOverridden: 1
+    Type: Sirenix.OdinValidator.Editor.Validators.MaterialValidator, Sirenix.OdinValidator.Editor
     Override: 
   - Enabled: 1
     EnabledOverridden: 1

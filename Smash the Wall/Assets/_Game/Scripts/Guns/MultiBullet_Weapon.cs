@@ -48,10 +48,8 @@ namespace Weapons
         {
             base.EnableInput();
 
-#if InputSystemInstalled
             _input.input.Player.Fire.performed += Fire;
             _input.input.Player.Fire.canceled += Fire;
-#endif
 
             ProjectileiGunBulletSpawner_System.instance.Initialize(this);
             ProjectileiGunBulletSpawner_System.instance.Enable();
@@ -61,10 +59,8 @@ namespace Weapons
         {
             base.DisableInput();
 
-#if InputSystemInstalled
             _input.input.Player.Fire.performed -= Fire;
             _input.input.Player.Fire.canceled -= Fire;
-#endif
 
             ProjectileiGunBulletSpawner_System.instance.Disable();
             ProjectileiGunBulletSpawner_System.instance.Dispose();

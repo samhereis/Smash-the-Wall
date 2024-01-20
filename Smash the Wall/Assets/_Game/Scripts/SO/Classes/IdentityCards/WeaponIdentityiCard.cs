@@ -20,14 +20,6 @@ namespace IdentityCards
         [field: SerializeField] public Sprite icon { get; private set; }
         [field: SerializeField, ReadOnly] public string targetName { get; private set; }
 
-
-#if UNITY_EDITOR
-        public WeaponIdentityiCard(WeaponBase resourceReference) : base(resourceReference)
-        {
-
-        }
-#endif
-
         private bool IsUnclocked()
         {
             return _isUnlocked || isDefault;

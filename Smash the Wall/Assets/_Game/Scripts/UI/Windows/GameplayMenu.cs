@@ -3,7 +3,6 @@ using DependencyInjection;
 using DG.Tweening;
 using GameState;
 using Helpers;
-using Identifiers;
 using Interfaces;
 using Managers;
 using Services;
@@ -41,10 +40,7 @@ namespace UI
         [Inject] private GameConfigs _gameConfigs;
         [Inject] private GameSaveManager _gameSaveManager;
         [Inject] private ListOfAllPictures _listOfAllPictures;
-
-#if InputSystemInstalled
         [Inject] private Inputs.PlayerInputData _inputs;
-#endif
 
         private ShopMenu _shopWindow;
 
@@ -100,9 +96,7 @@ namespace UI
         {
             base.Enable(duration);
 
-#if InputSystemInstalled
             _inputs.Enable();
-#endif
             SubscribeToEvents();
 
             if (_currentLevelText != null)
@@ -115,10 +109,7 @@ namespace UI
         {
             base.Disable(duration);
 
-#if InputSystemInstalled
             _inputs.Disable();
-#endif
-
             UnsubscribeFromEvents();
         }
 

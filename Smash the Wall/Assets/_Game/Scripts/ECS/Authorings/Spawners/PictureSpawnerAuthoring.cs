@@ -13,16 +13,11 @@ namespace ECS.Authoring
     {
         [Required]
         [SerializeField] private ListOfAllPictures _listOfAllPictures;
-
-#if UNITY_EDITOR
         [field: SerializeField] public List<PictureAuthoring> pictures = new List<PictureAuthoring>();
-#endif
 
         public void Validate(SelfValidationResult result)
         {
-#if UNITY_EDITOR
             foreach (var pictureInList in _listOfAllPictures.pictures) { pictures.SafeAdd(pictureInList.GetAsset()); }
-#endif
         }
 
         public class PictureSpawnerAuthoring_Baker : Baker<PictureSpawnerAuthoring>
@@ -30,8 +25,6 @@ namespace ECS.Authoring
             public override void Bake(PictureSpawnerAuthoring authoring)
             {
                 var picturePrefabBuffer = AddBuffer<PicturePrefabBufferElement>(GetEntity(TransformUsageFlags.Dynamic));
-
-#if UNITY_EDITOR
                 foreach (var picture in authoring.pictures)
                 {
                     picturePrefabBuffer.Add(new PicturePrefabBufferElement
@@ -42,7 +35,6 @@ namespace ECS.Authoring
                         }
                     });
                 }
-#endif
 
                 AddComponent(GetEntity(TransformUsageFlags.None), new PicturePrefabsComponent());
             }

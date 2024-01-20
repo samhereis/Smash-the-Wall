@@ -21,9 +21,7 @@ namespace DataClasses
         public void Initialize()
         {
 #if UNITY_EDITOR
-
             sceneCode = _scene.name;
-
 #endif
         }
     }

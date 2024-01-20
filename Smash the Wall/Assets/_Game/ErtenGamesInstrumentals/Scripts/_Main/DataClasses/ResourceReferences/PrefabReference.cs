@@ -16,31 +16,19 @@ namespace ErtenGamesInstrumentals.DataClasses
         [field: FoldoutGroup("Debug")]
         [field: SerializeField, ReadOnly] public string typeReference { get; private set; }
 
-#if UNITY_EDITOR
-
-        [FoldoutGroup("Debug")]
-        [SerializeField] private string[] _removeFromStringReference = { ".prefab" };
-
-        [Required]
-        [OnValueChanged(nameof(Setup))]
-        [SerializeField] protected TGetAsComponent _resourceReference;
-
-        public PrefabReference(TGetAsComponent resourceReference)
-        {
-            _resourceReference = resourceReference;
-        }
-
-        private string _objectName = string.Empty;
         public string objectName
         {
             get
             {
+#if UNITY_EDITOR
+
                 if (string.IsNullOrEmpty(_objectName) == true) { SetObjectName(); };
                 return _objectName;
+#else
+                return typeReference;
+#endif
             }
         }
-
-#endif
 
         public virtual async Task<TGetAsComponent> GetAssetAsync()
         {
@@ -73,11 +61,23 @@ namespace ErtenGamesInstrumentals.DataClasses
             return result.GetComponent<T>();
         }
 
+#if UNITY_EDITOR
+
+        [FoldoutGroup("Debug")]
+        [SerializeField] private string[] _removeFromStringReference = { ".prefab" };
+
+        [Required]
+        [OnValueChanged(nameof(Setup))]
+        [SerializeField] protected TGetAsComponent _resourceReference;
+
+        private string _objectName = string.Empty;
+
+#endif
+
         [FoldoutGroup("Debug"), Button]
         public virtual void Setup()
         {
 #if UNITY_EDITOR
-
             if (_resourceReference != null)
             {
                 stringReference = AssetDatabase.GetAssetPath(_resourceReference);
@@ -97,14 +97,12 @@ namespace ErtenGamesInstrumentals.DataClasses
 
                 SetObjectName();
             }
-
 #endif
         }
 
         private void SetObjectName()
         {
 #if UNITY_EDITOR
-
             if (_resourceReference == null) { return; }
 
             _objectName = _resourceReference.name;

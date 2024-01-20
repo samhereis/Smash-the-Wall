@@ -1,5 +1,6 @@
 using Configs;
 using DependencyInjection;
+using Inputs;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,9 +18,7 @@ namespace Gameplay
         [SerializeField] private Transform _yRotatedObject;
 
         [Header("DI")]
-#if InputSystemInstalled
-        [Inject] private Inputs.PlayerInputData _inputsHolder;
-#endif
+        [Inject] private PlayerInputData _inputsHolder;
         [Inject] private GameConfigs _gameConfigs;
 
         private float _mouseX;
@@ -31,18 +30,14 @@ namespace Gameplay
         {
             DependencyContext.InjectDependencies(this);
 
-#if InputSystemInstalled
             _inputsHolder.input.Player.Look.performed += Look;
             _inputsHolder.input.Player.Look.canceled += Look;
-#endif
         }
 
         private void OnDisable()
         {
-#if InputSystemInstalled
             _inputsHolder.input.Player.Look.performed -= Look;
             _inputsHolder.input.Player.Look.canceled -= Look;
-#endif
         }
 
         private void Look(InputAction.CallbackContext context)

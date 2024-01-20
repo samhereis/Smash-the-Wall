@@ -1,7 +1,7 @@
 using DependencyInjection;
 using Displayers;
+using Inputs;
 using Interfaces;
-using Services;
 using Sirenix.OdinInspector;
 using Sounds;
 using UnityEngine;
@@ -18,9 +18,7 @@ namespace Weapons
         [SerializeField] protected Transform _gunPoint;
         [field: SerializeField] public Transform shootPosition { get; protected set; }
 
-#if InputSystemInstalled
-        [Inject] protected Inputs.PlayerInputData _input;
-#endif
+        [Inject] protected PlayerInputData _input;
         [Inject] protected TrajectoryDisplayer _trajectoryDisplayer;
 
         [field: SerializeField, ReadOnly] public bool canShoot { get; protected set; }

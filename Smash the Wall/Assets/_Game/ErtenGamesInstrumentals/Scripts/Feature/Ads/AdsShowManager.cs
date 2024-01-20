@@ -22,10 +22,7 @@ namespace Services
 
         [Header("Settings")]
         [SerializeField] private int _openAppCountToShowAppOpenAdd = 1;
-
-#if UNITY_EDITOR
-        [SerializeField] private bool _allowAppOpenInEditor = true;
-#endif
+        [SerializeField] private bool _allowAppOpenInEditor = false;
 
         [Header("Debug")]
         [SerializeField] private int _appOpenCount = 0;
@@ -48,7 +45,7 @@ namespace Services
 
         private void OnApplicationFocus(bool focus)
         {
-/*#if UNITY_EDITOR
+#if UNITY_EDITOR
             if (_allowAppOpenInEditor == false) { return; }
 #endif
             if (focus == true)
@@ -61,7 +58,7 @@ namespace Services
                 {
                     TryShowAppOpen();
                 }
-            }*/
+            }
         }
 
         public void RemoveAds()

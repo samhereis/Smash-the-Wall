@@ -262,11 +262,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelSave_DTO:
-    <levelIndex>k__BackingField: 0
-    <pictureIndex>k__BackingField: 0
+    <levelIndex>k__BackingField: 5
+    <pictureIndex>k__BackingField: 2
   _weapons_DTO:
     <allWeapons>k__BackingField: []
-    <currentWeaponIndex>k__BackingField: 0
+    <currentWeaponIndex>k__BackingField: 3
 --- !u!1 &8120009865874695716
 GameObject:
   m_ObjectHideFlags: 0

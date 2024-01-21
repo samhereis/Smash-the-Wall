@@ -1,6 +1,7 @@
 using DTO.Save;
 using Helpers;
 using Interfaces;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Managers
@@ -16,7 +17,7 @@ namespace Managers
         [SerializeField] private LevelSave_DTO _levelSave_DTO;
         [SerializeField] private Weapons_DTO _weapons_DTO;
 
-        [ContextMenu(nameof(Initialize))]
+        [Button]
         public void Initialize()
         {
             _levelSave_DTO = null;
@@ -47,7 +48,7 @@ namespace Managers
         public void IncreaseLevelIndex()
         {
             _levelSave_DTO.levelIndex++;
-            UpdateSaves();
+            SaveLevel();
         }
 
         public void SaveLevel()
@@ -60,6 +61,7 @@ namespace Managers
             SaveHelper.SaveToJson(_weapons_DTO, _weaponsSaveFolderPath, _weaponsSaveFileName);
         }
 
+        [Button]
         public void SaveAll()
         {
             UpdateSaves();

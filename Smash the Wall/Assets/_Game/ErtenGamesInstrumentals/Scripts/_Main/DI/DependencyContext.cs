@@ -100,11 +100,8 @@ namespace DependencyInjection
         {
             foreach (var objectToInject in _objects)
             {
-                if (objectToInject is IInitializable)
-                {
-                    var initializable = (objectToInject.dependency as IInitializable);
-                    initializable?.Initialize();
-                }
+                var initializable = (objectToInject.dependency as IInitializable);
+                initializable?.Initialize();
             }
 
             foreach (var config in _configs)

@@ -75,6 +75,8 @@ namespace SO.Lists
             if (pictureIndex >= _pictures.Count) { pictureIndex = 0; }
 
             save.pictureIndex = pictureIndex;
+
+            _gameSaveManager.SaveLevel();
         }
 
         public PictureIdentityCard GetCurrent()

@@ -88,6 +88,8 @@ namespace SO.Lists
         {
             var weaponsSave = _gameSaveManager.GetWeaponsSave();
             weaponsSave.currentWeaponIndex = _weapons.IndexOf(weaponIdentityiCard);
+
+            _gameSaveManager.SaveWeapons();
         }
 
         public int GetCurrentWeaponIndex()

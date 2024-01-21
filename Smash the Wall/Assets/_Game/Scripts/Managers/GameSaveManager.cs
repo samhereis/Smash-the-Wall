@@ -46,8 +46,8 @@ namespace Managers
 
         public void IncreaseLevelIndex()
         {
-            UpdateSaves();
             _levelSave_DTO.levelIndex++;
+            UpdateSaves();
         }
 
         public void SaveLevel()

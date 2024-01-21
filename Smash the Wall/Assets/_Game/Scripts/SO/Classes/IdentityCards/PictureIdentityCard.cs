@@ -9,8 +9,8 @@ namespace IdentityCards
     [Serializable]
     public class PictureIdentityCard : PrefabReference<PictureAuthoring>
     {
-        [SerializeField] public PictureMode pictureMode { get; private set; } = PictureMode.DestroyBorder;
-        [SerializeField] public Color borderColor { get; private set; }
+        [field: SerializeField] public PictureMode pictureMode { get; private set; } = PictureMode.DestroyBorder;
+        [field: SerializeField] public Color borderColor { get; private set; }
 
         public override async void Setup()
         {

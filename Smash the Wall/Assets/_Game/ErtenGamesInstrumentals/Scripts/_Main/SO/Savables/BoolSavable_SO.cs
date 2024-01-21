@@ -8,14 +8,10 @@ namespace Settings
     public sealed class BoolSavable_SO : BaseSavable_SO<bool>, ISelfValidator
     {
         public bool currentValue => _currentValue;
-        public string key => _key;
-
-        [SerializeField] private string _trueValue = "true";
-        [SerializeField] private string _falseValue = "false";
 
         public void Validate(SelfValidationResult result)
         {
-            _currentValue = PlayerPrefs.GetString(key, _defaultValue.ToString()) == _trueValue;
+            Initialize();
 
 #if UNITY_EDITOR
 
@@ -28,16 +24,17 @@ namespace Settings
 #endif
         }
 
+        [Button]
         public override void Initialize()
         {
-            _currentValue = PlayerPrefs.GetString(key, _defaultValue.ToString()) == _trueValue;
+            _currentValue = PlayerPrefs.GetString(_key, _defaultValue.ToString()) == true.ToString();
         }
 
         public override void SetData(bool value)
         {
             base.SetData(value);
 
-            PlayerPrefs.SetString(key, value ? _trueValue : _falseValue);
+            PlayerPrefs.SetString(_key, value.ToString());
             PlayerPrefs.Save();
         }
     }

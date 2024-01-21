@@ -12,7 +12,8 @@ namespace DependencyInjection
     public class DIBox
     {
         [ShowInInspector, ReadOnly] private static readonly Dictionary<Type, Dictionary<string, object>> _dictionarySingle = new();
-        [ShowInInspector, ReadOnly] private Loggers.ILogger _logger;
+
+        private Loggers.ILogger _logger;
 
         public DIBox()
         {
@@ -111,7 +112,9 @@ namespace DependencyInjection
                 return null;
             }
 
-            return _dictionarySingle[typeof(T)][id] as T;
+            T result = _dictionarySingle[typeof(T)][id] as T;
+
+            return result;
         }
 
         public object Get(Type type, string id = "", bool logErrors = true)

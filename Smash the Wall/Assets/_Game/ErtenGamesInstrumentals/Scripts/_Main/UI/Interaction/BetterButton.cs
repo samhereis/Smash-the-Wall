@@ -28,7 +28,16 @@ namespace UI.Interaction
         [FoldoutGroup("Settings"), SerializeField] private bool _vibrate = true;
         [FoldoutGroup("Settings"), SerializeField] private bool _requireAudio = true;
 
-        [Inject] private static VibrationHelper _vibrationHelper;
+        private static VibrationHelper _vibrationHelper_;
+
+        private VibrationHelper vibrationHelper
+        {
+            get
+            {
+                if (_vibrationHelper_ == null) { _vibrationHelper_ = DependencyContext.diBox.Get<VibrationHelper>(); }
+                return _vibrationHelper_;
+            }
+        }
 
         private bool _hasDownAnimationEnded = false;
 
@@ -49,15 +58,6 @@ namespace UI.Interaction
                     });
                 }
             }
-        }
-
-        protected override void Awake()
-        {
-#if UNITY_EDITOR
-            if (Application.isPlaying == false) { return; }
-#endif
-
-            if (_vibrationHelper == null) DependencyContext.diBox.Get<VibrationHelper>();
         }
 
         protected override void OnDestroy()
@@ -90,7 +90,7 @@ namespace UI.Interaction
             {
                 if (_playSound) { SoundPlayer.instance?.TryPlay(_clickSound); }
 
-                if (_vibrate) { _vibrationHelper?.LightVibration(); }
+                if (_vibrate) { vibrationHelper?.LightVibration(); }
             }
         }
 

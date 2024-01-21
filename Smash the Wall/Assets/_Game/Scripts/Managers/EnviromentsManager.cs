@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Managers
 {
 
-    [ListDrawerSettings(ListElementLabelName = (nameof(PrefabReference<EnviromentIdentifier>.objectName)))]
+    [ListDrawerSettings(ListElementLabelName = (nameof(PrefabReference<EnviromentIdentifier>.targetName)))]
     [Required]
     public class EnviromentsManager_SuitableEnviromentsAttribute : Attribute { }
 

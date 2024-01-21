@@ -18,7 +18,6 @@ namespace IdentityCards
 
         [Required]
         [field: SerializeField] public Sprite icon { get; private set; }
-        [field: SerializeField, ReadOnly] public string targetName { get; private set; }
 
         private bool IsUnclocked()
         {
@@ -28,14 +27,6 @@ namespace IdentityCards
         public bool IsToUnlock(LevelSave_DTO levelSave)
         {
             return levelSave.levelIndex >= opensAtLevel && isUnlocked == false;
-        }
-
-        public override async void Setup()
-        {
-            base.Setup();
-
-            var target = await GetAssetAsync();
-            targetName = target.name;
         }
 
         public void SetIsUnlockedStatus(bool isUnlocked)

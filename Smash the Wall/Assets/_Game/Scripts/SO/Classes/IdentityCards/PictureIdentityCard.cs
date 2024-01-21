@@ -11,7 +11,6 @@ namespace IdentityCards
     {
         [SerializeField] public PictureMode pictureMode { get; private set; } = PictureMode.DestroyBorder;
         [SerializeField] public Color borderColor { get; private set; }
-        [SerializeField] public string targetName { get; private set; }
 
         public override async void Setup()
         {
@@ -21,8 +20,6 @@ namespace IdentityCards
 
             if (target != null)
             {
-                targetName = pictureMode.ToString() + "_" + target.name;
-
                 if (pictureMode != target.pictureMode) { pictureMode = target.pictureMode; }
                 if (borderColor != target.borderColor) { borderColor = target.borderColor; }
             }

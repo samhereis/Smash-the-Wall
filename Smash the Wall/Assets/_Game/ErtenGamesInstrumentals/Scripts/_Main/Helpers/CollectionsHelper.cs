@@ -62,6 +62,8 @@ namespace Helpers
 
         public static T GetRandom<T>(this IEnumerable<T> list)
         {
+            if (list == null || list.Count() == 0) return default(T);
+
             return list.ElementAt(Random.Range(0, list.Count()));
         }
 

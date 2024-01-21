@@ -69,7 +69,7 @@ namespace GameState
 
             if (hasEverPlayed == false)
             {
-                startMenu = Instantiate(await _listOfAllMenus.GetMenuAsync<StartMenu>());
+                startMenu = Instantiate(_listOfAllMenus.GetMenu<StartMenu>());
                 startMenu.onStartClicked += OnStartMenu_StartClicked;
             }
             else
@@ -83,6 +83,9 @@ namespace GameState
                 startMenu.onStartClicked -= OnStartMenu_StartClicked;
 
                 adsTrackingContentEnabled = startMenu.adsTrackingConsent;
+                isSendDataEnabled = startMenu.analyticsConsent;
+
+                hasEverPlayed = true;
 
                 EnterMainMenu();
             }

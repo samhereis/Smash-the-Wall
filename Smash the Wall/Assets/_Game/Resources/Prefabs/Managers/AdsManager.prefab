@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124185496936650589}
-  - component: {fileID: 6890465247782482409}
   - component: {fileID: 7465894293229340108}
   m_Layer: 0
   m_Name: AdsManager
@@ -33,46 +32,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6890465247782482409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3209343878217277981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 514c04905a661c4468a7bda81b5066ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <provider>k__BackingField: 0
-  <adProvider>k__BackingField: {fileID: 0}
-  _initializeOnStart: 1
-  _initializeOnSetConsent: 1
-  _defaultAppOpenAdDelay: 60
-  _defaultInterstitialDelay: 60
-  _defaultRewardedDelay: 0
-  _isTest: 0
-  _enabledAd: 
-  _skipAd: 
-  <placements>k__BackingField:
-  - placement: DefaultInterstitial
-    type: 2
-  - placement: DefaultAppOpen
-    type: 0
-  - placement: DefaultBanner
-    type: 1
-  - placement: DefaultRewarded
-    type: 3
-  _isAdTrackingConsentValueSet: 0
-  _adTrackingConsent: 0
-  <isInitialized>k__BackingField: 0
-  _currentAppOpenDelay: 0
-  <removedAds>k__BackingField: 0
-  <advertisingId>k__BackingField: 
-  _currentRequestedForShowPlacement:
-    placement: 
-    type: 0
 --- !u!114 &7465894293229340108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e825d1bbec8864caf050c2493e5309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _adsManager: {fileID: 6890465247782482409}
   _openAppCountToShowAppOpenAdd: 1
   _allowAppOpenInEditor: 1
+  _isActive: 0
   _appOpenCount: 0

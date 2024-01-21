@@ -3,6 +3,7 @@ using Interfaces;
 using Managers;
 using Servies;
 using SO.Lists;
+using UnityEngine;
 
 namespace GameState
 {
@@ -42,11 +43,13 @@ namespace GameState
             UnsubscribeFromEvents();
 
             _view.onPlayClicked += Play;
+            _view.onQuitClicked += Quit;
         }
 
         public void UnsubscribeFromEvents()
         {
             _view.onPlayClicked -= Play;
+            _view.onQuitClicked -= Quit;
         }
 
         private void Play()
@@ -54,6 +57,11 @@ namespace GameState
             EventsLogManager.LogEvent("PlayButtonClicked");
 
             _gameStateChanger.ChangeState(new Gameplay_GameState_Controller());
+        }
+
+        private void Quit()
+        {
+            Application.Quit();
         }
     }
 }

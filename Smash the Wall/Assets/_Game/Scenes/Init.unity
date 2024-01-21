@@ -166,6 +166,7 @@ MonoBehaviour:
   _dependencyContextPrefab: {fileID: 3398682003654139528, guid: 3feff053b017268439be97d0cce0024f, type: 3}
   _eventsLogManager: {fileID: 0}
   _listOfAllScenes: {fileID: 0}
+  _listOfAllMenus: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

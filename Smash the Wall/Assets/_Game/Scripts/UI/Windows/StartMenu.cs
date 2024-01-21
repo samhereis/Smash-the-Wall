@@ -21,8 +21,6 @@ namespace UI
         [FoldoutGroup("Depencencies")]
         [SerializeField] private List<Sprite> _backgroundSprites = new List<Sprite>();
 
-        // ---
-
         [Required]
         [FoldoutGroup("Components")]
         [SerializeField] private Toggle _adsTrackingConsent;
@@ -50,8 +48,6 @@ namespace UI
         [Required]
         [FoldoutGroup("Components")]
         [SerializeField] private TextMeshProUGUI _label;
-
-        // ---
 
         [Header("Settings")]
         [Required]

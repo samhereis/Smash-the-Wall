@@ -1,11 +1,10 @@
-using Sirenix.OdinInspector;
+using DependencyInjection;
+using ErtenGamesInstrumentals.Ads;
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Services
 {
-    [RequireComponent(typeof(AdsManager))]
     public class AdsShowManager : MonoBehaviour
     {
         public class AdsStrings
@@ -16,31 +15,25 @@ namespace Services
             public const string DefaultBanner = nameof(DefaultBanner);
         }
 
-        [Header("Comonents")]
-        [Required]
-        [SerializeField] private AdsManager _adsManager;
-
         [Header("Settings")]
         [SerializeField] private int _openAppCountToShowAppOpenAdd = 1;
         [SerializeField] private bool _allowAppOpenInEditor = false;
+        [SerializeField] private bool _isActive = false;
 
         [Header("Debug")]
         [SerializeField] private int _appOpenCount = 0;
 
-        private void Awake()
-        {
-            if (_adsManager == null)
-            {
-                _adsManager = GetComponent<AdsManager>();
-            }
-        }
+        [Inject] private IRewardedAd _rewardedAd;
+        [Inject] private IInterstitialAd _interstitialAd;
+        [Inject] private IBannerAd _bannerAd;
+        [Inject] private IAppOpenAd _appOpenAd;
 
-        private async void Start()
+        private void Start()
         {
-            await RequestInterstitial();
-            await RequestRewarded();
-            await RequestBanner();
-            await RequestAppOpen();
+            RequestInterstitial();
+            RequestRewarded();
+            RequestBanner();
+            RequestAppOpen();
         }
 
         private void OnApplicationFocus(bool focus)
@@ -61,136 +54,83 @@ namespace Services
             }
         }
 
-        public void RemoveAds()
+        public void SetActive(bool isActive)
         {
-            if (_adsManager.removedAds == false)
-            {
-                _adsManager.RemoveAds(true);
-            }
+            _isActive = isActive;
         }
 
         #region Rewarded
 
-        public async void TryShowRewarded(Action callback = null, string appID = nameof(AdsStrings.DefaultRewarded))
+        public void TryShowRewarded(string appID = nameof(AdsStrings.DefaultRewarded), Action onRewarded = null, Action onFail = null)
         {
             Debug.Log("Try Show ad: Rewarded");
 
-            bool gotRewarded = false;
-
-            _adsManager.onPaid -= OnPaid;
-            _adsManager.onRewarded -= OnRewarded;
-            _adsManager.onClose -= OnAdClosed;
-
-            _adsManager.onPaid += OnPaid;
-            _adsManager.onRewarded += OnRewarded;
-            _adsManager.onClose += OnAdClosed;
-
-            if (await _adsManager.TryShowPlacement(appID) == false)
-            {
-                await RequestRewarded();
-
-                await _adsManager.TryShowPlacement(appID);
-            }
-
-            void OnPaid(Placement placement, Revenue revenue)
-            {
-                TryGetReward();
-                _adsManager.onPaid -= OnPaid;
-            }
-
-            void OnRewarded(Placement placement)
-            {
-                TryGetReward();
-                _adsManager.onRewarded -= OnRewarded;
-            }
-
-            void OnAdClosed(Placement placement)
-            {
-                TryGetReward();
-                _adsManager.onClose -= OnAdClosed;
-            }
-
-            void TryGetReward()
-            {
-                if (gotRewarded == false)
-                {
-                    callback?.Invoke();
-
-                    gotRewarded = true;
-                }
-            }
+            _rewardedAd?.TryShowRewardedAd(appID, onRewarded, onFail);
         }
 
-        private async Task RequestRewarded(string adID = nameof(AdsStrings.DefaultRewarded))
+        private void RequestRewarded(string adID = nameof(AdsStrings.DefaultRewarded))
         {
-            await _adsManager.Request(adID, 5f);
+            _rewardedAd.Request();
         }
 
         #endregion
 
         #region Interstitial
 
-        public async void TryShowInterstitial(string adID = nameof(AdsStrings.DefaultInterstitial))
+        public void TryShowInterstitial(string adID = nameof(AdsStrings.DefaultInterstitial))
         {
             Debug.Log("Try Show ad: Interstitial");
 
-            if (await _adsManager.TryShowPlacement(adID) == false)
-            {
-                await RequestInterstitial();
-            }
+            _interstitialAd?.TryShowInterstitial(adID);
         }
 
-        private async Task RequestInterstitial(string adID = nameof(AdsStrings.DefaultRewarded))
+        private void RequestInterstitial(string adID = nameof(AdsStrings.DefaultRewarded))
         {
-            await _adsManager.Request(adID, 5f);
+            _interstitialAd?.Request();
         }
 
         #endregion
 
         #region Banner
 
-        public async void TryShowBanner(string adID = nameof(AdsStrings.DefaultBanner))
+        public void TryShowBanner(string adID = nameof(AdsStrings.DefaultBanner))
         {
             Debug.Log("Try Show ad: Banner");
 
-            if (await _adsManager.TryShowPlacement(adID) == false)
-            {
-                await RequestBanner();
-                await _adsManager.TryShowPlacement(adID);
-            }
+            _bannerAd?.TryShowBanner(adID);
         }
 
         public void DestroyBanner(string adID = nameof(AdsStrings.DefaultBanner))
         {
-            _adsManager.Destroy(adID);
+            _bannerAd?.Destroy();
         }
 
-        private async Task RequestBanner(string adID = nameof(AdsStrings.DefaultBanner))
+        private void RequestBanner(string adID = nameof(AdsStrings.DefaultBanner))
         {
-            await _adsManager.Request(adID, 5f);
+            _bannerAd?.Request();
         }
 
         #endregion
 
         #region AppOpen
 
-        public async void TryShowAppOpen(string adID = nameof(AdsStrings.DefaultAppOpen))
+        public void TryShowAppOpen(string adID = nameof(AdsStrings.DefaultAppOpen))
         {
             Debug.Log("Try Show ad: AppOpen");
 
-            if (await _adsManager.TryShowPlacement(adID) == false)
-            {
-                await RequestAppOpen();
-            }
-            else
+            _appOpenAd.TryShowAppOpenAd(adID, onShowed: () =>
             {
                 _appOpenCount = 0;
-            }
+            },
+            onFail: () =>
+            {
+
+            });
         }
 
-        private async Task RequestAppOpen(string adID = nameof(AdsStrings.DefaultAppOpen))
+        private void RequestAppOpen(string adID = nameof(AdsStrings.DefaultAppOpen))
         {
-            await _adsManager.Request(adID, 5f);
+            _appOpenAd?.Request();
         }
 
         #endregion

@@ -439,6 +439,7 @@ MonoBehaviour:
   _clickSound: {fileID: 11400000, guid: cb4deb998f2312a4b9c67d0844b0a903, type: 2}
   _onOverScale: 0.75
   _animationDuration: 0.25
+  _animate: 0
   _playSound: 1
   _vibrate: 1
   _requireAudio: 1

@@ -119,7 +119,7 @@ namespace UI.Elements
         {
             if (_weaponIdentityiCard.isUnlocked == false)
             {
-                _adsShowManager?.TryShowRewarded(OnOpen);
+                _adsShowManager?.TryShowRewarded(onRewarded: OnOpen);
             }
             else
             {

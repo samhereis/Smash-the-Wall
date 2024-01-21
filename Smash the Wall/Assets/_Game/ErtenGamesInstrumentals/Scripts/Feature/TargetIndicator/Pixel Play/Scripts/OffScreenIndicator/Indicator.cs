@@ -36,7 +36,7 @@ namespace TargetIndicator
         public void SetImageColor(Color color)
         {
             if (_indicatorImage.color != color) { _indicatorImage.color = color; }
-            //if (distanceText.color != color) { distanceText.color = color; }
+            if (_distanceText.color != color) { _distanceText.color = color; }
         }
 
         public void SetDistanceText(float value)

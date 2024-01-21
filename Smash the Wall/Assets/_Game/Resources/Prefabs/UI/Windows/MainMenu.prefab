@@ -336,6 +336,7 @@ MonoBehaviour:
   _clickSound: {fileID: 11400000, guid: b1f00bbb6f54c4d47bb0aa80774a9549, type: 2}
   _onOverScale: 1
   _animationDuration: 1
+  _animate: 1
   _playSound: 1
   _vibrate: 1
   _requireAudio: 1
@@ -1083,7 +1084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 1, a: 0.09803922}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1930,6 +1931,7 @@ MonoBehaviour:
   _clickSound: {fileID: 11400000, guid: 8c20cf04578d1ab45976caed652df26c, type: 2}
   _onOverScale: 0.75
   _animationDuration: 0.25
+  _animate: 1
   _playSound: 1
   _vibrate: 1
   _requireAudio: 1

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isGlobal: 0
+  "_auto\u0399nitialize": 1
   _objects: []
   _configs: []
   _scriptableObjects: []
@@ -63,6 +64,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edcf9a810e50f78408200646ae62ee86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onGameplayStatucChanged:
+    <eventName>k__BackingField: onGameplayStatucChanged
+    <currentSubscribedObjectsCount>k__BackingField: 0
+    <timesInvoked>k__BackingField: 0
   _onChangedWeapon:
     <eventName>k__BackingField: onChangedWeapon
     <currentSubscribedObjectsCount>k__BackingField: 0

@@ -57,27 +57,26 @@ namespace TargetIndicator
             {
                 Vector3 screenPosition = OffScreenIndicatorCore.GetScreenPosition(_mainCamera, target.transform.position);
                 bool isTargetVisible = OffScreenIndicatorCore.IsTargetVisible(screenPosition);
-                float distanceFromCamera = target.NeedDistanceText ? target.GetDistanceFromCamera(_mainCamera.transform.position) : float.MinValue;// Gets the target distance from the camera.
+                float distanceFromCamera = target.NeedDistanceText ? target.GetDistanceFromCamera(_mainCamera.transform.position) : float.MinValue;
                 Indicator indicator = null;
 
                 if (target.NeedBoxIndicator && isTargetVisible)
                 {
                     screenPosition.z = 0;
-                    indicator = GetIndicator(ref target.indicator, IndicatorType.BOX); // Gets the box indicator from the pool.
+                    indicator = GetIndicator(ref target.indicator, IndicatorType.BOX);
                 }
                 else if (target.NeedArrowIndicator && !isTargetVisible)
                 {
                     float angle = float.MinValue;
                     OffScreenIndicatorCore.GetArrowIndicatorPositionAndAngle(ref screenPosition, ref angle, _screenCentre, _screenBounds);
-                    indicator = GetIndicator(ref target.indicator, IndicatorType.ARROW); // Gets the arrow indicator from the pool.
-                    indicator.SetRotation(Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg)); // Sets the rotation for the arrow indicator.
+                    indicator = GetIndicator(ref target.indicator, IndicatorType.ARROW);
+                    indicator.SetRotation(Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg));
                 }
                 if (indicator)
                 {
-                    indicator.SetImageColor(target.TargetColor);// Sets the image color of the indicator.
-                    indicator.SetDistanceText(distanceFromCamera); //Set the distance text for the indicator.
-                    indicator.transform.position = screenPosition; //Sets the position of the indicator on the screen.
-                                                                   //indicator.SetRotation(Quaternion.identity); // Sets the rotation of the distance text of the indicator.
+                    indicator.SetImageColor(target.TargetColor);
+                    indicator.SetDistanceText(distanceFromCamera);
+                    indicator.transform.position = screenPosition;
                 }
             }
         }
@@ -104,13 +103,13 @@ namespace TargetIndicator
                 {
                     indicator.Activate(false);
                     indicator = type == IndicatorType.BOX ? BoxObjectPool.current.GetPooledObject() : ArrowObjectPool.current.GetPooledObject();
-                    indicator.Activate(true); // Sets the indicator as active.
+                    indicator.Activate(true);
                 }
             }
             else
             {
                 indicator = type == IndicatorType.BOX ? BoxObjectPool.current.GetPooledObject() : ArrowObjectPool.current.GetPooledObject();
-                indicator.Activate(true); // Sets the indicator as active.
+                indicator.Activate(true);
             }
             return indicator;
         }

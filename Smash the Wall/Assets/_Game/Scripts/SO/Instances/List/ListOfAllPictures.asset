@@ -14,19 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pictures:
   - <stringReference>k__BackingField: Prefabs/Pictures/DestroyBorder/AngelAmoji
+    <assetReference>k__BackingField: Prefabs/Pictures/DestroyBorder/AngelAmoji
     <typeReference>k__BackingField: PictureAuthoring
-    _removeFromStringReference:
-    - .prefab
-    _resourceReference: {fileID: 4188479979054571039, guid: 2f940ccfe48452144b389c374c43f078, type: 3}
+    <objectName>k__BackingField: AngelAmoji
+    target: {fileID: 4188479979054571039, guid: 2f940ccfe48452144b389c374c43f078, type: 3}
   - <stringReference>k__BackingField: Prefabs/Pictures/DestroyBorder/Bird
+    <assetReference>k__BackingField: Prefabs/Pictures/DestroyBorder/Bird
     <typeReference>k__BackingField: PictureAuthoring
-    _removeFromStringReference:
-    - .prefab
-    _resourceReference: {fileID: 4188479979054571039, guid: fe98583576308af4e976bc735b0fd339, type: 3}
+    <objectName>k__BackingField: Bird
+    target: {fileID: 4188479979054571039, guid: fe98583576308af4e976bc735b0fd339, type: 3}
   <borderDefaultColor>k__BackingField: {r: 0, g: 1, b: 1, a: 1}
   <borderMaterialAnimationDuration>k__BackingField: 1
-  _destroyborderInspectorColor: {r: 0, g: 0.39215687, b: 0.39215687, a: 0.39215687}
-  _destroyWholeObjectInspectorColor: {r: 0.39215687, g: 0.39215687, b: 0, a: 0.39215687}
-  _picturesEditor:
-  - {fileID: 4188479979054571039, guid: 2f940ccfe48452144b389c374c43f078, type: 3}
-  - {fileID: 4188479979054571039, guid: fe98583576308af4e976bc735b0fd339, type: 3}

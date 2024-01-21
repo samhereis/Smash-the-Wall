@@ -21,8 +21,6 @@ namespace ECS.Authoring
         {
             public override void Bake(PicturePieceAuthoring authoring)
             {
-                //authoring.Init();
-
                 AddComponent(GetEntity(TransformUsageFlags.Dynamic), new PicturePiece_ComponentData
                 {
                     isHit = authoring.isHit,
@@ -46,7 +44,6 @@ namespace ECS.Authoring
         [field: SerializeField] public bool isKinematic { get; private set; } = true;
         [field: SerializeField] public bool isHit { get; private set; }
 
-        [ContextMenu(nameof(Initialize))]
         public void Initialize()
         {
             GetComponent<MeshCollider>().convex = true;

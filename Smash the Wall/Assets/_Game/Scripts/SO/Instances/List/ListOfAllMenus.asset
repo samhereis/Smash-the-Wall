@@ -13,43 +13,43 @@ MonoBehaviour:
   m_Name: ListOfAllMenus
   m_EditorClassIdentifier: 
   _menus:
-  - <stringReference>k__BackingField: Prefabs/UI/Windows/GameplayMenu
+  - <stringReference>k__BackingField: Assets/_Game/Resources/Prefabs/UI/Windows/GameplayMenu.prefab
+    <assetReference>k__BackingField: Prefabs/UI/Windows/GameplayMenu
     <typeReference>k__BackingField: GameplayMenu
-    _removeFromStringReference:
-    - .prefab
-    _resourceReference: {fileID: 3201094068043948741, guid: 2958629b1327edd4fb14ff1e15302227, type: 3}
-  - <stringReference>k__BackingField: Prefabs/UI/Windows/LoseWIndow
+    <objectName>k__BackingField: GameplayMenu
+    target: {fileID: 3201094068043948741, guid: 2958629b1327edd4fb14ff1e15302227, type: 3}
+  - <stringReference>k__BackingField: Assets/_Game/Resources/Prefabs/UI/Windows/LoseWIndow.prefab
+    <assetReference>k__BackingField: Prefabs/UI/Windows/LoseWIndow
     <typeReference>k__BackingField: LoseMenu
-    _removeFromStringReference:
-    - .prefab
-    _resourceReference: {fileID: 7581452637993789491, guid: 73ec6ef63fe502e40bdc2a550ee9f890, type: 3}
-  - <stringReference>k__BackingField: Prefabs/UI/Windows/MainMenu
+    <objectName>k__BackingField: LoseWIndow
+    target: {fileID: 7581452637993789491, guid: 73ec6ef63fe502e40bdc2a550ee9f890, type: 3}
+  - <stringReference>k__BackingField: Assets/_Game/Resources/Prefabs/UI/Windows/MainMenu.prefab
+    <assetReference>k__BackingField: Prefabs/UI/Windows/MainMenu
     <typeReference>k__BackingField: MainMenu
-    _removeFromStringReference:
-    - .prefab
-    _resourceReference: {fileID: 5655452756565254404, guid: 9f745b5c954d0f04f88a78fd68af8daf, type: 3}
-  - <stringReference>k__BackingField: Prefabs/UI/Windows/PauseMenu
+    <objectName>k__BackingField: MainMenu
+    target: {fileID: 5655452756565254404, guid: 9f745b5c954d0f04f88a78fd68af8daf, type: 3}
+  - <stringReference>k__BackingField: Assets/_Game/Resources/Prefabs/UI/Windows/PauseMenu.prefab
+    <assetReference>k__BackingField: Prefabs/UI/Windows/PauseMenu
     <typeReference>k__BackingField: PauseMenu
-    _removeFromStringReference:
-    - .prefab
-    _resourceReference: {fileID: 8002591916120266729, guid: 0ef08d132acb94d43aeeede359e25bee, type: 3}
-  - <stringReference>k__BackingField: Prefabs/UI/Windows/SettingsMenu
+    <objectName>k__BackingField: PauseMenu
+    target: {fileID: 8002591916120266729, guid: 0ef08d132acb94d43aeeede359e25bee, type: 3}
+  - <stringReference>k__BackingField: Assets/_Game/Resources/Prefabs/UI/Windows/SettingsMenu.prefab
+    <assetReference>k__BackingField: Prefabs/UI/Windows/SettingsMenu
     <typeReference>k__BackingField: SettingsMenu
-    _removeFromStringReference:
-    - .prefab
-    _resourceReference: {fileID: 7787107892029457193, guid: 186246278db62e248a33cf68ea3d657a, type: 3}
-  - <stringReference>k__BackingField: Prefabs/UI/Windows/ShopWindow
+    <objectName>k__BackingField: SettingsMenu
+    target: {fileID: 7787107892029457193, guid: 186246278db62e248a33cf68ea3d657a, type: 3}
+  - <stringReference>k__BackingField: Assets/_Game/Resources/Prefabs/UI/Windows/ShopWindow.prefab
+    <assetReference>k__BackingField: Prefabs/UI/Windows/ShopWindow
     <typeReference>k__BackingField: ShopMenu
-    _removeFromStringReference:
-    - .prefab
-    _resourceReference: {fileID: 7458205613686312571, guid: 023df2356c975d54f8b75802ea2dd99c, type: 3}
-  - <stringReference>k__BackingField: Prefabs/UI/Windows/StartMenu
+    <objectName>k__BackingField: ShopWindow
+    target: {fileID: 7458205613686312571, guid: 023df2356c975d54f8b75802ea2dd99c, type: 3}
+  - <stringReference>k__BackingField: Assets/_Game/Resources/Prefabs/UI/Windows/StartMenu.prefab
+    <assetReference>k__BackingField: Prefabs/UI/Windows/StartMenu
     <typeReference>k__BackingField: StartMenu
-    _removeFromStringReference:
-    - .prefab
-    _resourceReference: {fileID: 6653555981982410890, guid: 9ebc47bcee653b547be9d6a01e2ec745, type: 3}
-  - <stringReference>k__BackingField: Prefabs/UI/Windows/WinWindow
+    <objectName>k__BackingField: StartMenu
+    target: {fileID: 6653555981982410890, guid: 9ebc47bcee653b547be9d6a01e2ec745, type: 3}
+  - <stringReference>k__BackingField: Assets/_Game/Resources/Prefabs/UI/Windows/WinWindow.prefab
+    <assetReference>k__BackingField: Prefabs/UI/Windows/WinWindow
     <typeReference>k__BackingField: WinMenu
-    _removeFromStringReference:
-    - .prefab
-    _resourceReference: {fileID: 7984881144403979762, guid: 9caf300eba55a314caacbaee1eaf628a, type: 3}
+    <objectName>k__BackingField: WinWindow
+    target: {fileID: 7984881144403979762, guid: 9caf300eba55a314caacbaee1eaf628a, type: 3}

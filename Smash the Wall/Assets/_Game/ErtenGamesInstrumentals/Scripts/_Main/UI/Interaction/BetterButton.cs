@@ -23,11 +23,12 @@ namespace UI.Interaction
 #endif
 
         [FoldoutGroup("Settings"), SerializeField] private float _animationDuration = 0.25f;
+        [FoldoutGroup("Settings"), SerializeField] private bool _animate = true;
         [FoldoutGroup("Settings"), SerializeField] private bool _playSound = true;
         [FoldoutGroup("Settings"), SerializeField] private bool _vibrate = true;
         [FoldoutGroup("Settings"), SerializeField] private bool _requireAudio = true;
 
-        [Inject] private VibrationHelper _vibrationHelper;
+        [Inject] private static VibrationHelper _vibrationHelper;
 
         private bool _hasDownAnimationEnded = false;
 
@@ -56,7 +57,7 @@ namespace UI.Interaction
             if (Application.isPlaying == false) { return; }
 #endif
 
-            DependencyContext.InjectDependencies(this);
+            if (_vibrationHelper == null) DependencyContext.diBox.Get<VibrationHelper>();
         }
 
         protected override void OnDestroy()
@@ -73,16 +74,10 @@ namespace UI.Interaction
 
             _hasDownAnimationEnded = false;
 
-#if DoTweenInstalled
-            transform.DOKill();
-#endif
-
-#if DoTweenInstalled
-            transform?.DOScale(_onOverScale, _animationDuration).SetEase(Ease.OutBack).OnComplete(() =>
+            if (_animate == true)
             {
-                _hasDownAnimationEnded = true;
-            });
-#endif
+                AnimateScale();
+            }
         }
 
         public override void OnPointerClick(PointerEventData eventData)
@@ -103,7 +98,24 @@ namespace UI.Interaction
         {
             base.OnPointerExit(eventData);
 
-            ResetScale();
+            if (_animate == true)
+            {
+                ResetScale();
+            }
+        }
+
+        private void AnimateScale()
+        {
+#if DoTweenInstalled
+            transform.DOKill();
+#endif
+
+#if DoTweenInstalled
+            transform?.DOScale(_onOverScale, _animationDuration).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                _hasDownAnimationEnded = true;
+            });
+#endif
         }
 
         private async void ResetScale()
@@ -128,6 +140,7 @@ namespace UI.Interaction
         SerializedProperty _clickSound;
         SerializedProperty _onOverScale;
         SerializedProperty _animationDuration;
+        SerializedProperty _animate;
         SerializedProperty _playSound;
         SerializedProperty _vibrate;
         SerializedProperty _requireAudio;
@@ -135,9 +148,11 @@ namespace UI.Interaction
         protected override void OnEnable()
         {
             base.OnEnable();
+
             _clickSound = serializedObject.FindProperty(nameof(_clickSound));
             _onOverScale = serializedObject.FindProperty(nameof(_onOverScale));
             _animationDuration = serializedObject.FindProperty(nameof(_animationDuration));
+            _animate = serializedObject.FindProperty(nameof(_animate));
             _playSound = serializedObject.FindProperty(nameof(_playSound));
             _vibrate = serializedObject.FindProperty(nameof(_vibrate));
             _requireAudio = serializedObject.FindProperty(nameof(_requireAudio));
@@ -145,7 +160,6 @@ namespace UI.Interaction
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
             EditorGUILayout.Space();
 
             serializedObject.Update();
@@ -153,11 +167,14 @@ namespace UI.Interaction
             if (_clickSound != null) EditorGUILayout.PropertyField(_clickSound);
             if (_onOverScale != null) EditorGUILayout.PropertyField(_onOverScale);
             if (_animationDuration != null) EditorGUILayout.PropertyField(_animationDuration);
+            if (_animate != null) EditorGUILayout.PropertyField(_animate);
             if (_playSound != null) EditorGUILayout.PropertyField(_playSound);
             if (_vibrate != null) EditorGUILayout.PropertyField(_vibrate);
             if (_requireAudio != null) EditorGUILayout.PropertyField(_requireAudio);
 
             serializedObject.ApplyModifiedProperties();
+
+            base.OnInspectorGUI();
         }
     }
 #endif

@@ -2,7 +2,6 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
 
 namespace ErtenGamesInstrumentals.DataClasses
@@ -10,29 +9,31 @@ namespace ErtenGamesInstrumentals.DataClasses
     [Serializable]
     public class PrefabReference<TGetAsComponent> where TGetAsComponent : Component
     {
+#if UNITY_EDITOR
+        [field: Required]
+        [field: Sirenix.OdinInspector.FilePath]
+        [field: OnValueChanged(nameof(Setup))]
+        [field: SerializeField] public string stringReference { get; private set; }
+#endif
+
+
         [field: FoldoutGroup("Debug")]
-        [field: SerializeField, ReadOnly] public string stringReference { get; private set; }
+        [field: SerializeField, ReadOnly] protected string assetReference { get; private set; }
 
         [field: FoldoutGroup("Debug")]
         [field: SerializeField, ReadOnly] public string typeReference { get; private set; }
 
-        public string objectName
-        {
-            get
-            {
-#if UNITY_EDITOR
+        [field: FoldoutGroup("Debug")]
+        [field: SerializeField, ReadOnly] public string objectName { get; private set; }
 
-                if (string.IsNullOrEmpty(_objectName) == true) { SetObjectName(); };
-                return _objectName;
-#else
-                return typeReference;
+#if UNITY_EDITOR
+        [FoldoutGroup("Debug")]
+        [ReadOnly] public TGetAsComponent target;
 #endif
-            }
-        }
 
         public virtual async Task<TGetAsComponent> GetAssetAsync()
         {
-            var request = Resources.LoadAsync<GameObject>(stringReference);
+            var request = Resources.LoadAsync<GameObject>(assetReference);
             while (request.isDone == false) { await AsyncHelper.Skip(); }
             var result = request.asset as GameObject;
 
@@ -49,7 +50,7 @@ namespace ErtenGamesInstrumentals.DataClasses
         [FoldoutGroup("Debug"), Button]
         public virtual TGetAsComponent GetAsset()
         {
-            var result = Resources.Load<GameObject>(stringReference);
+            var result = Resources.Load<GameObject>(assetReference);
 
             return result.GetComponent<TGetAsComponent>();
         }
@@ -61,51 +62,27 @@ namespace ErtenGamesInstrumentals.DataClasses
             return result.GetComponent<T>();
         }
 
-#if UNITY_EDITOR
-
-        [FoldoutGroup("Debug")]
-        [SerializeField] private string[] _removeFromStringReference = { ".prefab" };
-
-        [Required]
-        [OnValueChanged(nameof(Setup))]
-        [SerializeField] protected TGetAsComponent _resourceReference;
-
-        private string _objectName = string.Empty;
-
-#endif
-
-        [FoldoutGroup("Debug"), Button]
-        public virtual void Setup()
+        public virtual async void Setup()
         {
 #if UNITY_EDITOR
-            if (_resourceReference != null)
+
+            assetReference = stringReference;
+
+            int index = assetReference.IndexOf("Resources/");
+            if (index != -1)
             {
-                stringReference = AssetDatabase.GetAssetPath(_resourceReference);
-
-                int index = stringReference.IndexOf("Resources/");
-                if (index != -1)
-                {
-                    stringReference = stringReference.Substring(index + "Resources/".Length);
-                }
-
-                foreach (var removeFromStringReference in _removeFromStringReference)
-                {
-                    stringReference = stringReference.Replace(removeFromStringReference, "");
-                }
-
-                typeReference = _resourceReference.GetType().Name;
-
-                SetObjectName();
+                assetReference = assetReference.Substring(index + "Resources/".Length);
             }
-#endif
-        }
 
-        private void SetObjectName()
-        {
-#if UNITY_EDITOR
-            if (_resourceReference == null) { return; }
+            assetReference = assetReference.Replace(".prefab", "");
 
-            _objectName = _resourceReference.name;
+            target = await GetAssetAsync();
+
+            if (target != null)
+            {
+                typeReference = target.GetType().Name;
+                objectName = target.name;
+            }
 #endif
         }
     }

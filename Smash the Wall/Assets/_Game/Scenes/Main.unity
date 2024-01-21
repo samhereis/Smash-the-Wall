@@ -165,35 +165,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _suitableEnviroments:
   - <stringReference>k__BackingField: Prefabs/Enviroments/ArabicVillage
+    <assetReference>k__BackingField: Prefabs/Enviroments/ArabicVillage
     <typeReference>k__BackingField: EnviromentIdentifier
-    _removeFromStringReference:
-    - Assets/Resources/
-    - .prefab
-    _resourceReference: {fileID: -4046979998144564975, guid: b9c94ede2c310bd47aee048839659897, type: 3}
+    <objectName>k__BackingField: ArabicVillage
+    target: {fileID: -4046979998144564975, guid: b9c94ede2c310bd47aee048839659897, type: 3}
   - <stringReference>k__BackingField: Prefabs/Enviroments/CrhistmassPark
+    <assetReference>k__BackingField: Prefabs/Enviroments/CrhistmassPark
     <typeReference>k__BackingField: EnviromentIdentifier
-    _removeFromStringReference:
-    - Assets/Resources/
-    - .prefab
-    _resourceReference: {fileID: 5896307446046161548, guid: 70bf94217c33315459c48071ceec9916, type: 3}
+    <objectName>k__BackingField: CrhistmassPark
+    target: {fileID: 5896307446046161548, guid: 70bf94217c33315459c48071ceec9916, type: 3}
   - <stringReference>k__BackingField: Prefabs/Enviroments/DinigRoom
+    <assetReference>k__BackingField: Prefabs/Enviroments/DinigRoom
     <typeReference>k__BackingField: EnviromentIdentifier
-    _removeFromStringReference:
-    - Assets/Resources/
-    - .prefab
-    _resourceReference: {fileID: 6569114583364351758, guid: e0dac6a863fe95f48b684c07f7a611be, type: 3}
+    <objectName>k__BackingField: DinigRoom
+    target: {fileID: 6569114583364351758, guid: e0dac6a863fe95f48b684c07f7a611be, type: 3}
   - <stringReference>k__BackingField: Prefabs/Enviroments/LivingBlock
+    <assetReference>k__BackingField: Prefabs/Enviroments/LivingBlock
     <typeReference>k__BackingField: EnviromentIdentifier
-    _removeFromStringReference:
-    - Assets/Resources/
-    - .prefab
-    _resourceReference: {fileID: 6734634835897331492, guid: ff9f90ccc2af6044ea2438a2ba309a1b, type: 3}
+    <objectName>k__BackingField: LivingBlock
+    target: {fileID: 6734634835897331492, guid: ff9f90ccc2af6044ea2438a2ba309a1b, type: 3}
   - <stringReference>k__BackingField: Prefabs/Enviroments/NightForest
+    <assetReference>k__BackingField: Prefabs/Enviroments/NightForest
     <typeReference>k__BackingField: EnviromentIdentifier
-    _removeFromStringReference:
-    - Assets/Resources/
-    - .prefab
-    _resourceReference: {fileID: 6902148803539727153, guid: e07ae0c32dc9bf747b43481d6f7deefa, type: 3}
+    <objectName>k__BackingField: NightForest
+    target: {fileID: 6902148803539727153, guid: e07ae0c32dc9bf747b43481d6f7deefa, type: 3}
   _enviroment: {fileID: 0}
 --- !u!1 &1629336984
 GameObject:

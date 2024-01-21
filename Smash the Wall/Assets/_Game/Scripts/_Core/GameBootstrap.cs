@@ -4,12 +4,34 @@ using Managers;
 using Servies;
 using Sirenix.OdinInspector;
 using SO.Lists;
+using UI;
 using UnityEngine;
 
 namespace GameState
 {
     public class GameBootstrap : GameBootstrapBase, INeedDependencyInjection
     {
+        private string falseString = false.ToString();
+        private string trueString = true.ToString();
+
+        public bool hasEverPlayed
+        {
+            get => PlayerPrefs.GetString(nameof(hasEverPlayed), falseString) == trueString;
+            set => PlayerPrefs.SetString(nameof(hasEverPlayed), value.ToString());
+        }
+
+        public bool adsTrackingContentEnabled
+        {
+            get => PlayerPrefs.GetString(nameof(adsTrackingContentEnabled), falseString) == trueString;
+            set => PlayerPrefs.SetString(nameof(adsTrackingContentEnabled), value.ToString());
+        }
+
+        public bool isSendDataEnabled
+        {
+            get => PlayerPrefs.GetString(nameof(isSendDataEnabled), falseString) == trueString;
+            set => PlayerPrefs.SetString(nameof(isSendDataEnabled), value.ToString());
+        }
+
         [SerializeField] private DependencyContext _dependencyContextPrefab;
 
         [Inject]
@@ -22,14 +44,14 @@ namespace GameState
         [FoldoutGroup("Depencencies"), SerializeField, ReadOnly] private ListOfAllScenes _listOfAllScenes;
 
         [Inject]
+        [FoldoutGroup("Depencencies"), SerializeField, ReadOnly] private ListOfAllMenus _listOfAllMenus;
+
+        [Inject]
         [FoldoutGroup("Depencencies"), ShowInInspector, ReadOnly] protected IGameStateChanger _gameStateChanger;
 
-        private void Update()
+        private void Start()
         {
-            if (Input.GetMouseButtonUp(0))
-            {
-                Initialize();
-            }
+            Initialize();
         }
 
         public async override void Initialize()
@@ -43,7 +65,27 @@ namespace GameState
 
             DependencyContext.InjectDependencies(this);
 
-            EnterMainMenu();
+            StartMenu startMenu = null;
+
+            if (hasEverPlayed == false)
+            {
+                startMenu = Instantiate(await _listOfAllMenus.GetMenuAsync<StartMenu>());
+                startMenu.onStartClicked += OnStartMenu_StartClicked;
+            }
+            else
+            {
+                EnterMainMenu();
+            }
+
+
+            void OnStartMenu_StartClicked()
+            {
+                startMenu.onStartClicked -= OnStartMenu_StartClicked;
+
+                adsTrackingContentEnabled = startMenu.adsTrackingConsent;
+
+                EnterMainMenu();
+            }
         }
 
         private void EnterMainMenu()

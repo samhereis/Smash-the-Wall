@@ -4,7 +4,6 @@ namespace InGameStrings
     {
         #region With Parameters
 
-        public const string onASceneLoadRequested = nameof(onASceneLoadRequested);
         public const string onGameplayStatucChanged = nameof(onGameplayStatucChanged);
 
         #endregion

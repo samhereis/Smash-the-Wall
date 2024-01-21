@@ -26,6 +26,15 @@ namespace SO.Lists
 
         [Inject] private GameSaveManager _gameSaveManager;
 
+        [Button]
+        private void Validate()
+        {
+            foreach (var picture in _pictures)
+            {
+                picture.Setup();
+            }
+        }
+
         public override void Initialize()
         {
             DependencyContext.InjectDependencies(this);

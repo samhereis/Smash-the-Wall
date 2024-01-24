@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 483bc6f9f14235a43bcc3b63752b7ddd, type: 3}
-  m_Name: UI_LoseStar
+  m_Name: UI_Win
   m_EditorClassIdentifier: 

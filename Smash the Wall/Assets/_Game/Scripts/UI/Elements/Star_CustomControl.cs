@@ -50,7 +50,7 @@ namespace UI.Elements
             }
         }
 
-        public void SetActiveStars(int newActiveStarsCount)
+        public void SetActiveStars(int newActiveStarsCount, float delay = 0)
         {
             for (int i = 0; i < _instantiatedStars.Count; i++)
             {
@@ -58,10 +58,10 @@ namespace UI.Elements
                 starInstance.transform.localScale = Vector3.zero;
             }
 
-            StartCoroutine(SetActiveStarsEnumerator(newActiveStarsCount));
+            StartCoroutine(SetActiveStarsEnumerator(newActiveStarsCount, delay));
         }
 
-        private IEnumerator SetActiveStarsEnumerator(int newActiveStarsCount)
+        private IEnumerator SetActiveStarsEnumerator(int newActiveStarsCount, float delay)
         {
             for (int i = 0; i < _instantiatedStars.Count; i++)
             {
@@ -69,6 +69,8 @@ namespace UI.Elements
                 float scale = 0.5f + NumberHelper.GetPercentageOf1(i + 1, _starsCount) / 2;
                 starInstance.transform.DOScale(scale, 0.5f);
             }
+
+            yield return new WaitForSeconds(delay);
 
             for (int i = 0; i < _instantiatedStars.Count; i++)
             {

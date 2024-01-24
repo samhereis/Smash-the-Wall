@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee251ebbbaeaa27498f96ed6e9887657, type: 3}
+  m_Name: AudioConfigs
+  m_EditorClassIdentifier: 
+  _uiSounds:
+  - _audioClips:
+    - {fileID: 8300000, guid: 20aea4ac827a8cf419d7652bba175120, type: 3}
+    <isMain>k__BackingField: 0
+    <loop>k__BackingField: 0
+    <disableOthers>k__BackingField: 0
+    <alwaysRandomSound>k__BackingField: 1
+    <volume>k__BackingField: 1
+    <distance>k__BackingField: 50
+    <soundName>k__BackingField: {fileID: 11400000, guid: b1f00bbb6f54c4d47bb0aa80774a9549, type: 2}
+  - _audioClips:
+    - {fileID: 8300000, guid: 9ee40221cc004444ea517054a1064d92, type: 3}
+    <isMain>k__BackingField: 0
+    <loop>k__BackingField: 0
+    <disableOthers>k__BackingField: 0
+    <alwaysRandomSound>k__BackingField: 1
+    <volume>k__BackingField: 1
+    <distance>k__BackingField: 50
+    <soundName>k__BackingField: {fileID: 11400000, guid: 8c20cf04578d1ab45976caed652df26c, type: 2}
+  - _audioClips:
+    - {fileID: 8300000, guid: 442d2e4e4e7aca8438a1ffa9db3c4780, type: 3}
+    <isMain>k__BackingField: 0
+    <loop>k__BackingField: 0
+    <disableOthers>k__BackingField: 0
+    <alwaysRandomSound>k__BackingField: 1
+    <volume>k__BackingField: 1
+    <distance>k__BackingField: 50
+    <soundName>k__BackingField: {fileID: 11400000, guid: cb4deb998f2312a4b9c67d0844b0a903, type: 2}
+  - _audioClips:
+    - {fileID: 8300000, guid: 1547bccb5cce91a479b4f1384a287c9a, type: 3}
+    <isMain>k__BackingField: 0
+    <loop>k__BackingField: 0
+    <disableOthers>k__BackingField: 0
+    <alwaysRandomSound>k__BackingField: 1
+    <volume>k__BackingField: 1
+    <distance>k__BackingField: 50
+    <soundName>k__BackingField: {fileID: 11400000, guid: 622b50ff6d5028344b7b577c0550b742, type: 2}
+  - _audioClips:
+    - {fileID: 8300000, guid: d999bf0a9d77fcb40bc714acbc51b424, type: 3}
+    <isMain>k__BackingField: 0
+    <loop>k__BackingField: 0
+    <disableOthers>k__BackingField: 0
+    <alwaysRandomSound>k__BackingField: 1
+    <volume>k__BackingField: 1
+    <distance>k__BackingField: 50
+    <soundName>k__BackingField: {fileID: 11400000, guid: 8071336d5f6e69f479537c50c21c8136, type: 2}
+  - _audioClips:
+    - {fileID: 8300000, guid: 51ec19e460e18f2479f094f6e6597ff1, type: 3}
+    <isMain>k__BackingField: 0
+    <loop>k__BackingField: 0
+    <disableOthers>k__BackingField: 0
+    <alwaysRandomSound>k__BackingField: 1
+    <volume>k__BackingField: 1
+    <distance>k__BackingField: 50
+    <soundName>k__BackingField: {fileID: 11400000, guid: 85458d6edf5b69e49b1f47f40de2371f, type: 2}
+  _gunSounds: []
+  _enviromentSounds: []

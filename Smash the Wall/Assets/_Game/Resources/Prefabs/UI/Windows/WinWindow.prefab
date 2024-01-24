@@ -384,8 +384,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 647ec82eadf3ce44d9a31c695c0508a5, type: 3}
   - {fileID: 21300000, guid: 531772219af0b744ba42c1c0b0f50b03, type: 3}
   - {fileID: 21300000, guid: f1ae818bcdda7754891ac8b124587404, type: 3}
-  _winAudio:
-    _audioClips: []
+  _winAudio: {fileID: 11400000, guid: 8071336d5f6e69f479537c50c21c8136, type: 2}
   _nextLevelButton: {fileID: 1521434032172089246}
   _goToMainMenuButton: {fileID: 8660523861662061310}
   _winInfoBlock: {fileID: 7614886493378642414}

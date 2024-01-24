@@ -10,16 +10,28 @@ namespace Configs
     public class AudioConfigs : ConfigBase
     {
         [Required]
-        [SerializeField] private List<SoundWithName> _sounds = new List<SoundWithName>();
+        [SerializeField] private List<SoundWithName> _uiSounds = new List<SoundWithName>();
+
+        [Required]
+        [SerializeField] private List<SoundWithName> _gunSounds = new List<SoundWithName>();
+
+        [Required]
+        [SerializeField] private List<SoundWithName> _enviromentSounds = new List<SoundWithName>();
+
+        private List<SoundWithName> _allSounds = new List<SoundWithName>();
 
         public override void Initialize()
         {
+            _allSounds.Clear();
 
+            _allSounds.AddRange(_uiSounds);
+            _allSounds.AddRange(_gunSounds);
+            _allSounds.AddRange(_enviromentSounds);
         }
 
-        public Sounds.Sound GetSound(String_SO name)
+        public Sound GetSound(String_SO name)
         {
-            var audio = _sounds.Find(x => x.soundName == name);
+            var audio = _allSounds.Find(x => x.soundName == name);
 
             if (audio == null)
             {

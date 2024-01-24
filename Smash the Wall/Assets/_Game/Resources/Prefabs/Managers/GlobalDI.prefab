@@ -348,6 +348,8 @@ MonoBehaviour:
     id: 
   - dependency: {fileID: 11400000, guid: c6b75b63787589e48b810c21011bda50, type: 2}
     id: 
+  - dependency: {fileID: 11400000, guid: 333033df575998f43bce845266d384a4, type: 2}
+    id: 
   _scriptableObjects:
   - dependency: {fileID: 11400000, guid: 92fff25f19956674bb88805cfcac1d57, type: 2}
     id: GunRotationSpeed

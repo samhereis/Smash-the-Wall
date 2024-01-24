@@ -1,5 +1,6 @@
 using Configs;
 using DependencyInjection;
+using Interfaces;
 using Sirenix.OdinInspector;
 using SO;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using UnityEngine;
 namespace Sounds
 {
     [RequireComponent(typeof(AudioSource))]
-    public sealed class SoundPlayer : MonoBehaviour, INeedDependencyInjection, ISelfValidator
+    public sealed class SoundPlayer : MonoBehaviour, IInitializable, INeedDependencyInjection, ISelfValidator
     {
         public static SoundPlayer instance { get; private set; }
 
@@ -45,6 +46,11 @@ namespace Sounds
         private void OnDestroy()
         {
             if (instance == this && _isGlobal == true) instance = null;
+        }
+
+        public void Initialize()
+        {
+            DependencyContext.InjectDependencies(this);
         }
 
         public void TryPlay(String_SO soundString)

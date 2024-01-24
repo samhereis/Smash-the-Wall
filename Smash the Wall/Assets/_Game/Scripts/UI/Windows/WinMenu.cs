@@ -3,6 +3,7 @@ using DataClasses;
 using DependencyInjection;
 using Helpers;
 using Sirenix.OdinInspector;
+using SO;
 using SO.Lists;
 using Sounds;
 using System;
@@ -25,7 +26,7 @@ namespace UI
         [SerializeField] private Sprite[] _winEmojis;
 
         [Required]
-        [SerializeField] private Sound _winAudio;
+        [SerializeField] private Sound_String_SO _winAudio;
 
         [Header("Components")]
 
@@ -49,6 +50,7 @@ namespace UI
 
         [Inject] private GameConfigs _gameConfigs;
         [Inject] private ListOfAllPictures _listOfAllPictures;
+        [Inject] private SoundPlayer _soundPlayer;
 
         private IWinStarCalculator _winStarCalculator;
 
@@ -79,6 +81,8 @@ namespace UI
 
             _gameConfigs.isRestart = false;
 
+            _soundPlayer?.TryPlay(_winAudio);
+
             switch (_currentPictureMode)
             {
                 case Enums.PictureMode.DestroyBorder:
@@ -86,7 +90,7 @@ namespace UI
                         _starControl.gameObject.SetActive(true);
 
                         _starControl.SetStarCount(_gameConfigs.gameSettings.winLoseStarSettings.Count);
-                        _starControl.SetActiveStars(_winStarCalculator != null ? _winStarCalculator.CalculateWinStars() : 5);
+                        _starControl.SetActiveStars(_winStarCalculator != null ? _winStarCalculator.CalculateWinStars() : 5, 0.75f);
 
                         break;
                     }
@@ -103,8 +107,6 @@ namespace UI
                         break;
                     }
             }
-
-            SoundPlayer.instance?.TryPlay(_winAudio);
         }
 
         public override void Disable(float? duration = null)

@@ -7,6 +7,6 @@ namespace Sounds
     [Serializable]
     public class SoundWithName : Sound
     {
-        [SerializeField] public Sound_String_SO soundName { get; private set; }
+        [field: SerializeField] public Sound_String_SO soundName { get; private set; }
     }
 }

@@ -135,7 +135,7 @@ MonoBehaviour:
   _resetScaleDuration: 0.25
   _shootScaleDuration: 0.1
   _debug: 0
-  _elasticStretchAudio: {fileID: 11400000, guid: 08626b21f05bf654da6dfd134f0d22d0, type: 2}
+  _elasticStretchAudio: {fileID: 11400000, guid: 219f8d748692cd6499d39bdff596aaf2, type: 2}
   _elasticResetAudio: {fileID: 11400000, guid: 95dcb4e5068565148bfc30054613e6e2, type: 2}
   _shootAudio: {fileID: 11400000, guid: f1bbf8d061c096d438a744efef1334c4, type: 2}
 --- !u!1001 &7524930112977588533

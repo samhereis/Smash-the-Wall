@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483bc6f9f14235a43bcc3b63752b7ddd, type: 3}
-  m_Name: Gun_Slingshot_Reset
+  m_Script: {fileID: 11500000, guid: 7303246fad8e2a049aebd6c0c71d2985, type: 3}
+  m_Name: DiagonalExpandAppearance
   m_EditorClassIdentifier: 
+  tagID: diagexp
+  baseDuration: 0.5
+  diagonalFromBttmLeft: 0

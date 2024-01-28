@@ -26,7 +26,6 @@ namespace ProjectSripts
         [Header("Sounds")]
         [SerializeField] private bool _debug;
         [SerializeField, Required] private Sound_String_SO _elasticStretchAudio;
-        [SerializeField, Required] private Sound_String_SO _elasticResetAudio;
         [SerializeField, Required] private Sound_String_SO _shootAudio;
 
         [Inject] private VibrationHelper _vibrationHelper;
@@ -97,7 +96,6 @@ namespace ProjectSripts
 
                 _elasticPart.DOScaleZ(_normalElasticZScalse, _resetScaleDuration);
                 _trajectoryDisplayer.Disable();
-                _soundPlayer?.TryPlay(_elasticResetAudio);
             }
         }
 

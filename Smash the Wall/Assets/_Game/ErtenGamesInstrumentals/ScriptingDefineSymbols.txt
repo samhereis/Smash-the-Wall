@@ -1,8 +1,0 @@
-Addressables - "AddressablesInstalled"
-DoTween - "DoTweenInstalled"
-Feel - "FeelInstalled"
-InAppPurchaces - "InAppPurchacesInstalled"
-OdinInspector - "OdinInspectorInstalled"
-Localization - "LocalizationInstalled"
-Newtonsoft - "NewtonsoftInstalled"
-RemoteConfig - "RemoteConfigInstalled"

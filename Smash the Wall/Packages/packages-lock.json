@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.ertengames.instrumentals": {
+      "version": "https://github.com/samhereis/ErtenGamesInstrumentals.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1332dc962f109f75f0ad9af659e8d4416ddd9778"
+    },
     "com.heurekagames.assethunterpro": {
       "version": "file:com.heurekagames.assethunterpro",
       "depth": 0,
@@ -28,11 +35,12 @@
       }
     },
     "com.unity.burst": {
-      "version": "1.8.11",
+      "version": "1.8.12",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.mathematics": "1.2.1"
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -210,7 +218,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.analytics": {
-      "version": "5.0.2",
+      "version": "5.1.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -221,7 +229,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.core": {
-      "version": "1.12.0",
+      "version": "1.12.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4494916261611407915}
   - component: {fileID: 4407760984060643394}
   - component: {fileID: 5341432344716273623}
+  - component: {fileID: 4858908516301683473}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -136,6 +137,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4858908516301683473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972084655304435136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ace8ced0e81c847968cdca0aeda757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typewriterStartsAutomatically: 0
+  animationLoop: 0
+  timeScale: 0
+  _text: <wave>destroy whole object mode</wave>
+  useDynamicScaling: 1
+  referenceFontSize: 50
+  isResettingTimeOnNewText: 1
+  useDefaultDatabases: 1
+  databaseBehaviors: {fileID: 11400000, guid: adb6cb270a7016b4b903d908b1979e2d, type: 2}
+  databaseAppearances: {fileID: 11400000, guid: c62376ed3bb4fc34e9f9ea07d5884497, type: 2}
+  useDefaultStyleSheet: 1
+  styleSheet: {fileID: 0}
+  databaseActions: {fileID: 11400000, guid: d1a84279b51ee8c40a34962dd09cfb09, type: 2}
+  defaultAppearancesTags:
+  - size
+  defaultDisappearancesTags:
+  - fade
+  defaultBehaviorsTags: []
+  defaultTagsMode: 0
 --- !u!1 &1206208023380896710
 GameObject:
   m_ObjectHideFlags: 0

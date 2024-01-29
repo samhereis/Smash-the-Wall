@@ -95,15 +95,17 @@ MonoBehaviour:
     <volume>k__BackingField: 1
     <distance>k__BackingField: 50
     <soundName>k__BackingField: {fileID: 11400000, guid: a8b7b1ae6183a24498dd568d9c04d3b8, type: 2}
-  - _audioClips: []
+  - _audioClips:
+    - {fileID: 8300000, guid: a3c1ac5baee92874eae06e721b313e4c, type: 3}
     <isMain>k__BackingField: 0
     <loop>k__BackingField: 0
     <disableOthers>k__BackingField: 0
     <alwaysRandomSound>k__BackingField: 1
     <volume>k__BackingField: 1
     <distance>k__BackingField: 50
-    <soundName>k__BackingField: {fileID: 11400000, guid: 95dcb4e5068565148bfc30054613e6e2, type: 2}
-  - _audioClips: []
+    <soundName>k__BackingField: {fileID: 11400000, guid: 219f8d748692cd6499d39bdff596aaf2, type: 2}
+  - _audioClips:
+    - {fileID: 8300000, guid: 26c6895bfe94c714e93edfbdbe6c04eb, type: 3}
     <isMain>k__BackingField: 0
     <loop>k__BackingField: 0
     <disableOthers>k__BackingField: 0
@@ -111,12 +113,4 @@ MonoBehaviour:
     <volume>k__BackingField: 1
     <distance>k__BackingField: 50
     <soundName>k__BackingField: {fileID: 11400000, guid: f1bbf8d061c096d438a744efef1334c4, type: 2}
-  - _audioClips: []
-    <isMain>k__BackingField: 0
-    <loop>k__BackingField: 0
-    <disableOthers>k__BackingField: 0
-    <alwaysRandomSound>k__BackingField: 1
-    <volume>k__BackingField: 1
-    <distance>k__BackingField: 50
-    <soundName>k__BackingField: {fileID: 0}
   _enviromentSounds: []
